@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Webhook Relay API cover">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#050505"/>
+      <stop offset="60%" stop-color="#0a1628"/>
+      <stop offset="100%" stop-color="#1500ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="300" cy="315" r="80" fill="none" stroke="#1500ff" stroke-width="3" opacity="0.6"/>
+  <circle cx="600" cy="315" r="80" fill="none" stroke="#5ee87a" stroke-width="3" opacity="0.5"/>
+  <circle cx="900" cy="315" r="80" fill="none" stroke="#e07050" stroke-width="3" opacity="0.5"/>
+  <path d="M380 315 H520 M680 315 H820" stroke="#d4d4d4" stroke-width="2" stroke-dasharray="8 6" opacity="0.7"/>
+  <text x="600" y="180" text-anchor="middle" fill="#fdfdfd" font-family="system-ui,sans-serif" font-size="52" font-weight="600">Webhook Relay</text>
+  <text x="600" y="240" text-anchor="middle" fill="#a3a3a3" font-family="system-ui,sans-serif" font-size="26">HMAC · Redis · Retry backoff</text>
+  <text x="300" y="330" text-anchor="middle" fill="#1500ff" font-family="monospace" font-size="16">API</text>
+  <text x="600" y="330" text-anchor="middle" fill="#5ee87a" font-family="monospace" font-size="16">Queue</text>
+  <text x="900" y="330" text-anchor="middle" fill="#e07050" font-family="monospace" font-size="16">Webhook</text>
+</svg>

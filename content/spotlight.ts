@@ -1,0 +1,73 @@
+import type { SpotlightItem } from "./types";
+
+export const spotlightItems: SpotlightItem[] = [
+  {
+    id: "spotlight-weroi",
+    pillar: "Full-stack",
+    title: "weROI Agency Platform",
+    description:
+      "Full-stack agency platform with a React SPA frontend, FastAPI Python backend, and MongoDB Atlas persistence. Built lead-capture funnels, multi-step audit forms, JWT-protected admin dashboard, Resend email integration, and REST APIs for lead management. Deployed the frontend on Vercel and the API on Railway with CORS configuration and health-check routing.",
+    stack: [
+      "React",
+      "FastAPI",
+      "Python",
+      "MongoDB Atlas",
+      "JWT",
+      "Resend",
+      "Tailwind CSS",
+      "Vercel",
+      "Railway",
+    ],
+    href: "https://weroi.net",
+    caseStudyHref: "/projects/weroi",
+    github: "https://github.com/zacharyahutton/weROI",
+    image: "/case-studies/weroi.png",
+    linkLabel: "Live site",
+    accent: "#1500ff",
+    tabIcon: "WR",
+  },
+  {
+    id: "spotlight-pntcog",
+    pillar: "Contract delivery",
+    title: "PNTCOG Ministry Platform",
+    description:
+      "Multi-section React ministry website serving events, giving, prayer requests, media, and a Jubilee anniversary hub. Structured component architecture for team-friendly content updates, responsive mobile-first layouts, and performance-focused delivery on Vercel for a live congregation audience.",
+    stack: [
+      "React",
+      "JavaScript",
+      "Responsive design",
+      "Vercel",
+      "Component architecture",
+      "React Router",
+      "Accessible forms",
+    ],
+    href: "https://portmorentcog.org",
+    caseStudyHref: "/projects/pntcog",
+    image: "/case-studies/pntcog.png",
+    linkLabel: "Live site",
+    accent: "#5ee87a",
+    tabIcon: "PN",
+  },
+  {
+    id: "spotlight-studysync",
+    pillar: "Personal",
+    title: "StudySync API",
+    description:
+      "Personal FastAPI REST API for tracking coursework deadlines and study sessions. Implements JWT authentication, SQLAlchemy ORM models, Pydantic validation, and modular route handlers. Built to practice secure backend patterns, database modeling, and API documentation with OpenAPI.",
+    stack: [
+      "Python",
+      "FastAPI",
+      "SQLAlchemy",
+      "JWT",
+      "Pydantic",
+      "SQLite",
+      "OpenAPI",
+    ],
+    caseStudyHref: "/projects/studysync-api",
+    github: "https://github.com/zacharyahutton/studysync-api",
+    image: "/case-studies/studysync-cover.svg",
+    linkLabel: "GitHub",
+    accent: "#e07050",
+    tabIcon: "SS",
+  },
+];

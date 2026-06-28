@@ -1,0 +1,218 @@
+@import "tailwindcss";
+
+:root {
+  --color-electric-indigo: #1500ff;
+  --color-obsidian: #050505;
+  --color-charcoal: #151515;
+  --color-graphite: #1e1e1e;
+  --color-paper: #fdfdfd;
+  --color-silver: #e5e5e5;
+  --color-pearl: #d4d4d4;
+  --color-slate: #2f2f2f;
+  --color-ash: #a3a3a3;
+  --color-stone: #737373;
+  --page-max-width: 1200px;
+  --section-gap: 64px;
+  --radius-cards: 14px;
+  --radius-pills: 9999px;
+  --terminal-green: #5ee87a;
+  --section-scroll-margin: 7rem;
+}
+
+html.light {
+  --color-obsidian: #f5f5f5;
+  --color-charcoal: #ffffff;
+  --color-graphite: #ebebeb;
+  --color-paper: #0a0a0a;
+  --color-silver: #1a1a1a;
+  --color-pearl: #2b2b2b;
+  --color-slate: #b8b8b8;
+  --color-ash: #3d3d3d;
+  --color-stone: #5c5c5c;
+}
+
+@theme inline {
+  --color-background: var(--color-obsidian);
+  --color-foreground: var(--color-paper);
+  --color-obsidian: #050505;
+  --color-charcoal: #151515;
+  --color-graphite: #1e1e1e;
+  --color-paper: #fdfdfd;
+  --color-pearl: #d4d4d4;
+  --color-ash: #a3a3a3;
+  --color-stone: #737373;
+  --color-slate: #2f2f2f;
+  --color-silver: #e5e5e5;
+  --color-electric-indigo: #1500ff;
+  --font-sans: var(--font-dm-sans);
+  --radius-card: 14px;
+  --radius-pill: 9999px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-obsidian);
+  color: var(--color-paper);
+  font-family: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+::selection {
+  background: rgba(21, 0, 255, 0.35);
+  color: #fff;
+}
+
+.section-kicker {
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-ash);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: var(--radius-pills);
+  background: var(--color-electric-indigo);
+  color: var(--color-paper);
+  padding: 0.65rem 1.35rem;
+  font-size: 14px;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: var(--radius-pills);
+  border: 1px solid color-mix(in srgb, var(--color-paper) 35%, transparent);
+  color: var(--color-paper);
+  padding: 0.55rem 1.15rem;
+  font-size: 13px;
+  font-weight: 500;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.btn-ghost:hover {
+  border-color: var(--color-paper);
+}
+
+html.light .btn-ghost {
+  border-color: color-mix(in srgb, var(--color-paper) 55%, transparent);
+}
+
+html.light .btn-ghost:hover {
+  background: color-mix(in srgb, var(--color-paper) 6%, transparent);
+}
+
+html.light .surface-card {
+  border-color: #a8a8a8;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+html.light .section-kicker {
+  color: var(--color-stone);
+}
+
+.page-section {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+  scroll-margin-top: var(--section-scroll-margin);
+}
+
+.resume-section-title {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid #222;
+  padding-bottom: 0.2rem;
+  color: #111;
+}
+
+.surface-card {
+  border: 1px solid var(--color-slate);
+  background: var(--color-charcoal);
+  border-radius: var(--radius-cards);
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-vertical {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee var(--duration, 40s) linear infinite;
+}
+
+.animate-marquee-vertical {
+  animation: marquee-vertical var(--duration, 40s) linear infinite;
+}
+
+.marquee-track {
+  animation: marquee 45s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.cursor-blink::after {
+  content: "▋";
+  animation: blink 1s step-end infinite;
+  color: var(--terminal-green);
+  margin-left: 2px;
+}
+
+.bento-card {
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.35s ease;
+}
+
+.bento-card:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--color-paper) 25%, transparent);
+}
+
+.deck-card {
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.deck-card:hover {
+  transform: translateY(-8px) rotate(0deg) !important;
+  z-index: 10;
+}

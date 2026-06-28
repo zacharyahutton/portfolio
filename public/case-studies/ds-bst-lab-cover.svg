@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Binary Search Tree Lab cover">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a100c"/>
+      <stop offset="100%" stop-color="#1a3020"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="600" cy="120" r="36" fill="#e8a849" opacity="0.9"/>
+  <circle cx="480" cy="240" r="32" fill="#5ee87a" opacity="0.8"/>
+  <circle cx="720" cy="240" r="32" fill="#5ee87a" opacity="0.8"/>
+  <circle cx="400" cy="360" r="28" fill="#1500ff" opacity="0.7"/>
+  <circle cx="560" cy="360" r="28" fill="#1500ff" opacity="0.7"/>
+  <circle cx="680" cy="360" r="28" fill="#1500ff" opacity="0.7"/>
+  <circle cx="800" cy="360" r="28" fill="#1500ff" opacity="0.7"/>
+  <line x1="600" y1="156" x2="480" y2="208" stroke="#e8a84955" stroke-width="3"/>
+  <line x1="600" y1="156" x2="720" y2="208" stroke="#e8a84955" stroke-width="3"/>
+  <line x1="480" y1="272" x2="400" y2="332" stroke="#5ee87a44" stroke-width="2"/>
+  <line x1="480" y1="272" x2="560" y2="332" stroke="#5ee87a44" stroke-width="2"/>
+  <line x1="720" y1="272" x2="680" y2="332" stroke="#5ee87a44" stroke-width="2"/>
+  <line x1="720" y1="272" x2="800" y2="332" stroke="#5ee87a44" stroke-width="2"/>
+  <text x="600" y="480" text-anchor="middle" fill="#fdfdfd" font-family="system-ui,sans-serif" font-size="44" font-weight="600">BST Lab</text>
+  <text x="600" y="530" text-anchor="middle" fill="#a3a3a3" font-family="system-ui,sans-serif" font-size="24">Java · JUnit · Big-O Analysis</text>
+</svg>

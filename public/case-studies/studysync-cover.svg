@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="StudySync API cover">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a0f0a"/>
+      <stop offset="50%" stop-color="#2d1810"/>
+      <stop offset="100%" stop-color="#e07050"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff08" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect x="80" y="100" width="520" height="380" rx="16" fill="#0d0d0d" stroke="#e0705044" stroke-width="2"/>
+  <text x="120" y="160" fill="#e07050" font-family="monospace" font-size="22">GET /api/v1/deadlines</text>
+  <text x="120" y="200" fill="#888" font-family="monospace" font-size="18">Authorization: Bearer eyJ...</text>
+  <text x="120" y="260" fill="#5ee87a" font-family="monospace" font-size="18">{</text>
+  <text x="140" y="295" fill="#d4d4d4" font-family="monospace" font-size="18">"course": "Data Structures",</text>
+  <text x="140" y="330" fill="#d4d4d4" font-family="monospace" font-size="18">"due": "2026-04-15",</text>
+  <text x="140" y="365" fill="#d4d4d4" font-family="monospace" font-size="18">"status": "pending"</text>
+  <text x="120" y="400" fill="#5ee87a" font-family="monospace" font-size="18">}</text>
+  <text x="700" y="280" fill="#fdfdfd" font-family="system-ui,sans-serif" font-size="56" font-weight="600">StudySync</text>
+  <text x="700" y="340" fill="#d4d4d4" font-family="system-ui,sans-serif" font-size="28">FastAPI · JWT · SQLAlchemy</text>
+</svg>
