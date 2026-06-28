@@ -14,9 +14,10 @@ python scripts/generate-instagram-highlights.py
 
 ```bash
 pip install imageio[ffmpeg]   # MP4 output (recommended for Instagram)
-# optional: pip install cairosvg   # devicon SVG → PNG logos in assets/logos/
 python scripts/generate-instagram-videos.py
 ```
+
+Removes stale `.gif` files in `videos-stack/` when MP4 export succeeds.
 
 Output videos: `brand/instagram/videos-stack/` — 1080×1920, 4 seconds, 30fps.
 
@@ -91,7 +92,7 @@ Each narrative slide has 2–4 sentences of context. Stack slide explains **why*
 | 4 | `04-tools.png` | Tools and deploy grid with copy |
 | 5 | `05-architecture.png` | Browser → API → database diagram in plain English |
 
-Logos download to `assets/logos/` when `cairosvg` is installed; indigo initial badges render as fallback.
+Logos download to `assets/logos/` from [walkxcode/dashboard-icons](https://github.com/walkxcode/dashboard-icons) via jsDelivr PNG CDN; Express and SQLAlchemy use Pillow brand badges if no CDN match.
 
 ### STACK videos (`videos-stack/`) — optional
 

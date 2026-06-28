@@ -34,6 +34,10 @@ def _write_mp4(frames: list[np.ndarray], path: Path, fps: int = FPS) -> None:
 
         iio.imwrite(path, frames, fps=fps, codec="libx264", pixelformat="yuv420p")
         print(f"  video  {path.relative_to(ROOT)}")
+        gif = path.with_suffix(".gif")
+        if gif.exists():
+            gif.unlink()
+            print(f"  removed  {gif.relative_to(ROOT)}")
         return
     except Exception as exc:
         print(f"  imageio  {exc} — trying moviepy")
