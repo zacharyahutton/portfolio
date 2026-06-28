@@ -115,7 +115,7 @@ export default function ProjectCard({
             alt={`${project.title} cover`}
             className={cn(
               "transition duration-500 group-hover:scale-[1.02]",
-              imageFit === "contain" ? "object-contain p-3" : "object-cover object-top",
+              imageFit === "contain" ? "object-contain p-4" : "object-cover object-top",
             )}
             sizes="(max-width: 768px) 100vw, 50vw"
           />

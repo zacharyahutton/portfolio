@@ -22,7 +22,7 @@ export default function ProjectCoverImage({
       src={src}
       alt={alt}
       fill
-      className={cn("absolute inset-0 h-full w-full object-cover", className)}
+      className={cn("absolute inset-0 h-full w-full", className)}
       sizes={sizes}
       priority={priority}
     />
