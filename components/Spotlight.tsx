@@ -4,11 +4,11 @@
 
 import { useState } from "react";
 
-import Image from "next/image";
-
 import Link from "next/link";
 
 import { ArrowRight, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
+
+import ProjectCoverImage from "@/components/ui/ProjectCoverImage";
 
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -88,24 +88,16 @@ export default function Spotlight() {
 
                   {item.image ? (
 
-                    <Image
-
+                    <ProjectCoverImage
                       src={item.image}
-
                       alt={item.title}
-
-                      fill
-
                       className={cn(
                         item.id === "spotlight-pntcog"
                           ? "object-contain p-6"
                           : "object-cover object-top",
                       )}
-
                       sizes="(max-width: 1024px) 100vw, 50vw"
-
                       priority={active === 0}
-
                     />
 
                   ) : (

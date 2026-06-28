@@ -1,8 +1,8 @@
-import Image from "next/image";
-
 import Link from "next/link";
 
 import { ArrowRight, Code2, ExternalLink } from "lucide-react";
+
+import ProjectCoverImage from "@/components/ui/ProjectCoverImage";
 
 import {
 
@@ -110,24 +110,14 @@ export default function ProjectCard({
 
         >
 
-          <Image
-
+          <ProjectCoverImage
             src={project.image}
-
             alt={`${project.title} cover`}
-
-            fill
-
             className={cn(
-
               "transition duration-500 group-hover:scale-[1.02]",
-
               imageFit === "contain" ? "object-contain p-3" : "object-cover object-top",
-
             )}
-
             sizes="(max-width: 768px) 100vw, 50vw"
-
           />
 
         </div>

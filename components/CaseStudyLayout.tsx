@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Code2, ExternalLink } from "lucide-react";
+import ProjectCoverImage from "@/components/ui/ProjectCoverImage";
 import type { CaseStudy, Project } from "@/content/types";
 import { projectImageFit, cn } from "@/lib/utils";
 
@@ -101,10 +101,9 @@ export default function CaseStudyLayout({ project, caseStudy }: CaseStudyLayoutP
             projectImageFit[project.slug] === "contain" ? "bg-black" : "bg-[var(--color-graphite)]",
           )}
         >
-          <Image
+          <ProjectCoverImage
             src={caseStudy.screenshots[0].src}
             alt={caseStudy.screenshots[0].alt}
-            fill
             className={
               projectImageFit[project.slug] === "contain"
                 ? "object-contain p-8"
