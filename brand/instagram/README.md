@@ -1,112 +1,122 @@
 # Instagram Highlights — Upload Guide
 
-Upload-ready Story Highlight covers and pinned story slides for **Zachary Hutton**. Design matches portfolio obsidian (`#050505`) and electric indigo (`#1500ff`).
+Magazine-style Story Highlight covers and pinned story slides for **Zachary Hutton**. Obsidian (`#050505`) + electric indigo (`#1500ff`), varied layouts — not identical AI slides.
 
-**Regenerate assets:** from `portfolio/` run:
+**Regenerate:**
 
 ```bash
+cd portfolio
+pip install pillow qrcode[pil]
 python scripts/generate-instagram-highlights.py
 ```
 
-Requires [Pillow](https://pypi.org/project/pillow/). Fonts: DM Sans in `fonts/` (script falls back to Segoe UI on Windows).
+**Optional live screenshots** (Playwright — uses `portfolio` devDependency):
+
+```bash
+python scripts/generate-instagram-highlights.py --capture
+npx playwright install chromium   # first time only
+```
+
+Output: `brand/instagram/` — covers, five story folders, `assets/screenshots/`, `photos-needed.md`, `motion/README.md`.
 
 ---
 
 ## Before you start
 
-1. Profile photo, bio, and link in bio set per `brand/INSTAGRAM_SETUP.md`.
-2. Transfer PNGs to your phone (AirDrop, Google Drive, USB, or cloud folder).
-3. Create highlights **left to right** in the order below so the row reads: About → Projects → Skills → UTech → Contact.
+1. Profile photo, bio, link per `brand/INSTAGRAM_SETUP.md`.
+2. Replace placeholders listed in `photos-needed.md` (portrait, desk, campus).
+3. Transfer PNGs to phone (AirDrop, Drive, USB).
+4. Create highlights **left → right**: About → Build → Stack → UTech → Connect.
 
 ---
 
-## Step 1 — Create highlights (covers)
+## Step 1 — Highlight covers (`covers/`)
 
-For each highlight, tap **New** on your profile story row, then **Edit Highlight** → **Edit Cover** → upload the matching PNG from `covers/`.
+| Order | Name | File |
+|-------|------|------|
+| 1 | **About** | `01-about.png` |
+| 2 | **Build** | `02-build.png` |
+| 3 | **Stack** | `03-stack.png` |
+| 4 | **UTech** | `04-utech.png` |
+| 5 | **Connect** | `05-connect.png` |
 
-| Order (L→R) | Highlight name | Cover file |
-|-------------|----------------|------------|
-| 1 | **About** | `covers/01-about.png` |
-| 2 | **Projects** | `covers/02-projects.png` |
-| 3 | **Skills** | `covers/03-skills.png` |
-| 4 | **UTech** | `covers/04-utech.png` |
-| 5 | **Contact** | `covers/05-contact.png` |
-
-Covers are 1080×1080. Text and icon sit in the center safe zone for Instagram’s circular crop.
+1080×1080, text-only, safe for circular crop.
 
 ---
 
-## Step 2 — Upload story slides into each highlight
+## Step 2 — Story slides (numeric order)
 
-Post each folder’s PNGs as **Stories** (one image per story), in numeric order. After posting, open the story → **⋯** → **Highlight** → select the matching highlight name.
+Post each PNG as a Story → **Highlight** → matching folder name.
 
 ### About (`stories-about/`)
 
 | File | Content |
 |------|---------|
-| `01-who-i-am.png` | Name, UTech CS, GPA 3.7, Dean's List, Portmore |
-| `02-what-i-build.png` | Full-stack focus, security-aware engineering |
-| `03-open-to-internships.png` | Open to internships and co-ops |
+| `01-portrait.png` | Polaroid — headshot or placeholder |
+| `02-workspace.png` | Desk / laptop placeholder |
+| `03-github-weekly.png` | GitHub contributions + “Building every week →” |
 
-### Projects (`stories-projects/`)
+### Build (`stories-build/`)
+
+Four projects × four slides each (browser → problem → solution → stack):
+
+| Project | A browser | B problem | C solution | D stack |
+|---------|-----------|-----------|------------|---------|
+| Portfolio | `01-portfolio-a-browser.png` | `…-b-problem.png` | `…-c-solution.png` | `…-d-stack.png` |
+| weROI | `02-weroi-…` | | | |
+| StudySync | `03-studysync-…` | | | |
+| PNTCOG | `04-pntcog-…` | | | |
+
+### Stack (`stories-stack/`)
 
 | File | Content |
 |------|---------|
-| `01-portfolio.png` | Personal portfolio (Next.js, Vercel) |
-| `02-studysync.png` | StudySync API (FastAPI, JWT, OpenAPI) |
-| `03-weroi-platform.png` | weROI platform build (React, FastAPI, MongoDB) |
-| `04-pntcog.png` | PNTCOG ministry site (React, live site) |
-
-### Skills (`stories-skills/`)
-
-| File | Content |
-|------|---------|
-| `01-languages.png` | Python, TypeScript, JavaScript, Java, SQL, HTML/CSS |
-| `02-frameworks.png` | React, Next.js, FastAPI, Tailwind, Node, Express |
-| `03-tools-practices.png` | Git, Vercel, Railway, MongoDB, REST, secure coding, CI/CD |
+| `01-what-i-build.png` | Web apps, APIs, internal tools |
+| `02-tech-badges.png` | Text badge grid |
+| `03-code-snippet.png` | Real StudySync FastAPI route |
 
 ### UTech (`stories-utech/`)
 
 | File | Content |
 |------|---------|
-| `01-cs-student.png` | CS student, GPA, Dean's List, graduation 2029 |
-| `02-labs-github.png` | Coursework to GitHub, OWASP / PortSwigger labs |
+| `01-campus.png` | Campus placeholder + CS @ UTech card |
+| `02-labs-github.png` | Labs → GitHub |
 
-### Contact (`stories-contact/`)
+### Connect (`stories-connect/`)
 
 | File | Content |
 |------|---------|
-| `01-reach-me.png` | Email, open to work, location |
-| `02-links.png` | Portfolio, GitHub, LinkedIn URLs |
+| `01-open-to-work.png` | Internships & co-ops |
+| `02-links.png` | Email, LinkedIn, GitHub, portfolio |
+| `03-qr-portfolio.png` | QR to portfolio |
 
-Story slides are 1080×1920 (9:16).
-
----
-
-## Step 3 — Pin stories to highlights
-
-1. Post all slides for one highlight (or post and add to highlight one at a time).
-2. When adding to a highlight, pick the highlight you created in Step 1.
-3. Repeat for all five folders.
-4. In **Edit Highlight**, confirm cover art still shows the correct `covers/*.png`.
-
-**Tip:** Upload in folder order (`01`, `02`, `03`…) so pinned stories read top-to-bottom in a logical flow.
+Slides are **1080×1920** (9:16). Every slide: `ZH // 2026` label + indigo accent + grain/grid texture.
 
 ---
 
-## Quick checklist
+## Step 3 — Pin to highlights
 
-- [ ] 5 highlight covers uploaded (`covers/`)
-- [ ] About: 3 stories pinned (`stories-about/`)
-- [ ] Projects: 4 stories pinned (`stories-projects/`)
-- [ ] Skills: 3 stories pinned (`stories-skills/`)
-- [ ] UTech: 2 stories pinned (`stories-utech/`)
-- [ ] Contact: 2 stories pinned (`stories-contact/`)
+1. Post slides in folder order (`01`, `02`, …).
+2. Add each to the highlight created in Step 1.
+3. Confirm cover art in **Edit Highlight**.
+
+Optional motion clips: see `motion/README.md`.
+
+---
+
+## Checklist
+
+- [ ] 5 covers
+- [ ] About: 3 stories
+- [ ] Build: 16 stories
+- [ ] Stack: 3 stories
+- [ ] UTech: 2 stories
+- [ ] Connect: 3 stories
 - [ ] Bio link: https://zachary-hutton-portfolio.vercel.app/
-- [ ] Email button: hzach577@gmail.com
+- [ ] Personal photos swapped per `photos-needed.md`
 
-**Total assets:** 19 PNGs (5 covers + 14 story slides).
+**Total:** 32 PNGs (5 covers + 27 stories).
 
 ---
 
-*Content sourced from `content/profile.ts`, `content/skills.ts`, and `brand/INSTAGRAM_SETUP.md`.*
+*Content from `content/profile.ts`, project modules, and StudySync API source.*
