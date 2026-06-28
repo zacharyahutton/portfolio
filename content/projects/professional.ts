@@ -12,6 +12,7 @@ export const professionalProjects: Project[] = [
     stack: [
       "React",
       "JavaScript",
+      "TypeScript",
       "HTML5",
       "CSS3",
       "Responsive design",
@@ -42,6 +43,9 @@ export const professionalProjects: Project[] = [
     stack: [
       "React",
       "JavaScript",
+      "TypeScript",
+      "HTML5",
+      "CSS3",
       "Tailwind CSS",
       "Framer Motion",
       "GSAP",

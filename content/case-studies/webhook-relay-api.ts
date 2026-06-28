@@ -61,9 +61,12 @@ export const webhookRelayApiCaseStudy: CaseStudy = {
   stack: [
     "Python",
     "FastAPI",
-    "Redis",
+    "JavaScript",
+    "HMAC",
+    "JSON",
     "REST APIs",
-    "HMAC-SHA256",
+    "Middleware",
+    "Redis",
     "Webhooks",
     "API keys",
     "Exponential backoff",
@@ -73,5 +76,5 @@ export const webhookRelayApiCaseStudy: CaseStudy = {
     "Dead-letter logging",
     "Delivery replay",
   ],
-  screenshots: [{ src: "/case-studies/webhook-relay-cover.svg", alt: "Webhook Relay API cover" }],
+  screenshots: [{ src: "/case-studies/webhook-relay-cover.png", alt: "Webhook Relay API cover" }],
 };

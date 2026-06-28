@@ -62,6 +62,7 @@ export const pntcogCaseStudy: CaseStudy = {
     "JavaScript",
     "HTML5",
     "CSS3",
+    "TypeScript",
     "Responsive design",
     "Mobile-first UI",
     "Component architecture",

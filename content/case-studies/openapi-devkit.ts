@@ -61,10 +61,11 @@ export const openapiDevkitCaseStudy: CaseStudy = {
   stack: [
     "TypeScript",
     "Node.js",
+    "JavaScript",
     "OpenAPI 3",
+    "CLI",
     "Zod",
     "Code generation",
-    "CLI",
     "Fetch API",
     "Postman collections",
     "JSON Schema",
@@ -72,5 +73,5 @@ export const openapiDevkitCaseStudy: CaseStudy = {
     "Runtime validation",
     "Dry-run mode",
   ],
-  screenshots: [{ src: "/case-studies/openapi-devkit-cover.svg", alt: "OpenAPI DevKit cover" }],
+  screenshots: [{ src: "/case-studies/openapi-devkit-cover.png", alt: "OpenAPI DevKit cover" }],
 };

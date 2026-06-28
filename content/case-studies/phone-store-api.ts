@@ -59,12 +59,15 @@ export const phoneStoreApiCaseStudy: CaseStudy = {
     { value: "Webhooks", label: "Order events" },
   ],
   stack: [
+    "TypeScript",
     "Node.js",
     "Express",
+    "JavaScript",
     "MongoDB",
+    "REST APIs",
+    "JSON",
     "JWT",
     "Refresh tokens",
-    "REST APIs",
     "express-rate-limit",
     "HMAC webhooks",
     "Inventory reservation",
@@ -74,5 +77,5 @@ export const phoneStoreApiCaseStudy: CaseStudy = {
     "Pagination",
     "Order status pipeline",
   ],
-  screenshots: [{ src: "/case-studies/phone-store-cover.svg", alt: "Phone Store API cover" }],
+  screenshots: [{ src: "/case-studies/phone-store-cover.png", alt: "Phone Store API cover" }],
 };

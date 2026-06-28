@@ -185,6 +185,12 @@ export default function Navbar({ variant = "home" }: NavbarProps) {
     };
 
   }, [isHome]);
+  useEffect(() => {
+    if (!isHome) {
+      setActiveIndex(getRouteActiveIndex(pathname));
+    }
+  }, [isHome, pathname]);
+
 
 
 

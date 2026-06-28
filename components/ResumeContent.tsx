@@ -1,4 +1,4 @@
-import { User } from "lucide-react";
+﻿import { User } from "lucide-react";
 import GithubIcon from "@/components/ui/GithubIcon";
 import LinkedinIcon from "@/components/ui/LinkedinIcon";
 import { profile } from "@/content/profile";
@@ -9,7 +9,7 @@ export default function ResumeContent() {
       <header className="text-center">
         <h1 className="text-[1.65rem] font-bold tracking-[0.06em] text-[#111]">ZACHARY HUTTON</h1>
         <p className="mt-2 text-[0.85rem] leading-relaxed text-[#333]">
-          {profile.contact.location} · {profile.contact.email} · (876) 781-0400
+          {profile.contact.location} Â· {profile.contact.email} Â· (876) 781-0400
         </p>
         <p className="mt-1 text-[0.85rem] text-[#333]">
           <a
@@ -19,7 +19,7 @@ export default function ResumeContent() {
             <User size={12} aria-hidden />
             Portfolio
           </a>
-          {" · "}
+          {" Â· "}
           <a
             href={profile.contact.github}
             className="inline-flex items-center gap-1 text-[#111] underline-offset-2 hover:underline"
@@ -27,7 +27,7 @@ export default function ResumeContent() {
             <GithubIcon size={12} aria-hidden />
             GitHub
           </a>
-          {" · "}
+          {" Â· "}
           <a
             href={profile.contact.linkedin}
             className="inline-flex items-center gap-1 text-[#111] underline-offset-2 hover:underline"
@@ -48,12 +48,12 @@ export default function ResumeContent() {
           </p>
           <span className="text-[0.85rem] text-[#444]">Expected 2029</span>
         </div>
-        <p className="mt-1 text-[0.88rem] font-semibold">GPA: 3.7 · Dean&apos;s List</p>
+        <p className="mt-1 text-[0.88rem] font-semibold">GPA: 3.7 Â· Dean&apos;s List</p>
         <p className="mt-2 text-[0.88rem] leading-relaxed">
           Coursework spans data structures, databases, networking, object-oriented programming, and software
           engineering. I apply lecture concepts through labs, personal repositories, and production contract work.
         </p>
-        <p className="mt-1 text-[0.85rem] text-[#444]">Ardenne High School · Grade I in CSEC across all subjects</p>
+        <p className="mt-1 text-[0.85rem] text-[#444]">Ardenne High School Â· Grade I in CSEC across all subjects</p>
         <p className="mt-0.5 text-[0.72rem] leading-snug text-[#666]">
           Information Technology, English A, Mathematics, Additional Mathematics, Physics, Principles of
           Accounts, Principles of Business, Industrial Technology (Electrical), Social Studies
@@ -88,7 +88,7 @@ export default function ResumeContent() {
               weROI Agency Platform <span className="font-normal text-[0.82rem] text-[#555]">(weroi.net)</span>
             </p>
             <p className="mt-1">
-              Engineered a full-stack agency platform: <strong>React</strong> SPA frontend,{" "}
+              Engineered a full-stack agency platform: <strong>React</strong> / <strong>TypeScript</strong> SPA frontend,{" "}
               <strong>FastAPI</strong>/<strong>Python</strong> backend, and <strong>MongoDB Atlas</strong>{" "}
               persistence. Designed document models for leads, audits, and admin users.
             </p>
@@ -134,7 +134,7 @@ export default function ResumeContent() {
           <div>
             <div className="flex flex-wrap justify-between gap-2">
               <p className="font-semibold">Software Developer (Contract), weROI</p>
-              <span className="text-[0.85rem] text-[#444]">2024–Present</span>
+              <span className="text-[0.85rem] text-[#444]">2024â€“Present</span>
             </div>
             <p className="mt-1 leading-relaxed">
               Delivered production web applications using <strong>React</strong>, <strong>Next.js</strong>,{" "}
@@ -145,7 +145,7 @@ export default function ResumeContent() {
           <div>
             <div className="flex flex-wrap justify-between gap-2">
               <p className="font-semibold">Freelance Web Developer, Independent</p>
-              <span className="text-[0.85rem] text-[#444]">2023–Present</span>
+              <span className="text-[0.85rem] text-[#444]">2023â€“Present</span>
             </div>
             <p className="mt-1 leading-relaxed">
               Developed responsive websites with <strong>component-based</strong> architecture, <strong>SEO</strong>,
@@ -206,3 +206,4 @@ export default function ResumeContent() {
     </article>
   );
 }
+

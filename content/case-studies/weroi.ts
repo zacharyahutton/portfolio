@@ -68,6 +68,9 @@ export const weroiCaseStudy: CaseStudy = {
   stack: [
     "React",
     "JavaScript",
+    "TypeScript",
+    "HTML5",
+    "CSS3",
     "Tailwind CSS",
     "Framer Motion",
     "GSAP",

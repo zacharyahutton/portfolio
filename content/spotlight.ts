@@ -1,4 +1,4 @@
-import type { SpotlightItem } from "./types";
+﻿import type { SpotlightItem } from "./types";
 
 export const spotlightItems: SpotlightItem[] = [
   {
@@ -9,14 +9,17 @@ export const spotlightItems: SpotlightItem[] = [
       "Full-stack agency platform with a React SPA frontend, FastAPI Python backend, and MongoDB Atlas persistence. Built lead-capture funnels, multi-step audit forms, JWT-protected admin dashboard, Resend email integration, and REST APIs for lead management. Deployed the frontend on Vercel and the API on Railway with CORS configuration and health-check routing.",
     stack: [
       "React",
+      "JavaScript",
+      "TypeScript",
       "FastAPI",
       "Python",
       "MongoDB Atlas",
+      "Tailwind CSS",
       "JWT",
       "Resend",
-      "Tailwind CSS",
       "Vercel",
       "Railway",
+      "REST APIs",
     ],
     href: "https://weroi.net",
     caseStudyHref: "/projects/weroi",
@@ -35,11 +38,14 @@ export const spotlightItems: SpotlightItem[] = [
     stack: [
       "React",
       "JavaScript",
+      "HTML5",
+      "CSS3",
       "Responsive design",
       "Vercel",
       "Component architecture",
       "React Router",
       "Accessible forms",
+      "Mobile-first UI",
     ],
     href: "https://portmorentcog.org",
     caseStudyHref: "/projects/pntcog",
@@ -57,15 +63,18 @@ export const spotlightItems: SpotlightItem[] = [
     stack: [
       "Python",
       "FastAPI",
-      "SQLAlchemy",
+      "SQL",
+      "SQLite",
       "JWT",
       "Pydantic",
-      "SQLite",
+      "REST APIs",
       "OpenAPI",
+      "pytest",
+      "Uvicorn",
     ],
     caseStudyHref: "/projects/studysync-api",
     github: "https://github.com/zacharyahutton/studysync-api",
-    image: "/case-studies/studysync-cover.svg",
+    image: "/case-studies/studysync-cover.png",
     linkLabel: "GitHub",
     accent: "#6366f1",
     tabIcon: "SS",

@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 
 import { cn } from "@/lib/utils";
 
@@ -17,25 +17,12 @@ export default function ProjectCoverImage({
   sizes = "(max-width: 768px) 100vw, 50vw",
   priority = false,
 }: ProjectCoverImageProps) {
-  const isSvg = src.toLowerCase().endsWith(".svg");
-
-  if (isSvg) {
-    return (
-      // eslint-disable-next-line @next/next/no-img-element
-      <img
-        src={src}
-        alt={alt}
-        className={cn("absolute inset-0 h-full w-full", className)}
-      />
-    );
-  }
-
   return (
     <Image
       src={src}
       alt={alt}
       fill
-      className={className}
+      className={cn("absolute inset-0 h-full w-full object-cover", className)}
       sizes={sizes}
       priority={priority}
     />
