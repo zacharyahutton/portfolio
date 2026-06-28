@@ -70,7 +70,6 @@ export const professionalProjects: Project[] = [
       "Analytics events",
     ],
     live: "https://weroi.net",
-    github: "https://github.com/zacharyahutton/weROI",
     image: "/case-studies/weroi.png",
     result: "Production agency stack with admin dashboard and lead funnels",
     featured: true,

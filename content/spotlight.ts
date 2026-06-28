@@ -23,7 +23,6 @@ export const spotlightItems: SpotlightItem[] = [
     ],
     href: "https://weroi.net",
     caseStudyHref: "/projects/weroi",
-    github: "https://github.com/zacharyahutton/weROI",
     image: "/case-studies/weroi.png",
     linkLabel: "Live site",
     accent: "#1500ff",
