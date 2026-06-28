@@ -131,7 +131,7 @@ export const personalProjects: Project[] = [
       "This site. Next.js App Router, typed content modules, obsidian design system, spotlight carousel, case study routes, and resume modal.",
     stack: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "HTML5", "CSS3"],
     github: "https://github.com/zacharyahutton/portfolio",
-    live: "https://zachary-hutton.vercel.app",
+    live: "https://zachary-hutton-portfolio.vercel.app/",
     image: "/case-studies/portfolio-cover.png",
     result: "Open-source portfolio site on Vercel",
   },
