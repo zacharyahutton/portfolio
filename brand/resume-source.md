@@ -14,7 +14,7 @@
 
 Portmore, Jamaica | [hzach577@gmail.com](mailto:hzach577@gmail.com) | [(876) 781-0400](tel:+18767810400)  
 
-[Portfolio](https://zachary-hutton.vercel.app) | [GitHub](https://github.com/zacharyahutton) | [LinkedIn](https://www.linkedin.com/in/zachary-hutton-a2ab81415/)
+[Portfolio](https://zachary-hutton-portfolio.vercel.app/) | [GitHub](https://github.com/zacharyahutton) | [LinkedIn](https://www.linkedin.com/in/zachary-hutton-a2ab81415/)
 
 
 
