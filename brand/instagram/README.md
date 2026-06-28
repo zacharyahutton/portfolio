@@ -10,6 +10,16 @@ pip install pillow qrcode[pil]
 python scripts/generate-instagram-highlights.py
 ```
 
+**STACK story animations** (optional — MP4 preferred, GIF fallback without extra deps):
+
+```bash
+pip install imageio[ffmpeg]   # MP4 output (recommended for Instagram)
+# optional: pip install cairosvg   # devicon SVG → PNG logos in assets/logos/
+python scripts/generate-instagram-videos.py
+```
+
+Output videos: `brand/instagram/videos-stack/` — 1080×1920, 4 seconds, 30fps.
+
 **Live screenshots** (Playwright — optional):
 
 ```bash
@@ -59,16 +69,15 @@ Post each PNG as a Story → **Highlight** → matching folder name.
 | 3 | `03-github-weekly.png` | GitHub profile in browser frame + caption on what recruiters see |
 | 4 | `04-portfolio-monitor.png` | Portfolio on SANSUI monitor (desk crop) or live capture |
 
-### Build (`stories-build/`) — 20 slides
+### Build (`stories-build/`) — 15 slides
 
-Four projects × five slides each (browser → problem → solution → stack → learned):
+Three projects × five slides each (browser → problem → solution → stack → learned):
 
 | Project | Files |
 |---------|-------|
 | Portfolio | `01-portfolio-a-browser.png` … `01-portfolio-e-learned.png` |
 | weROI | `02-weroi-a-browser.png` … `02-weroi-e-learned.png` |
-| StudySync | `03-studysync-a-browser.png` … `03-studysync-e-learned.png` |
-| PNTCOG | `04-pntcog-a-browser.png` … `04-pntcog-e-learned.png` |
+| PNTCOG | `03-pntcog-a-browser.png` … `03-pntcog-e-learned.png` |
 
 Each narrative slide has 2–4 sentences of context. Stack slide explains **why** each technology matters.
 
@@ -82,7 +91,21 @@ Each narrative slide has 2–4 sentences of context. Stack slide explains **why*
 | 4 | `04-tools.png` | Tools and deploy grid with copy |
 | 5 | `05-architecture.png` | Browser → API → database diagram in plain English |
 
-Logos download to `assets/logos/` on regen when CDN is reachable; text badges render as fallback.
+Logos download to `assets/logos/` when `cairosvg` is installed; indigo initial badges render as fallback.
+
+### STACK videos (`videos-stack/`) — optional
+
+Post MP4 or GIF the same way as a photo Story, then pin to **Stack** highlight (mix with static PNGs).
+
+| Order | File | Animation |
+|-------|------|-----------|
+| 1 | `01-what-i-build.mp4` (or `.gif`) | Three product cards fade in |
+| 2 | `02-languages.mp4` | Language grid stagger |
+| 3 | `03-frameworks.mp4` | Framework grid stagger |
+| 4 | `04-tools.mp4` | Tools grid stagger |
+| 5 | `05-architecture.mp4` | Architecture boxes + arrows draw in |
+
+Highlight cover stays static (`covers/03-stack.png`); Instagram does not support animated highlight covers.
 
 ### UTech (`stories-utech/`) — 3 slides
 
@@ -114,18 +137,19 @@ Optional motion clips: see `motion/README.md`.
 
 ---
 
-## Complete file list (40 PNGs)
+## Complete file list (35 PNGs + 5 videos)
 
 ```
 covers/                          5 PNGs
 stories-about/                   4 PNGs
-stories-build/                  20 PNGs
+stories-build/                  15 PNGs
 stories-stack/                   5 PNGs
 stories-utech/                   3 PNGs
 stories-connect/                 3 PNGs
+videos-stack/                    5 MP4 or GIF (optional)
 ```
 
-**Total: 40 PNGs** (5 covers + 35 stories).
+**Total: 35 PNGs** (5 covers + 30 stories) + optional 5 STACK animations.
 
 ---
 
@@ -133,12 +157,12 @@ stories-connect/                 3 PNGs
 
 - [ ] 5 covers
 - [ ] About: 4 stories
-- [ ] Build: 20 stories
-- [ ] Stack: 5 stories
+- [ ] Build: 15 stories
+- [ ] Stack: 5 stories (+ optional 5 videos in `videos-stack/`)
 - [ ] UTech: 3 stories
 - [ ] Connect: 3 stories
 - [ ] Bio link: https://zachary-hutton-portfolio.vercel.app/
 
 ---
 
-*Content from `content/profile.ts`, `content/skills.ts`, project modules, and StudySync API source.*
+*Content from `content/profile.ts`, project modules, and portfolio case studies.*

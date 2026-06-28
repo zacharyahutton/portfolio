@@ -1687,29 +1687,11 @@ PROJECTS: list[ProjectStory] = [
         ),
         tags=("React", "FastAPI", "MongoDB", "JWT", "Vercel", "Railway"),
     ),
-    ProjectStory(
-        slug="studysync",
-        name="StudySync API",
-        url="github.com/zacharyahutton/studysync-api",
-        fallback_image=PUBLIC / "case-studies" / "studysync-cover.png",
-        problem=(
-            "I wanted a backend that mirrors production API patterns: authenticated users, "
-            "validated request bodies, relational data modeling, and documented endpoints "
-            "I could exercise in Postman. Scattered deadline notes were the real use case."
-        ),
-        solution=(
-            "StudySync exposes REST routes for auth, courses, and deadline CRUD. Pydantic validates "
-            "every request, SQLAlchemy maps to SQLite locally, and OpenAPI docs generate "
-            "automatically from FastAPI route definitions."
-        ),
-        learned=(
-            "OpenAPI-first design makes frontend and tests easier to align. When the contract "
-            "is visible at /docs, integration debates disappear and I ship faster."
-        ),
-        tags=("Python", "FastAPI", "SQLAlchemy", "JWT", "OpenAPI"),
-    ),
-    ProjectStory(
-        slug="pntcog",
+]
+
+BUILD_PROJECTS: list[ProjectStory] = [
+    p for p in PROJECTS if p.slug in ("portfolio", "weroi", "pntcog")
+]
         name="PNTCOG Ministry",
         url="portmorentcog.org",
         fallback_image=PUBLIC / "case-studies" / "pntcog-cover.png",
