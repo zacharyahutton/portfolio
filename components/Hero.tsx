@@ -21,7 +21,7 @@ export default function Hero() {
   const { openResume } = useResume();
 
   return (
-    <section className="relative flex min-h-[100svh] flex-col overflow-x-hidden px-6 pb-16 pt-24">
+    <section id="top" className="relative flex min-h-[100svh] flex-col overflow-x-hidden px-6 pb-16 pt-24">
       <div className="flex flex-1 flex-col justify-center">
         <div className="relative mx-auto grid w-full max-w-[var(--page-max-width)] items-center gap-10 text-center lg:grid-cols-2 lg:gap-14">
           <div className="flex flex-col justify-center">

@@ -45,7 +45,7 @@ export const spotlightItems: SpotlightItem[] = [
     caseStudyHref: "/projects/pntcog",
     image: "/case-studies/pntcog.png",
     linkLabel: "Live site",
-    accent: "#5ee87a",
+    accent: "#d4a843",
     tabIcon: "PN",
   },
   {
@@ -67,7 +67,7 @@ export const spotlightItems: SpotlightItem[] = [
     github: "https://github.com/zacharyahutton/studysync-api",
     image: "/case-studies/studysync-cover.svg",
     linkLabel: "GitHub",
-    accent: "#e07050",
+    accent: "#6366f1",
     tabIcon: "SS",
   },
 ];

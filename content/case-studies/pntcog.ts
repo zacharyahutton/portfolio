@@ -74,5 +74,5 @@ export const pntcogCaseStudy: CaseStudy = {
     "Image optimization",
     "Preview deployments",
   ],
-  screenshots: [{ src: "/case-studies/pntcog.png", alt: "PNTCOG ministry website homepage" }],
+  screenshots: [{ src: "/case-studies/pntcog.png", alt: "PNTCOG 50th Jubilee logo — gold 50, cross, and globe" }],
 };

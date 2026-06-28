@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Code2, ExternalLink } from "lucide-react";
 import type { CaseStudy, Project } from "@/content/types";
+import { projectImageFit, cn } from "@/lib/utils";
 
 function RichText({ text, className }: { text: string; className?: string }) {
   const parts = text.split(/(\*\*[^*]+\*\*)/g);
@@ -94,12 +95,21 @@ export default function CaseStudyLayout({ project, caseStudy }: CaseStudyLayoutP
       </header>
 
       {caseStudy.screenshots && caseStudy.screenshots.length > 0 && (
-        <div className="relative mx-auto mt-14 aspect-video max-w-4xl overflow-hidden rounded-[var(--radius-cards)] border border-[var(--color-slate)] bg-[var(--color-graphite)] shadow-lg">
+        <div
+          className={cn(
+            "relative mx-auto mt-14 aspect-video max-w-4xl overflow-hidden rounded-[var(--radius-cards)] border border-[var(--color-slate)] shadow-lg",
+            projectImageFit[project.slug] === "contain" ? "bg-black" : "bg-[var(--color-graphite)]",
+          )}
+        >
           <Image
             src={caseStudy.screenshots[0].src}
             alt={caseStudy.screenshots[0].alt}
             fill
-            className="object-cover object-top"
+            className={
+              projectImageFit[project.slug] === "contain"
+                ? "object-contain p-8"
+                : "object-cover object-top"
+            }
             sizes="(max-width: 1024px) 100vw, 896px"
             priority
           />
