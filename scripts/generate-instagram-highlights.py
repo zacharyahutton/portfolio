@@ -18,6 +18,9 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "brand" / "instagram"
 FONTS_DIR = OUT / "fonts"
 SCREENSHOTS_DIR = OUT / "assets" / "screenshots"
+ASSETS_DIR = OUT / "assets"
+DESK_SETUP = ASSETS_DIR / "desk-setup.png"
+UTECH_CAMPUS = ASSETS_DIR / "utech-campus.png"
 PUBLIC = ROOT / "public"
 
 COVER_SIZE = (1080, 1080)
@@ -59,6 +62,7 @@ class ProjectStory:
     fallback_image: Path
     problem: str
     solution: str
+    learned: str
     tags: tuple[str, ...]
 
 
@@ -192,9 +196,25 @@ def draw_indigo_underline(
     width: int,
     *,
     thickness: int = 4,
-    offset_y: int = 8,
+    gap: int = 16,
 ) -> None:
-    draw.rectangle([x, y + offset_y, x + width, y + offset_y + thickness], fill=INDIGO)
+    """Draw underline below y (text bottom edge). gap keeps the line off the glyphs."""
+    draw.rectangle([x, y + gap, x + width, y + gap + thickness], fill=INDIGO)
+
+
+def underline_text_bbox(
+    draw: ImageDraw.ImageDraw,
+    bbox: tuple[int, int, int, int],
+    *,
+    max_width: int | None = None,
+    thickness: int = 4,
+    gap: int = 16,
+) -> None:
+    x1, _, x2, y2 = bbox
+    full_w = x2 - x1
+    width = min(full_w, max_width) if max_width else full_w
+    ux = x1 + (full_w - width) // 2
+    draw_indigo_underline(draw, ux, y2, width, thickness=thickness, gap=gap)
 
 
 def new_story_canvas(*, grid: bool = True) -> tuple[Image.Image, ImageDraw.ImageDraw]:
@@ -329,6 +349,41 @@ def load_image(path: Path | None, size: tuple[int, int] | None = None) -> Image.
     return img
 
 
+def crop_fraction(img: Image.Image, left: float, top: float, right: float, bottom: float) -> Image.Image:
+    w, h = img.size
+    return img.crop((int(w * left), int(h * top), int(w * right), int(h * bottom)))
+
+
+def cover_photo(
+    img: Image.Image,
+    target: tuple[int, int],
+    *,
+    anchor: str = "center",
+) -> Image.Image:
+    """Scale and crop photo to fill target dimensions."""
+    tw, th = target
+    src = img.copy()
+    scale = max(tw / src.width, th / src.height)
+    new_w, new_h = int(src.width * scale), int(src.height * scale)
+    src = src.resize((new_w, new_h), Image.Resampling.LANCZOS)
+    if anchor == "left":
+        x = 0
+    elif anchor == "right":
+        x = new_w - tw
+    else:
+        x = (new_w - tw) // 2
+    y = (new_h - th) // 2
+    return src.crop((x, y, x + tw, y + th))
+
+
+def load_desk_setup() -> Image.Image | None:
+    return load_image(DESK_SETUP)
+
+
+def load_utech_campus() -> Image.Image | None:
+    return load_image(UTECH_CAMPUS)
+
+
 def find_headshot() -> Path | None:
     patterns = [
         PUBLIC / "headshot.jpg",
@@ -364,16 +419,10 @@ def draw_minimal_cover(label: str, filename: str, *, letter_only: bool = False) 
 
     tw, th = text_size(draw, main, font)
     cx, cy = w // 2, h // 2 - 20
-    draw.text((cx - tw // 2, cy - th // 2), main, font=font, fill=PEARL)
-    draw_indigo_underline(draw, cx - min(tw, 180) // 2, cy + th // 2 + 12, min(tw, 180))
-
-    if not letter_only and len(label) == 1:
-        pass
-    elif not letter_only:
-        sub_font = load_font(24, "medium")
-        sub = label[0]
-        sw, _ = text_size(draw, sub, sub_font)
-        draw.text((cx - sw // 2, cy + th // 2 + 36), sub, font=sub_font, fill=MUTED_PEARL)
+    tx, ty = cx - tw // 2, cy - th // 2
+    draw.text((tx, ty), main, font=font, fill=PEARL)
+    bbox = draw.textbbox((tx, ty), main, font=font)
+    underline_text_bbox(draw, bbox, max_width=min(bbox[2] - bbox[0], 240), gap=18)
 
     save_cover(img, filename)
 
@@ -412,10 +461,10 @@ def layout_corner_text(
     draw.text((x, y), eyebrow.upper(), font=eyebrow_font, fill=INDIGO_SOFT)
     y += 44
     for line in wrap_text(headline, 14):
+        line_bbox = draw.textbbox((x, y), line, font=title_font)
         draw.text((x, y), line, font=title_font, fill=WHITE)
         if underline_at == "headline":
-            lw, lh = text_size(draw, line, title_font)
-            draw_indigo_underline(draw, x, y + lh, min(lw, 320))
+            underline_text_bbox(draw, line_bbox, max_width=min(line_bbox[2] - line_bbox[0], 320))
         y += 76
     y += 20
     for line in wrap_text(body, 28):
@@ -442,11 +491,13 @@ def layout_tilted_card(
     y = 48
     tf = load_font(52, "bold")
     bf = load_font(32, "regular")
-    for line in wrap_text(title, 16):
+    title_lines = wrap_text(title, 16)
+    for line in title_lines:
         cd.text((48, y), line, font=tf, fill=WHITE)
         y += 62
-    y += 16
-    draw_indigo_underline(cd, 48, y, 120)
+    if title_lines:
+        last_bbox = cd.textbbox((48, y - 62), title_lines[-1], font=tf)
+        underline_text_bbox(cd, last_bbox, max_width=120, gap=12)
     y += 28
     for line in wrap_text(body, 30):
         cd.text((48, y), line, font=bf, fill=PEARL)
@@ -492,8 +543,10 @@ def layout_polaroid(
 
     cap_font = load_script_font(38)
     cw, _ = text_size(draw, caption, cap_font)
-    draw.text((fx + (frame_w - cw) // 2, fy + frame_h - 100), caption, font=cap_font, fill=CHARCOAL)
-    draw_indigo_underline(draw, fx + 80, fy + frame_h - 48, frame_w - 160)
+    cap_y = fy + frame_h - 100
+    draw.text((fx + (frame_w - cw) // 2, cap_y), caption, font=cap_font, fill=CHARCOAL)
+    cap_bbox = draw.textbbox((fx + (frame_w - cw) // 2, cap_y), caption, font=cap_font)
+    underline_text_bbox(draw, cap_bbox, max_width=frame_w - 160, gap=10)
     save_story(img, folder, filename)
 
 
@@ -504,11 +557,18 @@ def layout_browser_slide(
     screenshot: Image.Image | None,
     url: str,
     project_name: str,
+    angle: float = -2.5,
+    arrow_label: str = "live →",
 ) -> None:
     img, draw = new_story_canvas()
     draw.text((72, 130), project_name.upper(), font=load_font(28, "medium"), fill=INDIGO_SOFT)
-    draw_browser_frame(img, draw, screenshot, x=72, y=220, w=936, h=1280, title=url)
-    draw_handwritten_arrow(draw, (780, 1580), (920, 1720), "live →")
+
+    frame_w, frame_h = 936, 1280
+    frame = Image.new("RGBA", (frame_w + 80, frame_h + 80), (0, 0, 0, 0))
+    fd = ImageDraw.Draw(frame)
+    draw_browser_frame(frame, fd, screenshot, x=40, y=40, w=frame_w, h=frame_h, title=url)
+    paste_rotated_card(img, frame, (20, 200), angle)
+    draw_handwritten_arrow(draw, (780, 1580), (920, 1720), arrow_label)
     save_story(img, folder, filename)
 
 
@@ -520,9 +580,9 @@ def layout_one_liner(
     line: str,
     align: str = "left",
     rotate_card: float = 0,
+    script_note: str | None = None,
 ) -> None:
     img, draw = new_story_canvas()
-    w, _ = STORY_SIZE
     card = Image.new("RGBA", (860, 360), (0, 0, 0, 0))
     cd = ImageDraw.Draw(card)
     cd.rounded_rectangle([0, 0, 860, 360], radius=20, fill=CHARCOAL, outline=GRAPHITE, width=2)
@@ -533,9 +593,12 @@ def layout_one_liner(
     for ln in wrap_text(line, 32):
         cd.text((48, y), ln, font=tf, fill=WHITE)
         y += 52
-    draw_indigo_underline(cd, 48, y + 8, 200)
+    label_bbox = cd.textbbox((48, 40), label.upper(), font=lf)
+    underline_text_bbox(cd, label_bbox, max_width=200, gap=10)
     xy = (110, 760) if align == "left" else (80, 820)
     paste_rotated_card(img, card, xy, rotate_card)
+    if script_note:
+        draw.text((72, 1680), script_note, font=load_script_font(34), fill=PEARL)
     save_story(img, folder, filename)
 
 
@@ -564,15 +627,18 @@ def layout_code_ide(folder: str, filename: str) -> None:
         y += 38
 
     draw.text((72, 1720), "Real route from StudySync API", font=load_font(26, "medium"), fill=MUTED_PEARL)
-    draw_indigo_underline(draw, 72, 1758, 280)
+    foot_bbox = draw.textbbox((72, 1720), "Real route from StudySync API", font=load_font(26, "medium"))
+    underline_text_bbox(draw, foot_bbox, max_width=280, gap=10)
     save_story(img, folder, filename)
 
 
 def layout_logo_grid(folder: str, filename: str, badges: Sequence[str]) -> None:
     img, draw = new_story_canvas()
     draw.text((72, 140), "STACK", font=load_font(28, "medium"), fill=INDIGO_SOFT)
-    draw.text((72, 190), "Tools I reach for", font=load_font(56, "bold"), fill=WHITE)
-    draw_indigo_underline(draw, 72, 268, 200)
+    headline = "Tools I reach for"
+    draw.text((72, 190), headline, font=load_font(56, "bold"), fill=WHITE)
+    head_bbox = draw.textbbox((72, 190), headline, font=load_font(56, "bold"))
+    underline_text_bbox(draw, head_bbox, max_width=200)
 
     cols = 2
     bw, bh, gap = 420, 100, 24
@@ -592,17 +658,26 @@ def layout_logo_grid(folder: str, filename: str, badges: Sequence[str]) -> None:
 def layout_github_contributions(folder: str, filename: str, screenshot: Image.Image | None) -> None:
     img, draw = new_story_canvas()
     draw.text((72, 140), "GITHUB", font=load_font(26, "medium"), fill=INDIGO_SOFT)
-    draw.text((72, 200), "Building every week", font=load_font(58, "bold"), fill=WHITE)
-    draw_indigo_underline(draw, 72, 278, 260)
+    headline = "Building every week"
+    hf = load_font(58, "bold")
+    draw.text((72, 200), headline, font=hf, fill=WHITE)
+    head_bbox = draw.textbbox((72, 200), headline, font=hf)
+    underline_text_bbox(draw, head_bbox, max_width=260)
 
     if screenshot:
         fitted = screenshot.copy()
-        fitted.thumbnail((920, 720), Image.Resampling.LANCZOS)
+        fitted.thumbnail((960, 1100), Image.Resampling.LANCZOS)
         px = (STORY_SIZE[0] - fitted.width) // 2
-        draw.rounded_rectangle([px - 12, 340, px + fitted.width + 12, 340 + fitted.height + 12], radius=16, fill=CHARCOAL)
-        img.paste(fitted, (px, 352))
+        py = 320
+        draw.rounded_rectangle(
+            [px - 12, py - 12, px + fitted.width + 12, py + fitted.height + 12],
+            radius=16,
+            fill=CHARCOAL,
+            outline=INDIGO,
+            width=1,
+        )
+        img.paste(fitted, (px, py))
     else:
-        # Stylized contribution grid mock
         gx, gy = 120, 380
         rng = random.Random(7)
         for week in range(26):
@@ -617,7 +692,114 @@ def layout_github_contributions(folder: str, filename: str, screenshot: Image.Im
                 )
         draw.text((120, 680), "github.com/zacharyahutton", font=load_font(28, "medium"), fill=ASH)
 
-    draw_handwritten_arrow(draw, (620, 1480), (880, 1680), "Building every week →")
+    draw_handwritten_arrow(draw, (580, 1480), (900, 1680), "Building every week →")
+    save_story(img, folder, filename)
+
+
+def layout_photo_hero(
+    folder: str,
+    filename: str,
+    *,
+    photo: Image.Image,
+    eyebrow: str,
+    headline: str,
+    body: str = "",
+    corner: str = "bl",
+    gradient: bool = True,
+) -> None:
+    img = cover_photo(photo, STORY_SIZE, anchor="center")
+    if gradient:
+        overlay = Image.new("RGBA", STORY_SIZE, (0, 0, 0, 0))
+        od = ImageDraw.Draw(overlay)
+        for y in range(STORY_SIZE[1]):
+            t = y / STORY_SIZE[1]
+            alpha = int(40 + t * 180) if corner.startswith("b") else int(180 - t * 140)
+            od.line([(0, y), (STORY_SIZE[0], y)], fill=(5, 5, 8, min(alpha, 220)))
+        img = Image.alpha_composite(img.convert("RGBA"), overlay).convert("RGB")
+    img = finish_canvas(img, grid=False, grain=True)
+    draw = ImageDraw.Draw(img)
+    draw_signature_motif(draw)
+
+    w, h = STORY_SIZE
+    margin = 72
+    if corner.startswith("bl"):
+        x, y = margin, h - margin - 380
+    elif corner.startswith("br"):
+        x, y = w - margin - 560, h - margin - 380
+    elif corner.startswith("tl"):
+        x, y = margin, 180
+    else:
+        x, y = w - margin - 560, 180
+
+    eyebrow_font = load_font(26, "medium")
+    title_font = load_font(58, "bold")
+    body_font = load_font(32, "regular")
+    draw.text((x, y), eyebrow.upper(), font=eyebrow_font, fill=INDIGO_SOFT)
+    y += 48
+    for line in wrap_text(headline, 16):
+        line_bbox = draw.textbbox((x, y), line, font=title_font)
+        draw.text((x, y), line, font=title_font, fill=WHITE)
+        underline_text_bbox(draw, line_bbox, max_width=min(line_bbox[2] - line_bbox[0], 360), gap=14)
+        y += 72
+    if body:
+        y += 16
+        for line in wrap_text(body, 26):
+            draw.text((x, y), line, font=body_font, fill=PEARL)
+            y += 44
+    save_story(img, folder, filename)
+
+
+def layout_photo_caption(
+    folder: str,
+    filename: str,
+    *,
+    photo: Image.Image,
+    caption: str,
+    subtitle: str = "",
+    rotate_frame: float = 2.0,
+) -> None:
+    img, draw = new_story_canvas(grid=False)
+    framed = cover_photo(photo, (880, 1180), anchor="center")
+    frame = Image.new("RGBA", (920, 1220), (0, 0, 0, 0))
+    fd = ImageDraw.Draw(frame)
+    fd.rounded_rectangle([0, 0, 920, 1220], radius=20, outline=INDIGO, width=2)
+    frame.paste(framed, (20, 20))
+    paste_rotated_card(img, frame, (80, 260), rotate_frame)
+
+    cap_font = load_script_font(42)
+    cap_y = 1560
+    draw.text((72, cap_y), caption, font=cap_font, fill=PEARL)
+    if subtitle:
+        draw.text((72, cap_y + 56), subtitle, font=load_font(26, "regular"), fill=MUTED_PEARL)
+    save_story(img, folder, filename)
+
+
+def layout_campus_photo(folder: str, filename: str, campus: Image.Image | None) -> None:
+    img, draw = new_story_canvas(grid=False)
+    if campus:
+        hero = cover_photo(campus, (936, 760), anchor="center")
+        draw.rounded_rectangle([72, 220, 1008, 980], radius=20, outline=INDIGO, width=2)
+        img.paste(hero, (72 + (936 - hero.width) // 2, 220 + (760 - hero.height) // 2))
+    else:
+        draw.rounded_rectangle([72, 220, 1008, 980], radius=20, fill=GRAPHITE, outline=(55, 55, 62), width=2)
+        pf = load_font(32, "medium")
+        msg = "Campus photo — add assets/utech-campus.png"
+        lines = wrap_text(msg, 22)
+        ty = 520
+        for line in lines:
+            lw, _ = text_size(draw, line, pf)
+            draw.text(((STORY_SIZE[0] - lw) // 2, ty), line, font=pf, fill=ASH)
+            ty += 44
+
+    card = Image.new("RGBA", (880, 280), (0, 0, 0, 0))
+    cd = ImageDraw.Draw(card)
+    cd.rounded_rectangle([0, 0, 880, 280], radius=18, fill=CHARCOAL, outline=INDIGO, width=2)
+    tf = load_font(44, "bold")
+    cd.text((48, 48), "CS @ UTech", font=tf, fill=WHITE)
+    cd.text((48, 118), "GPA 3.7 · Dean's List · 2029", font=load_font(30, "regular"), fill=PEARL)
+    cs_bbox = cd.textbbox((48, 48), "CS @ UTech", font=tf)
+    underline_text_bbox(cd, cs_bbox, max_width=180, gap=10)
+    paste_rotated_card(img, card, (100, 1040), 2.5)
     save_story(img, folder, filename)
 
 
@@ -636,8 +818,8 @@ def layout_connect_links(folder: str, filename: str) -> None:
     for label, value in links:
         draw.text((72 + random.randint(-4, 8), y), label, font=load_font(22, "medium"), fill=INDIGO)
         draw.text((72 + random.randint(0, 12), y + 36), value, font=lf, fill=PEARL)
-        lw, _ = text_size(draw, value, lf)
-        draw_indigo_underline(draw, 72, y + 36 + 34, min(lw, 520), thickness=3)
+        val_bbox = draw.textbbox((72, y + 36), value, font=lf)
+        underline_text_bbox(draw, val_bbox, max_width=min(val_bbox[2] - val_bbox[0], 520), gap=8, thickness=3)
         y += 120
     save_story(img, folder, filename)
 
@@ -658,34 +840,12 @@ def layout_qr_slide(folder: str, filename: str) -> None:
         draw.text((72, 400), "pip install qrcode[pil]", font=load_font(28, "regular"), fill=ASH)
 
     draw.text((72, 180), "Scan to portfolio", font=load_font(56, "bold"), fill=WHITE)
-    draw_indigo_underline(draw, 72, 258, 240)
+    qr_head_bbox = draw.textbbox((72, 180), "Scan to portfolio", font=load_font(56, "bold"))
+    underline_text_bbox(draw, qr_head_bbox, max_width=240)
     if qr_img:
         draw.rounded_rectangle([300, 520, 780, 1000], radius=20, fill=CHARCOAL, outline=INDIGO, width=2)
         img.paste(qr_img, (330, 550))
     draw.text((72, 1100), url, font=load_font(26, "regular"), fill=MUTED_PEARL)
-    save_story(img, folder, filename)
-
-
-def layout_campus_placeholder(folder: str, filename: str) -> None:
-    img, draw = new_story_canvas()
-    draw.rounded_rectangle([72, 220, 1008, 980], radius=20, fill=GRAPHITE, outline=(55, 55, 62), width=2)
-    pf = load_font(32, "medium")
-    msg = "Campus / study spot — replace with your photo"
-    lines = wrap_text(msg, 22)
-    ty = 520
-    for line in lines:
-        lw, _ = text_size(draw, line, pf)
-        draw.text(((STORY_SIZE[0] - lw) // 2, ty), line, font=pf, fill=ASH)
-        ty += 44
-
-    card = Image.new("RGBA", (880, 280), (0, 0, 0, 0))
-    cd = ImageDraw.Draw(card)
-    cd.rounded_rectangle([0, 0, 880, 280], radius=18, fill=CHARCOAL, outline=INDIGO, width=2)
-    tf = load_font(44, "bold")
-    cd.text((48, 48), "CS @ UTech", font=tf, fill=WHITE)
-    cd.text((48, 118), "GPA 3.7 · Dean's List · 2029", font=load_font(30, "regular"), fill=PEARL)
-    draw_indigo_underline(cd, 48, 200, 180)
-    paste_rotated_card(img, card, (100, 1040), 2.5)
     save_story(img, folder, filename)
 
 
@@ -714,20 +874,34 @@ def capture_screenshots(force: bool = False) -> dict[str, Path]:
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
-        context = browser.new_context(viewport={"width": 1280, "height": 900}, device_scale_factor=2)
-        page = context.new_page()
         for key, url in CAPTURE_TARGETS.items():
             out = SCREENSHOTS_DIR / f"{key}.png"
             if out.exists() and not force:
                 saved[key] = out
                 continue
             try:
-                page.goto(url, wait_until="networkidle", timeout=45000)
-                page.wait_for_timeout(1500)
                 if key == "github":
-                    page.evaluate("window.scrollTo(0, 400)")
+                    context = browser.new_context(
+                        viewport={"width": 1400, "height": 900},
+                        device_scale_factor=2,
+                    )
+                    page = context.new_page()
+                    page.goto(url, wait_until="domcontentloaded", timeout=90000)
+                    page.wait_for_timeout(3000)
+                    page.evaluate("window.scrollTo(0, 0)")
                     page.wait_for_timeout(800)
-                page.screenshot(path=str(out), full_page=False)
+                    page.screenshot(path=str(out), full_page=True)
+                    context.close()
+                else:
+                    context = browser.new_context(
+                        viewport={"width": 1280, "height": 900},
+                        device_scale_factor=2,
+                    )
+                    page = context.new_page()
+                    page.goto(url, wait_until="domcontentloaded", timeout=60000)
+                    page.wait_for_timeout(2500)
+                    page.screenshot(path=str(out), full_page=False)
+                    context.close()
                 saved[key] = out
                 print(f"  capture  {out.relative_to(ROOT)}")
             except Exception as exc:
@@ -749,6 +923,7 @@ PROJECTS: list[ProjectStory] = [
         fallback_image=PUBLIC / "case-studies" / "portfolio-cover.png",
         problem="Recruiters need one place to see projects, case studies, and resume.",
         solution="Next.js portfolio with typed content, obsidian design, Vercel deploy.",
+        learned="Design systems in code beat one-off mockups — content modules scale.",
         tags=("Next.js", "TypeScript", "Tailwind", "Framer Motion", "Vercel"),
     ),
     ProjectStory(
@@ -758,6 +933,7 @@ PROJECTS: list[ProjectStory] = [
         fallback_image=PUBLIC / "case-studies" / "weroi-cover.png",
         problem="Agency needed lead capture, admin tooling, and email integration.",
         solution="React + FastAPI + MongoDB stack with JWT admin and Resend email.",
+        learned="Splitting admin auth from public forms keeps attack surface smaller.",
         tags=("React", "FastAPI", "MongoDB", "JWT", "Vercel", "Railway"),
     ),
     ProjectStory(
@@ -767,6 +943,7 @@ PROJECTS: list[ProjectStory] = [
         fallback_image=PUBLIC / "case-studies" / "studysync-cover.png",
         problem="Track coursework deadlines and study sessions in one API.",
         solution="FastAPI + SQLAlchemy + JWT auth with OpenAPI docs.",
+        learned="OpenAPI-first design makes frontend and tests easier to align.",
         tags=("Python", "FastAPI", "SQLAlchemy", "JWT", "OpenAPI"),
     ),
     ProjectStory(
@@ -776,6 +953,7 @@ PROJECTS: list[ProjectStory] = [
         fallback_image=PUBLIC / "case-studies" / "pntcog-cover.png",
         problem="Church community needed events, giving, prayer, and media online.",
         solution="Multi-section React site — mobile-first, live on Vercel.",
+        learned="Non-technical stakeholders need clear sections, not clever nav.",
         tags=("React", "TypeScript", "Vercel", "Responsive UI"),
     ),
 ]
@@ -802,61 +980,145 @@ def generate_covers() -> None:
 
 
 def generate_about(captures: dict[str, Path]) -> None:
+    desk = load_desk_setup()
     headshot = load_image(find_headshot(), (640, 640))
-    layout_polaroid(
-        "stories-about",
-        "01-portrait.png",
-        photo=headshot,
-        caption="Zachary Hutton",
-        placeholder_text="Drop your photo here",
-    )
-    layout_polaroid(
-        "stories-about",
-        "02-workspace.png",
-        photo=None,
-        caption="Where I build",
-        placeholder_text="Desk / laptop setup — replace with your photo",
-    )
+
+    # Slide 1 — intro: headshot or laptop/GitHub crop from desk setup
+    if headshot:
+        layout_polaroid(
+            "stories-about",
+            "01-who-i-am.png",
+            photo=headshot,
+            caption="Hi, I'm Zach",
+        )
+    elif desk:
+        laptop_crop = crop_fraction(desk, 0.0, 0.08, 0.58, 0.92)
+        layout_photo_hero(
+            "stories-about",
+            "01-who-i-am.png",
+            photo=laptop_crop,
+            eyebrow="About",
+            headline="Hi, I'm Zach",
+            body="CS student · full-stack builder · Portmore, Jamaica",
+            corner="bl",
+        )
+    else:
+        layout_corner_text(
+            "stories-about",
+            "01-who-i-am.png",
+            corner="bl",
+            eyebrow="About",
+            headline="Hi, I'm Zach",
+            body="CS student · full-stack builder · Portmore, Jamaica",
+        )
+
+    # Slide 2 — full desk setup with focus statement
+    if desk:
+        layout_photo_hero(
+            "stories-about",
+            "02-workspace.png",
+            photo=desk,
+            eyebrow="Now",
+            headline="Currently focused on secure web applications.",
+            corner="bl",
+        )
+    else:
+        layout_polaroid(
+            "stories-about",
+            "02-workspace.png",
+            photo=None,
+            caption="Where I build",
+            placeholder_text="Add assets/desk-setup.png",
+        )
+
+    # Slide 3 — expanded GitHub profile capture
     gh_shot = load_image(captures.get("github"))
     layout_github_contributions("stories-about", "03-github-weekly.png", gh_shot)
 
+    # Slide 4 — portfolio on external monitor crop
+    if desk:
+        monitor_crop = crop_fraction(desk, 0.42, 0.05, 1.0, 0.88)
+        layout_photo_caption(
+            "stories-about",
+            "04-portfolio-monitor.png",
+            photo=monitor_crop,
+            caption="Portfolio on the big screen →",
+            subtitle="zachary-hutton-portfolio.vercel.app",
+            rotate_frame=-2.2,
+        )
+    else:
+        layout_browser_slide(
+            "stories-about",
+            "04-portfolio-monitor.png",
+            screenshot=load_image(captures.get("portfolio")),
+            url="zachary-hutton-portfolio.vercel.app",
+            project_name="Portfolio",
+            angle=3.0,
+            arrow_label="ship it →",
+        )
+
 
 def generate_build(captures: dict[str, Path]) -> None:
+    desk = load_desk_setup()
+    browser_angles = (-3.5, 2.8, -2.0, 3.2)
+    arrow_labels = ("live →", "see it →", "demo →", "visit →")
+
     for i, proj in enumerate(PROJECTS, start=1):
         prefix = f"{i:02d}-{proj.slug}"
         shot = screenshot_for(proj.slug, captures)
         if shot is None:
             shot = load_image(proj.fallback_image)
+
+        # Portfolio: prefer real desk monitor crop as alternate hero
+        if proj.slug == "portfolio" and desk:
+            browser_shot = crop_fraction(desk, 0.42, 0.05, 1.0, 0.88)
+            arrow = "real setup →"
+        else:
+            browser_shot = shot
+            arrow = arrow_labels[i - 1]
+
         layout_browser_slide(
             "stories-build",
             f"{prefix}-a-browser.png",
-            screenshot=shot,
+            screenshot=browser_shot,
             url=proj.url or "github.com/zacharyahutton/studysync-api",
             project_name=proj.name,
+            angle=browser_angles[i - 1],
+            arrow_label=arrow,
         )
         layout_one_liner(
             "stories-build",
             f"{prefix}-b-problem.png",
-            label="Problem solved",
+            label="The problem",
             line=proj.problem,
             align="left" if i % 2 else "right",
             rotate_card=-2.0 if i % 2 else 3.0,
+            script_note="why it mattered" if i == 1 else None,
         )
         layout_one_liner(
             "stories-build",
             f"{prefix}-c-solution.png",
-            label="Solution",
+            label="What I built",
             line=proj.solution,
             align="right" if i % 2 else "left",
             rotate_card=2.5 if i % 2 else -3.5,
+            script_note="how it works" if i == 2 else None,
         )
         layout_tilted_card(
             "stories-build",
             f"{prefix}-d-stack.png",
-            title=proj.name,
-            body="Stack",
+            title="Stack",
+            body=proj.name,
             tags=proj.tags,
             angle=-4.0 + i,
+        )
+        layout_one_liner(
+            "stories-build",
+            f"{prefix}-e-learned.png",
+            label="What I learned",
+            line=proj.learned,
+            align="left" if i % 2 == 0 else "right",
+            rotate_card=1.5 if i % 2 else -2.5,
         )
 
 
@@ -878,7 +1140,8 @@ def generate_stack() -> None:
 
 
 def generate_utech() -> None:
-    layout_campus_placeholder("stories-utech", "01-campus.png")
+    campus = load_utech_campus()
+    layout_campus_photo("stories-utech", "01-campus.png", campus)
     layout_tilted_card(
         "stories-utech",
         "02-labs-github.png",
@@ -913,11 +1176,12 @@ def cleanup_legacy_folders() -> None:
 
     legacy_stories = {
         "stories-about": (
-            "01-who-i-am.png",
+            "01-portrait.png",
             "02-what-i-build.png",
             "03-open-to-internships.png",
         ),
         "stories-utech": ("01-cs-student.png",),
+        "stories-build": (),  # old 4-slide sets without e-learned removed on regen
     }
     for folder, names in legacy_stories.items():
         for name in names:
@@ -931,6 +1195,7 @@ def cleanup_legacy_folders() -> None:
         if folder.is_dir():
             for f in folder.glob("*.png"):
                 f.unlink()
+                print(f"  removed  {f.relative_to(ROOT)}")
             try:
                 folder.rmdir()
             except OSError:
