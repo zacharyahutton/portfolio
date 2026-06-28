@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Download, Minus, Plus, Printer, X } from "lucide-react";
 import ResumeContent from "./ResumeContent";
+import { downloadResumePdf } from "@/lib/resumePdf";
 
 interface ResumeModalProps {
   open: boolean;
@@ -15,6 +16,7 @@ const ZOOM_STEP = 0.1;
 
 export default function ResumeModal({ open, onClose }: ResumeModalProps) {
   const [zoom, setZoom] = useState(1);
+  const [downloading, setDownloading] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -41,7 +43,7 @@ export default function ResumeModal({ open, onClose }: ResumeModalProps) {
   }, [open]);
 
   const handlePrint = useCallback(() => {
-    const node = contentRef.current;
+    const node = contentRef.current?.querySelector(".resume-document");
     if (!node) return;
     const printWindow = window.open("", "_blank", "noopener,noreferrer");
     if (!printWindow) return;
@@ -52,10 +54,11 @@ export default function ResumeModal({ open, onClose }: ResumeModalProps) {
         <title>Zachary Hutton Resume</title>
         <style>
           body { margin: 0; font-family: Georgia, "Times New Roman", serif; color: #111; }
+          a { color: #111; }
           strong { font-weight: 700; }
           .resume-section-title { font-size: 10.5pt; text-transform: uppercase; letter-spacing: 0.08em; border-bottom: 1px solid #222; margin: 0.7rem 0 0.35rem; padding-bottom: 0.12rem; }
           hr { border: none; border-top: 1px solid #ccc; margin: 1rem 0; }
-          @media print { body { padding: 0.4in; } }
+          @media print { body { padding: 0.4in; } a { text-decoration: underline; } }
         </style>
       </head><body>${node.innerHTML}</body></html>
     `);
@@ -64,20 +67,17 @@ export default function ResumeModal({ open, onClose }: ResumeModalProps) {
     printWindow.print();
   }, []);
 
-  const handleDownloadHtml = useCallback(async () => {
+  const handleDownloadPdf = useCallback(async () => {
+    if (downloading) return;
+    setDownloading(true);
     try {
-      const res = await fetch("/resume.html");
-      const blob = await res.blob();
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "zachary-hutton-resume.html";
-      a.click();
-      URL.revokeObjectURL(url);
+      await downloadResumePdf();
     } catch {
       handlePrint();
+    } finally {
+      setDownloading(false);
     }
-  }, [handlePrint]);
+  }, [downloading, handlePrint]);
 
   if (!open) return null;
 
@@ -121,11 +121,12 @@ export default function ResumeModal({ open, onClose }: ResumeModalProps) {
           </button>
           <button
             type="button"
-            onClick={handleDownloadHtml}
-            className="flex h-9 items-center gap-1.5 rounded-full border border-[var(--color-slate)] px-3 text-xs text-[var(--color-pearl)] transition hover:border-[var(--color-paper)]"
+            onClick={handleDownloadPdf}
+            disabled={downloading}
+            className="flex h-9 items-center gap-1.5 rounded-full border border-[var(--color-slate)] px-3 text-xs text-[var(--color-pearl)] transition hover:border-[var(--color-paper)] disabled:opacity-60"
           >
             <Download size={14} />
-            <span className="hidden sm:inline">Download</span>
+            <span className="hidden sm:inline">{downloading ? "Saving..." : "Download PDF"}</span>
           </button>
           <button
             type="button"

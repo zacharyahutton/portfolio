@@ -2,7 +2,7 @@
 
 
 
-> Export to one-page PDF via the portfolio resume modal (Print PDF) or print from `public/resume.html`.
+> Export to PDF via the portfolio resume modal (Download PDF / Print PDF) or open `public/resume.pdf`.
 
 
 
@@ -12,9 +12,9 @@
 
 **Zachary Hutton**  
 
-Portmore, Jamaica | hzach577@gmail.com | (876) 781-0400  
+Portmore, Jamaica | [hzach577@gmail.com](mailto:hzach577@gmail.com) | [(876) 781-0400](tel:+18767810400)  
 
-[Portfolio](https://zachary-hutton.vercel.app) | [GitHub](https://github.com/zacharyahutton/portfolio) | [LinkedIn](https://www.linkedin.com/in/zachary-hutton-a2ab81415/)
+[Portfolio](https://zachary-hutton.vercel.app) | [GitHub](https://github.com/zacharyahutton) | [LinkedIn](https://www.linkedin.com/in/zachary-hutton-a2ab81415/)
 
 
 

@@ -1,7 +1,8 @@
-import { User } from "lucide-react";
+﻿import { User } from "lucide-react";
 import GithubIcon from "@/components/ui/GithubIcon";
 import LinkedinIcon from "@/components/ui/LinkedinIcon";
 import { profile } from "@/content/profile";
+import { resumeLinks } from "@/content/resumeLinks";
 
 export default function ResumeContent() {
   return (
@@ -9,11 +10,21 @@ export default function ResumeContent() {
       <header className="text-center">
         <h1 className="text-[1.65rem] font-bold tracking-[0.06em] text-[#111]">ZACHARY HUTTON</h1>
         <p className="mt-2 text-[0.85rem] leading-relaxed text-[#333]">
-          {profile.contact.location} | {profile.contact.email} | (876) 781-0400
+          {profile.contact.location} |{" "}
+          <a
+            href={resumeLinks.email}
+            className="text-[#111] underline-offset-2 hover:underline"
+          >
+            {profile.contact.email}
+          </a>{" "}
+          |{" "}
+          <a href={resumeLinks.phone} className="text-[#111] underline-offset-2 hover:underline">
+            (876) 781-0400
+          </a>
         </p>
         <p className="mt-1 text-[0.85rem] text-[#333]">
           <a
-            href="https://zachary-hutton.vercel.app"
+            href={resumeLinks.portfolio}
             className="inline-flex items-center gap-1 text-[#111] underline-offset-2 hover:underline"
           >
             <User size={12} aria-hidden />
@@ -21,7 +32,7 @@ export default function ResumeContent() {
           </a>
           {" | "}
           <a
-            href="https://github.com/zacharyahutton/portfolio"
+            href={resumeLinks.github}
             className="inline-flex items-center gap-1 text-[#111] underline-offset-2 hover:underline"
           >
             <GithubIcon size={12} aria-hidden />
@@ -29,7 +40,7 @@ export default function ResumeContent() {
           </a>
           {" | "}
           <a
-            href={profile.contact.linkedin}
+            href={resumeLinks.linkedin}
             className="inline-flex items-center gap-1 text-[#111] underline-offset-2 hover:underline"
           >
             <LinkedinIcon size={12} aria-hidden />
