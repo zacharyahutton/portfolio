@@ -2,10 +2,11 @@
 
 from __future__ import annotations
 
-import math
 import os
 import random
+from dataclasses import dataclass
 from pathlib import Path
+from typing import Callable
 
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
@@ -13,15 +14,51 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "public" / "case-studies"
 W, H = 1200, 675
 
-# Site design tokens (globals.css)
+# Site design tokens (globals.css) — shared dark base
 OBSIDIAN = (5, 5, 5)
 CHARCOAL = (21, 21, 21)
 GRAPHITE = (30, 30, 30)
 PEARL = (212, 212, 212)
 ASH = (163, 163, 163)
-INDIGO = (21, 0, 255)
-INDIGO_SOFT = (99, 102, 241)
-INDIGO_GLOW = (79, 70, 229)
+
+
+@dataclass(frozen=True)
+class AccentPalette:
+    """Per-project accent: primary fill, soft outline/grid, glow halo."""
+
+    primary: tuple[int, int, int]
+    soft: tuple[int, int, int]
+    glow: tuple[int, int, int]
+
+
+def _glow_from_soft(soft: tuple[int, int, int], factor: float = 0.78) -> tuple[int, int, int]:
+    return tuple(max(0, min(255, int(c * factor))) for c in soft)
+
+
+def _primary_from_soft(soft: tuple[int, int, int], boost: float = 1.08) -> tuple[int, int, int]:
+    return tuple(max(0, min(255, int(c * boost))) for c in soft)
+
+
+def palette(soft: tuple[int, int, int]) -> AccentPalette:
+    return AccentPalette(
+        primary=_primary_from_soft(soft),
+        soft=soft,
+        glow=_glow_from_soft(soft),
+    )
+
+
+# Accent colors restored from pre-ab570ce terminal covers (ac column)
+PROJECT_PALETTES: dict[str, AccentPalette] = {
+    "studysync": palette((99, 102, 241)),       # indigo
+    "webhook-relay": palette((16, 185, 129)),   # emerald
+    "openapi-devkit": palette((56, 189, 248)),  # cyan
+    "phone-store": palette((236, 72, 153)),     # pink
+    "portfolio": palette((99, 102, 241)),       # indigo
+    "ds-bst-lab": palette((245, 158, 11)),      # amber
+    "db-library": palette((14, 165, 233)),       # sky
+    "prog-fund-algorithms": palette((168, 85, 247)),  # violet
+    "cyber-network": palette((34, 197, 94)),     # green
+}
 
 
 def lerp(a: tuple[int, ...], b: tuple[int, ...], t: float) -> tuple[int, ...]:
@@ -58,8 +95,8 @@ def draw_background(draw: ImageDraw.ImageDraw) -> None:
         draw.line([(0, y), (W, y)], fill=col)
 
 
-def draw_grid(draw: ImageDraw.ImageDraw, step: int = 56) -> None:
-    r, g, b = INDIGO_SOFT
+def draw_grid(draw: ImageDraw.ImageDraw, accent: AccentPalette, step: int = 56) -> None:
+    r, g, b = accent.soft
     alpha = 18
     for x in range(0, W, step):
         draw.line([(x, 0), (x, H)], fill=(r, g, b, alpha))
@@ -98,14 +135,20 @@ def draw_glow_circle(
         )
 
 
-def draw_mark_plate(draw: ImageDraw.ImageDraw, cx: int, cy: int, size: int = 200) -> None:
+def draw_mark_plate(
+    draw: ImageDraw.ImageDraw,
+    cx: int,
+    cy: int,
+    accent: AccentPalette,
+    size: int = 200,
+) -> None:
     half = size // 2
-    draw_glow_circle(draw, cx, cy, size, INDIGO_GLOW, layers=8)
+    draw_glow_circle(draw, cx, cy, size, accent.glow, layers=8)
     draw.rounded_rectangle(
         [cx - half, cy - half, cx + half, cy + half],
         radius=36,
         fill=(*GRAPHITE, 220),
-        outline=(*INDIGO_SOFT, 140),
+        outline=(*accent.soft, 140),
         width=2,
     )
 
@@ -114,6 +157,7 @@ def draw_footer(
     draw: ImageDraw.ImageDraw,
     title: str,
     subtitle: str,
+    accent: AccentPalette,
 ) -> None:
     title_font = font(28, bold=True)
     sub_font = font(15)
@@ -124,13 +168,12 @@ def draw_footer(
     draw.rounded_rectangle(
         [W // 2 - 28, H - 38, W // 2 + 28, H - 30],
         radius=4,
-        fill=INDIGO,
+        fill=accent.primary,
     )
 
 
-def draw_studysync(draw: ImageDraw.ImageDraw, cx: int, cy: int) -> None:
-    draw_mark_plate(draw, cx, cy, 210)
-    # Open book
+def draw_studysync(draw: ImageDraw.ImageDraw, cx: int, cy: int, accent: AccentPalette) -> None:
+    draw_mark_plate(draw, cx, cy, accent, 210)
     draw.polygon(
         [
             (cx - 70, cy - 10),
@@ -140,49 +183,47 @@ def draw_studysync(draw: ImageDraw.ImageDraw, cx: int, cy: int) -> None:
             (cx, cy + 22),
             (cx - 70, cy + 50),
         ],
-        fill=INDIGO,
-        outline=INDIGO_SOFT,
+        fill=accent.primary,
+        outline=accent.soft,
     )
     draw.line([(cx, cy - 38), (cx, cy + 22)], fill=PEARL, width=3)
-    # Sync arrows
     for dx, sign in ((-95, 1), (95, -1)):
         ax = cx + dx
-        draw.arc([ax - 28, cy - 55, ax + 28, cy + 5], 200, 340, fill=INDIGO_SOFT, width=4)
+        draw.arc([ax - 28, cy - 55, ax + 28, cy + 5], 200, 340, fill=accent.soft, width=4)
         tip_x = ax + sign * 22
         draw.polygon(
             [(tip_x, cy - 28), (tip_x - sign * 14, cy - 40), (tip_x - sign * 14, cy - 16)],
-            fill=INDIGO_SOFT,
+            fill=accent.soft,
         )
 
 
-def draw_webhook_relay(draw: ImageDraw.ImageDraw, cx: int, cy: int) -> None:
-    draw_mark_plate(draw, cx, cy, 210)
+def draw_webhook_relay(draw: ImageDraw.ImageDraw, cx: int, cy: int, accent: AccentPalette) -> None:
+    draw_mark_plate(draw, cx, cy, accent, 210)
     nodes = [(cx - 80, cy), (cx, cy - 50), (cx + 80, cy), (cx, cy + 55)]
     for i, (nx, ny) in enumerate(nodes):
-        draw.ellipse([nx - 18, ny - 18, nx + 18, ny + 18], fill=INDIGO, outline=INDIGO_SOFT, width=2)
+        draw.ellipse([nx - 18, ny - 18, nx + 18, ny + 18], fill=accent.primary, outline=accent.soft, width=2)
         if i < len(nodes) - 1:
             n2 = nodes[i + 1]
-            draw.line([(nx, ny), n2], fill=INDIGO_SOFT, width=3)
-    draw.line([(nodes[2][0], nodes[2][1]), (nodes[0][0], nodes[0][1])], fill=INDIGO_SOFT, width=3)
-    # Arrow on center-right edge
+            draw.line([(nx, ny), n2], fill=accent.soft, width=3)
+    draw.line([(nodes[2][0], nodes[2][1]), (nodes[0][0], nodes[0][1])], fill=accent.soft, width=3)
     draw.polygon([(cx + 38, cy - 50), (cx + 58, cy - 50), (cx + 48, cy - 32)], fill=PEARL)
 
 
-def draw_openapi_devkit(draw: ImageDraw.ImageDraw, cx: int, cy: int) -> None:
-    draw_mark_plate(draw, cx, cy, 210)
+def draw_openapi_devkit(draw: ImageDraw.ImageDraw, cx: int, cy: int, accent: AccentPalette) -> None:
+    draw_mark_plate(draw, cx, cy, accent, 210)
     bracket_font = mono(120)
-    draw.text((cx - 92, cy - 68), "{", fill=INDIGO, font=bracket_font)
-    draw.text((cx + 28, cy - 68), "}", fill=INDIGO_SOFT, font=bracket_font)
+    draw.text((cx - 92, cy - 68), "{", fill=accent.primary, font=bracket_font)
+    draw.text((cx + 28, cy - 68), "}", fill=accent.soft, font=bracket_font)
     draw.line([(cx - 30, cy + 10), (cx + 30, cy + 10)], fill=PEARL, width=4)
     draw.line([(cx - 18, cy + 28), (cx + 18, cy + 28)], fill=ASH, width=3)
     draw.line([(cx - 24, cy + 46), (cx + 24, cy + 46)], fill=ASH, width=3)
 
 
-def draw_phone_store(draw: ImageDraw.ImageDraw, cx: int, cy: int) -> None:
-    draw_mark_plate(draw, cx, cy, 210)
+def draw_phone_store(draw: ImageDraw.ImageDraw, cx: int, cy: int, accent: AccentPalette) -> None:
+    draw_mark_plate(draw, cx, cy, accent, 210)
     pw, ph = 88, 148
     x0, y0 = cx - pw // 2, cy - ph // 2
-    draw.rounded_rectangle([x0, y0, x0 + pw, y0 + ph], radius=18, fill=INDIGO, outline=INDIGO_SOFT, width=2)
+    draw.rounded_rectangle([x0, y0, x0 + pw, y0 + ph], radius=18, fill=accent.primary, outline=accent.soft, width=2)
     draw.rounded_rectangle(
         [x0 + 10, y0 + 22, x0 + pw - 10, y0 + ph - 34],
         radius=8,
@@ -191,44 +232,46 @@ def draw_phone_store(draw: ImageDraw.ImageDraw, cx: int, cy: int) -> None:
     draw.ellipse([cx - 10, y0 + ph - 24, cx + 10, y0 + ph - 8], fill=PEARL)
 
 
-def draw_portfolio(draw: ImageDraw.ImageDraw, cx: int, cy: int) -> None:
-    draw_mark_plate(draw, cx, cy, 210)
+def draw_portfolio(draw: ImageDraw.ImageDraw, cx: int, cy: int, accent: AccentPalette) -> None:
+    draw_mark_plate(draw, cx, cy, accent, 210)
     code_font = mono(72)
-    draw.text((cx - 78, cy - 52), "</", fill=INDIGO, font=code_font)
-    draw.text((cx + 10, cy - 52), ">", fill=INDIGO_SOFT, font=code_font)
-    draw.rounded_rectangle([cx - 42, cy + 18, cx + 42, cy + 54], radius=8, fill=(*INDIGO, 80), outline=INDIGO_SOFT)
+    draw.text((cx - 78, cy - 52), "</", fill=accent.primary, font=code_font)
+    draw.text((cx + 10, cy - 52), ">", fill=accent.soft, font=code_font)
+    draw.rounded_rectangle(
+        [cx - 42, cy + 18, cx + 42, cy + 54],
+        radius=8,
+        fill=(*accent.primary, 80),
+        outline=accent.soft,
+    )
     draw.text((cx - 22, cy + 22), "ZH", fill=PEARL, font=font(22, bold=True))
 
 
-def draw_ds_java(draw: ImageDraw.ImageDraw, cx: int, cy: int) -> None:
-    draw_mark_plate(draw, cx, cy, 210)
-    # Stylized Java cup
+def draw_ds_java(draw: ImageDraw.ImageDraw, cx: int, cy: int, accent: AccentPalette) -> None:
+    draw_mark_plate(draw, cx, cy, accent, 210)
     draw.polygon(
         [(cx - 55, cy - 40), (cx + 55, cy - 40), (cx + 48, cy + 50), (cx - 48, cy + 50)],
-        fill=INDIGO,
-        outline=INDIGO_SOFT,
+        fill=accent.primary,
+        outline=accent.soft,
         width=2,
     )
-    draw.arc([cx - 62, cy - 55, cx + 10, cy + 15], 90, 270, fill=INDIGO_SOFT, width=5)
-    draw.ellipse([cx - 22, cy - 62, cx + 22, cy - 34], fill=CHARCOAL, outline=INDIGO_SOFT, width=2)
+    draw.arc([cx - 62, cy - 55, cx + 10, cy + 15], 90, 270, fill=accent.soft, width=5)
+    draw.ellipse([cx - 22, cy - 62, cx + 22, cy - 34], fill=CHARCOAL, outline=accent.soft, width=2)
     draw.text((cx - 16, cy - 8), "J", fill=PEARL, font=font(52, bold=True))
 
 
-def draw_db_library(draw: ImageDraw.ImageDraw, cx: int, cy: int) -> None:
-    draw_mark_plate(draw, cx, cy, 210)
-    # Database cylinder
+def draw_db_library(draw: ImageDraw.ImageDraw, cx: int, cy: int, accent: AccentPalette) -> None:
+    draw_mark_plate(draw, cx, cy, accent, 210)
     db_x, db_y = cx - 55, cy - 10
-    draw.ellipse([db_x, db_y - 35, db_x + 70, db_y + 5], fill=INDIGO, outline=INDIGO_SOFT, width=2)
-    draw.rectangle([db_x, db_y, db_x + 70, db_y + 55], fill=INDIGO)
-    draw.ellipse([db_x, db_y + 35, db_x + 70, db_y + 75], fill=INDIGO_SOFT, outline=INDIGO_SOFT, width=2)
-    # Book
+    draw.ellipse([db_x, db_y - 35, db_x + 70, db_y + 5], fill=accent.primary, outline=accent.soft, width=2)
+    draw.rectangle([db_x, db_y, db_x + 70, db_y + 55], fill=accent.primary)
+    draw.ellipse([db_x, db_y + 35, db_x + 70, db_y + 75], fill=accent.soft, outline=accent.soft, width=2)
     draw.rounded_rectangle([cx + 10, cy - 45, cx + 72, cy + 55], radius=6, fill=GRAPHITE, outline=PEARL, width=2)
     for i in range(4):
         draw.line([(cx + 22, cy - 28 + i * 18), (cx + 60, cy - 28 + i * 18)], fill=ASH, width=2)
 
 
-def draw_algorithms(draw: ImageDraw.ImageDraw, cx: int, cy: int) -> None:
-    draw_mark_plate(draw, cx, cy, 210)
+def draw_algorithms(draw: ImageDraw.ImageDraw, cx: int, cy: int, accent: AccentPalette) -> None:
+    draw_mark_plate(draw, cx, cy, accent, 210)
     heights = [30, 55, 80, 50, 95, 65, 40]
     bar_w = 18
     gap = 10
@@ -236,7 +279,7 @@ def draw_algorithms(draw: ImageDraw.ImageDraw, cx: int, cy: int) -> None:
     x = cx - total_w // 2
     base_y = cy + 55
     for i, h in enumerate(heights):
-        color = INDIGO if i % 2 == 0 else INDIGO_SOFT
+        color = accent.primary if i % 2 == 0 else accent.soft
         draw.rounded_rectangle(
             [x, base_y - h, x + bar_w, base_y],
             radius=4,
@@ -246,9 +289,8 @@ def draw_algorithms(draw: ImageDraw.ImageDraw, cx: int, cy: int) -> None:
     draw.line([(cx - total_w // 2 - 10, base_y + 8), (cx + total_w // 2 + 10, base_y + 8)], fill=PEARL, width=2)
 
 
-def draw_cyber_network(draw: ImageDraw.ImageDraw, cx: int, cy: int) -> None:
-    draw_mark_plate(draw, cx, cy, 210)
-    # Shield
+def draw_cyber_network(draw: ImageDraw.ImageDraw, cx: int, cy: int, accent: AccentPalette) -> None:
+    draw_mark_plate(draw, cx, cy, accent, 210)
     shield = [
         (cx, cy - 62),
         (cx + 58, cy - 32),
@@ -257,8 +299,7 @@ def draw_cyber_network(draw: ImageDraw.ImageDraw, cx: int, cy: int) -> None:
         (cx - 48, cy + 38),
         (cx - 58, cy - 32),
     ]
-    draw.polygon(shield, fill=INDIGO, outline=INDIGO_SOFT, width=2)
-    # Network nodes inside shield
+    draw.polygon(shield, fill=accent.primary, outline=accent.soft, width=2)
     inner = [(cx, cy - 18), (cx - 28, cy + 18), (cx + 28, cy + 18)]
     for i, (nx, ny) in enumerate(inner):
         for j in range(i + 1, len(inner)):
@@ -267,19 +308,23 @@ def draw_cyber_network(draw: ImageDraw.ImageDraw, cx: int, cy: int) -> None:
         draw.ellipse([nx - 8, ny - 8, nx + 8, ny + 8], fill=PEARL)
 
 
+DrawFn = Callable[[ImageDraw.ImageDraw, int, int, AccentPalette], None]
+
+
 def render_cover(
     filename: str,
     title: str,
     subtitle: str,
-    draw_mark,
+    draw_mark: DrawFn,
+    accent: AccentPalette,
 ) -> Path:
     img = Image.new("RGBA", (W, H), OBSIDIAN)
     draw = ImageDraw.Draw(img, "RGBA")
     draw_background(draw)
-    draw_grid(draw)
+    draw_grid(draw, accent)
     cx, cy = W // 2, H // 2 - 30
-    draw_mark(draw, cx, cy)
-    draw_footer(draw, title, subtitle)
+    draw_mark(draw, cx, cy, accent)
+    draw_footer(draw, title, subtitle, accent)
     out = add_noise(img)
     path = OUT / filename
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -287,24 +332,25 @@ def render_cover(
     return path
 
 
-COVERS = [
-    ("studysync-cover.png", "StudySync API", "FastAPI · SQL · JWT", draw_studysync),
-    ("webhook-relay-cover.png", "Webhook Relay", "HMAC · retries · rate limits", draw_webhook_relay),
-    ("openapi-devkit-cover.png", "OpenAPI DevKit", "TypeScript · Zod · CLI", draw_openapi_devkit),
-    ("phone-store-cover.png", "Phone Store API", "Express · MongoDB · JWT", draw_phone_store),
-    ("portfolio-cover.png", "Personal Portfolio", "Next.js · TypeScript · Motion", draw_portfolio),
-    ("ds-bst-lab-cover.png", "Binary Search Tree Lab", "Java · JUnit · algorithms", draw_ds_java),
-    ("db-library-cover.png", "Library Management DB", "PostgreSQL · SQL · Python", draw_db_library),
-    ("prog-fund-algorithms-cover.png", "Algorithm Analysis", "Python · benchmarking", draw_algorithms),
-    ("cyber-network-cover.png", "Network Hardening", "Linux · policy · security", draw_cyber_network),
+COVERS: list[tuple[str, str, str, str, DrawFn]] = [
+    ("studysync-cover.png", "studysync", "StudySync API", "FastAPI · SQL · JWT", draw_studysync),
+    ("webhook-relay-cover.png", "webhook-relay", "Webhook Relay", "HMAC · retries · rate limits", draw_webhook_relay),
+    ("openapi-devkit-cover.png", "openapi-devkit", "OpenAPI DevKit", "TypeScript · Zod · CLI", draw_openapi_devkit),
+    ("phone-store-cover.png", "phone-store", "Phone Store API", "Express · MongoDB · JWT", draw_phone_store),
+    ("portfolio-cover.png", "portfolio", "Personal Portfolio", "Next.js · TypeScript · Motion", draw_portfolio),
+    ("ds-bst-lab-cover.png", "ds-bst-lab", "Binary Search Tree Lab", "Java · JUnit · algorithms", draw_ds_java),
+    ("db-library-cover.png", "db-library", "Library Management DB", "PostgreSQL · SQL · Python", draw_db_library),
+    ("prog-fund-algorithms-cover.png", "prog-fund-algorithms", "Algorithm Analysis", "Python · benchmarking", draw_algorithms),
+    ("cyber-network-cover.png", "cyber-network", "Network Hardening", "Linux · policy · security", draw_cyber_network),
 ]
 
 
 def main() -> None:
     print(f"Output directory: {OUT}")
-    for file, title, subtitle, draw_mark in COVERS:
-        path = render_cover(file, title, subtitle, draw_mark)
-        print(f"  {path.name}  ({path.stat().st_size:,} bytes)")
+    for file, slug, title, subtitle, draw_mark in COVERS:
+        accent = PROJECT_PALETTES[slug]
+        path = render_cover(file, title, subtitle, draw_mark, accent)
+        print(f"  {path.name}  ({path.stat().st_size:,} bytes)  accent={accent.soft}")
 
 
 if __name__ == "__main__":
