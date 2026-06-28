@@ -1909,6 +1909,18 @@ def generate_utech() -> None:
         tags=("GitHub", "OWASP", "PortSwigger", "Build in public"),
         angle=-2.8,
     )
+    layout_corner_text(
+        "stories-utech",
+        "03-academic-proof.png",
+        corner="bl",
+        eyebrow="UTech CS",
+        headline="GPA 3.7, Dean's List",
+        body=(
+            "BSc Computer Science at the University of Technology, Jamaica. Expected graduation 2029. "
+            "I connect data structures, databases, and networking lectures to full-stack projects on GitHub. "
+            "If you are hiring, my transcript and repos tell the same story."
+        ),
+    )
 
 
 def generate_connect() -> None:
@@ -1943,18 +1955,13 @@ def cleanup_legacy_folders() -> None:
             "02-what-i-build.png",
             "03-open-to-internships.png",
         ),
-        "stories-utech": ("01-cs-student.png", "03-academic-proof.png"),
+        "stories-utech": ("01-cs-student.png",),
         "stories-build": (
-            "03-studysync-a-browser.png",
-            "03-studysync-b-problem.png",
-            "03-studysync-c-solution.png",
-            "03-studysync-d-stack.png",
-            "03-studysync-e-learned.png",
-            "04-pntcog-a-browser.png",
-            "04-pntcog-b-problem.png",
-            "04-pntcog-c-solution.png",
-            "04-pntcog-d-stack.png",
-            "04-pntcog-e-learned.png",
+            "03-pntcog-a-browser.png",
+            "03-pntcog-b-problem.png",
+            "03-pntcog-c-solution.png",
+            "03-pntcog-d-stack.png",
+            "03-pntcog-e-learned.png",
         ),
         "stories-stack": (
             "02-tech-badges.png",

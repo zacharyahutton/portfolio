@@ -114,7 +114,7 @@ Optional motion clips: see `motion/README.md`.
 
 ---
 
-## Complete file list (45 PNGs)
+## Complete file list (40 PNGs)
 
 ```
 covers/                          5 PNGs
@@ -125,7 +125,7 @@ stories-utech/                   3 PNGs
 stories-connect/                 3 PNGs
 ```
 
-**Total: 45 PNGs** (5 covers + 40 stories).
+**Total: 40 PNGs** (5 covers + 35 stories).
 
 ---
 
