@@ -1,4 +1,4 @@
-# Zachary Hutton · Resume (source)
+# Zachary Hutton | Resume (source)
 
 
 
@@ -12,9 +12,9 @@
 
 **Zachary Hutton**  
 
-Portmore, Jamaica · hzach577@gmail.com · (876) 781-0400  
+Portmore, Jamaica | hzach577@gmail.com | (876) 781-0400  
 
-[Portfolio](https://zachary-hutton.vercel.app) · [GitHub](https://github.com/zacharyahutton) · [LinkedIn](https://www.linkedin.com/in/zachary-hutton-a2ab81415/)
+[Portfolio](https://zachary-hutton.vercel.app) | [GitHub](https://github.com/zacharyahutton/portfolio) | [LinkedIn](https://www.linkedin.com/in/zachary-hutton-a2ab81415/)
 
 
 
@@ -26,19 +26,17 @@ Portmore, Jamaica · hzach577@gmail.com · (876) 781-0400
 
 
 
-**BSc Computer Science**, University of Technology, Jamaica · Expected 2029  
+**Currently pursuing BSc in Computer Science**, University of Technology, Jamaica | Sep 2025 - May 2029 (expected)  
 
-**GPA: 3.7** · Dean's List  
-
-
-
-Coursework spans data structures, databases, networking, object-oriented programming, and software engineering. I apply lecture concepts through labs, personal repositories, and production contract work so each topic connects to runnable code.
+**GPA: 3.7** | Dean's List  
 
 
 
-Ardenne High School · Grade I in CSEC across all subjects
+**Ardenne High School** | Sep 2020 - Jul 2025  
 
-Information Technology, English A, Mathematics, Additional Mathematics, Physics, Principles of Accounts, Principles of Business, Industrial Technology (Electrical), Social Studies
+CSEC: Grade I across subjects  
+
+IT, English A, Math, Add. Math, Physics, POB, POA, Industrial Tech (Electrical), Social Studies
 
 
 
@@ -102,13 +100,13 @@ Built a developer sandbox API with API-key auth, HMAC-signed **webhook** deliver
 
 
 
-**Software Developer (Contract)**, weROI · 2024–Present  
+**Software Developer (Contract)**, weROI | 2024-Present  
 
 Delivered production web applications using **React**, **Next.js**, **FastAPI**, and **MongoDB** for client-facing platforms. Implemented **REST APIs**, authentication patterns, and **serverless deployment** on **Vercel** and **Railway**.
 
 
 
-**Freelance Web Developer**, Independent · 2023–Present  
+**Freelance Web Developer**, Independent | 2023-Present  
 
 Developed responsive websites with **component-based** architecture, **SEO**, and performance optimization for local businesses.
 

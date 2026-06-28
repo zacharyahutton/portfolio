@@ -47,7 +47,8 @@ export default function ResumeModal({ open, onClose }: ResumeModalProps) {
     if (!printWindow) return;
     printWindow.document.write(`
       <!DOCTYPE html>
-      <html><head>
+      <html lang="en"><head>
+        <meta charset="UTF-8" />
         <title>Zachary Hutton Resume</title>
         <style>
           body { margin: 0; font-family: Georgia, "Times New Roman", serif; color: #111; }
