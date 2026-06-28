@@ -88,24 +88,29 @@ class SkillEntry:
 
 LOGOS_DIR = ASSETS_DIR / "logos"
 
-DEVICON_PATHS: dict[str, str] = {
-    "python": "python/python-original",
-    "typescript": "typescript/typescript-original",
-    "javascript": "javascript/javascript-original",
-    "java": "java/java-original",
-    "react": "react/react-original",
-    "nextjs": "nextjs/nextjs-original",
-    "fastapi": "fastapi/fastapi-original",
-    "tailwind": "tailwindcss/tailwindcss-original",
-    "nodejs": "nodejs/nodejs-original",
-    "mongodb": "mongodb/mongodb-original",
-    "docker": "docker/docker-original",
-    "git": "git/git-original",
-    "vercel": "vercel/vercel-original",
-    "express": "express/express-original",
-    "sqlalchemy": "sqlalchemy/sqlalchemy-original",
-    "postman": "postman/postman-original",
-    "railway": "railway/railway-original",
+# walkxcode/dashboard-icons PNG filenames (jsdelivr CDN, no SVG conversion needed)
+DASHBOARD_ICON_FILES: dict[str, str] = {
+    "python": "python",
+    "typescript": "typescript",
+    "javascript": "javascript",
+    "java": "java",
+    "react": "reactjs",
+    "nextjs": "nextjs",
+    "fastapi": "fastapi",
+    "tailwind": "tailwind",
+    "nodejs": "nodejs",
+    "mongodb": "mongodb",
+    "docker": "docker",
+    "git": "git",
+    "vercel": "vercel",
+    "postman": "postman",
+    "railway": "railway",
+}
+
+# Pillow fallback when CDN has no PNG (brand color + abbreviation)
+BRAND_BADGE_STYLE: dict[str, tuple[tuple[int, int, int], str]] = {
+    "express": ((35, 35, 35), "ex"),
+    "sqlalchemy": ((212, 76, 76), "SA"),
 }
 
 STACK_LANGUAGES: tuple[SkillEntry, ...] = (
@@ -527,10 +532,10 @@ def contain_photo(
 
 
 def prepare_headshot(img: Image.Image, target: tuple[int, int]) -> Image.Image:
-    """Face-centered square crop, fitted to polaroid upper photo area."""
+    """Square crop centered in frame, fitted to polaroid upper photo area."""
     w, h = img.size
     side = min(w, h)
-    cx, cy = w // 2, int(h * 0.42)
+    cx, cy = w // 2, h // 2
     left = max(0, min(cx - side // 2, w - side))
     top = max(0, min(cy - side // 2, h - side))
     square = img.crop((left, top, left + side, top + side))
@@ -583,32 +588,52 @@ def find_headshot() -> Path | None:
 _LOGOS_ENSURED = False
 
 
+def _download_logo_png(url: str) -> bytes | None:
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (compatible; WEROI/1.0)"})
+        with urllib.request.urlopen(req, timeout=25) as resp:
+            data = resp.read()
+        return data if len(data) > 500 else None
+    except (urllib.error.URLError, OSError, TimeoutError):
+        return None
+
+
+def _brand_badge(key: str, size: int = 128) -> Image.Image:
+    """Colored badge with abbreviation for icons missing from CDN."""
+    fill, abbr = BRAND_BADGE_STYLE.get(key, (INDIGO_SOFT, key[:2].upper()))
+    img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+    d = ImageDraw.Draw(img)
+    d.rounded_rectangle([0, 0, size - 1, size - 1], radius=size // 5, fill=fill)
+    f = load_font(max(14, size // 3), "bold")
+    tw, th = text_size(d, abbr, f)
+    d.text(((size - tw) // 2, (size - th) // 2 - 1), abbr, font=f, fill=WHITE)
+    return img
+
+
 def ensure_logos() -> None:
-    """Ensure assets/logos exists; download PNGs from devicon when CDN allows (once per run)."""
+    """Ensure assets/logos/*.png exist — walkxcode CDN PNGs, Pillow badges as fallback."""
     global _LOGOS_ENSURED
     if _LOGOS_ENSURED:
         return
     _LOGOS_ENSURED = True
     LOGOS_DIR.mkdir(parents=True, exist_ok=True)
-    for key, icon_path in DEVICON_PATHS.items():
+    all_keys = set(DASHBOARD_ICON_FILES) | set(BRAND_BADGE_STYLE)
+    for key in sorted(all_keys):
         out = LOGOS_DIR / f"{key}.png"
         if out.exists() and out.stat().st_size > 500:
             continue
-        url = f"https://cdn.jsdelivr.net/gh/devicons/devicon@develop/icons/{icon_path}.svg"
-        try:
-            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-            with urllib.request.urlopen(req, timeout=20) as resp:
-                svg_data = resp.read()
-            try:
-                import cairosvg
-
-                png_data = cairosvg.svg2png(bytestring=svg_data, output_width=128, output_height=128)
-                out.write_bytes(png_data)
-                print(f"  logo     {out.relative_to(ROOT)}")
-            except ImportError:
-                print(f"  logo     skipped {key}: pip install cairosvg for SVG logos")
-        except (urllib.error.URLError, OSError, TimeoutError) as exc:
-            print(f"  logo     skipped {key}: {exc}")
+        saved = False
+        icon_file = DASHBOARD_ICON_FILES.get(key)
+        if icon_file:
+            url = f"https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/{icon_file}.png"
+            data = _download_logo_png(url)
+            if data:
+                out.write_bytes(data)
+                print(f"  logo     {out.relative_to(ROOT)} (cdn)")
+                saved = True
+        if not saved:
+            _brand_badge(key, 128).save(out, format="PNG")
+            print(f"  logo     {out.relative_to(ROOT)} (badge)")
 
 
 def _initial_badge(name: str, size: int = 40) -> Image.Image:
@@ -1169,15 +1194,16 @@ def layout_campus_conversational(folder: str, filename: str, campus: Image.Image
             width=2,
         )
     lines = (
-        "Third-year CS @ UTech. Dean's List, GPA 3.7.",
-        "I turn lecture concepts into GitHub repos I can demo.",
-        "Security labs on OWASP & PortSwigger in my own time.",
+        "If you're wondering where I build my CS foundation — it's here.",
+        "Third-year at UTech, Dean's List, GPA 3.7.",
+        "I turn every lecture into a GitHub repo you can actually run.",
+        "Security drills on OWASP & PortSwigger keep me sharp between semesters.",
     )
     y = LOWER_THIRD_Y + 20
     tf = load_font(36, "bold")
     bf = load_font(28, "regular")
     w = STORY_SIZE[0]
-    head = "This is where I study"
+    head = "This is where I study — come see"
     tw, _ = text_size(draw, head, tf)
     hx = (w - tw) // 2
     hbbox = draw.textbbox((hx, y), head, font=tf)
@@ -1687,11 +1713,8 @@ PROJECTS: list[ProjectStory] = [
         ),
         tags=("React", "FastAPI", "MongoDB", "JWT", "Vercel", "Railway"),
     ),
-]
-
-BUILD_PROJECTS: list[ProjectStory] = [
-    p for p in PROJECTS if p.slug in ("portfolio", "weroi", "pntcog")
-]
+    ProjectStory(
+        slug="pntcog",
         name="PNTCOG Ministry",
         url="portmorentcog.org",
         fallback_image=PUBLIC / "case-studies" / "pntcog-cover.png",
@@ -1712,7 +1735,6 @@ BUILD_PROJECTS: list[ProjectStory] = [
         tags=("React", "TypeScript", "Vercel", "Responsive UI"),
     ),
 ]
-
 
 BUILD_PROJECTS: list[ProjectStory] = PROJECTS
 
@@ -1791,10 +1813,13 @@ def generate_about(captures: dict[str, Path]) -> None:
     gh_shot = load_image(captures.get("github"))
     layout_github_browser("stories-about", "03-github-weekly.png", gh_shot)
 
-    if desk:
+    portfolio_shot = screenshot_for("portfolio", captures)
+    if portfolio_shot is not None:
+        browser_inner = portfolio_shot
+    elif desk:
         browser_inner = desk_monitor_crop(desk)
     else:
-        browser_inner = screenshot_for("portfolio", captures)
+        browser_inner = None
     layout_browser_slide(
         "stories-about",
         "04-portfolio-monitor.png",
@@ -1816,7 +1841,7 @@ def generate_build(captures: dict[str, Path]) -> None:
         "pntcog": "React + TypeScript for modular ministry sections. Vercel preview deploys let volunteers approve copy before the congregation sees changes.",
     }
 
-    for i, proj in enumerate(PROJECTS, start=1):
+    for i, proj in enumerate(BUILD_PROJECTS, start=1):
         prefix = f"{i:02d}-{proj.slug}"
         shot = screenshot_for(proj.slug, captures)
         if shot is None:
@@ -1882,11 +1907,11 @@ def generate_utech() -> None:
     layout_tilted_card(
         "stories-utech",
         "02-labs-github.png",
-        title="From labs to GitHub",
+        title="You'll see this on my GitHub",
         body=(
-            "Database and networking labs at UTech connect directly to the APIs I ship. "
-            "When I finish coursework, I push a repo recruiters can clone, run, and review. "
-            "OWASP and PortSwigger labs on personal time keep security top of mind."
+            "Every database and networking lab I finish at UTech becomes a repo you can clone, run, "
+            "and review. I push coursework the same week I submit it so you see how I think in code. "
+            "OWASP and PortSwigger labs on my own time keep security habits sharp before I ship to production."
         ),
         tags=("GitHub", "OWASP", "PortSwigger", "Build in public"),
         angle=-2.8,
@@ -1896,11 +1921,12 @@ def generate_utech() -> None:
         "03-academic-proof.png",
         corner="bl",
         eyebrow="UTech CS",
-        headline="GPA 3.7, Dean's List",
+        headline="GPA 3.7, Dean's List — here's the proof",
         body=(
-            "BSc Computer Science at the University of Technology, Jamaica. Expected graduation 2029. "
-            "I connect data structures, databases, and networking lectures to full-stack projects on GitHub. "
-            "If you are hiring, my transcript and repos tell the same story."
+            "I'm in my BSc Computer Science program at the University of Technology, Jamaica, "
+            "on track to graduate 2029. When you open my transcript and GitHub side by side, "
+            "you'll see the same person: data structures in lecture, REST APIs in repos. "
+            "If you're hiring interns, that's the signal I want you to find."
         ),
     )
 
@@ -1911,11 +1937,12 @@ def generate_connect() -> None:
         "01-open-to-work.png",
         corner="tl",
         eyebrow="Connect",
-        headline="Open to internships and co-ops",
+        headline="Open to internships and co-ops — let's talk",
         body=(
-            "I am a BSc CS student at UTech (GPA 3.7, Dean's List) based in Portmore, Jamaica. "
-            "Remote-friendly. If you are hiring full-stack interns, I bring APIs, deployments, "
-            "and security-aware engineering habits from coursework and client projects."
+            "I'm a third-year BSc CS student at UTech (GPA 3.7, Dean's List) based in Portmore, Jamaica. "
+            "Remote-friendly and happy to overlap with US/Eastern hours. If you're hiring full-stack "
+            "interns, I bring production APIs, Vercel + Railway deploys, and security-aware habits "
+            "from coursework, client sites, and open-source repos you can review today."
         ),
         underline_at="headline",
     )
@@ -1939,11 +1966,16 @@ def cleanup_legacy_folders() -> None:
         ),
         "stories-utech": ("01-cs-student.png",),
         "stories-build": (
-            "03-pntcog-a-browser.png",
-            "03-pntcog-b-problem.png",
-            "03-pntcog-c-solution.png",
-            "03-pntcog-d-stack.png",
-            "03-pntcog-e-learned.png",
+            "03-studysync-a-browser.png",
+            "03-studysync-b-problem.png",
+            "03-studysync-c-solution.png",
+            "03-studysync-d-stack.png",
+            "03-studysync-e-learned.png",
+            "04-pntcog-a-browser.png",
+            "04-pntcog-b-problem.png",
+            "04-pntcog-c-solution.png",
+            "04-pntcog-d-stack.png",
+            "04-pntcog-e-learned.png",
         ),
         "stories-stack": (
             "02-tech-badges.png",
