@@ -210,7 +210,7 @@ export default function ProjectCard({
 
         <div className="mt-6 flex flex-wrap gap-3 border-t border-[var(--color-slate)] pt-4">
 
-          {linkToCaseStudy && caseStudyHref && (
+          {caseStudyHref && linkToCaseStudy && (
 
             <Link href={caseStudyHref} className="btn-primary text-xs">
 

@@ -22,5 +22,7 @@ export function getProjectBySlug(slug: string): Project | undefined {
 }
 
 export function getCaseStudySlugs(): string[] {
-  return allProjects.filter((p) => p.caseStudy).map((p) => p.slug);
+  return allProjects
+    .filter((p) => p.id !== "portfolio-site" && p.caseStudy)
+    .map((p) => p.slug);
 }

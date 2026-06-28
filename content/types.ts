@@ -40,6 +40,7 @@ export interface Project {
   image?: string;
   result?: string;
   caseStudy?: CaseStudy;
+  caseStudyHref?: string;
 }
 
 export interface SpotlightItem {

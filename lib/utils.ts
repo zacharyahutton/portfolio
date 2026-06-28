@@ -27,6 +27,7 @@ export const projectAccentColors: Record<string, string> = {
   "db-library-system": "#3b82f6",
   "prog-fund-algorithms": "#a855f7",
   "cyber-network-hardening": "#06b6d4",
+  "portfolio-site": "#1500ff",
 };
 
 export const projectImageFit: Record<string, "cover" | "contain"> = {

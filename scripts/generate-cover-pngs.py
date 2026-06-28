@@ -40,6 +40,7 @@ COVERS = [
     ("db-library-cover.png","Library DB","SQL · PostgreSQL · Python",(8,16,24),(14,42,58),(12,74,110),(14,165,233),(18,50,72),"SQL","SELECT loans FROM books"),
     ("prog-fund-algorithms-cover.png","Algorithms","Python · benchmarking",(14,10,20),(40,22,55),(76,29,149),(168,85,247),(48,28,72),"PERF","merge vs quicksort"),
     ("cyber-network-cover.png","Network Hardening","Linux · policy · networking",(6,12,10),(12,32,22),(8,52,38),(34,197,94),(16,40,28),"SEC","firewall patch LAN"),
+    ("portfolio-cover.png","Zachary Hutton Portfolio","Next.js · TypeScript · Tailwind · Motion",(12,10,26),(21,18,56),(49,46,129),(99,102,241),(30,27,75),"LIVE","zachary-hutton.vercel.app"),
 ]
 
 tf, sf, bf, cf = font(50,True), font(22), font(14,True), mono(18)
