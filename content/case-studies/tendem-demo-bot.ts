@@ -4,7 +4,7 @@ export const tendemDemoBotCaseStudy: CaseStudy = {
   overview:
     "Live Telegram bot with multi-step booking and support flows, 30+ FAQ topics, LLM chat, SQLite persistence, rate limiting, and a FastAPI webhook server deployed on Railway.",
   problem:
-    "Businesses need messaging bots that combine structured workflows with AI ? not slide decks. I built a **live Telegram demo** showing webhooks, conversational state, LLM routing, graceful fallbacks, and deployment patterns that extend to other chat platforms.",
+    "Businesses need messaging bots that combine structured workflows with AI - not slide decks. I built a **live Telegram demo** showing webhooks, conversational state, LLM routing, graceful fallbacks, and deployment patterns that extend to other chat platforms.",
   solution:
     "The bot implements **Telegram Bot API** handlers for booking, support tickets, FAQ, and AI chat modes. A **FastAPI** webhook server validates secret tokens, persists user state in **SQLite**, routes **Groq/OpenAI** calls with per-user memory, and degrades to keyword FAQ when models fail. Admin commands expose stats and health for ops visibility.",
   architecture: [
@@ -50,7 +50,7 @@ export const tendemDemoBotCaseStudy: CaseStudy = {
     {
       title: "SQLite for demo-grade persistence",
       description:
-        "For a portfolio bot, **SQLite** keeps deployment simple on Railway while still demonstrating real state ? bookings, tickets, and conversation memory survive restarts.",
+        "For a portfolio bot, **SQLite** keeps deployment simple on Railway while still demonstrating real state - bookings, tickets, and conversation memory survive restarts.",
     },
   ],
   screenshots: [

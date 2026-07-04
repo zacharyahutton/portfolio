@@ -7,7 +7,7 @@ export const personalProjects: Project[] = [
     title: "Telegram Demo Bot",
     type: "personal",
     problem:
-      "Demonstrate production-ready messaging integration: live bot with webhooks, conversational state, LLM routing, and deployed infrastructure ? not mockups.",
+      "Demonstrate production-ready messaging integration: live bot with webhooks, conversational state, LLM routing, and deployed infrastructure - not mockups.",
     description:
       "Live Telegram bot with multi-step appointment booking, support tickets, 30+ FAQ topics across eight categories, and Groq/OpenAI chat with SQLite memory. FastAPI webhook server on Railway, per-user rate limits, admin /stats, and FAQ fallbacks when models fail.",
     stack: [
@@ -28,7 +28,7 @@ export const personalProjects: Project[] = [
     github: "https://github.com/zacharyahutton/telegram-bot-demo",
     live: "https://t.me/zachtedem_bot",
     image: "/case-studies/tendem-demo-bot-cover.png",
-    result: "Live Telegram demo ? t.me/zachtedem_bot ? webhook server on Railway",
+    result: "Live Telegram demo - t.me/zachtedem_bot - webhook server on Railway",
     featured: true,
   },
   {
