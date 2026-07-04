@@ -46,7 +46,7 @@ portfolio/
 ├── content/              # Typed content modules (projects, profile, experience)
 ├── lib/utils.ts          # cn() helper and shared constants
 ├── public/               # Static assets (resume.html, case-study images)
-├── brand/                # Resume source markdown
+├── brand/                # Instagram/social assets (public); application docs live in ../_private-career/
 └── OPEN_SOURCE.md        # This file
 ```
 

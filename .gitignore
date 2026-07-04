@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local-only application/marketing assets (sibling folder, never pushed):
+# C:\Users\EverybodyHatesA1one\Documents\_private-career\
+../_private-career/

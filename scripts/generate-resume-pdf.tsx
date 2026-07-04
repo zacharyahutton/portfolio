@@ -7,7 +7,10 @@ import ResumePdfDocument from "../components/ResumePdfDocument";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const outputPath = path.join(__dirname, "../public/resume.pdf");
-const mindriftCopyPath = path.join(__dirname, "../brand/MINDRIFT_RESUME.pdf");
+const mindriftCopyPath = path.join(
+  __dirname,
+  "../../_private-career/mindrift/MINDRIFT_RESUME.pdf",
+);
 
 async function main() {
   await renderToFile(React.createElement(ResumePdfDocument), outputPath);

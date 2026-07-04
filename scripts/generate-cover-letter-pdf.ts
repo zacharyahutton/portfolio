@@ -4,9 +4,9 @@ import { chromium } from "playwright";
 import fs from "node:fs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const brandDir = path.join(__dirname, "../brand");
-const mdPath = path.join(brandDir, "MINDRIFT_COVER_LETTER.md");
-const outputPath = path.join(brandDir, "MINDRIFT_COVER_LETTER.pdf");
+const privateDir = path.join(__dirname, "../../_private-career/mindrift");
+const mdPath = path.join(privateDir, "MINDRIFT_COVER_LETTER.md");
+const outputPath = path.join(privateDir, "MINDRIFT_COVER_LETTER.pdf");
 
 function mdToHtml(markdown: string): string {
   const paragraphs = markdown
