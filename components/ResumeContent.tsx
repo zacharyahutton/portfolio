@@ -85,7 +85,7 @@ export default function ResumeContent() {
         <div className="mt-3 space-y-4 text-[0.88rem] leading-relaxed">
           <div>
             <p className="font-semibold">
-              Telegram Demo Bot — Telegram{" "}
+              Telegram Demo Bot ? Telegram{" "}
               <span className="font-normal text-[0.82rem] text-[#555]">(t.me/zachtedem_bot)</span>
             </p>
             <p className="mt-1">
@@ -174,7 +174,8 @@ export default function ResumeContent() {
             <p className="mt-1 leading-relaxed">
               Delivered production web applications using <strong>React</strong>, <strong>Next.js</strong>,{" "}
               <strong>FastAPI</strong>, and <strong>MongoDB</strong>. Built <strong>REST APIs</strong>,{" "}
-              <strong>JWT</strong> auth, <strong>GrowthIQ</strong> LLM chat, email automation, and deployment on{" "}
+              <strong>JWT</strong> auth, <strong>GrowthIQ</strong> LLM chat with FAQ fallbacks,{" "}
+              <strong>webhook</strong> endpoints, email automation, and deployment on{" "}
               <strong>Vercel</strong> and <strong>Railway</strong>.
             </p>
           </div>
@@ -185,8 +186,9 @@ export default function ResumeContent() {
             </div>
             <p className="mt-1 leading-relaxed">
               Backend integrations, <strong>REST APIs</strong>, <strong>webhooks</strong>, and automation alongside
-              responsive <strong>React</strong>/<strong>TypeScript</strong> sites. ~3 years combined contract and
-              freelance delivery (2023–present).
+              responsive <strong>React</strong>/<strong>TypeScript</strong> sites. Built <strong>Telegram bots</strong>{" "}
+              with conversation flows, <strong>LLM</strong> chat, and <strong>Railway</strong> deployment. ~3 years
+              combined contract and freelance delivery (2023?present).
             </p>
           </div>
         </div>
@@ -227,8 +229,9 @@ export default function ResumeContent() {
           </p>
           <p>
             <span className="font-semibold">Messaging &amp; bots;</span> <strong>Telegram Bot API</strong>;{" "}
-            multi-step <strong>conversation flows</strong>; <strong>webhook</strong> delivery and verification;{" "}
-            <strong>LLM</strong> routing with fallbacks; per-user <strong>rate limiting</strong>
+            <strong>python-telegram-bot</strong>; multi-step <strong>conversation flows</strong>;{" "}
+            <strong>webhook</strong> delivery and verification; <strong>LLM integration</strong> (Groq/OpenAI);{" "}
+            <strong>aiosqlite</strong>; per-user <strong>rate limiting</strong>
           </p>
           <p>
             <span className="font-semibold">Tools;</span> <strong>Git</strong>; <strong>GitHub</strong>;{" "}

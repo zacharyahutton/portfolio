@@ -2,13 +2,13 @@ import type { Profile } from "./types";
 
 export const profile: Profile = {
   name: "Zachary Hutton",
-  headline: "CS student · collaborative builder · security-aware engineer",
-  tags: ["Computer Science", "Full-Stack Development", "Cybersecurity", "UTech"],
+  headline: "CS student · full-stack & messaging bots · security-aware engineer",
+  tags: ["Computer Science", "Full-Stack Development", "Messaging Bots", "Cybersecurity", "UTech"],
   oneLiner:
-    "BSc Computer Science student at UTech (GPA 3.7, Dean's List) seeking internships and co-ops. I build with strong fundamentals, learn quickly, and work well on teams.",
+    "BSc Computer Science student at UTech (GPA 3.7, Dean's List) seeking internships and co-ops. I build full-stack web apps and production Telegram bots — webhooks, conversation flows, and LLM integration — with strong fundamentals and clear communication.",
   about: [
     "Computer Science student at the University of Technology, Jamaica (GPA 3.7, Dean's List). I connect coursework in data structures, databases, and networking to projects I can run, test, and ship.",
-    "I enjoy full-stack web development and security-aware engineering. On personal time I build on GitHub, work through OWASP and PortSwigger labs, and deepen fundamentals through deliberate practice.",
+    "I build full-stack web applications and messaging bots — Telegram Bot API, FastAPI webhooks, async Python, and LLM chat with Groq/OpenAI. On personal time I ship open-source demos, work through OWASP and PortSwigger labs, and deepen fundamentals through deliberate practice.",
     "Contract and freelance delivery taught me to scope work, communicate clearly, and ship reliable software. I'm eager to contribute on a team and grow under mentorship.",
   ],
   stats: [

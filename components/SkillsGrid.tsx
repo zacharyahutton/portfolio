@@ -9,7 +9,7 @@ export default function SkillsGrid() {
           <span className="text-sm font-medium uppercase tracking-widest text-teal-400">Toolkit</span>
           <h2 className="mt-3 font-serif text-3xl text-white sm:text-4xl">Skills across the stack</h2>
           <p className="mt-4 max-w-2xl text-zinc-400">
-            Six categories — from languages and frameworks to security awareness and engineering practices.
+            Five categories — from languages and messaging integrations to security awareness and engineering practices.
           </p>
         </SectionReveal>
 

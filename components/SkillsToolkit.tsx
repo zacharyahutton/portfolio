@@ -14,8 +14,8 @@ export default function SkillsToolkit() {
             delay={80}
           />
           <p className="mx-auto mt-4 max-w-2xl text-[var(--color-pearl)]">
-            Languages, frameworks, and tooling I reach for when building APIs, frontends, and production
-            deployments.
+            Languages, frameworks, messaging bots, and tooling I reach for when building APIs, webhooks, frontends,
+            and production deployments.
           </p>
         </SectionReveal>
 

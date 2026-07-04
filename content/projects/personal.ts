@@ -2,6 +2,36 @@ import type { Project } from "../types";
 
 export const personalProjects: Project[] = [
   {
+    id: "tendem-demo-bot",
+    slug: "tendem-demo-bot",
+    title: "Telegram Demo Bot",
+    type: "personal",
+    problem:
+      "Demonstrate production-ready messaging integration: live bot with webhooks, conversational state, LLM routing, and deployed infrastructure ? not mockups.",
+    description:
+      "Live Telegram bot with multi-step appointment booking, support tickets, 30+ FAQ topics across eight categories, and Groq/OpenAI chat with SQLite memory. FastAPI webhook server on Railway, per-user rate limits, admin /stats, and FAQ fallbacks when models fail.",
+    stack: [
+      "Python",
+      "Telegram Bot API",
+      "FastAPI",
+      "SQLite",
+      "Groq",
+      "OpenAI",
+      "Webhooks",
+      "Conversation flows",
+      "LLM",
+      "aiosqlite",
+      "python-telegram-bot",
+      "Railway",
+      "Async Python",
+    ],
+    github: "https://github.com/zacharyahutton/telegram-bot-demo",
+    live: "https://t.me/zachtedem_bot",
+    image: "/case-studies/tendem-demo-bot-cover.png",
+    result: "Live Telegram demo ? t.me/zachtedem_bot ? webhook server on Railway",
+    featured: true,
+  },
+  {
     id: "studysync-api",
     slug: "studysync-api",
     title: "StudySync API",
@@ -29,36 +59,6 @@ export const personalProjects: Project[] = [
     github: "https://github.com/zacharyahutton/studysync-api",
     image: "/case-studies/studysync-cover.png",
     result: "JWT-secured API with course deadline tracking endpoints",
-    featured: true,
-  },
-  {
-    id: "tendem-demo-bot",
-    slug: "tendem-demo-bot",
-    title: "Telegram Demo Bot",
-    type: "personal",
-    problem:
-      "Prove messaging-platform integration for Mindrift/Tendem: live bot with webhooks, conversational state, LLM routing, and production deployment — not slides.",
-    description:
-      "Live Telegram bot with multi-step appointment booking, support tickets, 30+ FAQ topics across eight categories, and Groq/OpenAI chat with SQLite memory. FastAPI webhook server on Railway, per-user rate limits, admin /stats, and FAQ fallbacks when models fail.",
-    stack: [
-      "Python",
-      "Telegram Bot API",
-      "FastAPI",
-      "SQLite",
-      "Groq",
-      "OpenAI",
-      "Webhooks",
-      "Conversation flows",
-      "LLM",
-      "aiosqlite",
-      "Railway",
-      "Async Python",
-    ],
-    github: "https://github.com/zacharyahutton/telegram-bot-demo",
-    live: "https://t.me/zachtedem_bot",
-    image: "/case-studies/tendem-demo-bot-cover.png",
-    result: "Live Telegram demo — t.me/zachtedem_bot — webhook server on Railway",
-    featured: true,
   },
   {
     id: "webhook-relay-api",

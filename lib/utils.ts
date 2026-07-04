@@ -20,6 +20,7 @@ export const projectAccentColors: Record<string, string> = {
   weroi: "#b8ff3c",
   pntcog: "#d4a843",
   "studysync-api": "#6366f1",
+  "tendem-demo-bot": "#0088cc",
   "webhook-relay-api": "#f59e0b",
   "openapi-devkit": "#14b8a6",
   "phone-store-api": "#ec4899",

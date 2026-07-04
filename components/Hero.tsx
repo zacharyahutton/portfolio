@@ -9,7 +9,8 @@ import { profile } from "@/content/profile";
 
 const taglines = [
   "internship-ready · team-oriented",
-  "full-stack fundamentals",
+  "full-stack & messaging bots",
+  "webhooks · LLM integration",
   "security-aware engineering",
   "open to co-ops & mentorship",
 ];

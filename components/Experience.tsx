@@ -25,9 +25,17 @@ export default function Experience() {
                 </div>
                 <div className="sm:max-w-xl sm:text-right">
                   <span className="text-xs text-[var(--color-stone)]">{entry.period}</span>
-                  <p className="mt-2 text-sm leading-relaxed text-[var(--color-pearl)] sm:text-left">
-                    {entry.bullets[0]}
-                  </p>
+                  <ul className="mt-2 space-y-2 text-sm leading-relaxed text-[var(--color-pearl)] sm:text-left">
+                    {entry.bullets.map((bullet) => (
+                      <li key={bullet} className="flex items-start gap-2">
+                        <span
+                          className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[var(--color-electric-indigo)]"
+                          aria-hidden
+                        />
+                        {bullet}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </SectionReveal>

@@ -268,9 +268,9 @@ export default function ResumePdfDocument() {
           </View>
           <Text style={styles.body}>
             Delivered production web applications using <Bold>React</Bold>, <Bold>Next.js</Bold>,{" "}
-            <Bold>FastAPI</Bold>, and <Bold>MongoDB</Bold>. Built <Bold>REST APIs</Bold>,{" "}
-            <Bold>JWT</Bold> auth, <Bold>GrowthIQ</Bold> LLM chat, email automation, and deployment on{" "}
-            <Bold>Vercel</Bold> and <Bold>Railway</Bold>.
+            <Bold>FastAPI</Bold>, and <Bold>MongoDB</Bold>. Built <Bold>REST APIs</Bold>, <Bold>JWT</Bold> auth,{" "}
+            <Bold>GrowthIQ</Bold> LLM chat with FAQ fallbacks, <Bold>webhook</Bold> endpoints, email automation, and
+            deployment on <Bold>Vercel</Bold> and <Bold>Railway</Bold>.
           </Text>
         </View>
 
@@ -280,8 +280,9 @@ export default function ResumePdfDocument() {
             <Text style={styles.rowDate}>2023-Present</Text>
           </View>
           <Text style={styles.body}>
-            Backend integrations, <Bold>REST APIs</Bold>, <Bold>webhooks</Bold>, and automation alongside
-            responsive <Bold>React</Bold>/<Bold>TypeScript</Bold> sites. ~3 years combined contract and
+            Backend integrations, <Bold>REST APIs</Bold>, <Bold>webhooks</Bold>, and automation alongside responsive{" "}
+            <Bold>React</Bold>/<Bold>TypeScript</Bold> sites. Built <Bold>Telegram bots</Bold> with conversation
+            flows, <Bold>LLM</Bold> chat, and <Bold>Railway</Bold> deployment. ~3 years combined contract and
             freelance delivery (2023-Present).
           </Text>
         </View>
@@ -319,9 +320,10 @@ export default function ResumePdfDocument() {
             secure coding
           </Text>
           <Text style={styles.skillsLine}>
-            <Text style={styles.bold}>Messaging & bots;</Text> <Bold>Telegram Bot API</Bold>; multi-step{" "}
-            <Bold>conversation flows</Bold>; <Bold>webhook</Bold> delivery and verification;{" "}
-            <Bold>LLM</Bold> routing with fallbacks; per-user <Bold>rate limiting</Bold>
+            <Text style={styles.bold}>Messaging & bots;</Text> <Bold>Telegram Bot API</Bold>;{" "}
+            <Bold>python-telegram-bot</Bold>; multi-step <Bold>conversation flows</Bold>;{" "}
+            <Bold>webhook</Bold> delivery and verification; <Bold>LLM integration</Bold> (Groq/OpenAI);{" "}
+            <Bold>aiosqlite</Bold>; per-user <Bold>rate limiting</Bold>
           </Text>
           <Text style={styles.skillsLine}>
             <Text style={styles.bold}>Tools;</Text> <Bold>Git</Bold>; <Bold>GitHub</Bold>;{" "}
