@@ -1,4 +1,4 @@
-ï»¿import { User } from "lucide-react";
+import { User } from "lucide-react";
 import GithubIcon from "@/components/ui/GithubIcon";
 import LinkedinIcon from "@/components/ui/LinkedinIcon";
 import { profile } from "@/content/profile";
@@ -85,7 +85,7 @@ export default function ResumeContent() {
         <div className="mt-3 space-y-4 text-[0.88rem] leading-relaxed">
           <div>
             <p className="font-semibold">
-              Tendem Demo Bot â€” Telegram{" "}
+              Telegram Demo Bot — Telegram{" "}
               <span className="font-normal text-[0.82rem] text-[#555]">(t.me/zachtedem_bot)</span>
             </p>
             <p className="mt-1">
@@ -186,7 +186,7 @@ export default function ResumeContent() {
             <p className="mt-1 leading-relaxed">
               Backend integrations, <strong>REST APIs</strong>, <strong>webhooks</strong>, and automation alongside
               responsive <strong>React</strong>/<strong>TypeScript</strong> sites. ~3 years combined contract and
-              freelance delivery (2023â€“present).
+              freelance delivery (2023–present).
             </p>
           </div>
         </div>

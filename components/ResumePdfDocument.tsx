@@ -183,7 +183,7 @@ export default function ResumePdfDocument() {
 
         <View style={styles.projectBlock}>
           <Text style={styles.projectTitle}>
-            Tendem Demo Bot — Telegram <Text style={styles.subtle}>(t.me/zachtedem_bot)</Text>
+            Telegram Demo Bot — Telegram <Text style={styles.subtle}>(t.me/zachtedem_bot)</Text>
           </Text>
           <Text style={styles.body}>
             Built a <Bold>live Telegram bot</Bold> with multi-step booking, support tickets,{" "}

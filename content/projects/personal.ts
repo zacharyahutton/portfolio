@@ -1,4 +1,4 @@
-ï»¿import type { Project } from "../types";
+import type { Project } from "../types";
 
 export const personalProjects: Project[] = [
   {
@@ -34,10 +34,10 @@ export const personalProjects: Project[] = [
   {
     id: "tendem-demo-bot",
     slug: "tendem-demo-bot",
-    title: "Tendem Demo Bot (Telegram)",
+    title: "Telegram Demo Bot",
     type: "personal",
     problem:
-      "Prove messaging-platform integration for Mindrift/Tendem: live bot with webhooks, conversational state, LLM routing, and production deployment â€” not slides.",
+      "Prove messaging-platform integration for Mindrift/Tendem: live bot with webhooks, conversational state, LLM routing, and production deployment — not slides.",
     description:
       "Live Telegram bot with multi-step appointment booking, support tickets, 30+ FAQ topics across eight categories, and Groq/OpenAI chat with SQLite memory. FastAPI webhook server on Railway, per-user rate limits, admin /stats, and FAQ fallbacks when models fail.",
     stack: [
@@ -57,7 +57,7 @@ export const personalProjects: Project[] = [
     github: "https://github.com/zacharyahutton/telegram-bot-demo",
     live: "https://t.me/zachtedem_bot",
     image: "/case-studies/tendem-demo-bot-cover.png",
-    result: "Live Telegram demo â€” t.me/zachtedem_bot â€” webhook server on Railway",
+    result: "Live Telegram demo — t.me/zachtedem_bot — webhook server on Railway",
     featured: true,
   },
   {

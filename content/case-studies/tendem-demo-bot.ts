@@ -4,9 +4,9 @@ export const tendemDemoBotCaseStudy: CaseStudy = {
   overview:
     "Live Telegram bot with multi-step booking and support flows, 30+ FAQ topics, LLM chat, SQLite persistence, rate limiting, and a FastAPI webhook server deployed on Railway.",
   problem:
-    "Mindrift's Tendem Bot Developer role requires proof of messaging-platform integration â€” not slides. I needed a **live bot** demonstrating webhooks, conversational state, LLM routing, fallbacks, and production deployment patterns that translate to WhatsApp and Discord.",
+    "Businesses need messaging bots that combine structured workflows with AI—not slide decks. I built a **live Telegram demo** showing webhooks, conversational state, LLM routing, graceful fallbacks, and deployment patterns that extend to other chat platforms.",
   solution:
-    "Tendem Demo Bot implements **Telegram Bot API** handlers for booking, support tickets, FAQ, and AI chat modes. A **FastAPI** webhook server validates secret tokens, persists user state in **SQLite**, routes **Groq/OpenAI** calls with per-user memory, and degrades to keyword FAQ when models fail. Admin commands expose stats and health for ops visibility.",
+    "The bot implements **Telegram Bot API** handlers for booking, support tickets, FAQ, and AI chat modes. A **FastAPI** webhook server validates secret tokens, persists user state in **SQLite**, routes **Groq/OpenAI** calls with per-user memory, and degrades to keyword FAQ when models fail. Admin commands expose stats and health for ops visibility.",
   architecture: [
     {
       title: "Conversation Layer",
@@ -40,7 +40,7 @@ export const tendemDemoBotCaseStudy: CaseStudy = {
     {
       title: "Webhook-first with polling fallback",
       description:
-        "Production bots run on **webhooks** for low latency and predictable scaling. I ship both modes so reviewers can test locally while the live demo stays 24/7 on Railway.",
+        "Production bots run on **webhooks** for low latency and predictable scaling. I ship both modes so developers can test locally while the live demo stays 24/7 on Railway.",
     },
     {
       title: "FAQ fallbacks before and after LLM calls",
@@ -56,7 +56,7 @@ export const tendemDemoBotCaseStudy: CaseStudy = {
   screenshots: [
     {
       src: "/case-studies/tendem-demo-bot-cover.png",
-      alt: "Tendem Demo Bot profile and branding",
+      alt: "Telegram demo bot profile and branding",
     },
   ],
 };
