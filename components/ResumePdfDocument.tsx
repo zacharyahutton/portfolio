@@ -151,6 +151,10 @@ export default function ResumePdfDocument() {
             <Link src={resumeLinks.linkedin} style={styles.link}>
               LinkedIn
             </Link>
+            <Text> | </Text>
+            <Link src={resumeLinks.instagram} style={styles.link}>
+              Instagram
+            </Link>
           </View>
         </View>
 
@@ -176,6 +180,22 @@ export default function ResumePdfDocument() {
         <View style={styles.divider} />
 
         <SectionTitle>Projects</SectionTitle>
+
+        <View style={styles.projectBlock}>
+          <Text style={styles.projectTitle}>
+            Tendem Demo Bot — Telegram <Text style={styles.subtle}>(t.me/zachtedem_bot)</Text>
+          </Text>
+          <Text style={styles.body}>
+            Built a <Bold>live Telegram bot</Bold> with multi-step booking, support tickets,{" "}
+            <Bold>30+ FAQ</Bold> topics, and <Bold>Groq/OpenAI</Bold> chat with <Bold>SQLite</Bold> memory.
+            Implemented <Bold>FastAPI</Bold> webhooks, secret-token validation, per-user{" "}
+            <Bold>rate limiting</Bold>, and FAQ fallbacks when models fail.
+          </Text>
+          <Text style={styles.body}>
+            Deployed on <Bold>Railway</Bold> with public health endpoint. Open source at{" "}
+            github.com/zacharyahutton/telegram-bot-demo.
+          </Text>
+        </View>
 
         <View style={styles.projectBlock}>
           <Text style={styles.projectTitle}>
@@ -206,24 +226,12 @@ export default function ResumePdfDocument() {
           <Text style={styles.body}>
             Integrated lead-capture funnels, multi-step audit forms, and an{" "}
             <Bold>admin dashboard</Bold> with <Bold>JWT</Bold> authentication. Built{" "}
-            <Bold>RESTful APIs</Bold> for lead management and connected <Bold>Resend</Bold> for
-            transactional email.
+            <Bold>RESTful APIs</Bold> for lead management, shipped <Bold>GrowthIQ</Bold> LLM chat with FAQ
+            fallbacks, and connected <Bold>Resend</Bold> for transactional email.
           </Text>
           <Text style={styles.body}>
             Deployed frontend on <Bold>Vercel</Bold> and API on <Bold>Railway</Bold> with{" "}
             <Bold>CORS</Bold>, environment configuration, and health-check routing.
-          </Text>
-        </View>
-
-        <View style={styles.projectBlock}>
-          <Text style={styles.projectTitle}>
-            StudySync API <Text style={styles.subtle}>(Personal)</Text>
-          </Text>
-          <Text style={styles.body}>
-            Developed a <Bold>FastAPI</Bold> <Bold>REST API</Bold> with{" "}
-            <Bold>JWT authentication</Bold>, <Bold>SQLAlchemy</Bold> ORM, and course deadline
-            tracking endpoints. Used <Bold>Pydantic</Bold> schemas for request validation and
-            OpenAPI documentation.
           </Text>
         </View>
 
@@ -238,6 +246,17 @@ export default function ResumePdfDocument() {
           </Text>
         </View>
 
+        <View style={styles.projectBlock}>
+          <Text style={styles.projectTitle}>
+            Phone Store REST API <Text style={styles.subtle}>(Personal)</Text>
+          </Text>
+          <Text style={styles.body}>
+            RESTful <Bold>Node.js</Bold>/<Bold>Express</Bold> API with <Bold>JWT</Bold> auth,{" "}
+            <Bold>MongoDB</Bold> catalog, stock reservation, and <Bold>HMAC-signed order webhooks</Bold>{" "}
+            for async checkout updates.
+          </Text>
+        </View>
+
         <View style={styles.divider} />
 
         <SectionTitle>Experience</SectionTitle>
@@ -249,9 +268,9 @@ export default function ResumePdfDocument() {
           </View>
           <Text style={styles.body}>
             Delivered production web applications using <Bold>React</Bold>, <Bold>Next.js</Bold>,{" "}
-            <Bold>FastAPI</Bold>, and <Bold>MongoDB</Bold>. Implemented <Bold>REST APIs</Bold>,
-            authentication patterns, and deployment on <Bold>Vercel</Bold> and{" "}
-            <Bold>Railway</Bold>.
+            <Bold>FastAPI</Bold>, and <Bold>MongoDB</Bold>. Built <Bold>REST APIs</Bold>,{" "}
+            <Bold>JWT</Bold> auth, <Bold>GrowthIQ</Bold> LLM chat, email automation, and deployment on{" "}
+            <Bold>Vercel</Bold> and <Bold>Railway</Bold>.
           </Text>
         </View>
 
@@ -261,8 +280,9 @@ export default function ResumePdfDocument() {
             <Text style={styles.rowDate}>2023-Present</Text>
           </View>
           <Text style={styles.body}>
-            Developed responsive websites with <Bold>component-based</Bold> architecture,{" "}
-            <Bold>SEO</Bold>, and performance optimization for local businesses.
+            Backend integrations, <Bold>REST APIs</Bold>, <Bold>webhooks</Bold>, and automation alongside
+            responsive <Bold>React</Bold>/<Bold>TypeScript</Bold> sites. ~3 years combined contract and
+            freelance delivery (2023-Present).
           </Text>
         </View>
 
@@ -293,9 +313,15 @@ export default function ResumePdfDocument() {
           </Text>
           <Text style={styles.skillsLine}>
             <Text style={styles.bold}>Backend & data;</Text> <Bold>RESTful APIs</Bold>;{" "}
-            <Bold>MongoDB</Bold>; <Bold>MongoDB Atlas</Bold>; <Bold>SQLite</Bold>;{" "}
-            <Bold>SQLAlchemy</Bold>; <Bold>JWT authentication</Bold>; <Bold>Pydantic</Bold>{" "}
-            validation; <Bold>OWASP</Bold>-aligned secure coding
+            <Bold>webhooks</Bold>; <Bold>async Python</Bold>; <Bold>MongoDB</Bold>; <Bold>SQLite</Bold>;{" "}
+            <Bold>SQLAlchemy</Bold>; <Bold>JWT authentication</Bold>; <Bold>OAuth</Bold> patterns;{" "}
+            <Bold>Pydantic</Bold> validation; <Bold>LLM APIs</Bold> (Groq/OpenAI); <Bold>OWASP</Bold>-aligned
+            secure coding
+          </Text>
+          <Text style={styles.skillsLine}>
+            <Text style={styles.bold}>Messaging & bots;</Text> <Bold>Telegram Bot API</Bold>; multi-step{" "}
+            <Bold>conversation flows</Bold>; <Bold>webhook</Bold> delivery and verification;{" "}
+            <Bold>LLM</Bold> routing with fallbacks; per-user <Bold>rate limiting</Bold>
           </Text>
           <Text style={styles.skillsLine}>
             <Text style={styles.bold}>Tools;</Text> <Bold>Git</Bold>; <Bold>GitHub</Bold>;{" "}

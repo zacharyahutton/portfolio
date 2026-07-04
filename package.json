@@ -6,6 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "npm run generate:resume-pdf && next build --turbopack",
     "generate:resume-pdf": "tsx scripts/generate-resume-pdf.tsx",
+    "generate:cover-letter-pdf": "tsx scripts/generate-cover-letter-pdf.ts",
+    "generate:mindrift-pdfs": "npm run generate:resume-pdf && npm run generate:cover-letter-pdf",
     "start": "next start",
     "lint": "eslint"
   },

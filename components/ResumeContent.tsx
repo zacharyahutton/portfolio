@@ -46,6 +46,13 @@ export default function ResumeContent() {
             <LinkedinIcon size={12} aria-hidden />
             LinkedIn
           </a>
+          {" | "}
+          <a
+            href={resumeLinks.instagram}
+            className="inline-flex items-center gap-1 text-[#111] underline-offset-2 hover:underline"
+          >
+            Instagram
+          </a>
         </p>
       </header>
 
@@ -78,6 +85,23 @@ export default function ResumeContent() {
         <div className="mt-3 space-y-4 text-[0.88rem] leading-relaxed">
           <div>
             <p className="font-semibold">
+              Tendem Demo Bot — Telegram{" "}
+              <span className="font-normal text-[0.82rem] text-[#555]">(t.me/zachtedem_bot)</span>
+            </p>
+            <p className="mt-1">
+              Built a <strong>live Telegram bot</strong> with multi-step booking, support tickets,{" "}
+              <strong>30+ FAQ</strong> topics, and <strong>Groq/OpenAI</strong> chat with{" "}
+              <strong>SQLite</strong> memory. Implemented <strong>FastAPI</strong> webhooks, secret-token
+              validation, per-user <strong>rate limiting</strong>, and FAQ fallbacks when models fail.
+            </p>
+            <p className="mt-1">
+              Deployed on <strong>Railway</strong> with public health endpoint. Open source at{" "}
+              <strong>github.com/zacharyahutton/telegram-bot-demo</strong>.
+            </p>
+          </div>
+
+          <div>
+            <p className="font-semibold">
               PNTCOG Ministry Platform{" "}
               <span className="font-normal text-[0.82rem] text-[#555]">(portmorentcog.org)</span>
             </p>
@@ -104,23 +128,13 @@ export default function ResumeContent() {
             </p>
             <p className="mt-1">
               Integrated lead-capture funnels, multi-step audit forms, and an <strong>admin dashboard</strong> with{" "}
-              <strong>JWT</strong> authentication. Built <strong>RESTful APIs</strong> for lead management and
-              connected <strong>Resend</strong> for transactional email.
+              <strong>JWT</strong> authentication. Built <strong>RESTful APIs</strong> for lead management,
+              shipped <strong>GrowthIQ</strong> LLM chat with FAQ fallbacks, and connected <strong>Resend</strong>{" "}
+              for transactional email.
             </p>
             <p className="mt-1">
               Deployed frontend on <strong>Vercel</strong> and API on <strong>Railway</strong> with{" "}
               <strong>CORS</strong>, environment configuration, and health-check routing.
-            </p>
-          </div>
-
-          <div>
-            <p className="font-semibold">
-              StudySync API <span className="font-normal text-[0.82rem] text-[#555]">(Personal)</span>
-            </p>
-            <p className="mt-1">
-              Developed a <strong>FastAPI</strong> <strong>REST API</strong> with <strong>JWT authentication</strong>,{" "}
-              <strong>SQLAlchemy</strong> ORM, and course deadline tracking endpoints. Used{" "}
-              <strong>Pydantic</strong> schemas for request validation and OpenAPI documentation.
             </p>
           </div>
 
@@ -131,6 +145,17 @@ export default function ResumeContent() {
             <p className="mt-1">
               Built a developer sandbox API with API-key auth, HMAC-signed <strong>webhook</strong> delivery, retry
               backoff, and per-key <strong>rate limiting</strong> for testing outbound integrations.
+            </p>
+          </div>
+
+          <div>
+            <p className="font-semibold">
+              Phone Store REST API <span className="font-normal text-[0.82rem] text-[#555]">(Personal)</span>
+            </p>
+            <p className="mt-1">
+              RESTful <strong>Node.js</strong>/<strong>Express</strong> API with <strong>JWT</strong> auth,{" "}
+              <strong>MongoDB</strong> catalog, stock reservation, and <strong>HMAC-signed order webhooks</strong>{" "}
+              for async checkout updates.
             </p>
           </div>
         </div>
@@ -148,8 +173,9 @@ export default function ResumeContent() {
             </div>
             <p className="mt-1 leading-relaxed">
               Delivered production web applications using <strong>React</strong>, <strong>Next.js</strong>,{" "}
-              <strong>FastAPI</strong>, and <strong>MongoDB</strong>. Implemented <strong>REST APIs</strong>,
-              authentication patterns, and deployment on <strong>Vercel</strong> and <strong>Railway</strong>.
+              <strong>FastAPI</strong>, and <strong>MongoDB</strong>. Built <strong>REST APIs</strong>,{" "}
+              <strong>JWT</strong> auth, <strong>GrowthIQ</strong> LLM chat, email automation, and deployment on{" "}
+              <strong>Vercel</strong> and <strong>Railway</strong>.
             </p>
           </div>
           <div>
@@ -158,8 +184,9 @@ export default function ResumeContent() {
               <span className="text-[0.85rem] text-[#444]">2023-Present</span>
             </div>
             <p className="mt-1 leading-relaxed">
-              Developed responsive websites with <strong>component-based</strong> architecture, <strong>SEO</strong>,
-              and performance optimization for local businesses.
+              Backend integrations, <strong>REST APIs</strong>, <strong>webhooks</strong>, and automation alongside
+              responsive <strong>React</strong>/<strong>TypeScript</strong> sites. ~3 years combined contract and
+              freelance delivery (2023–present).
             </p>
           </div>
         </div>
@@ -193,9 +220,15 @@ export default function ResumeContent() {
           </p>
           <p>
             <span className="font-semibold">Backend &amp; data;</span> <strong>RESTful APIs</strong>;{" "}
-            <strong>MongoDB</strong>; <strong>MongoDB Atlas</strong>; <strong>SQLite</strong>;{" "}
-            <strong>SQLAlchemy</strong>; <strong>JWT authentication</strong>; <strong>Pydantic</strong>{" "}
-            validation; <strong>OWASP</strong>-aligned secure coding
+            <strong>webhooks</strong>; <strong>async Python</strong>; <strong>MongoDB</strong>;{" "}
+            <strong>SQLite</strong>; <strong>SQLAlchemy</strong>; <strong>JWT authentication</strong>;{" "}
+            <strong>OAuth</strong> patterns; <strong>Pydantic</strong> validation; <strong>LLM APIs</strong>{" "}
+            (Groq/OpenAI); <strong>OWASP</strong>-aligned secure coding
+          </p>
+          <p>
+            <span className="font-semibold">Messaging &amp; bots;</span> <strong>Telegram Bot API</strong>;{" "}
+            multi-step <strong>conversation flows</strong>; <strong>webhook</strong> delivery and verification;{" "}
+            <strong>LLM</strong> routing with fallbacks; per-user <strong>rate limiting</strong>
           </p>
           <p>
             <span className="font-semibold">Tools;</span> <strong>Git</strong>; <strong>GitHub</strong>;{" "}

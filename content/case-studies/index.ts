@@ -5,6 +5,7 @@ import { studysyncApiCaseStudy } from "./studysync-api";
 import { webhookRelayApiCaseStudy } from "./webhook-relay-api";
 import { openapiDevkitCaseStudy } from "./openapi-devkit";
 import { phoneStoreApiCaseStudy } from "./phone-store-api";
+import { tendemDemoBotCaseStudy } from "./tendem-demo-bot";
 
 export const caseStudiesBySlug: Record<string, CaseStudy> = {
   pntcog: pntcogCaseStudy,
@@ -13,6 +14,7 @@ export const caseStudiesBySlug: Record<string, CaseStudy> = {
   "webhook-relay-api": webhookRelayApiCaseStudy,
   "openapi-devkit": openapiDevkitCaseStudy,
   "phone-store-api": phoneStoreApiCaseStudy,
+  "tendem-demo-bot": tendemDemoBotCaseStudy,
 };
 
 export function getCaseStudyBySlug(slug: string): CaseStudy | undefined {

@@ -48,6 +48,14 @@ IT, English A, Math, Add. Math, Physics, POB, POA, Industrial Tech (Electrical),
 
 
 
+### Tendem Demo Bot — Telegram (t.me/zachtedem_bot)
+
+
+
+Built a **live Telegram bot** for messaging-platform integration: multi-step appointment booking, support tickets with priority, **30+ FAQ** topics, and **Groq/OpenAI** chat with **SQLite** conversation memory. Implemented **FastAPI** webhook server with secret-token validation, per-user **rate limiting**, admin /stats, and FAQ fallbacks when models fail. Deployed on **Railway** with public health endpoint; open source at github.com/zacharyahutton/telegram-bot-demo.
+
+
+
 ### PNTCOG Ministry Platform (portmorentcog.org)
 
 
@@ -68,19 +76,11 @@ Engineered a full-stack agency platform: **React** SPA frontend, **FastAPI**/**P
 
 
 
-Integrated lead-capture funnels, multi-step audit forms, and an **admin dashboard** protected by **JWT** session authentication. Built **RESTful APIs** for lead management, status updates, and form persistence. Connected **Resend** for transactional email and outreach sequences tied to funnel events.
+Integrated lead-capture funnels, multi-step audit forms, and an **admin dashboard** protected by **JWT** session authentication. Built **RESTful APIs** for lead management, status updates, and form persistence. Shipped **GrowthIQ**, an **LLM-powered chat assistant** with quick-reply routing, token limits, and local FAQ fallbacks. Connected **Resend** for transactional email and outreach sequences tied to funnel events.
 
 
 
 Deployed the frontend on **Vercel** and the API on **Railway** with **CORS** configuration, environment-based secrets, and health-check routing. Applied input validation, error handling, and deployment practices suitable for client-facing production traffic.
-
-
-
-### StudySync API (Personal)
-
-
-
-Developed a **FastAPI** **REST API** with **JWT authentication**, **SQLAlchemy** ORM models, and endpoints for course modules and deadline tracking. Used **Pydantic** schemas for request validation and OpenAPI documentation.
 
 
 
@@ -89,6 +89,14 @@ Developed a **FastAPI** **REST API** with **JWT authentication**, **SQLAlchemy**
 
 
 Built a developer sandbox API with API-key auth, HMAC-signed **webhook** delivery, retry backoff, and per-key **rate limiting** for testing outbound integrations.
+
+
+
+### Phone Store REST API (Personal)
+
+
+
+RESTful **Node.js**/**Express** API with **JWT** auth, **MongoDB** catalog, stock reservation, and **HMAC-signed order webhooks** for async checkout status updates.
 
 
 
@@ -102,13 +110,13 @@ Built a developer sandbox API with API-key auth, HMAC-signed **webhook** deliver
 
 **Software Developer (Contract)**, weROI | 2024-Present  
 
-Delivered production web applications using **React**, **Next.js**, **FastAPI**, and **MongoDB** for client-facing platforms. Implemented **REST APIs**, authentication patterns, and **serverless deployment** on **Vercel** and **Railway**.
+Delivered production web applications using **React**, **Next.js**, **FastAPI**, and **MongoDB**. Built **REST APIs**, **JWT** authentication, **GrowthIQ LLM chat**, email automation, and **serverless deployment** on **Vercel** and **Railway**.
 
 
 
 **Freelance Web Developer**, Independent | 2023-Present  
 
-Developed responsive websites with **component-based** architecture, **SEO**, and performance optimization for local businesses.
+Backend integrations, **REST APIs**, **webhooks**, and automation alongside responsive **React**/**TypeScript** sites for local businesses. ~3 years combined contract and freelance delivery (2023–present).
 
 
 
@@ -144,7 +152,11 @@ Developed responsive websites with **component-based** architecture, **SEO**, an
 
 
 
-**Backend & data.** **RESTful APIs**; **Pydantic** validation; **JWT authentication**; **MongoDB**; **MongoDB Atlas** document modeling. Experience with database schema design, ORM patterns (**SQLAlchemy**), and secure session handling aligned with **OWASP** guidance.
+**Backend & data.** **RESTful APIs**; **webhooks**; **async Python**; **Pydantic** validation; **JWT authentication**; **OAuth** patterns; **MongoDB**; **SQLite**; **SQLAlchemy**; **LLM APIs** (Groq/OpenAI). Experience with **Telegram Bot API**, conversation state, and secure session handling aligned with **OWASP** guidance.
+
+
+
+**Messaging & bots.** **Telegram Bot API**; multi-step **conversation flows**; **webhook** delivery and verification; **LLM** routing with fallbacks; per-user **rate limiting**; admin analytics commands.
 
 
 

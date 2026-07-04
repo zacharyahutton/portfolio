@@ -8,7 +8,7 @@ export const experience: TimelineEntry[] = [
     period: "2024 – Present",
     type: "work",
     bullets: [
-      "Production web apps with React, Next.js, FastAPI, and MongoDB. REST APIs, auth patterns, Vercel and Railway deployment.",
+      "Production web apps with React, Next.js, FastAPI, and MongoDB. REST APIs, JWT auth, GrowthIQ LLM chat assistant with FAQ fallbacks, Resend email automation, and Vercel/Railway deployment.",
     ],
   },
   {
@@ -18,7 +18,7 @@ export const experience: TimelineEntry[] = [
     period: "2023 – Present",
     type: "work",
     bullets: [
-      "Responsive sites with React, TypeScript, and modern CSS for local businesses.",
+      "Backend integrations, REST APIs, webhooks, and automation for local businesses. Responsive React/TypeScript sites with component architecture and SEO.",
     ],
   },
   {

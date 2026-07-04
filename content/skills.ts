@@ -23,6 +23,19 @@ export const skillCategories: SkillCategory[] = [
       "Express",
       "SQLAlchemy",
       "Pydantic",
+      "Telegram Bot API",
+    ],
+  },
+  {
+    name: "Messaging & integrations",
+    items: [
+      "Webhooks",
+      "Async Python",
+      "LLM APIs (Groq / OpenAI)",
+      "Conversation flows",
+      "OAuth & JWT",
+      "HMAC signing",
+      "Rate limiting",
     ],
   },
   {
