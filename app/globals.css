@@ -2,15 +2,16 @@
 
 :root {
   --color-electric-indigo: #1500ff;
-  --color-obsidian: #050505;
-  --color-charcoal: #151515;
-  --color-graphite: #1e1e1e;
+  /* Slightly lifted dark palette — still clearly dark, less harsh pure black */
+  --color-obsidian: #0c0c10;
+  --color-charcoal: #16161c;
+  --color-graphite: #22222a;
   --color-paper: #fdfdfd;
   --color-silver: #e5e5e5;
   --color-pearl: #d4d4d4;
-  --color-slate: #2f2f2f;
-  --color-ash: #a3a3a3;
-  --color-stone: #737373;
+  --color-slate: #35353f;
+  --color-ash: #a8a8b0;
+  --color-stone: #7a7a84;
   --page-max-width: 1200px;
   --section-gap: 64px;
   --radius-cards: 14px;
@@ -20,28 +21,29 @@
 }
 
 html.light {
-  --color-obsidian: #f5f5f5;
-  --color-charcoal: #ffffff;
-  --color-graphite: #ebebeb;
-  --color-paper: #0a0a0a;
-  --color-silver: #1a1a1a;
-  --color-pearl: #2b2b2b;
-  --color-slate: #b8b8b8;
-  --color-ash: #3d3d3d;
-  --color-stone: #5c5c5c;
+  /* Soft cool off-white — atmospheric, not clinical bright white */
+  --color-obsidian: #e8e9ef;
+  --color-charcoal: #f0f1f6;
+  --color-graphite: #dcdde6;
+  --color-paper: #12121a;
+  --color-silver: #1c1c26;
+  --color-pearl: #2e2e3a;
+  --color-slate: #b0b2c0;
+  --color-ash: #4a4a58;
+  --color-stone: #6a6a78;
 }
 
 @theme inline {
   --color-background: var(--color-obsidian);
   --color-foreground: var(--color-paper);
-  --color-obsidian: #050505;
-  --color-charcoal: #151515;
-  --color-graphite: #1e1e1e;
+  --color-obsidian: #0c0c10;
+  --color-charcoal: #16161c;
+  --color-graphite: #22222a;
   --color-paper: #fdfdfd;
   --color-pearl: #d4d4d4;
-  --color-ash: #a3a3a3;
-  --color-stone: #737373;
-  --color-slate: #2f2f2f;
+  --color-ash: #a8a8b0;
+  --color-stone: #7a7a84;
+  --color-slate: #35353f;
   --color-silver: #e5e5e5;
   --color-electric-indigo: #1500ff;
   --font-sans: var(--font-dm-sans);
@@ -59,9 +61,141 @@ body {
   font-family: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
+.font-display {
+  font-family: var(--font-display), var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+.font-condensed {
+  font-family: var(--font-condensed), "Arial Narrow", var(--font-display), sans-serif;
+}
+
+.font-mono-label {
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* Editorial mono metadata label — the "system data" voice */
+.mono-label {
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ash);
+}
+
+/* Ember status dot — single accent, kept in brand indigo */
+.status-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: var(--color-electric-indigo);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--color-electric-indigo) 70%, transparent);
+}
+
+/* Ghosted monument section title — near-invisible display watermark */
+.ghost-title {
+  font-family: var(--font-condensed), "Arial Narrow", sans-serif;
+  text-transform: uppercase;
+  line-height: 0.82;
+  letter-spacing: -0.01em;
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--color-paper) 12%, transparent);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Monument display headline with dark-to-light gradient fill */
+.monument {
+  font-family: var(--font-condensed), "Arial Narrow", sans-serif;
+  text-transform: uppercase;
+  line-height: 0.84;
+  letter-spacing: -0.01em;
+}
+
+.monument-fade {
+  background: linear-gradient(
+    180deg,
+    var(--color-paper) 0%,
+    color-mix(in srgb, var(--color-paper) 70%, transparent) 55%,
+    color-mix(in srgb, var(--color-paper) 30%, transparent) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Hairline divider — structural grid line */
+.hairline {
+  height: 1px;
+  width: 100%;
+  background: color-mix(in srgb, var(--color-paper) 12%, transparent);
+}
+
+/* Dropdown reveal */
+@keyframes dropdown-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-panel {
+  animation: dropdown-in 0.22s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
 ::selection {
   background: rgba(21, 0, 255, 0.35);
   color: #fff;
+}
+
+html.has-custom-cursor,
+html.has-custom-cursor * {
+  cursor: none !important;
+}
+
+@media (pointer: coarse) {
+  html.has-custom-cursor,
+  html.has-custom-cursor * {
+    cursor: auto !important;
+  }
+}
+
+.hero-atmosphere {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(21, 0, 255, 0.2), transparent 55%),
+    radial-gradient(ellipse 40% 30% at 85% 60%, rgba(21, 0, 255, 0.08), transparent 50%);
+}
+
+.hero-atmosphere::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-marquee,
+  .animate-marquee-vertical,
+  .marquee-track,
+  .dropdown-panel {
+    animation: none !important;
+  }
+
+  html.has-custom-cursor,
+  html.has-custom-cursor * {
+    cursor: auto !important;
+  }
 }
 
 .section-kicker {
@@ -208,8 +342,7 @@ html.light .section-kicker {
 }
 
 .deck-card {
-  transition:
-    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .deck-card:hover {

@@ -39,7 +39,7 @@ export const resourceCategories: ResourceCategory[] = [
       { name: "Dev.to", url: "https://dev.to", description: "Developer articles and discussion" },
       { name: "r/learnprogramming", url: "https://reddit.com/r/learnprogramming", description: "Beginner-friendly Reddit" },
       { name: "r/netsecstudents", url: "https://reddit.com/r/netsecstudents", description: "Security learning community" },
-      { name: "Discord — The Programmer's Hangout", url: "https://discord.gg/programming", description: "Active dev community" },
+      { name: "Discord: The Programmer's Hangout", url: "https://discord.gg/programming", description: "Active dev community" },
     ],
   },
 ];
@@ -47,5 +47,5 @@ export const resourceCategories: ResourceCategory[] = [
 export const currentlyConsuming = [
   { title: "PortSwigger Web Security Academy", type: "Course" },
   { title: "NeetCode 150 (Python track)", type: "Practice" },
-  { title: "Computer Networks — Tanenbaum", type: "Textbook" },
+  { title: "Computer Networks, Tanenbaum", type: "Textbook" },
 ];

@@ -1,6 +1,6 @@
-# Zachary Hutton Portfolio · Open Source
+# Zachary Hutton Portfolio ï¿½ Open Source
 
-Personal portfolio site — **Next.js 15**, typed content modules, case studies, and project showcases. Deployed on Vercel.
+Personal portfolio site ï¿½ **Next.js 15**, typed content modules, case studies, and project showcases. Deployed on Vercel.
 
 ## Tech stack
 
@@ -45,10 +45,10 @@ OPEN_SOURCE.md        # This file
 
 ## Deploy (Vercel)
 
-1. Import [github.com/zacharyahutton/portfolio](https://github.com/zacharyahutton/portfolio) — repo root is the Next.js app.
+1. Import [github.com/zacharyahutton/portfolio](https://github.com/zacharyahutton/portfolio) ï¿½ repo root is the Next.js app.
 2. Build command: `npm run build`. Framework preset: **Next.js**.
 3. No environment variables required for the static content site.
-4. Optional: add `public/resume.pdf` and `public/og-image.png`.
+4. Optional: add `public/Zach_Hutton_Resume.pdf` and `public/og-image.png`.
 
 ## License
 

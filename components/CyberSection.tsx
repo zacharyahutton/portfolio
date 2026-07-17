@@ -8,7 +8,7 @@ import TextType from "./ui/TextType";
 import { cybersecurity } from "@/content/cybersecurity";
 
 const terminalLines = [
-  { prompt: "$", text: "whoami", output: "zachary@utech-cs — security-aware engineer" },
+  { prompt: "$", text: "whoami", output: "zachary@utech-cs, security aware engineer" },
   { prompt: "$", text: "cat focus.txt", output: null },
   ...cybersecurity.learningFocus.map((item) => ({
     prompt: ">",
@@ -111,7 +111,7 @@ export default function CyberSection() {
                       {cybersecurity.tools.map((tool) => (
                         <div key={tool.name} className="text-xs">
                           <span className="text-[var(--terminal-green)]">{tool.name}</span>
-                          <span className="text-[var(--color-stone)]"> — {tool.description}</span>
+                          <span className="text-[var(--color-stone)]"> {tool.description}</span>
                         </div>
                       ))}
                     </div>

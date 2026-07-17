@@ -2,20 +2,20 @@ import type { Profile } from "./types";
 
 export const profile: Profile = {
   name: "Zachary Hutton",
-  headline: "CS student · full-stack & messaging bots · security-aware engineer",
-  tags: ["Computer Science", "Full-Stack Development", "Messaging Bots", "Cybersecurity", "UTech"],
+  headline: "Full stack web developer · messaging bots · security aware engineer",
+  tags: ["Computer Science", "Full Stack Development", "Messaging Bots", "Cybersecurity", "UTech"],
   oneLiner:
-    "BSc Computer Science student at UTech (GPA 3.7, Dean's List) seeking internships and co-ops. I build full-stack web apps and production Telegram bots — webhooks, conversation flows, and LLM integration — with strong fundamentals and clear communication.",
+    "Portmore based builder: production web platforms, APIs that stay up, and Telegram bots that actually reply. UTech CS (GPA 3.7), open to internships, co ops, and freelance that ships.",
   about: [
-    "Computer Science student at the University of Technology, Jamaica (GPA 3.7, Dean's List). I connect coursework in data structures, databases, and networking to projects I can run, test, and ship.",
-    "I build full-stack web applications and messaging bots — Telegram Bot API, FastAPI webhooks, async Python, and LLM chat with Groq/OpenAI. On personal time I ship open-source demos, work through OWASP and PortSwigger labs, and deepen fundamentals through deliberate practice.",
-    "Contract and freelance delivery taught me to scope work, communicate clearly, and ship reliable software. I'm eager to contribute on a team and grow under mentorship.",
+    "I'm a Computer Science student at the University of Technology, Jamaica. Dean's List, GPA 3.7. I treat coursework like raw material. Data structures, databases, networking: I don't leave them in lecture slides. They show up in the APIs I write and the bots I deploy.",
+    "Day to day I ship full stack web apps and messaging bots: Telegram Bot API, FastAPI webhooks, async Python, LLM chat with Groq and OpenAI. On personal time I keep open source demos alive, grind OWASP and PortSwigger labs, and tighten the habits that keep production code from embarrassing you.",
+    "Contract and freelance taught me the unglamorous skills: scope tightly, talk clearly, deliver on time. Whether you need a ministry site that survives Sunday traffic, an agency platform with real admin, or a bot that books appointments without ghosting users, I build for the handoff, not just the demo.",
   ],
   stats: [
     { value: "GPA 3.7", label: "UTech BSc CS" },
     { value: "Dean's List", label: "Academic honour" },
-    { value: "2029", label: "Expected graduation" },
-    { value: "Open", label: "Internships & co-ops" },
+    { value: "3+", label: "Live products" },
+    { value: "Open", label: "Internships & freelance" },
     { value: "Jamaica", label: "Kingston · remote OK" },
   ],
   contact: {

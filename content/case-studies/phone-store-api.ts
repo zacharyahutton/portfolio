@@ -2,7 +2,7 @@ import type { CaseStudy } from "../types";
 
 export const phoneStoreApiCaseStudy: CaseStudy = {
   overview:
-    "Express REST API modeling a phone retail catalog with carts, checkout, inventory reservation, and order webhooks backed by MongoDB.",
+    "Titan Phone Store, an Express REST API modeling a phone retail catalog with carts, checkout, inventory reservation, and order webhooks backed by MongoDB.",
   problem:
     "I needed a project that exercises **inventory concurrency**, **authenticated checkout**, and **outbound webhooks** similar to Stripe-style order notifications. The API had to demonstrate realistic e-commerce backend patterns without building a full storefront UI.",
   solution:

@@ -1,112 +1,130 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState, Suspense } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { Float, Sphere, Stars } from "@react-three/drei";
+import type { Mesh } from "three";
 
-const orbitSkills = [
-  { label: "React", angle: 0 },
-  { label: "FastAPI", angle: 60 },
-  { label: "MongoDB", angle: 120 },
-  { label: "TypeScript", angle: 180 },
-  { label: "Next.js", angle: 240 },
-  { label: "Python", angle: 300 },
-];
+type Ptr = { x: number; y: number };
 
-const codeLines = [
-  { prefix: "const", text: " stack = [", color: "text-[var(--color-electric-indigo)]" },
-  { prefix: "", text: '  "React", "FastAPI", "MongoDB"', color: "text-[var(--color-pearl)]" },
-  { prefix: "", text: "];", color: "text-[var(--color-pearl)]" },
-  { prefix: "async function", text: " ship(feature) {", color: "text-[var(--color-electric-indigo)]" },
-  { prefix: "", text: "  await test(feature);", color: "text-[var(--color-ash)]" },
-  { prefix: "", text: "  return deploy(feature);", color: "text-[var(--color-ash)]" },
-  { prefix: "}", text: "", color: "text-[var(--color-pearl)]" },
-];
+function IndigoOrb({ pointer }: { pointer: React.MutableRefObject<Ptr> }) {
+  const mesh = useRef<Mesh>(null);
+  const glow = useRef<Mesh>(null);
+
+  useFrame((_, delta) => {
+    if (!mesh.current || !glow.current) return;
+    mesh.current.rotation.y += delta * 0.35;
+    mesh.current.rotation.x += delta * 0.12;
+    const tx = pointer.current.x * 0.55;
+    const ty = pointer.current.y * 0.4;
+    mesh.current.position.x += (tx - mesh.current.position.x) * 0.06;
+    mesh.current.position.y += (ty - mesh.current.position.y) * 0.06;
+    glow.current.position.copy(mesh.current.position);
+  });
+
+  return (
+    <Float speed={1.4} rotationIntensity={0.35} floatIntensity={0.6}>
+      <Sphere ref={glow} args={[1.55, 32, 32]}>
+        <meshBasicMaterial color="#1500ff" transparent opacity={0.12} />
+      </Sphere>
+      <Sphere ref={mesh} args={[1.05, 64, 64]}>
+        <meshStandardMaterial
+          color="#1a0a8a"
+          emissive="#1500ff"
+          emissiveIntensity={0.55}
+          metalness={0.65}
+          roughness={0.25}
+        />
+      </Sphere>
+      <Sphere args={[1.12, 32, 32]}>
+        <meshBasicMaterial color="#5ee87a" wireframe transparent opacity={0.08} />
+      </Sphere>
+    </Float>
+  );
+}
+
+function Scene({ pointer }: { pointer: React.MutableRefObject<Ptr> }) {
+  return (
+    <>
+      <ambientLight intensity={0.35} />
+      <pointLight position={[4, 3, 4]} intensity={1.4} color="#1500ff" />
+      <pointLight position={[-3, -2, 2]} intensity={0.45} color="#5ee87a" />
+      <Stars radius={40} depth={30} count={900} factor={2.2} saturation={0} fade speed={0.4} />
+      <IndigoOrb pointer={pointer} />
+    </>
+  );
+}
+
+function FallbackVisual() {
+  return (
+    <div className="absolute inset-0 flex items-center justify-center">
+      <div
+        className="h-48 w-48 rounded-full opacity-80"
+        style={{
+          background:
+            "radial-gradient(circle at 35% 30%, rgba(21,0,255,0.55), rgba(21,0,255,0.12) 45%, transparent 70%)",
+          boxShadow: "0 0 80px rgba(21,0,255,0.35)",
+        }}
+      />
+    </div>
+  );
+}
 
 export default function HeroVisual() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const pointer = useRef<Ptr>({ x: 0, y: 0 });
+  const [reduced, setReduced] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  }, []);
 
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-
     const onMove = (e: MouseEvent) => {
       const rect = el.getBoundingClientRect();
-      const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
-      const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
-      setOffset({ x: x * 18, y: y * 14 });
+      pointer.current = {
+        x: ((e.clientX - rect.left) / Math.max(1, rect.width)) * 2 - 1,
+        y: -(((e.clientY - rect.top) / Math.max(1, rect.height)) * 2 - 1),
+      };
     };
-
     el.addEventListener("mousemove", onMove);
     return () => el.removeEventListener("mousemove", onMove);
   }, []);
 
+  if (!mounted || reduced) {
+    return (
+      <div ref={containerRef} className="relative h-[min(520px,70vh)] w-full">
+        <FallbackVisual />
+      </div>
+    );
+  }
+
   return (
-    <div ref={containerRef} className="relative flex h-[min(520px,70vh)] w-full items-center justify-center">
+    <div ref={containerRef} className="relative h-[min(520px,70vh)] w-full">
       <div
-        className="absolute inset-0 rounded-[var(--radius-cards)] opacity-80"
+        className="absolute inset-0 rounded-[var(--radius-cards)]"
         style={{
-          background: `
-            radial-gradient(ellipse 70% 60% at ${50 + offset.x}% ${45 + offset.y}%,
-              rgba(21, 0, 255, 0.22), transparent 65%),
-            radial-gradient(ellipse 50% 40% at ${30 - offset.x}% ${70 - offset.y}%,
-              rgba(94, 232, 122, 0.08), transparent 55%)
-          `,
+          background:
+            "radial-gradient(ellipse 60% 50% at 50% 45%, rgba(21,0,255,0.18), transparent 70%)",
         }}
       />
-
-      <motion.div
-        className="relative z-10 w-full max-w-md"
-        animate={{ x: offset.x * 0.5, y: offset.y * 0.5 }}
-        transition={{ type: "spring", stiffness: 120, damping: 20 }}
+      <Canvas
+        className="h-full w-full"
+        dpr={[1, 1.75]}
+        camera={{ position: [0, 0, 4.2], fov: 42 }}
+        gl={{ antialias: true, alpha: true }}
+        onCreated={({ gl }) => {
+          gl.setClearColor(0x000000, 0);
+        }}
       >
-        <div className="surface-card overflow-hidden border-[var(--color-slate)] bg-[var(--color-charcoal)]/90 p-5 shadow-2xl backdrop-blur-sm">
-          <div className="mb-4 flex items-center gap-2">
-            <span className="h-2.5 w-2.5 rounded-full bg-red-500/80" />
-            <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/80" />
-            <span className="h-2.5 w-2.5 rounded-full bg-green-500/80" />
-            <span className="ml-2 text-[10px] uppercase tracking-wider text-[var(--color-stone)]">
-              portfolio.tsx
-            </span>
-          </div>
-          <pre className="font-mono text-[11px] leading-relaxed sm:text-xs">
-            {codeLines.map((line, i) => (
-              <div key={i} className="flex gap-2">
-                <span className="w-4 shrink-0 text-right text-[var(--color-stone)]">{i + 1}</span>
-                <span>
-                  {line.prefix && (
-                    <span className="text-[var(--color-electric-indigo)]">{line.prefix} </span>
-                  )}
-                  <span className={line.color}>{line.text}</span>
-                </span>
-              </div>
-            ))}
-          </pre>
-        </div>
-      </motion.div>
-
-      <motion.div
-        className="pointer-events-none absolute inset-0"
-        animate={{ rotate: offset.x * 0.3 }}
-        transition={{ type: "spring", stiffness: 80, damping: 18 }}
-      >
-        {orbitSkills.map((skill) => {
-          const rad = (skill.angle * Math.PI) / 180;
-          const radius = 140;
-          const x = Math.cos(rad) * radius;
-          const y = Math.sin(rad) * radius;
-
-          return (
-            <span
-              key={skill.label}
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[var(--color-slate)] bg-[var(--color-graphite)]/90 px-3 py-1.5 text-[10px] font-medium text-[var(--color-pearl)] backdrop-blur-sm sm:text-xs"
-              style={{ transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))` }}
-            >
-              {skill.label}
-            </span>
-          );
-        })}
-      </motion.div>
+        <Suspense fallback={null}>
+          <Scene pointer={pointer} />
+        </Suspense>
+      </Canvas>
     </div>
   );
 }

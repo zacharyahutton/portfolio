@@ -48,7 +48,7 @@ export default function BentoProjects() {
                 delay={90}
               />
               <p className="mt-4 max-w-lg text-[var(--color-pearl)]">
-                Contract delivery, coursework labs, and personal experiments — technical depth over volume.
+                Contract delivery, coursework labs, and personal experiments: technical depth over volume.
               </p>
             </div>
 

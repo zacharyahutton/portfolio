@@ -95,16 +95,7 @@ def draw_background(draw: ImageDraw.ImageDraw) -> None:
         draw.line([(0, y), (W, y)], fill=col)
 
 
-def draw_grid(draw: ImageDraw.ImageDraw, accent: AccentPalette, step: int = 56) -> None:
-    r, g, b = accent.soft
-    alpha = 18
-    for x in range(0, W, step):
-        draw.line([(x, 0), (x, H)], fill=(r, g, b, alpha))
-    for y in range(0, H, step):
-        draw.line([(0, y), (W, y)], fill=(r, g, b, alpha))
-
-
-def add_noise(img: Image.Image, strength: int = 10) -> Image.Image:
+def add_noise(img: Image.Image, strength: int = 8) -> Image.Image:
     rng = random.Random(42)
     noise = Image.new("RGBA", (W, H))
     px = noise.load()
@@ -123,12 +114,12 @@ def draw_glow_circle(
     cy: int,
     radius: int,
     color: tuple[int, int, int],
-    layers: int = 6,
+    layers: int = 4,
 ) -> None:
     for i in range(layers, 0, -1):
         t = i / layers
         r = int(radius * (0.55 + 0.45 * t))
-        alpha = int(14 + 22 * t)
+        alpha = int(8 + 12 * t)
         draw.ellipse(
             [cx - r, cy - r, cx + r, cy + r],
             fill=(*color, alpha),
@@ -140,15 +131,15 @@ def draw_mark_plate(
     cx: int,
     cy: int,
     accent: AccentPalette,
-    size: int = 200,
+    size: int = 240,
 ) -> None:
     half = size // 2
-    draw_glow_circle(draw, cx, cy, size, accent.glow, layers=8)
+    draw_glow_circle(draw, cx, cy, int(size * 0.72), accent.glow, layers=4)
     draw.rounded_rectangle(
         [cx - half, cy - half, cx + half, cy + half],
-        radius=36,
-        fill=(*GRAPHITE, 220),
-        outline=(*accent.soft, 140),
+        radius=40,
+        fill=(*GRAPHITE, 235),
+        outline=(*accent.soft, 100),
         width=2,
     )
 
@@ -159,15 +150,15 @@ def draw_footer(
     subtitle: str,
     accent: AccentPalette,
 ) -> None:
-    title_font = font(28, bold=True)
-    sub_font = font(15)
+    title_font = font(26, bold=True)
+    sub_font = font(14)
     tw = draw.textlength(title, font=title_font)
-    draw.text(((W - tw) / 2, H - 108), title, fill=PEARL, font=title_font)
+    draw.text(((W - tw) / 2, H - 100), title, fill=PEARL, font=title_font)
     sw = draw.textlength(subtitle, font=sub_font)
-    draw.text(((W - sw) / 2, H - 72), subtitle, fill=ASH, font=sub_font)
+    draw.text(((W - sw) / 2, H - 66), subtitle, fill=ASH, font=sub_font)
     draw.rounded_rectangle(
-        [W // 2 - 28, H - 38, W // 2 + 28, H - 30],
-        radius=4,
+        [W // 2 - 22, H - 36, W // 2 + 22, H - 30],
+        radius=3,
         fill=accent.primary,
     )
 
@@ -321,8 +312,8 @@ def render_cover(
     img = Image.new("RGBA", (W, H), OBSIDIAN)
     draw = ImageDraw.Draw(img, "RGBA")
     draw_background(draw)
-    draw_grid(draw, accent)
-    cx, cy = W // 2, H // 2 - 30
+    # No grid overlay — clean premium mark on dark field
+    cx, cy = W // 2, H // 2 - 36
     draw_mark(draw, cx, cy, accent)
     draw_footer(draw, title, subtitle, accent)
     out = add_noise(img)

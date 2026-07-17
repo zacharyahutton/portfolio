@@ -17,7 +17,7 @@ export default function ResourcesHub() {
             delay={90}
           />
           <p className="mt-4 max-w-lg text-[var(--color-pearl)]">
-            Docs, courses, tools, and communities I actually use — curated, not blogged.
+            Docs, courses, tools, and communities I actually use: curated, not blogged.
           </p>
         </SectionReveal>
 

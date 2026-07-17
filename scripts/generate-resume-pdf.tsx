@@ -1,15 +1,23 @@
-import React from "react";
-import { renderToFile } from "@react-pdf/renderer";
+import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import ResumePdfDocument from "../components/ResumePdfDocument";
 
+/**
+ * Curated resume lives at public/Zach_Hutton_Resume.pdf (copied from Downloads).
+ * Build must not overwrite it with a generated React-PDF stub.
+ */
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const outputPath = path.join(__dirname, "../public/resume.pdf");
+const canonicalPath = path.join(__dirname, "../public/Zach_Hutton_Resume.pdf");
 
 async function main() {
-  await renderToFile(React.createElement(ResumePdfDocument), outputPath);
-  console.log(`Wrote ${outputPath}`);
+  if (!fs.existsSync(canonicalPath)) {
+    console.error(
+      `Missing curated resume at ${canonicalPath}. Copy Zach_Hutton_Resume.pdf into public/ before building.`,
+    );
+    process.exit(1);
+  }
+  const { size } = fs.statSync(canonicalPath);
+  console.log(`Using curated resume ${canonicalPath} (${size} bytes)`);
 }
 
 main().catch((error) => {

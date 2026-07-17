@@ -1,363 +1,193 @@
 "use client";
 
-
-
-import { useState } from "react";
-
 import Link from "next/link";
-
-import { ArrowRight, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
-
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import ProjectCoverImage from "@/components/ui/ProjectCoverImage";
-
-import { AnimatePresence, motion } from "framer-motion";
-
 import SectionReveal from "./SectionReveal";
-
-import BlurText from "./ui/BlurText";
-
-import { spotlightItems } from "@/content/spotlight";
-
 import { cn } from "@/lib/utils";
 
+type WorkItem = {
+  id: string;
+  title: string;
+  category: string;
+  year: string;
+  description: string;
+  stack: string[];
+  image?: string;
+  imageFit?: "cover" | "contain";
+  href: string;
+  external?: boolean;
+  live?: string;
+  size: "large" | "small";
+};
 
+const workItems: WorkItem[] = [
+  {
+    id: "weroi",
+    title: "weROI Agency Platform",
+    category: "Full stack platform",
+    year: "2024 to 25",
+    description:
+      "React SPA + FastAPI + MongoDB Atlas. Lead funnels, JWT admin dashboard, Resend automation, split Vercel/Railway deploys.",
+    stack: ["React", "FastAPI", "MongoDB"],
+    image: "/case-studies/weroi.png",
+    href: "/projects/weroi",
+    live: "https://weroi.net",
+    size: "large",
+  },
+  {
+    id: "pntcog",
+    title: "PNTCOG Ministry Platform",
+    category: "Client delivery",
+    year: "2025",
+    description:
+      "Multi-section ministry site: events, giving, prayer requests, media, Jubilee hub. Live for a real congregation.",
+    stack: ["React", "React Router", "Vercel"],
+    image: "/case-studies/pntcog.png",
+    imageFit: "contain",
+    href: "/projects/pntcog",
+    live: "https://portmorentcog.org",
+    size: "large",
+  },
+  {
+    id: "tendem",
+    title: "Tendem Demo Bot",
+    category: "Bots & automation",
+    year: "2025",
+    description:
+      "Live Telegram bot: multi step booking, support tickets, LLM chat with FAQ fallbacks, webhooks on Railway.",
+    stack: ["Python", "FastAPI", "Telegram"],
+    image: "/case-studies/tendem-demo-bot-cover.png",
+    href: "/projects/tendem-demo-bot",
+    size: "small",
+  },
+  {
+    id: "titan",
+    title: "Titan Phone Store",
+    category: "E-commerce API",
+    year: "2025",
+    description:
+      "Phone retail backend: JWT auth with refresh tokens, atomic inventory reservation, HMAC order webhooks.",
+    stack: ["TypeScript", "Express", "MongoDB"],
+    image: "/case-studies/phone-store-cover.png",
+    href: "/projects/phone-store-api",
+    size: "small",
+  },
+  {
+    id: "webhook-relay",
+    title: "Webhook Relay API",
+    category: "Developer tooling",
+    year: "2025",
+    description:
+      "Webhook sandbox with API keys, HMAC signing, exponential backoff retries, and token-bucket rate limiting.",
+    stack: ["Python", "FastAPI", "Redis"],
+    image: "/case-studies/webhook-relay-cover.png",
+    href: "/projects/webhook-relay-api",
+    size: "small",
+  },
+];
 
-export default function Spotlight() {
-
-  const [active, setActive] = useState(0);
-
-  const item = spotlightItems[active];
-
-
-
-  const go = (dir: -1 | 1) => {
-
-    setActive((prev) => (prev + dir + spotlightItems.length) % spotlightItems.length);
-
-  };
-
-
-
+function WorkCard({ item, index }: { item: WorkItem; index: number }) {
   return (
-
-    <section id="highlights" className="page-section px-6">
-
-      <div className="mx-auto max-w-[var(--page-max-width)] text-center">
-
-        <SectionReveal>
-
-          <span className="section-kicker">Spotlight</span>
-
-          <BlurText
-
-            text="The highlights"
-
-            className="mt-3 text-4xl font-medium tracking-[-0.02em] text-[var(--color-paper)] sm:text-5xl"
-
-            delay={80}
-
-          />
-
-        </SectionReveal>
-
-
-
-        <SectionReveal delay={0.1}>
-
-          <div className="relative mt-12 overflow-hidden rounded-[var(--radius-cards)] border border-[var(--color-slate)] bg-[var(--color-charcoal)] text-left">
-
-            <AnimatePresence mode="wait">
-
-              <motion.div
-
-                key={item.id}
-
-                initial={{ opacity: 0, x: 24 }}
-
-                animate={{ opacity: 1, x: 0 }}
-
-                exit={{ opacity: 0, x: -24 }}
-
-                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-
-                className="grid lg:grid-cols-2"
-
-              >
-
-                <div className={cn("relative min-h-[240px] lg:min-h-[360px]", item.id === "spotlight-pntcog" ? "bg-black" : "bg-[var(--color-graphite)]")}>
-
-                  {item.image ? (
-
-                    <ProjectCoverImage
-                      src={item.image}
-                      alt={item.title}
-                      className={cn(
-                        item.id === "spotlight-pntcog"
-                          ? "object-contain p-6"
-                          : "object-cover object-top",
-                      )}
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                      priority={active === 0}
-                    />
-
-                  ) : (
-
-                    <div
-
-                      className="absolute inset-0"
-
-                      style={{
-
-                        background: `linear-gradient(135deg, ${item.accent}33, var(--color-graphite))`,
-
-                      }}
-
-                    />
-
-                  )}
-
-                </div>
-
-
-
-                <div className="flex flex-col justify-center p-8 lg:p-10">
-
-                  <div className="flex flex-wrap gap-2">
-
-                    {item.stack.map((tag) => (
-
-                      <span
-
-                        key={tag}
-
-                        className="rounded-full border border-[var(--color-slate)] px-3 py-1 text-[11px] text-[var(--color-ash)]"
-
-                      >
-
-                        {tag}
-
-                      </span>
-
-                    ))}
-
-                  </div>
-
-                  <h3 className="mt-5 text-2xl font-medium text-[var(--color-paper)] sm:text-3xl">
-
-                    {item.title}
-
-                  </h3>
-
-                  <p className="mt-4 text-sm leading-relaxed text-[var(--color-pearl)] sm:text-base">
-
-                    {item.description}
-
-                  </p>
-
-                  <div className="mt-8 flex flex-wrap items-center gap-4">
-
-                    {item.caseStudyHref && (
-
-                      <Link href={item.caseStudyHref} className="btn-primary text-sm">
-
-                        <ArrowRight size={15} />
-
-                        Case study
-
-                      </Link>
-
-                    )}
-
-                    {item.href && (
-
-                      <a
-
-                        href={item.href}
-
-                        target="_blank"
-
-                        rel="noopener noreferrer"
-
-                        className="btn-ghost text-sm"
-
-                      >
-
-                        <ExternalLink size={15} />
-
-                        {item.linkLabel ?? "Live site"}
-
-                      </a>
-
-                    )}
-
-                    {item.github && (
-
-                      <a
-
-                        href={item.github}
-
-                        target="_blank"
-
-                        rel="noopener noreferrer"
-
-                        className="btn-ghost text-sm"
-
-                      >
-
-                        GitHub
-
-                      </a>
-
-                    )}
-
-                  </div>
-
-                </div>
-
-              </motion.div>
-
-            </AnimatePresence>
-
-
-
-            <div className="absolute right-4 top-4 flex gap-2 lg:right-6 lg:top-6">
-
-              <button
-
-                type="button"
-
-                onClick={() => go(-1)}
-
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-slate)] bg-[var(--color-obsidian)]/80 text-[var(--color-pearl)] backdrop-blur-sm transition hover:border-[var(--color-paper)]"
-
-                aria-label="Previous highlight"
-
-              >
-
-                <ChevronLeft size={18} />
-
-              </button>
-
-              <button
-
-                type="button"
-
-                onClick={() => go(1)}
-
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-slate)] bg-[var(--color-obsidian)]/80 text-[var(--color-pearl)] backdrop-blur-sm transition hover:border-[var(--color-paper)]"
-
-                aria-label="Next highlight"
-
-              >
-
-                <ChevronRight size={18} />
-
-              </button>
-
+    <SectionReveal delay={index * 0.06} className="h-full">
+      <Link
+        href={item.href}
+        className="group flex h-full flex-col border border-[var(--color-slate)] bg-[var(--color-charcoal)] transition-colors hover:border-[var(--color-electric-indigo)]/60"
+      >
+        {/* Preview */}
+        <div
+          className={cn(
+            "relative w-full overflow-hidden",
+            item.size === "large" ? "aspect-[16/9]" : "aspect-[16/10]",
+            item.imageFit === "contain" ? "bg-black" : "bg-[var(--color-graphite)]",
+          )}
+        >
+          {item.image ? (
+            <div className="absolute inset-0 transition-transform duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-[1.04]">
+              <ProjectCoverImage
+                src={item.image}
+                alt={item.title}
+                className={cn(
+                  item.imageFit === "contain" ? "object-contain p-6" : "object-cover object-top",
+                )}
+                sizes={item.size === "large" ? "(max-width: 1024px) 100vw, 50vw" : "(max-width: 1024px) 100vw, 33vw"}
+                priority={index === 0}
+              />
             </div>
-
-
-
-            <div className="flex justify-center gap-2 border-t border-[var(--color-slate)] px-6 py-4">
-
-              {spotlightItems.map((s, i) => (
-
-                <button
-
-                  key={s.id}
-
-                  type="button"
-
-                  onClick={() => setActive(i)}
-
-                  className={cn(
-
-                    "h-2 rounded-full transition-all",
-
-                    i === active ? "w-6 bg-[var(--color-electric-indigo)]" : "w-2 bg-[var(--color-slate)]",
-
-                  )}
-
-                  aria-label={`Go to ${s.title}`}
-
-                />
-
-              ))}
-
-            </div>
-
-          </div>
-
-        </SectionReveal>
-
-
-
-        <div className="mt-6 grid grid-cols-3 gap-3">
-
-          {spotlightItems.map((s, i) => (
-
-            <button
-
-              key={s.id}
-
-              type="button"
-
-              onClick={() => setActive(i)}
-
-              className={cn(
-
-                "flex min-h-[52px] items-center gap-3 rounded-[var(--radius-cards)] border p-3 text-left transition sm:p-4",
-
-                i === active
-
-                  ? "border-[var(--color-electric-indigo)] bg-[var(--color-graphite)]"
-
-                  : "border-[var(--color-slate)] bg-transparent hover:border-[var(--color-pearl)]",
-
-              )}
-
-            >
-
-              <span
-
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-xs font-bold text-white"
-
-                style={{ backgroundColor: s.accent }}
-
-              >
-
-                {s.tabIcon}
-
-              </span>
-
-              <span className="hidden text-sm font-medium text-[var(--color-paper)] sm:block">{s.title}</span>
-
-            </button>
-
-          ))}
-
+          ) : (
+            <div className="absolute inset-0 bg-[var(--color-graphite)]" />
+          )}
+          {/* hover veil + view label */}
+          <div className="pointer-events-none absolute inset-0 bg-[var(--color-obsidian)]/0 transition-colors duration-300 group-hover:bg-[var(--color-obsidian)]/35" />
+          <span className="pointer-events-none absolute right-4 top-4 flex h-10 w-10 translate-y-2 items-center justify-center rounded-full bg-[var(--color-electric-indigo)] text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+            <ArrowUpRight size={16} />
+          </span>
         </div>
 
-
-
-        <SectionReveal delay={0.15}>
-
-          <Link href="/projects" className="btn-primary mt-10 inline-flex min-h-[44px] gap-2">
-
-            View all projects
-
-            <ArrowRight size={16} />
-
-          </Link>
-
-        </SectionReveal>
-
-      </div>
-
-    </section>
-
+        {/* Meta */}
+        <div className="flex flex-1 flex-col gap-2 p-5">
+          <div className="flex items-baseline justify-between gap-3">
+            <span className="mono-label">{item.category}</span>
+            <span className="mono-label text-[var(--color-stone)]">{item.year}</span>
+          </div>
+          <h3 className="text-lg font-medium leading-snug text-[var(--color-paper)] transition-colors group-hover:text-[var(--color-electric-indigo)] sm:text-xl">
+            {item.title}
+          </h3>
+          <p className="text-sm leading-relaxed text-[var(--color-pearl)]">{item.description}</p>
+          <div className="mt-auto flex flex-wrap gap-x-3 gap-y-1 pt-2">
+            {item.stack.map((tag) => (
+              <span key={tag} className="mono-label text-[var(--color-stone)]">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </Link>
+    </SectionReveal>
   );
-
 }
 
+export default function Spotlight() {
+  const large = workItems.filter((w) => w.size === "large");
+  const small = workItems.filter((w) => w.size === "small");
 
+  return (
+    <section id="highlights" className="page-section px-6">
+      <div className="mx-auto max-w-[var(--page-max-width)]">
+        <SectionReveal>
+          <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+            <div>
+              <h2 className="font-condensed text-[clamp(2.5rem,6vw,4.5rem)] uppercase leading-[0.9] tracking-tight text-[var(--color-paper)]">
+                Selected work
+              </h2>
+            </div>
+            <p className="max-w-sm text-sm text-[var(--color-pearl)] sm:text-right">
+              Production platforms, client sites, bots, and APIs, each with a full case study.
+            </p>
+          </div>
+        </SectionReveal>
+
+        <div className="mt-12 grid gap-5 lg:grid-cols-2">
+          {large.map((item, i) => (
+            <WorkCard key={item.id} item={item} index={i} />
+          ))}
+        </div>
+
+        <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {small.map((item, i) => (
+            <WorkCard key={item.id} item={item} index={i + 2} />
+          ))}
+        </div>
+
+        <SectionReveal delay={0.15}>
+          <div className="mt-12 text-center">
+            <Link href="/projects" className="btn-primary inline-flex min-h-[44px] gap-2">
+              View all projects
+              <ArrowRight size={16} />
+            </Link>
+          </div>
+        </SectionReveal>
+      </div>
+    </section>
+  );
+}

@@ -85,13 +85,13 @@ export default function ResumeContent() {
         <div className="mt-3 space-y-4 text-[0.88rem] leading-relaxed">
           <div>
             <p className="font-semibold">
-              Telegram Demo Bot ? Telegram{" "}
+              Tendem Demo Bot, Telegram{" "}
               <span className="font-normal text-[0.82rem] text-[#555]">(t.me/zachtedem_bot)</span>
             </p>
             <p className="mt-1">
-              Built a <strong>live Telegram bot</strong> with multi-step booking, support tickets,{" "}
+              Built a <strong>live Telegram bot</strong> with multi step booking, support tickets,{" "}
               <strong>30+ FAQ</strong> topics, and <strong>Groq/OpenAI</strong> chat with{" "}
-              <strong>SQLite</strong> memory. Implemented <strong>FastAPI</strong> webhooks, secret-token
+              <strong>SQLite</strong> memory. Implemented <strong>FastAPI</strong> webhooks, secret token
               validation, per-user <strong>rate limiting</strong>, and FAQ fallbacks when models fail.
             </p>
             <p className="mt-1">
@@ -108,7 +108,7 @@ export default function ResumeContent() {
             <p className="mt-1">
               Architected a multi-section <strong>React</strong> ministry website with events, giving, prayer requests,
               media, and a Jubilee anniversary hub. Structured modular page components for team-friendly content updates
-              and <strong>mobile-first</strong> navigation.
+              and <strong>mobile first</strong> navigation.
             </p>
             <p className="mt-1">
               Implemented <strong>responsive layouts</strong> across content-heavy pages with performance-focused
@@ -122,12 +122,12 @@ export default function ResumeContent() {
               weROI Agency Platform <span className="font-normal text-[0.82rem] text-[#555]">(weroi.net)</span>
             </p>
             <p className="mt-1">
-              Engineered a full-stack agency platform: <strong>React</strong> / <strong>TypeScript</strong> SPA frontend,{" "}
+              Engineered a full stack agency platform: <strong>React</strong> / <strong>TypeScript</strong> SPA frontend,{" "}
               <strong>FastAPI</strong>/<strong>Python</strong> backend, and <strong>MongoDB Atlas</strong>{" "}
               persistence. Designed document models for leads, audits, and admin users.
             </p>
             <p className="mt-1">
-              Integrated lead-capture funnels, multi-step audit forms, and an <strong>admin dashboard</strong> with{" "}
+              Integrated lead-capture funnels, multi step audit forms, and an <strong>admin dashboard</strong> with{" "}
               <strong>JWT</strong> authentication. Built <strong>RESTful APIs</strong> for lead management,
               shipped <strong>GrowthIQ</strong> LLM chat with FAQ fallbacks, and connected <strong>Resend</strong>{" "}
               for transactional email.
@@ -143,7 +143,7 @@ export default function ResumeContent() {
               Webhook Relay API <span className="font-normal text-[0.82rem] text-[#555]">(Personal)</span>
             </p>
             <p className="mt-1">
-              Built a developer sandbox API with API-key auth, HMAC-signed <strong>webhook</strong> delivery, retry
+              Built a developer sandbox API with API-key auth, HMAC signed <strong>webhook</strong> delivery, retry
               backoff, and per-key <strong>rate limiting</strong> for testing outbound integrations.
             </p>
           </div>
@@ -154,7 +154,7 @@ export default function ResumeContent() {
             </p>
             <p className="mt-1">
               RESTful <strong>Node.js</strong>/<strong>Express</strong> API with <strong>JWT</strong> auth,{" "}
-              <strong>MongoDB</strong> catalog, stock reservation, and <strong>HMAC-signed order webhooks</strong>{" "}
+              <strong>MongoDB</strong> catalog, stock reservation, and <strong>HMAC signed order webhooks</strong>{" "}
               for async checkout updates.
             </p>
           </div>
@@ -188,7 +188,7 @@ export default function ResumeContent() {
               Backend integrations, <strong>REST APIs</strong>, <strong>webhooks</strong>, and automation alongside
               responsive <strong>React</strong>/<strong>TypeScript</strong> sites. Built <strong>Telegram bots</strong>{" "}
               with conversation flows, <strong>LLM</strong> chat, and <strong>Railway</strong> deployment. ~3 years
-              combined contract and freelance delivery (2023?present).
+              combined contract and freelance delivery (2023 to present).
             </p>
           </div>
         </div>
@@ -229,7 +229,7 @@ export default function ResumeContent() {
           </p>
           <p>
             <span className="font-semibold">Messaging &amp; bots;</span> <strong>Telegram Bot API</strong>;{" "}
-            <strong>python-telegram-bot</strong>; multi-step <strong>conversation flows</strong>;{" "}
+            <strong>python-telegram-bot</strong>; multi step <strong>conversation flows</strong>;{" "}
             <strong>webhook</strong> delivery and verification; <strong>LLM integration</strong> (Groq/OpenAI);{" "}
             <strong>aiosqlite</strong>; per-user <strong>rate limiting</strong>
           </p>

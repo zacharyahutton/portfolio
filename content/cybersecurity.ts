@@ -1,6 +1,6 @@
 export const cybersecurity = {
   narrative:
-    "Security isn't a separate hobby — it's how I think about every layer I touch. From validating inputs on an API to understanding how packets move across a network, I build with the assumption that someone will try to break it.",
+    "Security isn't a separate hobby , it's how I think about every layer I touch. From validating inputs on an API to understanding how packets move across a network, I build with the assumption that someone will try to break it.",
   learningFocus: [
     "Secure SDLC and threat modeling basics",
     "Web application security (OWASP Top 10)",
@@ -18,7 +18,7 @@ export const cybersecurity = {
   projects: [
     {
       title: "Secure Auth Starter",
-      description: "JWT, bcrypt, rate limiting, and OWASP-aligned session handling patterns.",
+      description: "JWT, bcrypt, rate limiting, and OWASP aligned session handling patterns.",
       href: "https://github.com/zacharyahutton",
     },
     {

@@ -122,11 +122,11 @@ export const personalProjects: Project[] = [
   {
     id: "phone-store-api",
     slug: "phone-store-api",
-    title: "Phone Store REST API",
+    title: "Titan Phone Store API",
     type: "personal",
     problem: "Practice e-commerce API patterns with inventory, cart, and checkout flows.",
     description:
-      "RESTful API with JWT auth, MongoDB product catalog, stock reservation middleware, and webhook handlers for order status updates.",
+      "E-commerce backend for the Titan phone store: JWT auth, MongoDB product catalog, stock reservation middleware, and webhook handlers for order status updates.",
     stack: [
       "TypeScript",
       "Node.js",

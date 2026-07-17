@@ -33,7 +33,7 @@ export default function ProjectGrid() {
           <span className="text-sm font-medium uppercase tracking-widest text-teal-400">Projects</span>
           <h2 className="mt-3 font-serif text-3xl text-white sm:text-4xl">Work across every lane</h2>
           <p className="mt-4 max-w-2xl text-zinc-400">
-            Personal experiments, UTech coursework, and client delivery via weROI — filter by type.
+            Personal experiments, UTech coursework, and client delivery via weROI. Filter by type.
           </p>
         </SectionReveal>
 

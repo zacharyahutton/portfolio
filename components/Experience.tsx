@@ -10,7 +10,7 @@ export default function Experience() {
           <span className="section-kicker">Experience</span>
           <BlurText
             text="Where I've built"
-            className="mt-4 text-4xl font-medium tracking-[-0.02em] text-[var(--color-paper)] sm:text-5xl"
+            className="font-display mt-4 text-4xl font-semibold tracking-[-0.02em] text-[var(--color-paper)] sm:text-5xl"
             delay={90}
           />
         </SectionReveal>

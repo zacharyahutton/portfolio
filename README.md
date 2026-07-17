@@ -68,7 +68,7 @@ npm run start    # serve production build
 1. Import [github.com/zacharyahutton/portfolio](https://github.com/zacharyahutton/portfolio) — **repo root is this app** (no monorepo subdirectory).
 2. Framework preset: **Next.js**. Build command: `npm run build`. Output: default.
 3. **Environment variables:** none required (static content site).
-4. Resume: `public/resume.html` is live (print to PDF from the browser if needed). Optional: add `public/resume.pdf` for a direct download.
+4. Resume: place the curated file at `public/Zach_Hutton_Resume.pdf` (site CTAs use `/Zach_Hutton_Resume.pdf`).
 5. Optional: add `public/og-image.png` for social previews.
 
 See [OPEN_SOURCE.md](./OPEN_SOURCE.md) for architecture notes.
