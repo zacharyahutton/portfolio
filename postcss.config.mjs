@@ -1,7 +1,6 @@
+/** Revox mirror pages ship their own CSS; app shell uses plain globals.css only. */
 const config = {
-  plugins: {
-    "@tailwindcss/postcss": {},
-  },
+  plugins: {},
 };
 
 export default config;
