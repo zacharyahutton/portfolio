@@ -4,42 +4,24 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "npm run generate:resume-pdf && next build --turbopack",
-    "generate:resume-pdf": "tsx scripts/generate-resume-pdf.tsx",
-    "generate:cover-letter-pdf": "tsx scripts/generate-cover-letter-pdf.ts",
-    "generate:mindrift-pdfs": "npm run generate:resume-pdf && npm run generate:cover-letter-pdf",
+    "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "mirror:revox": "node scripts/_mirror-revox.js",
+    "mirror:rewrite": "node scripts/_rewrite-mirror-urls.js"
   },
   "dependencies": {
-    "@gsap/react": "^2.1.2",
-    "@paper-design/shaders-react": "^0.0.77",
-    "@react-pdf/renderer": "^4.5.1",
-    "@react-three/drei": "^10.7.7",
-    "@react-three/fiber": "^9.4.2",
-    "framer-motion": "^12.42.0",
-    "gsap": "^3.15.0",
-    "lucide-react": "^1.21.0",
     "next": "15.5.19",
-    "next-themes": "^0.4.6",
-    "ogl": "^1.0.11",
     "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "react-icons": "^5.7.0",
-    "three": "^0.181.2"
+    "react-dom": "19.1.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@types/three": "^0.181.0",
     "eslint": "^9",
     "eslint-config-next": "15.5.19",
-    "playwright": "^1.61.1",
-    "tailwindcss": "^4",
-    "tsx": "^4.22.4",
     "typescript": "^5"
   }
 }

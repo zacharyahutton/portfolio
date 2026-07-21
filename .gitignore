@@ -43,3 +43,12 @@ next-env.d.ts
 # Local-only application/marketing assets (sibling folder, never pushed):
 # C:\Users\EverybodyHatesA1one\Documents\_private-career\
 ../_private-career/
+
+# Local theme research (do not commit)
+.tmp-themes/
+
+# Local full-site backup of pre-Revox React site (large; keep on disk only)
+/backup/
+
+# Revox personalized mirror IS the published site — commit public/revox-mirror/
+

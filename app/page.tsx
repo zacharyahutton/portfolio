@@ -1,37 +1,15 @@
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import SkillsMarquee from "@/components/SkillsMarquee";
-import Services from "@/components/Services";
-import LaptopScroll from "@/components/LaptopScroll";
-import DevParallax from "@/components/DevParallax";
-import AboutNarrative from "@/components/AboutNarrative";
-import About from "@/components/About";
-import SkillsToolkit from "@/components/SkillsToolkit";
-import Achievements from "@/components/Achievements";
-import Blog from "@/components/Blog";
-import HireCTA from "@/components/HireCTA";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
-
+/** Fallback only — `/` is rewritten to the mirrored Revox theme via next.config. */
 export default function Home() {
   return (
-    <div>
-      <Navbar />
-      <main>
-        <Hero />
-        <SkillsMarquee />
-        <Services />
-        <LaptopScroll />
-        <DevParallax />
-        <AboutNarrative />
-        <About />
-        <SkillsToolkit />
-        <Achievements />
-        <Blog />
-        <HireCTA />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+    <main style={{ fontFamily: "system-ui", padding: 48, background: "#060606", color: "#fff" }}>
+      <h1>Zachary Hutton</h1>
+      <p>
+        If you see this, the Revox rewrite missed. Open{" "}
+        <a href="/revox-mirror/revox.baseecom.com/index.html" style={{ color: "#BFF747" }}>
+          /revox-mirror/revox.baseecom.com/index.html
+        </a>
+        .
+      </p>
+    </main>
   );
 }
