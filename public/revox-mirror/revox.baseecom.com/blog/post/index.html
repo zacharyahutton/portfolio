@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zachary Hutton Blog</title>
+  <meta name="description" content="Technical writing by Zachary Hutton on frontend engineering, performance, APIs, security, product thinking, and client work.">
+  <meta name="keywords" content="Zachary Hutton blog, web development, frontend engineering, software architecture">
+  <meta name="robots" content="max-image-preview:large">
+  <link rel="canonical" href="https://zachary-hutton-portfolio.vercel.app/blog/css-grid/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Zachary Hutton Blog">
+  <meta property="og:description" content="Technical writing by Zachary Hutton.">
+  <meta property="og:url" content="https://zachary-hutton-portfolio.vercel.app/blog/css-grid/">
+  <meta property="og:image" content="https://zachary-hutton-portfolio.vercel.app/revox-mirror/revox.baseecom.com/wp-content/uploads/zach/blog/blog-css-grid.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Zachary Hutton Blog">
+  <meta name="twitter:description" content="Technical writing by Zachary Hutton.">
+  <meta name="twitter:image" content="https://zachary-hutton-portfolio.vercel.app/revox-mirror/revox.baseecom.com/wp-content/uploads/zach/blog/blog-css-grid.png">
+  <link rel="stylesheet" href="../../wp-content/themes/revox/assets/css/bootstrap.min_ver%3D1784317577.css" media="all">
+  <link rel="stylesheet" href="../../wp-content/themes/revox/assets/css/all.min_ver%3D1784317577.css" media="all">
+  <link rel="stylesheet" href="../../wp-content/themes/revox/assets/css/main_ver%3D1784317577.css" media="all">
+  <link rel="stylesheet" href="../../wp-content/themes/revox/assets/css/revox-blog_ver%3D1784317577.css" media="all">
+  <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/big-shoulders-display?ver=1.0.0" media="screen">
+  <style>
+    :root{--body:#060606;--black:#000;--white:#fff;--theme:#BFF747;--text:#888;--bg:#1A1A1A}
+    *{box-sizing:border-box}
+    body{margin:0;background:#060606;color:#fff;font-family:Kanit,Arial,sans-serif}
+    p{color:#b8b8b8}
+    a{text-decoration:none}
+    .zh-header{position:sticky;top:0;z-index:1000;background:rgba(6,6,6,.88);backdrop-filter:blur(14px);border-bottom:1px solid rgba(191,247,71,.14)}
+    .zh-header-inner{max-width:1240px;margin:0 auto;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .zh-header nav{display:flex;flex-wrap:wrap;gap:18px}
+    .zh-header nav a{color:#fff;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+    .zh-header nav a:hover,.zh-accent{color:#BFF747}
+    .zh-logo img{height:34px;width:auto}
+    .zh-shell{max-width:1240px;margin:0 auto;padding:32px 20px 80px}
+    .zh-breadcrumb{margin:16px 0 32px;color:#888;font-size:14px}
+    .zh-breadcrumb a{color:#BFF747}
+    .zh-hero{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);gap:32px;align-items:start}
+    .zh-hero-card,.zh-side-card,.zh-article-card,.zh-cta-card{background:rgba(255,255,255,.02);border:1px solid rgba(191,247,71,.14);border-radius:22px}
+    .zh-hero-card{overflow:hidden}
+    .zh-hero-copy{padding:28px}
+    .zh-category{display:inline-flex;padding:8px 14px;border-radius:999px;border:1px solid rgba(191,247,71,.3);color:#BFF747;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+    h1{font-size:clamp(2.2rem,5vw,4.5rem);line-height:.95;margin:18px 0 14px;font-family:"Big Shoulders Display",sans-serif;text-transform:uppercase}
+    h2{font-size:clamp(1.8rem,3vw,2.5rem);line-height:1;margin:40px 0 18px;font-family:"Big Shoulders Display",sans-serif;text-transform:uppercase}
+    h3{font-size:1.25rem;line-height:1.1;margin:28px 0 12px;text-transform:uppercase}
+    .zh-meta{display:flex;flex-wrap:wrap;gap:12px 18px;color:#cfcfcf;font-size:14px;text-transform:uppercase;letter-spacing:.06em}
+    .zh-meta span::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#BFF747;margin-right:8px;vertical-align:middle}
+    .zh-excerpt{font-size:1.08rem;line-height:1.8;color:#e5e5e5}
+    .zh-cover{width:100%;height:auto;display:block}
+    .zh-side-stack{display:grid;gap:22px}
+    .zh-side-card{padding:22px}
+    .zh-side-card h3{margin-top:0}
+    .zh-side-card ol,.zh-side-card ul{margin:0;padding-left:18px}
+    .zh-side-card li{margin:0 0 10px}
+    .zh-side-card .zh-sub-item{margin-left:12px}
+    .zh-post-facts{list-style:none;padding:0;margin:0}
+    .zh-post-facts li{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+    .zh-post-facts li:last-child{border-bottom:none}
+    .zh-post-facts span{color:#888}
+    .zh-article-wrap{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:32px;margin-top:32px}
+    .zh-article-card{padding:28px}
+    .zh-author{display:flex;align-items:center;gap:16px;padding:18px 0 8px}
+    .zh-author img{width:72px;height:72px;border-radius:50%;object-fit:cover}
+    .zh-author strong{display:block;color:#fff}
+    .zh-article-card p{line-height:1.9;font-size:1.04rem}
+    .zh-article-card section{scroll-margin-top:110px}
+    .zh-cta-card{margin-top:32px;padding:28px}
+    .zh-btn-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:20px}
+    .zh-btn{display:inline-flex;align-items:center;gap:10px;padding:14px 20px;border-radius:999px;background:#BFF747;color:#060606;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
+    .zh-btn-outline{background:transparent;border:1px solid rgba(191,247,71,.3);color:#fff}
+    .zh-footer{margin-top:72px;border-top:1px solid rgba(191,247,71,.14);padding-top:28px}
+    .zh-footer-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:24px}
+    .zh-footer h4{margin:0 0 14px;font-size:14px;color:#BFF747;text-transform:uppercase;letter-spacing:.08em}
+    .zh-footer p,.zh-footer a{color:#b8b8b8}
+    .zh-footer a:hover{color:#BFF747}
+    @media (max-width:991px){
+      .zh-hero,.zh-article-wrap,.zh-footer-grid{grid-template-columns:1fr}
+      .zh-header-inner{align-items:flex-start;flex-direction:column}
+    }
+  </style>
+</head>
+<body>
+  <header class="zh-header">
+    <div class="zh-header-inner">
+      <a class="zh-logo" href="../../index.html"><img src="../../wp-content/uploads/2026/01/white-icon.svg?v=zh3" alt="Zachary Hutton"></a>
+      <nav aria-label="Primary">
+        <a href="../../index.html">Home</a>
+        <a href="../../about-me/index.html">About Me</a>
+        <a href="../../services/index.html">Services</a>
+        <a href="../../portfolio-page/index.html">Portfolio</a>
+        <a class="zh-accent" href="../../blog/index.html">Blog</a>
+        <a href="../../contact-us/index.html">Contact Me</a>
+        <a href="../../hire-me/index.html">Hire Me</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="zh-shell" id="zh-blog-post-app">
+    <div class="zh-breadcrumb"><a href="../../index.html">Home</a> / <a href="../../blog/index.html">Blog</a> / <span id="zh-post-title-inline">Post</span></div>
+
+    <section class="zh-hero">
+      <div class="zh-hero-card">
+        <img class="zh-cover" id="zh-post-cover" src="../../wp-content/uploads/zach/blog/blog-css-grid.png?v=premium2" alt="">
+        <div class="zh-hero-copy">
+          <span class="zh-category" id="zh-post-category">Blog</span>
+          <h1 id="zh-post-title">Zachary Hutton Blog</h1>
+          <div class="zh-meta" id="zh-post-meta"></div>
+          <p class="zh-excerpt" id="zh-post-excerpt"></p>
+        </div>
+      </div>
+      <div class="zh-side-stack">
+        <aside class="zh-side-card">
+          <h3>Table of Contents</h3>
+          <ol id="zh-post-toc"></ol>
+        </aside>
+        <aside class="zh-side-card">
+          <h3>Author</h3>
+          <div class="zh-author">
+            <img src="../../wp-content/uploads/zach/avatar-zach.png?v=hoodie4" alt="Zachary Hutton">
+            <div>
+              <strong>Zachary Hutton</strong>
+              <p>Full Stack Developer, writing practical lessons from product, platform, and client work.</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="zh-article-wrap">
+      <article class="zh-article-card">
+        <div id="zh-post-intro"></div>
+        <div id="zh-post-body"></div>
+        <div class="zh-cta-card">
+          <h2>Need help building something similar?</h2>
+          <p>I build premium websites, thoughtful product experiences, and custom software with a strong focus on clarity, performance, and trust.</p>
+          <div class="zh-btn-row">
+            <a class="zh-btn" href="../../hire-me/index.html">Hire Me <i class="fa-solid fa-arrow-up-right"></i></a>
+            <a class="zh-btn zh-btn-outline" href="../../contact-us/index.html">Contact Me <i class="fa-solid fa-arrow-up-right"></i></a>
+          </div>
+        </div>
+      </article>
+      <aside class="zh-side-stack">
+        <div class="zh-side-card">
+          <h3>Internal Links</h3>
+          <ul>
+            <li><a href="../../portfolio-page/index.html">Case Studies</a></li>
+            <li><a href="../../services/index.html">Services</a></li>
+            <li><a href="../../works/weroi/index.html">weROI Project Page</a></li>
+            <li><a href="../../contact-us/index.html">Contact Me</a></li>
+          </ul>
+        </div>
+        <div class="zh-side-card">
+          <h3>More from the Blog</h3>
+          <ul>
+            <li><a href="../../blog/css-grid/">CSS Grid vs Flexbox</a></li>
+            <li><a href="../../blog/typescript/">TypeScript Generics</a></li>
+            <li><a href="../../blog/rsc/">React Server Components</a></li>
+            <li><a href="../../blog/security/">Security Fundamentals</a></li>
+          </ul>
+        </div>
+      </aside>
+    </section>
+
+    <footer class="zh-footer">
+      <div class="zh-footer-grid">
+        <div>
+          <h4>About</h4>
+          <p>I help businesses ship better websites, cleaner product experiences, and software that makes sense both visually and operationally.</p>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <p><a href="../../services/index.html">Services</a><br><a href="../../portfolio-page/index.html">Portfolio</a><br><a href="../../about-me/index.html">About Me</a></p>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <p><a href="mailto:hzach577@gmail.com">hzach577@gmail.com</a><br><a href="tel:+18763701398">876-370-1398</a><br>Portmore, Jamaica</p>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script src="./blog-posts.js"></script>
+  <script>
+    const title = document.getElementById("zh-post-title");
+    const inline = document.getElementById("zh-post-title-inline");
+    const category = document.getElementById("zh-post-category");
+    const updateInline = () => {
+      inline.textContent = title.textContent;
+      const meta = document.getElementById("zh-post-meta");
+      if (meta && meta.lastElementChild) category.textContent = meta.lastElementChild.textContent;
+    };
+    new MutationObserver(updateInline).observe(title, { childList: true });
+    updateInline();
+  </script>
+</body>
+</html>

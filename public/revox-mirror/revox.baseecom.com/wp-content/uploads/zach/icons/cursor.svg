@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Cursor">
+  <rect width="64" height="64" rx="14" fill="#12141a"/>
+  <rect x="2" y="2" width="60" height="60" rx="12" fill="none" stroke="#BFF747" stroke-width="2"/>
+  <g transform="translate(10,10)">
+    <rect width="44" height="44" rx="10" fill="#1A1A1A"/>
+    <path fill="#FFFFFF" d="M14 10l18 12-18 12V10z"/>
+    <path fill="#BFF747" d="M32 22h10v4H32v-4z"/>
+  </g>
+</svg>

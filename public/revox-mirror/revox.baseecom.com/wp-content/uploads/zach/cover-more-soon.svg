@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750">
+<defs>
+  <linearGradient id="bg-cover-more-soon" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#060606"/>
+    <stop offset="100%" stop-color="#141820"/>
+  </linearGradient>
+  <linearGradient id="accent-cover-more-soon" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#BFF747" stop-opacity="0.95"/>
+    <stop offset="100%" stop-color="#BFF747" stop-opacity="0.25"/>
+  </linearGradient>
+</defs>
+<rect width="1200" height="750" fill="url(#bg-cover-more-soon)"/>
+<rect x="48" y="48" width="1104" height="654" rx="18" fill="none" stroke="#BFF747" stroke-opacity="0.22" stroke-width="2"/>
+<rect x="80" y="96" width="640" height="420" rx="14" fill="#0B0E13" stroke="#2a2d36" stroke-width="1"/>
+<rect x="100" y="116" width="600" height="40" rx="8" fill="#1a1d26"/>
+<circle cx="122" cy="136" r="7" fill="#ff5f57"/><circle cx="146" cy="136" r="7" fill="#febc2e"/><circle cx="170" cy="136" r="7" fill="#28c840"/>
+<text x="120" y="188" fill="#BFF747" font-family="Consolas,monospace" font-size="15">Pipeline preview</text>
+<text x="120" y="220" fill="#9a9aa3" font-family="Consolas,monospace" font-size="13">hero section loaded</text>
+<text x="120" y="248" fill="#9a9aa3" font-family="Consolas,monospace" font-size="13">services grid ready</text>
+<text x="120" y="276" fill="#9a9aa3" font-family="Consolas,monospace" font-size="13">gallery module queued</text>
+<rect x="120" y="310" width="220" height="10" rx="3" fill="#2a2d36"/>
+<rect x="120" y="336" width="320" height="10" rx="3" fill="#2a2d36"/>
+<rect x="120" y="362" width="280" height="10" rx="3" fill="#2a2d36"/>
+<rect x="120" y="420" width="260" height="64" rx="10" fill="#1c2214" stroke="#BFF747" stroke-opacity="0.35"/>
+<rect x="760" y="96" width="340" height="120" rx="12" fill="#BFF747" fill-opacity="0.1" stroke="#BFF747" stroke-opacity="0.28"/>
+<rect x="760" y="236" width="340" height="120" rx="12" fill="#12141a" stroke="#2a2d36"/>
+<rect x="760" y="376" width="340" height="140" rx="12" fill="#12141a" stroke="#2a2d36"/>
+<rect x="80" y="548" width="1040" height="4" rx="2" fill="url(#accent-cover-more-soon)"/>
+<text x="80" y="620" fill="#fff" font-family="Kanit,Arial,sans-serif" font-size="64" font-weight="700">More to come</text>
+<text x="80" y="668" fill="#BFF747" font-family="Kanit,Arial,sans-serif" font-size="22" font-weight="500">Case studies landing here</text>
+<text x="80" y="704" fill="#888" font-family="Kanit,Arial,sans-serif" font-size="16">In development — portfolio only</text>
+</svg>

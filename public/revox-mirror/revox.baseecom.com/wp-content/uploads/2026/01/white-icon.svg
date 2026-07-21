@@ -1,5 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="160" height="32" viewBox="0 0 160 32" fill="none">
-  <path d="M4 2h8c6 0 10 3 10 9s-4 9-10 9H10v4l10 8h-8L4 22V2z" fill="#BFF747"/>
-  <path d="M24 2h8v12h6V2h8v28h-8V18h-6v12h-8V2z" fill="#BFF747"/>
-  <text x="50" y="22" fill="#ffffff" font-family="Kanit,Arial,sans-serif" font-size="18" font-weight="600">zachary</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="210" height="48" viewBox="0 0 210 48" fill="none" role="img" aria-label="Zach">
+  <title>Zach</title>
+  <g transform="translate(0,1.5)">
+    <path d="M44.9994 17.9994V26.9993H17.9997C16.4475 26.9993 14.9399 26.8023 13.4999 26.4312C5.73739 24.4344 0 17.3866 0 8.99995V0H26.9998C36.9392 0 44.9994 8.0606 44.9994 17.9994Z" fill="#BFF747"/>
+    <path d="M44.9998 44.9975H18V31.4978H31.4999C38.9557 31.4978 44.9998 37.5418 44.9998 44.9975Z" fill="#BFF747"/>
+    <path d="M13.4999 31.0503V45H0V22.4835C3.24533 26.8091 8.01012 29.9308 13.4999 31.0503Z" fill="#BFF747"/>
+  </g>
+  <text x="58" y="33" fill="#FFFFFF" font-family="'Big Shoulders Display',Kanit,Arial,sans-serif" font-size="32" font-weight="700" letter-spacing="0.03em">ZACH</text>
 </svg>

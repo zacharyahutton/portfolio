@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#0B0E13"/>
+    <stop offset="100%" stop-color="#141820"/>
+  </linearGradient>
+  <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#BFF747" stop-opacity="0.9"/>
+    <stop offset="100%" stop-color="#BFF747" stop-opacity="0.35"/>
+  </linearGradient>
+</defs>
+<rect width="1200" height="750" fill="url(#bg)"/>
+<rect x="60" y="60" width="1080" height="630" rx="16" fill="none" stroke="#BFF747" stroke-opacity="0.35" stroke-width="2"/>
+<rect x="90" y="110" width="520" height="340" rx="12" fill="#12141a" stroke="#2a2d36"/>
+<rect x="110" y="130" width="480" height="36" rx="6" fill="#1a1d26"/>
+<circle cx="128" cy="148" r="6" fill="#ff5f57"/><circle cx="148" cy="148" r="6" fill="#febc2e"/><circle cx="168" cy="148" r="6" fill="#28c840"/>
+<text x="130" y="200" fill="#BFF747" font-family="Consolas,monospace" font-size="16">$ devos status</text>
+<text x="130" y="232" fill="#9a9aa3" font-family="Consolas,monospace" font-size="14"> rules synced</text>
+<text x="130" y="260" fill="#9a9aa3" font-family="Consolas,monospace" font-size="14"> workflows ready</text>
+<text x="130" y="288" fill="#9a9aa3" font-family="Consolas,monospace" font-size="14"> context loaded</text>
+<rect x="130" y="320" width="180" height="10" rx="3" fill="#2a2d36"/>
+<rect x="130" y="345" width="260" height="10" rx="3" fill="#2a2d36"/>
+<rect x="130" y="370" width="220" height="10" rx="3" fill="#2a2d36"/>
+<rect x="650" y="110" width="460" height="100" rx="10" fill="#BFF747" fill-opacity="0.12" stroke="#BFF747" stroke-opacity="0.25"/>
+<rect x="650" y="230" width="460" height="100" rx="10" fill="#BFF747" fill-opacity="0.08" stroke="#2a2d36"/>
+<rect x="650" y="350" width="460" height="100" rx="10" fill="#BFF747" fill-opacity="0.08" stroke="#2a2d36"/>
+<rect x="90" y="500" width="1020" height="4" rx="2" fill="url(#accent)"/>
+<text x="90" y="580" fill="#fff" font-family="Kanit,Arial,sans-serif" font-size="72" font-weight="700">DevOS</text>
+<text x="90" y="640" fill="#BFF747" font-family="Kanit,Arial,sans-serif" font-size="22" font-weight="500">Developer workflow · Rules · Automation</text>
+<text x="90" y="680" fill="#9a9aa3" font-family="Kanit,Arial,sans-serif" font-size="16">Personal operating system for shipping faster</text>
+</svg>
