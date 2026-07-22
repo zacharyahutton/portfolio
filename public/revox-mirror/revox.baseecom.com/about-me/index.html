@@ -2219,6 +2219,21 @@ a.header-logo img,
 #header-sticky .container{max-width:100%;padding-left:clamp(16px,3vw,40px);padding-right:clamp(16px,3vw,40px);}
 
 
+/* ── About hero portrait: smaller on desktop only ── */
+@media (min-width:992px){
+ .about-section-inner .about-image{
+  max-width:420px;
+  margin-left:auto;
+  margin-right:auto;
+ }
+ .about-section-inner .about-image img{
+  width:100%;
+  height:auto;
+  display:block;
+  object-fit:contain;
+ }
+}
+
 /* ── Product Engineer / about-section-3 readable layout ── */
 .about-section-3.zh-about-readable .about-wrapper-3.zh-about-grid{
  display:grid!important;grid-template-columns:minmax(200px,38%) 1fr;gap:clamp(24px,4vw,48px);
