@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     description,
     images: [
       {
-        url: "/og.jpg",
+        url: "/og.png",
         width: 1200,
         height: 630,
         alt: "Zachary Hutton, Full Stack Developer",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title,
     description,
-    images: ["/og.jpg"],
+    images: ["/og.png"],
   },
   robots: {
     index: true,
@@ -62,8 +62,8 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: [{ url: "/og.jpg", type: "image/jpeg" }],
-    apple: [{ url: "/og.jpg" }],
+    icon: [{ url: "/og.png", type: "image/png" }],
+    apple: [{ url: "/og.png" }],
   },
 };
 

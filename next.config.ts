@@ -25,6 +25,7 @@ const pageRewrites = [
   "contact-us",
   "hire-me",
   "our-faq",
+  "testimonials",
   "works/weroi",
   "works/devos",
   "works/pntcog",

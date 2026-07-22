@@ -10,7 +10,7 @@ const ROOT = path.join(
   "../public/revox-mirror/revox.baseecom.com"
 );
 const SITE = "https://zacharyhutton.online";
-const OG_IMAGE = `${SITE}/og.jpg`;
+const OG_IMAGE = `${SITE}/og.png`;
 const DEFAULT_DESC =
   "Zachary Hutton builds premium websites, scalable business platforms, AI-powered automation, and custom software from Portmore, Jamaica.";
 
@@ -106,7 +106,7 @@ function buildBlock(meta) {
 <meta property="og:url" content="${url}">
 <meta property="og:image" content="${OG_IMAGE}">
 <meta property="og:image:secure_url" content="${OG_IMAGE}">
-<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Zachary Hutton, Full Stack Developer">

@@ -497,6 +497,7 @@
     '<a href="/terms/">Terms</a>' +
     "</div></div>" +
     '<a class="zh-nav-top" href="/portfolio-page/">Portfolio</a>' +
+    '<a class="zh-nav-top" href="/testimonials/">Testimonials</a>' +
     '<a class="zh-nav-top" href="/blog/">Blog</a>' +
     '<a class="zh-nav-top" href="/hire-me/">Hire Me</a>' +
     '<a class="zh-nav-top" href="/contact-us/">Contact Me</a>';

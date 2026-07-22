@@ -1,6 +1,6 @@
 /**
- * Build a sharp OG card from the real hero portrait (not a mushy AI face).
- * 1200x630, dark left copy, portrait right, light laptop cue.
+ * High-quality OG card from real hero portrait.
+ * Outputs public/og.png (primary) + public/og.jpg (fallback).
  */
 const fs = require("fs");
 const path = require("path");
@@ -9,7 +9,7 @@ const sharp = require("sharp");
 const ROOT = path.join(__dirname, "..");
 const HERO = path.join(
   ROOT,
-  "public/revox-mirror/revox.baseecom.com/wp-content/uploads/zach/hero-zach-full.png"
+  "public/revox-mirror/revox.baseecom.com/wp-content/uploads/zach/zachary-hutton-cutout.png"
 );
 const OUT_JPG = path.join(ROOT, "public/og.jpg");
 const OUT_PNG = path.join(ROOT, "public/og.png");
@@ -17,82 +17,55 @@ const OUT_PNG = path.join(ROOT, "public/og.png");
 async function main() {
   const W = 1200;
   const H = 630;
+  const PW = 580;
 
-  // Soft dark base
-  const base = sharp({
-    create: {
-      width: W,
-      height: H,
-      channels: 3,
-      background: { r: 10, g: 10, b: 12 },
-    },
-  }).png();
+  const meta = await sharp(HERO).metadata();
+  const srcW = meta.width || 714;
+  const srcH = meta.height || 1010;
+  // Prefer upper body / face; trim a bit of empty bottom so face reads larger
+  const cropTop = Math.round(srcH * 0.02);
+  const cropH = Math.round(srcH * 0.78);
 
-  // Portrait: keep face crisp, place on right
   const portraitBuf = await sharp(HERO)
-    .resize(520, 630, {
+    .extract({ left: 0, top: cropTop, width: srcW, height: Math.min(cropH, srcH - cropTop) })
+    .resize(PW, H, {
       fit: "cover",
-      position: "top",
+      position: "north",
+      kernel: sharp.kernel.lanczos3,
     })
-    .png()
     .toBuffer();
 
-  // Soft left fade so text area stays clean
-  const fadeSvg = Buffer.from(`
-<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">
+  // Fade only (no full black rect). Laptop sits under copy on the left.
+  const overlaySvg = Buffer.from(`<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#0a0a0c" stop-opacity="1"/>
-      <stop offset="42%" stop-color="#0a0a0c" stop-opacity="1"/>
-      <stop offset="62%" stop-color="#0a0a0c" stop-opacity="0.55"/>
-      <stop offset="78%" stop-color="#0a0a0c" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="v" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#0a0a0c" stop-opacity="0.25"/>
-      <stop offset="100%" stop-color="#0a0a0c" stop-opacity="0.45"/>
+    <linearGradient id="fade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#09090b" stop-opacity="1"/>
+      <stop offset="38%" stop-color="#09090b" stop-opacity="0.95"/>
+      <stop offset="55%" stop-color="#09090b" stop-opacity="0.4"/>
+      <stop offset="70%" stop-color="#09090b" stop-opacity="0"/>
     </linearGradient>
   </defs>
-  <rect width="100%" height="100%" fill="url(#g)"/>
-  <rect width="100%" height="100%" fill="url(#v)"/>
-</svg>`);
+  <rect width="100%" height="100%" fill="url(#fade)"/>
 
-  // Laptop + tiny code cue (sparse)
-  const propsSvg = Buffer.from(`
-<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">
-  <!-- laptop -->
-  <g transform="translate(700,430)">
-    <rect x="18" y="8" width="210" height="132" rx="10" fill="#16161a" stroke="#2a2a30" stroke-width="2"/>
-    <rect x="28" y="18" width="190" height="104" rx="4" fill="#0d0d10"/>
-    <!-- fake portfolio UI on screen -->
-    <rect x="28" y="18" width="190" height="18" fill="#121218"/>
-    <circle cx="38" cy="27" r="2.5" fill="#ff5f57"/>
-    <circle cx="48" cy="27" r="2.5" fill="#febc2e"/>
-    <circle cx="58" cy="27" r="2.5" fill="#28c840"/>
-    <text x="78" y="31" fill="#BFF747" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700">zacharyhutton.online</text>
-    <rect x="40" y="48" width="70" height="8" rx="2" fill="#f2f2f2"/>
-    <rect x="40" y="62" width="50" height="5" rx="2" fill="#BFF747" opacity="0.9"/>
-    <rect x="40" y="76" width="100" height="4" rx="2" fill="#ffffff" opacity="0.35"/>
-    <rect x="40" y="86" width="88" height="4" rx="2" fill="#ffffff" opacity="0.28"/>
-    <rect x="40" y="102" width="46" height="12" rx="6" fill="#BFF747"/>
-    <rect x="8" y="142" width="230" height="10" rx="3" fill="#1c1c22"/>
-    <rect x="70" y="152" width="106" height="6" rx="2" fill="#141418"/>
-  </g>
-  <!-- tiny react-like atom, sparse -->
-  <g transform="translate(980,120)" opacity="0.35" fill="none" stroke="#BFF747" stroke-width="1.5">
-    <ellipse cx="0" cy="0" rx="28" ry="12" transform="rotate(0)"/>
-    <ellipse cx="0" cy="0" rx="28" ry="12" transform="rotate(60)"/>
-    <ellipse cx="0" cy="0" rx="28" ry="12" transform="rotate(120)"/>
-    <circle cx="0" cy="0" r="3.5" fill="#BFF747" stroke="none"/>
-  </g>
-  <!-- tiny brackets -->
-  <text x="1040" y="520" fill="#ffffff" opacity="0.22" font-family="Consolas, monospace" font-size="42">{ }</text>
-</svg>`);
+  <text x="64" y="220" fill="#ffffff" font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="56" font-weight="700">Zachary Hutton</text>
+  <text x="64" y="274" fill="#BFF747" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">Full Stack Developer</text>
+  <text x="64" y="324" fill="#f0f0f0" font-family="Arial, Helvetica, sans-serif" font-size="20">Premium websites, platforms, and AI systems</text>
 
-  const textSvg = Buffer.from(`
-<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">
-  <text x="64" y="250" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="700">Zachary Hutton</text>
-  <text x="64" y="300" fill="#BFF747" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700">Full Stack Developer</text>
-  <text x="64" y="348" fill="#ffffff" opacity="0.82" font-family="Arial, Helvetica, sans-serif" font-size="18">Premium websites, platforms, and AI systems</text>
+  <g transform="translate(64,380)">
+    <rect x="16" y="6" width="220" height="136" rx="12" fill="#15151a" stroke="#3a3a42" stroke-width="2"/>
+    <rect x="26" y="16" width="200" height="108" rx="5" fill="#0c0c10"/>
+    <rect x="26" y="16" width="200" height="20" fill="#121218"/>
+    <circle cx="38" cy="26" r="3" fill="#ff5f57"/>
+    <circle cx="50" cy="26" r="3" fill="#febc2e"/>
+    <circle cx="62" cy="26" r="3" fill="#28c840"/>
+    <text x="78" y="30" fill="#BFF747" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="700">zacharyhutton.online</text>
+    <rect x="40" y="50" width="78" height="9" rx="2" fill="#f5f5f5"/>
+    <rect x="40" y="66" width="54" height="6" rx="2" fill="#BFF747"/>
+    <rect x="40" y="82" width="110" height="5" rx="2" fill="#ffffff" opacity="0.4"/>
+    <rect x="40" y="94" width="96" height="5" rx="2" fill="#ffffff" opacity="0.3"/>
+    <rect x="40" y="110" width="52" height="14" rx="7" fill="#BFF747"/>
+    <rect x="6" y="144" width="240" height="11" rx="3" fill="#1b1b22"/>
+  </g>
 </svg>`);
 
   const composed = await sharp({
@@ -100,32 +73,26 @@ async function main() {
       width: W,
       height: H,
       channels: 3,
-      background: { r: 10, g: 10, b: 12 },
+      background: { r: 9, g: 9, b: 11 },
     },
   })
     .composite([
-      { input: portraitBuf, left: W - 520, top: 0 },
-      { input: fadeSvg, left: 0, top: 0 },
-      { input: propsSvg, left: 0, top: 0 },
-      { input: textSvg, left: 0, top: 0 },
+      { input: portraitBuf, left: W - PW, top: 0 },
+      { input: overlaySvg, left: 0, top: 0 },
     ])
     .png()
     .toBuffer();
 
-  // High-quality JPEG for WhatsApp/social (still under ~300KB ideally)
+  await sharp(composed).png({ compressionLevel: 6 }).toFile(OUT_PNG);
   await sharp(composed)
-    .jpeg({ quality: 92, mozjpeg: true, chromaSubsampling: "4:4:4" })
+    .jpeg({ quality: 96, mozjpeg: true, chromaSubsampling: "4:4:4" })
     .toFile(OUT_JPG);
 
-  await sharp(composed).png({ compressionLevel: 8 }).toFile(OUT_PNG);
-
-  const jpgStat = fs.statSync(OUT_JPG);
-  const pngStat = fs.statSync(OUT_PNG);
   console.log(
     JSON.stringify({
-      jpg: jpgStat.size,
-      png: pngStat.size,
-      out: OUT_JPG,
+      png: fs.statSync(OUT_PNG).size,
+      jpg: fs.statSync(OUT_JPG).size,
+      source: path.basename(HERO),
     })
   );
 }
