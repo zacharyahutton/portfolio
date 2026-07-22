@@ -70,7 +70,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
   left:50%;transform:translateX(-50%);right:auto;
   z-index:10001;transition:opacity .28s ease,transform .28s ease;
  }
- #zh-mobile-nav.zh-nav-hidden{opacity:0;pointer-events:none;transform:translateX(-50%) translateY(72px);}
+ #zh-mobile-nav.zh-nav-hidden{opacity:1!important;pointer-events:auto!important;transform:translateX(-50%)!important;}
  #zh-mobile-nav .zh-back-btn,
  #zh-mobile-nav .zh-hamburger{
   width:52px;height:52px;border-radius:50%;padding:0;
@@ -123,7 +123,8 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
   overflow:hidden;display:flex;flex-direction:column;
   box-shadow:0 16px 48px rgba(0,0,0,.7);
  }
- .zh-mobile-drawer.is-open{transform:translateY(0) scale(1);opacity:1;}
+ .zh-mobile-drawer:not(.is-open){pointer-events:none!important;visibility:hidden!important;}
+ .zh-mobile-drawer.is-open{transform:translateY(0) scale(1);opacity:1;pointer-events:auto!important;visibility:visible!important;}
  .zh-mobile-drawer-header{
   display:flex;justify-content:space-between;align-items:center;
   padding:12px 16px;border-bottom:1px solid rgba(191,247,71,.18);flex-shrink:0;
@@ -281,6 +282,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 <link rel="icon" href="wp-content/uploads/2025/11/android-chrome-512x512-1-214x214.png" sizes="192x192">
 <link rel="apple-touch-icon" href="./wp-content/uploads/2025/11/android-chrome-512x512-1-214x214.png">
 <meta name="msapplication-TileImage" content="./wp-content/uploads/2025/11/android-chrome-512x512-1-300x300.png">
+ <link rel="stylesheet" id="zh-site-fix-css" href="/wp-content/uploads/zach/zh-site-fix.css?v=zhfix1">
 </head>
 
 <body class="home wp-singular page-template page-template-elementor_header_footer page page-id-11 wp-theme-revox ehf-header ehf-footer ehf-template-revox ehf-stylesheet-revox revox-toolkit-activate not-logged-in elementor-default elementor-template-full-width elementor-kit-9 elementor-page elementor-page-11">
@@ -351,39 +353,39 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  <div class="offcanvas__wrapper">
  <div class="offcanvas__content">
  <div class="mobile-menus fix">
- <nav id="mobile-menus" class="menu-main-menu-container"><ul id="menu-main-menu" class="defult-header"><li id="menu-item-34" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home current-menu-ancestor current-menu-parent menu-item-has-children menu-item-34"><a href="./index.html" aria-current="page">Home</a>
+ <nav id="mobile-menus" class="menu-main-menu-container"><ul id="menu-main-menu" class="defult-header"><li id="menu-item-34" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home current-menu-ancestor current-menu-parent menu-item-has-children menu-item-34"><a href="/" aria-current="page">Home</a>
 <ul class="submenu">
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-11 current_page_item menu-item-35"><a href="./index.html" aria-current="page">Full Stack Developer</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="./web-developer/index.html">Web Developer</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="./graphic-designer/index.html">Product Engineer</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="./fashion-model/index.html">Case Studies</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-11 current_page_item menu-item-35"><a href="/" aria-current="page">Full Stack Developer</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/web-developer/">Web Developer</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/graphic-designer/">Product Engineer</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/fashion-model/">Case Studies</a></li>
 </ul>
 </li>
-<li id="menu-item-39" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39"><a href="./about-me/index.html">About Me</a></li>
-<li class="menu-item menu-item-has-children menu-item-services"><a href="./services/index.html">Services</a>
+<li id="menu-item-39" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39"><a href="/about-me/">About Me</a></li>
+<li class="menu-item menu-item-has-children menu-item-services"><a href="/services/">Services</a>
 <ul class="submenu">
-	<li class="menu-item"><a href="./services/index.html">All Services</a></li>
-	<li class="menu-item"><a href="./services/premium-business-websites/index.html">Premium Business Websites</a></li>
-	<li class="menu-item"><a href="./services/custom-software/index.html">Custom Software</a></li>
-	<li class="menu-item"><a href="./services/ai-integrations/index.html">AI Integrations</a></li>
-	<li class="menu-item"><a href="./services/automation-systems/index.html">Automation Systems</a></li>
-	<li class="menu-item"><a href="./services/seo/index.html">SEO</a></li>
-	<li class="menu-item"><a href="./services/business-platforms/index.html">Business Platforms</a></li>
-	<li class="menu-item"><a href="./services/maintenance/index.html">Maintenance</a></li>
-	<li class="menu-item"><a href="./services/performance-optimization/index.html">Performance Optimization</a></li>
-	<li class="menu-item"><a href="./services/consulting/index.html">Consulting</a></li>
+	<li class="menu-item"><a href="/services/">All Services</a></li>
+	<li class="menu-item"><a href="/services/premium-business-websites/">Premium Business Websites</a></li>
+	<li class="menu-item"><a href="/services/custom-software/">Custom Software</a></li>
+	<li class="menu-item"><a href="/services/ai-integrations/">AI Integrations</a></li>
+	<li class="menu-item"><a href="/services/automation-systems/">Automation Systems</a></li>
+	<li class="menu-item"><a href="/services/seo/">SEO</a></li>
+	<li class="menu-item"><a href="/services/business-platforms/">Business Platforms</a></li>
+	<li class="menu-item"><a href="/services/maintenance/">Maintenance</a></li>
+	<li class="menu-item"><a href="/services/performance-optimization/">Performance Optimization</a></li>
+	<li class="menu-item"><a href="/services/consulting/">Consulting</a></li>
 </ul>
 </li>
 <li id="menu-item-40" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-40"><a href="#">More</a>
 <ul class="submenu">
-	<li class="menu-item"><a href="./our-faq/index.html">FAQ</a></li>
-	<li class="menu-item"><a href="./privacy-policy/index.html">Privacy Policy</a></li>
-	<li class="menu-item"><a href="./terms/index.html">Terms</a></li>
+	<li class="menu-item"><a href="/our-faq/">FAQ</a></li>
+	<li class="menu-item"><a href="/privacy-policy/">Privacy Policy</a></li>
+	<li class="menu-item"><a href="/terms/">Terms</a></li>
 </ul>
 </li>
-<li id="menu-item-47" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47"><a href="./portfolio-page/index.html">Portfolio</a></li>
-<li id="menu-item-49" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-49"><a href="./blog/index.html">Blog</a></li>
-<li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="./contact-us/index.html">Contact Me</a></li>
+<li id="menu-item-47" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47"><a href="/portfolio-page/">Portfolio</a></li>
+<li id="menu-item-49" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-49"><a href="/blog/">Blog</a></li>
+<li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/contact-us/">Contact Me</a></li>
 </ul></nav> </div>
  </div>
  </div>
@@ -404,43 +406,43 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  <div class="mean__menu-wrapper">
  <div class="main-menu">
  <nav id="desktop-main-menu">
-<ul id="menu-main-menu" class="defult-header"><li id="menu-item-34" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home current-menu-ancestor current-menu-parent menu-item-has-children menu-item-34"><a href="./index.html" aria-current="page">Home</a>
+<ul id="menu-main-menu" class="defult-header"><li id="menu-item-34" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home current-menu-ancestor current-menu-parent menu-item-has-children menu-item-34"><a href="/" aria-current="page">Home</a>
 <ul class="submenu">
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-11 current_page_item menu-item-35"><a href="./index.html" aria-current="page">Full Stack Developer</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="./web-developer/index.html">Web Developer</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="./graphic-designer/index.html">Product Engineer</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="./fashion-model/index.html">Case Studies</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-11 current_page_item menu-item-35"><a href="/" aria-current="page">Full Stack Developer</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/web-developer/">Web Developer</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/graphic-designer/">Product Engineer</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/fashion-model/">Case Studies</a></li>
 </ul>
 </li>
-<li id="menu-item-39" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39"><a href="./about-me/index.html">About Me</a></li>
-<li class="menu-item menu-item-has-children menu-item-services"><a href="./services/index.html">Services</a>
+<li id="menu-item-39" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39"><a href="/about-me/">About Me</a></li>
+<li class="menu-item menu-item-has-children menu-item-services"><a href="/services/">Services</a>
 <ul class="submenu">
-	<li class="menu-item"><a href="./services/index.html">All Services</a></li>
-	<li class="menu-item"><a href="./services/premium-business-websites/index.html">Premium Business Websites</a></li>
-	<li class="menu-item"><a href="./services/custom-software/index.html">Custom Software</a></li>
-	<li class="menu-item"><a href="./services/ai-integrations/index.html">AI Integrations</a></li>
-	<li class="menu-item"><a href="./services/automation-systems/index.html">Automation Systems</a></li>
-	<li class="menu-item"><a href="./services/seo/index.html">SEO</a></li>
-	<li class="menu-item"><a href="./services/business-platforms/index.html">Business Platforms</a></li>
-	<li class="menu-item"><a href="./services/maintenance/index.html">Maintenance</a></li>
-	<li class="menu-item"><a href="./services/performance-optimization/index.html">Performance Optimization</a></li>
-	<li class="menu-item"><a href="./services/consulting/index.html">Consulting</a></li>
+	<li class="menu-item"><a href="/services/">All Services</a></li>
+	<li class="menu-item"><a href="/services/premium-business-websites/">Premium Business Websites</a></li>
+	<li class="menu-item"><a href="/services/custom-software/">Custom Software</a></li>
+	<li class="menu-item"><a href="/services/ai-integrations/">AI Integrations</a></li>
+	<li class="menu-item"><a href="/services/automation-systems/">Automation Systems</a></li>
+	<li class="menu-item"><a href="/services/seo/">SEO</a></li>
+	<li class="menu-item"><a href="/services/business-platforms/">Business Platforms</a></li>
+	<li class="menu-item"><a href="/services/maintenance/">Maintenance</a></li>
+	<li class="menu-item"><a href="/services/performance-optimization/">Performance Optimization</a></li>
+	<li class="menu-item"><a href="/services/consulting/">Consulting</a></li>
 </ul>
 </li>
 <li id="menu-item-40" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-40"><a href="#">More</a>
 <ul class="submenu">
-	<li class="menu-item"><a href="./our-faq/index.html">FAQ</a></li>
-	<li class="menu-item"><a href="./privacy-policy/index.html">Privacy Policy</a></li>
-	<li class="menu-item"><a href="./terms/index.html">Terms</a></li>
+	<li class="menu-item"><a href="/our-faq/">FAQ</a></li>
+	<li class="menu-item"><a href="/privacy-policy/">Privacy Policy</a></li>
+	<li class="menu-item"><a href="/terms/">Terms</a></li>
 </ul>
 </li>
-<li id="menu-item-47" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47"><a href="./portfolio-page/index.html">Portfolio</a></li>
-<li id="menu-item-49" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-49"><a href="./blog/index.html">Blog</a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="./contact-us/index.html">Contact Me</a></li>
+<li id="menu-item-47" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47"><a href="/portfolio-page/">Portfolio</a></li>
+<li id="menu-item-49" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-49"><a href="/blog/">Blog</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/contact-us/">Contact Me</a></li>
 </ul> </nav>
  </div>
  </div>
- <a href="./hire-me/index.html" class="theme-btn">Hire Me<i class="fa-solid fa-arrow-up-right"></i>
+ <a href="/hire-me/" class="theme-btn">Hire Me<i class="fa-solid fa-arrow-up-right"></i>
  </a>
  <div class="header__hamburger my-auto">
  <div class="sidebar__toggle">
@@ -491,7 +493,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  </div>
  
  <div class="zh-hero-actions">
- <a href="./portfolio-page/index.html" class="theme-btn wow fadeInUp" data-wow-delay=".5s">
+ <a href="/portfolio-page/" class="theme-btn wow fadeInUp" data-wow-delay=".5s">
  view portfolio 
  <i class="fa-solid fa-arrow-up-right"></i>
  </a>
@@ -692,7 +694,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  From high-converting marketing websites and booking platforms to secure APIs, business dashboards, and intelligent workflows, every solution is built with performance, security, scalability, and long-term maintainability in mind. </p>
  
  <div class="about-btn wow fadeInUp" data-wow-delay=".7s">
- <a href="./about-me/index.html" class="theme-btn">
+ <a href="/about-me/" class="theme-btn">
  get to know me <i class="fa-solid fa-arrow-up-right"></i>
  </a>
  
@@ -730,7 +732,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  <ul class="choose-us-box-list">
  <li class="wow fadeInUp" data-wow-delay="0.3s">
  <div class="content">
- <h2><a href="./services/index.html">Web platforms &amp; product sites</a></h2><p>Ship a fast, responsive site or SPA that looks premium and turns visitors into leads or bookings.</p>
+ <h2><a href="/services/">Web platforms &amp; product sites</a></h2><p>Ship a fast, responsive site or SPA that looks premium and turns visitors into leads or bookings.</p>
  </div>
  <a href="./services/brand-identity-design/" class="arrow-icon">
  <i class="fa-solid fa-arrow-up-right"></i>
@@ -738,7 +740,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  </li>
  <li class="wow fadeInUp" data-wow-delay="0.5s">
  <div class="content">
- <h2><a href="./services/index.html">API development &amp; integrations</a></h2><p>Typed REST APIs with auth, validation, and docs so frontends and bots can plug in cleanly.</p>
+ <h2><a href="/services/">API development &amp; integrations</a></h2><p>Typed REST APIs with auth, validation, and docs so frontends and bots can plug in cleanly.</p>
  </div>
  <a href="./services/frontend-development/" class="arrow-icon">
  <i class="fa-solid fa-arrow-up-right"></i>
@@ -746,7 +748,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  </li>
  <li class="wow fadeInUp" data-wow-delay="0.7s">
  <div class="content">
- <h2><a href="./services/index.html">Client &amp; ministry sites</a></h2><p>Production sites for businesses and congregations, events, giving, and content that stay editable in code.</p>
+ <h2><a href="/services/">Client &amp; ministry sites</a></h2><p>Production sites for businesses and congregations, events, giving, and content that stay editable in code.</p>
  </div>
  <a href="./services/e-commerce-solutions/" class="arrow-icon">
  <i class="fa-solid fa-arrow-up-right"></i>
@@ -754,7 +756,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  </li>
  <li class="wow fadeInUp" data-wow-delay="0.9s">
  <div class="content">
- <h2><a href="./services/index.html">AI Integrations &amp; Automation</a></h2><p>LLM chat, intelligent workflows, and automation with resilient fallbacks when models fail.</p>
+ <h2><a href="/services/">AI Integrations &amp; Automation</a></h2><p>LLM chat, intelligent workflows, and automation with resilient fallbacks when models fail.</p>
  </div>
  <a href="./services/digital-marketing/" class="arrow-icon">
  <i class="fa-solid fa-arrow-up-right"></i>
@@ -1225,7 +1227,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  <a href="https://domus-topaz.vercel.app" class="circle-icon" target="_blank" rel="noopener noreferrer" aria-label="Visit Domus live site">
  <i class="fa-solid fa-arrow-up-right"></i>
  </a>
- <a href="./portfolio-page/index.html#project-domus-case" class="theme-btn zh-btn-outline zh-btn-sm">Case Study</a>
+ <a href="/works/domus/" class="theme-btn zh-btn-outline zh-btn-sm">Case Study</a>
  </div>
  </div>
  </div>
@@ -1241,7 +1243,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  <a href="https://northern-elite.vercel.app" class="circle-icon" target="_blank" rel="noopener noreferrer" aria-label="Visit Northern Elite live site">
  <i class="fa-solid fa-arrow-up-right"></i>
  </a>
- <a href="./portfolio-page/index.html#project-northern-elite-case" class="theme-btn zh-btn-outline zh-btn-sm">Case Study</a>
+ <a href="/works/northern-elite/" class="theme-btn zh-btn-outline zh-btn-sm">Case Study</a>
  </div>
  </div>
  </div>
@@ -1260,7 +1262,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  <a href="https://weroi.net" class="circle-icon" target="_blank" rel="noopener noreferrer" aria-label="Visit weROI live site">
  <i class="fa-solid fa-arrow-up-right"></i>
  </a>
- <a href="./works/weroi/index.html" class="theme-btn zh-btn-outline zh-btn-sm">Case Study</a>
+ <a href="/works/weroi/" class="theme-btn zh-btn-outline zh-btn-sm">Case Study</a>
  </div>
  </div>
  </div>
@@ -1279,7 +1281,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  <a href="https://portmorentcog.org" class="circle-icon" target="_blank" rel="noopener noreferrer" aria-label="Visit PNTCOG live site">
  <i class="fa-solid fa-arrow-up-right"></i>
  </a>
- <a href="./portfolio-page/index.html#project-pntcog-case" class="theme-btn zh-btn-outline zh-btn-sm">Case Study</a>
+ <a href="/works/pntcog/" class="theme-btn zh-btn-outline zh-btn-sm">Case Study</a>
  </div>
  </div>
  </div>
@@ -1295,7 +1297,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  <a href="https://wehfigo.com" class="circle-icon" target="_blank" rel="noopener noreferrer" aria-label="Visit WehFiGo live site">
  <i class="fa-solid fa-arrow-up-right"></i>
  </a>
- <a href="./portfolio-page/index.html#project-wehfigo-case" class="theme-btn zh-btn-outline zh-btn-sm">Case Study</a>
+ <a href="/works/wehfigo/" class="theme-btn zh-btn-outline zh-btn-sm">Case Study</a>
  </div>
  </div>
  </div>
@@ -1311,11 +1313,11 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  </div>
  
  <div class="project-btn-all wow fadeInUp" data-wow-delay=".3s">
- <a href="./portfolio-page/index.html" class="theme-btn">
+ <a href="/portfolio-page/" class="theme-btn">
  view all works <i class="fa-solid fa-arrow-up-right"></i>
  </a>
  
- <a href="./contact-us/index.html" class="theme-btn">
+ <a href="/contact-us/" class="theme-btn">
  contact with me <i class="fa-solid fa-arrow-up-right"></i>
  </a>
  </div>
@@ -1391,7 +1393,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  
  </div>
  
- <a href="./hire-me/index.html" class="circle-icon">
+ <a href="/hire-me/" class="circle-icon">
  <i class="fa-solid fa-arrow-up-right"></i>
  </a>
  
@@ -1430,7 +1432,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  <span>most popular</span>
  </div>
  
- <a href="./hire-me/index.html" class="circle-icon">
+ <a href="/hire-me/" class="circle-icon">
  <i class="fa-solid fa-arrow-up-right"></i>
  </a>
  
@@ -1618,7 +1620,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  <h2 class="hero_title tv_hero_title hero_title_1">latest news <span> &amp; article</span></h2>
  </div>
  
- <a href="./blog/index.html" class="theme-btn">
+ <a href="/blog/" class="theme-btn">
  view all news <i class="fa-solid fa-arrow-up-right"></i>
  </a>
  </div>
@@ -1813,7 +1815,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  <h2 class="text_invert-2">Need a premium website, AI automation, or custom software?</h2>
  
  <h3 class="footer-big-text wt-about-title2">
- <a href="./hire-me/index.html">
+ <a href="/hire-me/">
  let's talk </a>
  </h3>
  
@@ -1821,10 +1823,10 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  I design and ship premium websites, scalable platforms, AI automation, and custom software engineered for performance and growth. <br> Reach out, let's build. </p>
  
  <div class="cta-btn wow fadeInUp" data-wow-delay=".5s">
- <a href="./hire-me/index.html" class="theme-btn">Get a Quote <i class="fa-solid fa-arrow-up-right"></i>
+ <a href="/hire-me/" class="theme-btn">Get a Quote <i class="fa-solid fa-arrow-up-right"></i>
  </a>
  
- <a href="./hire-me/index.html" class="theme-btn">Hire Me<i class="fa-solid fa-arrow-up-right"></i>
+ <a href="/hire-me/" class="theme-btn">Hire Me<i class="fa-solid fa-arrow-up-right"></i>
  </a>
  </div>
  </div>
@@ -1850,11 +1852,11 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  home </a>
  </li>
  <li>
- <a href="./about-me/index.html">
+ <a href="/about-me/">
  ABOUT ME </a>
  </li>
  <li>
- <a href="./services/index.html">
+ <a href="/services/">
  SERVICES </a>
  </li>
  <li>
@@ -1862,11 +1864,11 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  PORTFOLIO </a>
  </li>
  <li>
- <a href="./blog/index.html">
+ <a href="/blog/">
  news &amp; blog </a>
  </li>
  <li>
- <a href="./contact-us/index.html">
+ <a href="/contact-us/">
  CONTACT ME </a>
  </li>
  </ul>
@@ -2398,7 +2400,7 @@ a.header-logo img,
 <script id="zh-header-ux-js">
 (function(){
  var mq=window.matchMedia('(max-width:991px)');
- var DRAWER_NAV='<a class="zh-nav-top" href="./index.html">Home</a><a class="zh-nav-top" href="./about-me/index.html">About Me</a><div class="zh-nav-group"><button type="button" class="zh-nav-accordion" aria-expanded="false">Services<span class="zh-acc-chevron" aria-hidden="true">▼</span></button><div class="zh-nav-sub"><a href="./services/index.html">All Services</a><a href="./services/premium-business-websites/index.html">Premium Business Websites</a><a href="./services/custom-software/index.html">Custom Software</a><a href="./services/ai-integrations/index.html">AI Integrations</a><a href="./services/automation-systems/index.html">Automation Systems</a><a href="./services/seo/index.html">SEO</a><a href="./services/business-platforms/index.html">Business Platforms</a><a href="./services/maintenance/index.html">Maintenance</a><a href="./services/performance-optimization/index.html">Performance Optimization</a><a href="./services/consulting/index.html">Consulting</a></div></div><div class="zh-nav-group"><button type="button" class="zh-nav-accordion" aria-expanded="false">More<span class="zh-acc-chevron" aria-hidden="true">▼</span></button><div class="zh-nav-sub"><a href="./our-faq/index.html">FAQ</a><a href="./privacy-policy/index.html">Privacy Policy</a><a href="./terms/index.html">Terms</a></div></div><a class="zh-nav-top" href="./portfolio-page/index.html">Portfolio</a><a class="zh-nav-top" href="./blog/index.html">Blog</a><a class="zh-nav-top" href="./contact-us/index.html">Contact Me</a>';
+ var DRAWER_NAV='<a class="zh-nav-top" href="/">Home</a><a class="zh-nav-top" href="/about-me/">About Me</a><div class="zh-nav-group"><button type="button" class="zh-nav-accordion" aria-expanded="false">Services<span class="zh-acc-chevron" aria-hidden="true">▼</span></button><div class="zh-nav-sub"><a href="/services/">All Services</a><a href="/services/premium-business-websites/">Premium Business Websites</a><a href="/services/custom-software/">Custom Software</a><a href="/services/ai-integrations/">AI Integrations</a><a href="/services/automation-systems/">Automation Systems</a><a href="/services/seo/">SEO</a><a href="/services/business-platforms/">Business Platforms</a><a href="/services/maintenance/">Maintenance</a><a href="/services/performance-optimization/">Performance Optimization</a><a href="/services/consulting/">Consulting</a></div></div><div class="zh-nav-group"><button type="button" class="zh-nav-accordion" aria-expanded="false">More<span class="zh-acc-chevron" aria-hidden="true">▼</span></button><div class="zh-nav-sub"><a href="/our-faq/">FAQ</a><a href="/privacy-policy/">Privacy Policy</a><a href="/terms/">Terms</a></div></div><a class="zh-nav-top" href="/portfolio-page/">Portfolio</a><a class="zh-nav-top" href="/blog/">Blog</a><a class="zh-nav-top" href="/contact-us/">Contact Me</a>';
  function openDrawer(){
   var d=document.getElementById('zh-mobile-drawer');
   var b=document.getElementById('zh-mobile-drawer-backdrop');
@@ -2470,7 +2472,7 @@ a.header-logo img,
   backBtn.className='zh-back-btn';
   backBtn.setAttribute('aria-label','Go back');
   backBtn.innerHTML='&#8592;';
-  backBtn.addEventListener('click',function(e){e.preventDefault();if(window.history.length>1) window.history.back(); else window.location.href='./index.html';});
+  backBtn.addEventListener('click',function(e){e.preventDefault();if(window.history.length>1) window.history.back(); else window.location.href='/';});
   var menuBtn=document.createElement('button');
   menuBtn.type='button';
   menuBtn.className='zh-hamburger';
@@ -2491,7 +2493,7 @@ a.header-logo img,
   var existing=document.querySelector('.zh-mobile-home-btn');if(existing) return;
   var btn=document.createElement('a');
   btn.className='zh-mobile-home-btn';
-  btn.href='./index.html';
+  btn.href='/';
   btn.setAttribute('aria-label','Go to home page');
   btn.innerHTML='&#8592; HOME';
   document.body.appendChild(btn);
@@ -2509,20 +2511,7 @@ a.header-logo img,
   ensureDrawer();
   var nav=document.getElementById('zh-mobile-nav')||buildNav();
   buildHomeBtn();
-  var lastY=window.scrollY||0;
-  var hero=document.querySelector('.hero-section,.hero-section1,.hero-1,.hero-5,.hero-3,main h1,header');
-  var heroH=hero?(hero.getBoundingClientRect().height+window.scrollY):360;
-  function onScroll(){
-   var y=window.scrollY||window.pageYOffset;
-   if(y<heroH*0.4){nav.classList.remove('zh-nav-hidden');lastY=y;return;}
-   if(y>lastY+6&&y>heroH) nav.classList.add('zh-nav-hidden');
-   else if(y<lastY-6) nav.classList.remove('zh-nav-hidden');
-   lastY=y;
-  }
-  window.removeEventListener('scroll',nav._zhScroll||function(){});
-  nav._zhScroll=onScroll;
-  window.addEventListener('scroll',onScroll,{passive:true});
-  onScroll();
+  nav.classList.remove('zh-nav-hidden');
  }
  initMobileNav();
  if(mq.addEventListener) mq.addEventListener('change',initMobileNav);
@@ -2547,4 +2536,5 @@ a.header-logo img,
 })();
 </script>
 
+<script id="zh-site-fix-js" src="/wp-content/uploads/zach/zh-site-fix.js?v=zhfix1" defer></script>
 </body></html><!-- Page cached by LiteSpeed Cache 7.8.1 on 2026-07-17 19:15:15 -->

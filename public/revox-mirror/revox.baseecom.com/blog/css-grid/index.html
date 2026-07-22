@@ -22,7 +22,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
   left:50%;transform:translateX(-50%);right:auto;
   z-index:10001;transition:opacity .28s ease,transform .28s ease;
  }
- #zh-mobile-nav.zh-nav-hidden{opacity:0;pointer-events:none;transform:translateX(-50%) translateY(72px);}
+ #zh-mobile-nav.zh-nav-hidden{opacity:1!important;pointer-events:auto!important;transform:translateX(-50%)!important;}
  #zh-mobile-nav .zh-back-btn,
  #zh-mobile-nav .zh-hamburger{
   width:52px;height:52px;border-radius:50%;padding:0;
@@ -75,7 +75,8 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
   overflow:hidden;display:flex;flex-direction:column;
   box-shadow:0 16px 48px rgba(0,0,0,.7);
  }
- .zh-mobile-drawer.is-open{transform:translateY(0) scale(1);opacity:1;}
+ .zh-mobile-drawer:not(.is-open){pointer-events:none!important;visibility:hidden!important;}
+ .zh-mobile-drawer.is-open{transform:translateY(0) scale(1);opacity:1;pointer-events:auto!important;visibility:visible!important;}
  .zh-mobile-drawer-header{
   display:flex;justify-content:space-between;align-items:center;
   padding:12px 16px;border-bottom:1px solid rgba(191,247,71,.18);flex-shrink:0;
@@ -235,6 +236,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 <link rel="icon" href="../wp-content/uploads/2025/11/android-chrome-512x512-1-214x214.png" sizes="192x192">
 <link rel="apple-touch-icon" href="../wp-content/uploads/2025/11/android-chrome-512x512-1-214x214.png">
 <meta name="msapplication-TileImage" content="../wp-content/uploads/2025/11/android-chrome-512x512-1-300x300.png">
+ <link rel="stylesheet" id="zh-site-fix-css" href="/wp-content/uploads/zach/zh-site-fix.css?v=zhfix1">
 </head>
 
 <body class="blog wp-theme-revox ehf-header ehf-footer ehf-template-revox ehf-stylesheet-revox hfeed revox-toolkit-activate not-logged-in elementor-default elementor-kit-9">
@@ -252,7 +254,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 	<a class="hfe-skip-link" href="#content">Skip to main content</a><div id="page" class="hfeed site">
 
 		<header id="masthead" itemscope="itemscope" itemtype="https://schema.org/WPHeader">
-			<p class="main-title bhf-hidden" itemprop="headline"><a href="../index.html" title="Zachary Hutton" rel="home">Zachary</a></p>
+			<p class="main-title bhf-hidden" itemprop="headline"><a href="/" title="Zachary Hutton" rel="home">Zachary</a></p>
 			<style>.elementor-322 .elementor-element.elementor-element-6c5547f{--display:flex;--margin-top:0px;--margin-bottom:0px;--margin-left:0px;--margin-right:0px;--padding-top:0px;--padding-bottom:0px;--padding-left:0px;--padding-right:0px;}.elementor-322 .elementor-element.elementor-element-24c4555 .header-2.inner-page-style{border-style:none;}</style>		<div data-elementor-type="wp-post" data-elementor-id="322" class="elementor elementor-322">
 				<div class="elementor-element elementor-element-6c5547f e-con-full e-flex e-con e-parent" data-id="6c5547f" data-element_type="container" data-e-type="container">
 				<div class="elementor-element elementor-element-24c4555 elementor-widget elementor-widget-revox_header_5" data-id="24c4555" data-element_type="widget" data-e-type="widget" data-widget_type="revox_header_5.default">
@@ -264,7 +266,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  <div class="offcanvas__content">
  <div class="offcanvas__top mb-5 d-flex justify-content-between align-items-center">
  <div class="offcanvas__logo">
- <a href="../index.html">
+ <a href="/">
  <img src="../wp-content/assets/img/logo/white-icon.svg?v=zh3" alt="img">
  </a>
  </div>
@@ -277,39 +279,39 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  <p class="text d-none d-xl-block">
  Nullam dignissim, ante scelerisque the is euismod fermentum odio sem semper the is erat, a feugiat leo urna eget eros. Duis Aenean a imperdiet risus. </p>
  <div class="mobile-menu fix mb-3">
- <nav id="mobile-menus" class="menu-main-menu-container"><ul id="menu-main-menu" class="defult-header"><li id="menu-item-34" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-34"><a href="../index.html">Home</a>
+ <nav id="mobile-menus" class="menu-main-menu-container"><ul id="menu-main-menu" class="defult-header"><li id="menu-item-34" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-34"><a href="/">Home</a>
 <ul class="submenu">
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="../index.html">Full Stack Developer</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="../web-developer/index.html">Web Developer</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="../graphic-designer/index.html">Product Engineer</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="../fashion-model/index.html">Case Studies</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/">Full Stack Developer</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/web-developer/">Web Developer</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/graphic-designer/">Product Engineer</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/fashion-model/">Case Studies</a></li>
 </ul>
 </li>
-<li id="menu-item-39" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39"><a href="../about-me/index.html">About Me</a></li>
-<li class="menu-item menu-item-has-children menu-item-services"><a href="../services/index.html">Services</a>
+<li id="menu-item-39" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39"><a href="/about-me/">About Me</a></li>
+<li class="menu-item menu-item-has-children menu-item-services"><a href="/services/">Services</a>
 <ul class="submenu">
-	<li class="menu-item"><a href="../services/index.html">All Services</a></li>
-	<li class="menu-item"><a href="../services/premium-business-websites/index.html">Premium Business Websites</a></li>
-	<li class="menu-item"><a href="../services/custom-software/index.html">Custom Software</a></li>
-	<li class="menu-item"><a href="../services/ai-integrations/index.html">AI Integrations</a></li>
-	<li class="menu-item"><a href="../services/automation-systems/index.html">Automation Systems</a></li>
-	<li class="menu-item"><a href="../services/seo/index.html">SEO</a></li>
-	<li class="menu-item"><a href="../services/business-platforms/index.html">Business Platforms</a></li>
-	<li class="menu-item"><a href="../services/maintenance/index.html">Maintenance</a></li>
-	<li class="menu-item"><a href="../services/performance-optimization/index.html">Performance Optimization</a></li>
-	<li class="menu-item"><a href="../services/consulting/index.html">Consulting</a></li>
+	<li class="menu-item"><a href="/services/">All Services</a></li>
+	<li class="menu-item"><a href="/services/premium-business-websites/">Premium Business Websites</a></li>
+	<li class="menu-item"><a href="/services/custom-software/">Custom Software</a></li>
+	<li class="menu-item"><a href="/services/ai-integrations/">AI Integrations</a></li>
+	<li class="menu-item"><a href="/services/automation-systems/">Automation Systems</a></li>
+	<li class="menu-item"><a href="/services/seo/">SEO</a></li>
+	<li class="menu-item"><a href="/services/business-platforms/">Business Platforms</a></li>
+	<li class="menu-item"><a href="/services/maintenance/">Maintenance</a></li>
+	<li class="menu-item"><a href="/services/performance-optimization/">Performance Optimization</a></li>
+	<li class="menu-item"><a href="/services/consulting/">Consulting</a></li>
 </ul>
 </li>
 <li id="menu-item-40" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-40"><a href="#">More</a>
 <ul class="submenu">
-	<li class="menu-item"><a href="../our-faq/index.html">FAQ</a></li>
-	<li class="menu-item"><a href="../privacy-policy/index.html">Privacy Policy</a></li>
-	<li class="menu-item"><a href="../terms/index.html">Terms</a></li>
+	<li class="menu-item"><a href="/our-faq/">FAQ</a></li>
+	<li class="menu-item"><a href="/privacy-policy/">Privacy Policy</a></li>
+	<li class="menu-item"><a href="/terms/">Terms</a></li>
 </ul>
 </li>
-<li id="menu-item-47" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47"><a href="../portfolio-page/index.html">Portfolio</a></li>
-<li id="menu-item-49" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-49"><a href="../blog/index.html">Blog</a></li>
-<li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="../contact-us/index.html">Contact Me</a></li>
+<li id="menu-item-47" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47"><a href="/portfolio-page/">Portfolio</a></li>
+<li id="menu-item-49" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-49"><a href="/blog/">Blog</a></li>
+<li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/contact-us/">Contact Me</a></li>
 </ul></nav> </div>
  </div>
  </div>
@@ -322,85 +324,85 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  <div class="container">
  <div class="mega-menu-wrapper">
  <div class="header-main">
- <a href="../index.html" class="header-logo">
+ <a href="/" class="header-logo">
  <img src="../wp-content/assets/img/logo/white-icon.svg?v=zh3" alt="img">
  </a>
  <div class="mean__menu-wrapper">
  <div class="main-menu">
  <nav id="desktop-main-menu">
-<ul id="menu-main-menu" class="defult-header"><li id="menu-item-34" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-34"><a href="../index.html">Home</a>
+<ul id="menu-main-menu" class="defult-header"><li id="menu-item-34" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-34"><a href="/">Home</a>
 <ul class="submenu">
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="../index.html">Full Stack Developer</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="../web-developer/index.html">Web Developer</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="../graphic-designer/index.html">Product Engineer</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="../fashion-model/index.html">Case Studies</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/">Full Stack Developer</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/web-developer/">Web Developer</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/graphic-designer/">Product Engineer</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/fashion-model/">Case Studies</a></li>
 </ul>
 </li>
-<li id="menu-item-39" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39"><a href="../about-me/index.html">About Me</a></li>
-<li class="menu-item menu-item-has-children menu-item-services"><a href="../services/index.html">Services</a>
+<li id="menu-item-39" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39"><a href="/about-me/">About Me</a></li>
+<li class="menu-item menu-item-has-children menu-item-services"><a href="/services/">Services</a>
 <ul class="submenu">
-	<li class="menu-item"><a href="../services/index.html">All Services</a></li>
-	<li class="menu-item"><a href="../services/premium-business-websites/index.html">Premium Business Websites</a></li>
-	<li class="menu-item"><a href="../services/custom-software/index.html">Custom Software</a></li>
-	<li class="menu-item"><a href="../services/ai-integrations/index.html">AI Integrations</a></li>
-	<li class="menu-item"><a href="../services/automation-systems/index.html">Automation Systems</a></li>
-	<li class="menu-item"><a href="../services/seo/index.html">SEO</a></li>
-	<li class="menu-item"><a href="../services/business-platforms/index.html">Business Platforms</a></li>
-	<li class="menu-item"><a href="../services/maintenance/index.html">Maintenance</a></li>
-	<li class="menu-item"><a href="../services/performance-optimization/index.html">Performance Optimization</a></li>
-	<li class="menu-item"><a href="../services/consulting/index.html">Consulting</a></li>
+	<li class="menu-item"><a href="/services/">All Services</a></li>
+	<li class="menu-item"><a href="/services/premium-business-websites/">Premium Business Websites</a></li>
+	<li class="menu-item"><a href="/services/custom-software/">Custom Software</a></li>
+	<li class="menu-item"><a href="/services/ai-integrations/">AI Integrations</a></li>
+	<li class="menu-item"><a href="/services/automation-systems/">Automation Systems</a></li>
+	<li class="menu-item"><a href="/services/seo/">SEO</a></li>
+	<li class="menu-item"><a href="/services/business-platforms/">Business Platforms</a></li>
+	<li class="menu-item"><a href="/services/maintenance/">Maintenance</a></li>
+	<li class="menu-item"><a href="/services/performance-optimization/">Performance Optimization</a></li>
+	<li class="menu-item"><a href="/services/consulting/">Consulting</a></li>
 </ul>
 </li>
 <li id="menu-item-40" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-40"><a href="#">More</a>
 <ul class="submenu">
-	<li class="menu-item"><a href="../our-faq/index.html">FAQ</a></li>
-	<li class="menu-item"><a href="../privacy-policy/index.html">Privacy Policy</a></li>
-	<li class="menu-item"><a href="../terms/index.html">Terms</a></li>
+	<li class="menu-item"><a href="/our-faq/">FAQ</a></li>
+	<li class="menu-item"><a href="/privacy-policy/">Privacy Policy</a></li>
+	<li class="menu-item"><a href="/terms/">Terms</a></li>
 </ul>
 </li>
-<li id="menu-item-47" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47"><a href="../portfolio-page/index.html">Portfolio</a></li>
-<li id="menu-item-49" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-49"><a href="../blog/index.html">Blog</a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="../contact-us/index.html">Contact Me</a></li>
+<li id="menu-item-47" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47"><a href="/portfolio-page/">Portfolio</a></li>
+<li id="menu-item-49" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-49"><a href="/blog/">Blog</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/contact-us/">Contact Me</a></li>
 </ul> </nav>
  <nav id="mean-nav">
- <nav id="mobile-menu" class="menu-main-menu-container"><ul id="menu-main-menu-1" class=""><li id="menu-item-home" class="has-dropdown"><a href="../index.html">Home</a>
+ <nav id="mobile-menu" class="menu-main-menu-container"><ul id="menu-main-menu-1" class=""><li id="menu-item-home" class="has-dropdown"><a href="/">Home</a>
 <ul class="submenu">
-	<li><a href="../index.html">Full Stack Developer</a></li>
-	<li><a href="../web-developer/index.html">Web Developer</a></li>
-	<li><a href="../graphic-designer/index.html">Product Engineer</a></li>
-	<li><a href="../fashion-model/index.html">Case Studies</a></li>
+	<li><a href="/">Full Stack Developer</a></li>
+	<li><a href="/web-developer/">Web Developer</a></li>
+	<li><a href="/graphic-designer/">Product Engineer</a></li>
+	<li><a href="/fashion-model/">Case Studies</a></li>
 </ul>
 </li>
-<li><a href="../about-me/index.html">About Me</a></li>
-<li class="has-dropdown"><a href="../services/index.html">Services</a>
+<li><a href="/about-me/">About Me</a></li>
+<li class="has-dropdown"><a href="/services/">Services</a>
 <ul class="submenu">
-	<li><a href="../services/index.html">All Services</a></li>
-	<li><a href="../services/premium-business-websites/index.html">Premium Business Websites</a></li>
-	<li><a href="../services/custom-software/index.html">Custom Software</a></li>
-	<li><a href="../services/ai-integrations/index.html">AI Integrations</a></li>
-	<li><a href="../services/automation-systems/index.html">Automation Systems</a></li>
-	<li><a href="../services/seo/index.html">SEO</a></li>
-	<li><a href="../services/business-platforms/index.html">Business Platforms</a></li>
-	<li><a href="../services/maintenance/index.html">Maintenance</a></li>
-	<li><a href="../services/performance-optimization/index.html">Performance Optimization</a></li>
-	<li><a href="../services/consulting/index.html">Consulting</a></li>
+	<li><a href="/services/">All Services</a></li>
+	<li><a href="/services/premium-business-websites/">Premium Business Websites</a></li>
+	<li><a href="/services/custom-software/">Custom Software</a></li>
+	<li><a href="/services/ai-integrations/">AI Integrations</a></li>
+	<li><a href="/services/automation-systems/">Automation Systems</a></li>
+	<li><a href="/services/seo/">SEO</a></li>
+	<li><a href="/services/business-platforms/">Business Platforms</a></li>
+	<li><a href="/services/maintenance/">Maintenance</a></li>
+	<li><a href="/services/performance-optimization/">Performance Optimization</a></li>
+	<li><a href="/services/consulting/">Consulting</a></li>
 </ul>
 </li>
 <li class="has-dropdown"><a href="#">More</a>
 <ul class="submenu">
-	<li><a href="../our-faq/index.html">FAQ</a></li>
-	<li><a href="../privacy-policy/index.html">Privacy Policy</a></li>
-	<li><a href="../terms/index.html">Terms</a></li>
+	<li><a href="/our-faq/">FAQ</a></li>
+	<li><a href="/privacy-policy/">Privacy Policy</a></li>
+	<li><a href="/terms/">Terms</a></li>
 </ul>
 </li>
-<li><a href="../portfolio-page/index.html">Portfolio</a></li>
-<li><a href="../blog/index.html">Blog</a></li>
-<li><a href="../contact-us/index.html">Contact Me</a></li>
+<li><a href="/portfolio-page/">Portfolio</a></li>
+<li><a href="/blog/">Blog</a></li>
+<li><a href="/contact-us/">Contact Me</a></li>
 </ul></nav> </nav>
  </div>
  </div>
  <div class="header-right d-flex justify-content-end align-items-center mt-0">
- <a href="../hire-me/index.html" class="theme-btn">Hire Me<i class="fa-solid fa-arrow-up-right"></i>
+ <a href="/hire-me/" class="theme-btn">Hire Me<i class="fa-solid fa-arrow-up-right"></i>
  </a>
  <div class="header__hamburger d-xl-none my-auto">
  <div class="sidebar__toggle">
@@ -425,7 +427,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 
  <span class="sub_title d-block fw-medium">
  <div class="list breadcrumb-menu">
- <a href="../index.html">Home</a> <a href="../index.html">/</a> <a href="../index.html">Blog</a> CSS Grid vs Flexbox: When I Reach for Which </div>
+ <a href="/">Home</a> <a href="/">/</a> <a href="/">Blog</a> CSS Grid vs Flexbox: When I Reach for Which </div>
  </span>
  </div>
  </div>
@@ -596,14 +598,14 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
     display: flex;
     flex-direction: column;
   }
-}</code></pre><p>This is powerful because the same card component can live in a narrow sidebar or a wide main content area and adapt without the parent knowing anything about breakpoints. I have started using container queries on recent portfolio and client work, and they reduce the amount of media query overrides significantly.</p><p>The combination of Grid for page structure, Flexbox for component interiors, and container queries for responsive component behavior gives me a layout system that scales well across projects without accumulating fragile overrides.</p></section><section class="zh-article-section" id="common-layout-mistakes-i-try-to-avoid"><h2>Common layout mistakes I try to avoid</h2><p>One mistake is forcing Flexbox to imitate Grid by stacking nested wrappers and width percentages until the section becomes brittle. Another is using Grid for tiny one direction alignments that would be simpler with Flexbox. Both approaches work just enough to be tempting, then turn into friction when content changes.</p><p>I also avoid solving spacing problems with random margins on children when the parent should own the gap. Whether I use Grid or Flexbox, I prefer parent driven spacing because it creates a cleaner, more predictable system. That becomes especially important when components repeat or reorder on smaller screens.</p><p>Another common trap is hardcoding pixel widths in grid columns when <code>minmax</code>, <code>fr</code> units, or <code>auto-fit</code> would handle the responsiveness automatically. I have seen developers write five media queries to achieve what one <code>repeat(auto-fit, minmax(280px, 1fr))</code> line handles natively.</p><p>Finally, I do not let layout decisions drift away from semantics. A clean structure matters for accessibility, maintainability, and SEO. Good CSS should support meaningful HTML, not fight it.</p></section><section class="zh-article-section" id="my-practical-decision-tree-for-choosing-fast"><h2>My practical decision tree for choosing fast</h2><p>If I need rows and columns together, I start with Grid. If I need alignment along one axis, I start with Flexbox. If I am building a section shell, Grid gets the first shot. If I am building a component interior, Flexbox usually does. If I need both, I combine them without apology. If I need cards to align their internal rows, I reach for subgrid. If a component needs to adapt based on its own container width rather than the viewport, I add a container query.</p><p>That rule set is simple enough to use under deadline pressure, which is when most layout choices are actually made. The goal is not to sound clever about CSS. The goal is to produce layouts that survive real content, real revisions, and real devices.</p><p>If you want to see that mindset applied in a polished production context, take a look at my <a href="../works/weroi/index.html">weROI case study</a>, browse the broader <a href="../services/premium-business-websites/index.html">website service work</a>, or <a href="../contact-us/index.html">contact me</a> if you need a front end that feels intentional instead of improvised.</p></section>
+}</code></pre><p>This is powerful because the same card component can live in a narrow sidebar or a wide main content area and adapt without the parent knowing anything about breakpoints. I have started using container queries on recent portfolio and client work, and they reduce the amount of media query overrides significantly.</p><p>The combination of Grid for page structure, Flexbox for component interiors, and container queries for responsive component behavior gives me a layout system that scales well across projects without accumulating fragile overrides.</p></section><section class="zh-article-section" id="common-layout-mistakes-i-try-to-avoid"><h2>Common layout mistakes I try to avoid</h2><p>One mistake is forcing Flexbox to imitate Grid by stacking nested wrappers and width percentages until the section becomes brittle. Another is using Grid for tiny one direction alignments that would be simpler with Flexbox. Both approaches work just enough to be tempting, then turn into friction when content changes.</p><p>I also avoid solving spacing problems with random margins on children when the parent should own the gap. Whether I use Grid or Flexbox, I prefer parent driven spacing because it creates a cleaner, more predictable system. That becomes especially important when components repeat or reorder on smaller screens.</p><p>Another common trap is hardcoding pixel widths in grid columns when <code>minmax</code>, <code>fr</code> units, or <code>auto-fit</code> would handle the responsiveness automatically. I have seen developers write five media queries to achieve what one <code>repeat(auto-fit, minmax(280px, 1fr))</code> line handles natively.</p><p>Finally, I do not let layout decisions drift away from semantics. A clean structure matters for accessibility, maintainability, and SEO. Good CSS should support meaningful HTML, not fight it.</p></section><section class="zh-article-section" id="my-practical-decision-tree-for-choosing-fast"><h2>My practical decision tree for choosing fast</h2><p>If I need rows and columns together, I start with Grid. If I need alignment along one axis, I start with Flexbox. If I am building a section shell, Grid gets the first shot. If I am building a component interior, Flexbox usually does. If I need both, I combine them without apology. If I need cards to align their internal rows, I reach for subgrid. If a component needs to adapt based on its own container width rather than the viewport, I add a container query.</p><p>That rule set is simple enough to use under deadline pressure, which is when most layout choices are actually made. The goal is not to sound clever about CSS. The goal is to produce layouts that survive real content, real revisions, and real devices.</p><p>If you want to see that mindset applied in a polished production context, take a look at my <a href="/works/weroi/">weROI case study</a>, browse the broader <a href="/services/premium-business-websites/">website service work</a>, or <a href="/contact-us/">contact me</a> if you need a front end that feels intentional instead of improvised.</p></section>
       </div>
       <div class="zh-blog-cta">
        <h3>Need help building something similar?</h3>
        <p>I design and build premium websites, product experiences, and custom software with a strong focus on clarity, performance, and real business outcomes.</p>
        <div class="zh-blog-cta-actions">
-        <a class="theme-btn" href="../hire-me/index.html">Hire Me <i class="fa-solid fa-arrow-up-right"></i></a>
-        <a class="theme-btn style-border" href="../contact-us/index.html">Contact Me <i class="fa-solid fa-arrow-up-right"></i></a>
+        <a class="theme-btn" href="/hire-me/">Hire Me <i class="fa-solid fa-arrow-up-right"></i></a>
+        <a class="theme-btn style-border" href="/contact-us/">Contact Me <i class="fa-solid fa-arrow-up-right"></i></a>
        </div>
       </div>
     </article>
@@ -625,10 +627,10 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
      <div class="single-sidebar-widget">
       <h3 class="sidebar-widget-title">Related links</h3>
       <ul>
-       <li><a href="../portfolio-page/index.html">Portfolio</a></li>
-       <li><a href="../services/index.html">Services</a></li>
-       <li><a href="../blog/index.html">All blog posts</a></li>
-       <li><a href="../contact-us/index.html">Contact Me</a></li>
+       <li><a href="/portfolio-page/">Portfolio</a></li>
+       <li><a href="/services/">Services</a></li>
+       <li><a href="/blog/">All blog posts</a></li>
+       <li><a href="/contact-us/">Contact Me</a></li>
       </ul>
      </div>
      <div class="single-sidebar-widget">
@@ -677,7 +679,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  </div>
  <div class="footer-wrapper-2">
  <div class="container">
- <a href="../index.html" class="footer-logo">
+ <a href="/" class="footer-logo">
  <img src="../wp-content/uploads/2026/01/white-icon.svg?v=zh3" alt="img">
  </a>
  <div class="content wow fadeInUp" data-wow-delay=".3s">
@@ -694,27 +696,27 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  quick links </h4>
  <ul class="menu-item">
  <li>
- <a href="../index.html">
+ <a href="/">
  home </a>
  </li>
  <li>
- <a href="../about-me/index.html">
+ <a href="/about-me/">
  ABOUT ME </a>
  </li>
  <li>
- <a href="../services/index.html">
+ <a href="/services/">
  SERVICES </a>
  </li>
  <li>
- <a href="../portfolio-page/index.html">
+ <a href="/portfolio-page/">
  PORTFOLIO </a>
  </li>
  <li>
- <a href="../blog/index.html">
+ <a href="/blog/">
  news &amp; blog </a>
  </li>
  <li>
- <a href="../contact-us/index.html">
+ <a href="/contact-us/">
  CONTACT ME </a>
  </li>
  </ul>
@@ -779,11 +781,11 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  </div>
  <ul>
  <li>
- <a href="../terms/index.html">
+ <a href="/terms/">
  Terms &amp; Conditions </a>
  </li>
  <li>
- <a href="../privacy-policy/index.html">
+ <a href="/privacy-policy/">
  Privacy Policy </a>
  </li>
  </ul>
@@ -1242,7 +1244,7 @@ a.header-logo img,
 <script id="zh-header-ux-js">
 (function(){
  var mq=window.matchMedia('(max-width:991px)');
- var DRAWER_NAV='<a class="zh-nav-top" href="../index.html">Home</a><a class="zh-nav-top" href="../about-me/index.html">About Me</a><div class="zh-nav-group"><button type="button" class="zh-nav-accordion" aria-expanded="false">Services<span class="zh-acc-chevron" aria-hidden="true">▼</span></button><div class="zh-nav-sub"><a href="../services/index.html">All Services</a><a href="../services/premium-business-websites/index.html">Premium Business Websites</a><a href="../services/custom-software/index.html">Custom Software</a><a href="../services/ai-integrations/index.html">AI Integrations</a><a href="../services/automation-systems/index.html">Automation Systems</a><a href="../services/seo/index.html">SEO</a><a href="../services/business-platforms/index.html">Business Platforms</a><a href="../services/maintenance/index.html">Maintenance</a><a href="../services/performance-optimization/index.html">Performance Optimization</a><a href="../services/consulting/index.html">Consulting</a></div></div><div class="zh-nav-group"><button type="button" class="zh-nav-accordion" aria-expanded="false">More<span class="zh-acc-chevron" aria-hidden="true">▼</span></button><div class="zh-nav-sub"><a href="../our-faq/index.html">FAQ</a><a href="../privacy-policy/index.html">Privacy Policy</a><a href="../terms/index.html">Terms</a></div></div><a class="zh-nav-top" href="../portfolio-page/index.html">Portfolio</a><a class="zh-nav-top" href="../blog/index.html">Blog</a><a class="zh-nav-top" href="../contact-us/index.html">Contact Me</a>';
+ var DRAWER_NAV='<a class="zh-nav-top" href="/">Home</a><a class="zh-nav-top" href="/about-me/">About Me</a><div class="zh-nav-group"><button type="button" class="zh-nav-accordion" aria-expanded="false">Services<span class="zh-acc-chevron" aria-hidden="true">▼</span></button><div class="zh-nav-sub"><a href="/services/">All Services</a><a href="/services/premium-business-websites/">Premium Business Websites</a><a href="/services/custom-software/">Custom Software</a><a href="/services/ai-integrations/">AI Integrations</a><a href="/services/automation-systems/">Automation Systems</a><a href="/services/seo/">SEO</a><a href="/services/business-platforms/">Business Platforms</a><a href="/services/maintenance/">Maintenance</a><a href="/services/performance-optimization/">Performance Optimization</a><a href="/services/consulting/">Consulting</a></div></div><div class="zh-nav-group"><button type="button" class="zh-nav-accordion" aria-expanded="false">More<span class="zh-acc-chevron" aria-hidden="true">▼</span></button><div class="zh-nav-sub"><a href="/our-faq/">FAQ</a><a href="/privacy-policy/">Privacy Policy</a><a href="/terms/">Terms</a></div></div><a class="zh-nav-top" href="/portfolio-page/">Portfolio</a><a class="zh-nav-top" href="/blog/">Blog</a><a class="zh-nav-top" href="/contact-us/">Contact Me</a>';
  function openDrawer(){
   var d=document.getElementById('zh-mobile-drawer');
   var b=document.getElementById('zh-mobile-drawer-backdrop');
@@ -1314,7 +1316,7 @@ a.header-logo img,
   backBtn.className='zh-back-btn';
   backBtn.setAttribute('aria-label','Go back');
   backBtn.innerHTML='&#8592;';
-  backBtn.addEventListener('click',function(e){e.preventDefault();if(window.history.length>1) window.history.back(); else window.location.href='../index.html';});
+  backBtn.addEventListener('click',function(e){e.preventDefault();if(window.history.length>1) window.history.back(); else window.location.href='/';});
   var menuBtn=document.createElement('button');
   menuBtn.type='button';
   menuBtn.className='zh-hamburger';
@@ -1335,7 +1337,7 @@ a.header-logo img,
   var existing=document.querySelector('.zh-mobile-home-btn');if(existing) return;
   var btn=document.createElement('a');
   btn.className='zh-mobile-home-btn';
-  btn.href='../index.html';
+  btn.href='/';
   btn.setAttribute('aria-label','Go to home page');
   btn.innerHTML='&#8592; HOME';
   document.body.appendChild(btn);
@@ -1353,20 +1355,7 @@ a.header-logo img,
   ensureDrawer();
   var nav=document.getElementById('zh-mobile-nav')||buildNav();
   buildHomeBtn();
-  var lastY=window.scrollY||0;
-  var hero=document.querySelector('.hero-section,.hero-section1,.hero-1,.hero-5,.hero-3,main h1,header');
-  var heroH=hero?(hero.getBoundingClientRect().height+window.scrollY):360;
-  function onScroll(){
-   var y=window.scrollY||window.pageYOffset;
-   if(y<heroH*0.4){nav.classList.remove('zh-nav-hidden');lastY=y;return;}
-   if(y>lastY+6&&y>heroH) nav.classList.add('zh-nav-hidden');
-   else if(y<lastY-6) nav.classList.remove('zh-nav-hidden');
-   lastY=y;
-  }
-  window.removeEventListener('scroll',nav._zhScroll||function(){});
-  nav._zhScroll=onScroll;
-  window.addEventListener('scroll',onScroll,{passive:true});
-  onScroll();
+  nav.classList.remove('zh-nav-hidden');
  }
  initMobileNav();
  if(mq.addEventListener) mq.addEventListener('change',initMobileNav);
@@ -1391,4 +1380,5 @@ a.header-logo img,
 })();
 </script>
 
+<script id="zh-site-fix-js" src="/wp-content/uploads/zach/zh-site-fix.js?v=zhfix1" defer></script>
 </body></html><!-- Page cached by LiteSpeed Cache 7.8.1 on 2026-07-17 19:46:17 -->

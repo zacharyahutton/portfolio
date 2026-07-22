@@ -758,18 +758,28 @@
     });
 
     // Initialize ScrollSmoother
-    let smoother = ScrollSmoother.create({
+    /* ZH_MOBILE_SMOOTH_SKIP */
+    var zhIsMobile = window.matchMedia('(max-width: 991px)').matches;
+    let smoother = null;
+    if (!zhIsMobile) {
+      try {
+        smoother = ScrollSmoother.create({
         wrapper: "#smooth-wrapper",
         content: "#smooth-content",
-        smooth: 2,
+        smooth: 1.2,
         effects: true,
-        smoothTouch: 0.1,
+        smoothTouch: 0,
         normalizeScroll: false,
         ignoreMobileResize: true,
     });
+      } catch (zhErr) { console.warn('ScrollSmoother skipped', zhErr); }
+    } else {
+      try { $('#smooth-wrapper, #smooth-content').css({height:'auto',overflow:'visible',transform:'none'}); } catch(e){}
+    }
 
     // After smoother initialized, run SplitText animations
-    if ($(".tv_hero_title").length) {
+    /* ZH_SPLIT_SAFE */
+    if ($(".tv_hero_title").length && !zhIsMobile) {
         $(".tv_hero_title").each(function () {
         let $el = $(this);
         let split = new SplitText($el, {
@@ -799,7 +809,7 @@
             scrollTrigger: {
             trigger: $el,
             start: "top 90%",
-            scroller: smoother.scrollContainer, // 👈 this line is the key fix
+            scroller: (smoother && smoother.scrollContainer) ? smoother.scrollContainer : undefined, // ZH null-safe
             toggleActions: "play reverse play reverse",
             markers: false,
             },
@@ -820,7 +830,7 @@
     
 
     // Update ScrollTrigger when smoother refreshes
-    ScrollTrigger.addEventListener("refresh", () => smoother.refresh());
+    ScrollTrigger.addEventListener("refresh", () => { if (smoother) smoother.refresh(); });
     }
 
     /* ================================
@@ -1678,6 +1688,8 @@ text_slider.on('slideChangeTransitionStart', function () {
   }
   // Init preloader
   preloader();
+  /* ZH_PRELOADER_FAST */
+  setTimeout(function(){ try { var p=document.querySelector('.preloader'); if(p && p.style.display!=='none'){ p.style.display='none'; p.style.zIndex='-1'; } } catch(e){} }, 2500);
 
 
    /* ================================
@@ -1837,8 +1849,8 @@ text_slider.on('slideChangeTransitionStart', function () {
       var y = window.pageYOffset || 0;
       var isMobile = window.matchMedia('(max-width: 991px)').matches;
       if(!isMobile){
-        header.style.transform = '';
-        header.style.transition = '';
+        header.style.transform = 'none';
+        header.classList.remove('zach-header-hide','header-hidden');
         return;
       }
       header.style.transition = 'transform .25s ease';

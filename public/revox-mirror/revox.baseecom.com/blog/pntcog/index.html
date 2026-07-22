@@ -22,7 +22,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
   left:50%;transform:translateX(-50%);right:auto;
   z-index:10001;transition:opacity .28s ease,transform .28s ease;
  }
- #zh-mobile-nav.zh-nav-hidden{opacity:0;pointer-events:none;transform:translateX(-50%) translateY(72px);}
+ #zh-mobile-nav.zh-nav-hidden{opacity:1!important;pointer-events:auto!important;transform:translateX(-50%)!important;}
  #zh-mobile-nav .zh-back-btn,
  #zh-mobile-nav .zh-hamburger{
   width:52px;height:52px;border-radius:50%;padding:0;
@@ -75,7 +75,8 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
   overflow:hidden;display:flex;flex-direction:column;
   box-shadow:0 16px 48px rgba(0,0,0,.7);
  }
- .zh-mobile-drawer.is-open{transform:translateY(0) scale(1);opacity:1;}
+ .zh-mobile-drawer:not(.is-open){pointer-events:none!important;visibility:hidden!important;}
+ .zh-mobile-drawer.is-open{transform:translateY(0) scale(1);opacity:1;pointer-events:auto!important;visibility:visible!important;}
  .zh-mobile-drawer-header{
   display:flex;justify-content:space-between;align-items:center;
   padding:12px 16px;border-bottom:1px solid rgba(191,247,71,.18);flex-shrink:0;
@@ -235,6 +236,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 <link rel="icon" href="../wp-content/uploads/2025/11/android-chrome-512x512-1-214x214.png" sizes="192x192">
 <link rel="apple-touch-icon" href="../wp-content/uploads/2025/11/android-chrome-512x512-1-214x214.png">
 <meta name="msapplication-TileImage" content="../wp-content/uploads/2025/11/android-chrome-512x512-1-300x300.png">
+ <link rel="stylesheet" id="zh-site-fix-css" href="/wp-content/uploads/zach/zh-site-fix.css?v=zhfix1">
 </head>
 
 <body class="blog wp-theme-revox ehf-header ehf-footer ehf-template-revox ehf-stylesheet-revox hfeed revox-toolkit-activate not-logged-in elementor-default elementor-kit-9">
@@ -252,7 +254,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 	<a class="hfe-skip-link" href="#content">Skip to main content</a><div id="page" class="hfeed site">
 
 		<header id="masthead" itemscope="itemscope" itemtype="https://schema.org/WPHeader">
-			<p class="main-title bhf-hidden" itemprop="headline"><a href="../index.html" title="Zachary Hutton" rel="home">Zachary</a></p>
+			<p class="main-title bhf-hidden" itemprop="headline"><a href="/" title="Zachary Hutton" rel="home">Zachary</a></p>
 			<style>.elementor-322 .elementor-element.elementor-element-6c5547f{--display:flex;--margin-top:0px;--margin-bottom:0px;--margin-left:0px;--margin-right:0px;--padding-top:0px;--padding-bottom:0px;--padding-left:0px;--padding-right:0px;}.elementor-322 .elementor-element.elementor-element-24c4555 .header-2.inner-page-style{border-style:none;}</style>		<div data-elementor-type="wp-post" data-elementor-id="322" class="elementor elementor-322">
 				<div class="elementor-element elementor-element-6c5547f e-con-full e-flex e-con e-parent" data-id="6c5547f" data-element_type="container" data-e-type="container">
 				<div class="elementor-element elementor-element-24c4555 elementor-widget elementor-widget-revox_header_5" data-id="24c4555" data-element_type="widget" data-e-type="widget" data-widget_type="revox_header_5.default">
@@ -264,7 +266,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  <div class="offcanvas__content">
  <div class="offcanvas__top mb-5 d-flex justify-content-between align-items-center">
  <div class="offcanvas__logo">
- <a href="../index.html">
+ <a href="/">
  <img src="../wp-content/assets/img/logo/white-icon.svg?v=zh3" alt="img">
  </a>
  </div>
@@ -277,39 +279,39 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  <p class="text d-none d-xl-block">
  Nullam dignissim, ante scelerisque the is euismod fermentum odio sem semper the is erat, a feugiat leo urna eget eros. Duis Aenean a imperdiet risus. </p>
  <div class="mobile-menu fix mb-3">
- <nav id="mobile-menus" class="menu-main-menu-container"><ul id="menu-main-menu" class="defult-header"><li id="menu-item-34" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-34"><a href="../index.html">Home</a>
+ <nav id="mobile-menus" class="menu-main-menu-container"><ul id="menu-main-menu" class="defult-header"><li id="menu-item-34" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-34"><a href="/">Home</a>
 <ul class="submenu">
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="../index.html">Full Stack Developer</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="../web-developer/index.html">Web Developer</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="../graphic-designer/index.html">Product Engineer</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="../fashion-model/index.html">Case Studies</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/">Full Stack Developer</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/web-developer/">Web Developer</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/graphic-designer/">Product Engineer</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/fashion-model/">Case Studies</a></li>
 </ul>
 </li>
-<li id="menu-item-39" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39"><a href="../about-me/index.html">About Me</a></li>
-<li class="menu-item menu-item-has-children menu-item-services"><a href="../services/index.html">Services</a>
+<li id="menu-item-39" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39"><a href="/about-me/">About Me</a></li>
+<li class="menu-item menu-item-has-children menu-item-services"><a href="/services/">Services</a>
 <ul class="submenu">
-	<li class="menu-item"><a href="../services/index.html">All Services</a></li>
-	<li class="menu-item"><a href="../services/premium-business-websites/index.html">Premium Business Websites</a></li>
-	<li class="menu-item"><a href="../services/custom-software/index.html">Custom Software</a></li>
-	<li class="menu-item"><a href="../services/ai-integrations/index.html">AI Integrations</a></li>
-	<li class="menu-item"><a href="../services/automation-systems/index.html">Automation Systems</a></li>
-	<li class="menu-item"><a href="../services/seo/index.html">SEO</a></li>
-	<li class="menu-item"><a href="../services/business-platforms/index.html">Business Platforms</a></li>
-	<li class="menu-item"><a href="../services/maintenance/index.html">Maintenance</a></li>
-	<li class="menu-item"><a href="../services/performance-optimization/index.html">Performance Optimization</a></li>
-	<li class="menu-item"><a href="../services/consulting/index.html">Consulting</a></li>
+	<li class="menu-item"><a href="/services/">All Services</a></li>
+	<li class="menu-item"><a href="/services/premium-business-websites/">Premium Business Websites</a></li>
+	<li class="menu-item"><a href="/services/custom-software/">Custom Software</a></li>
+	<li class="menu-item"><a href="/services/ai-integrations/">AI Integrations</a></li>
+	<li class="menu-item"><a href="/services/automation-systems/">Automation Systems</a></li>
+	<li class="menu-item"><a href="/services/seo/">SEO</a></li>
+	<li class="menu-item"><a href="/services/business-platforms/">Business Platforms</a></li>
+	<li class="menu-item"><a href="/services/maintenance/">Maintenance</a></li>
+	<li class="menu-item"><a href="/services/performance-optimization/">Performance Optimization</a></li>
+	<li class="menu-item"><a href="/services/consulting/">Consulting</a></li>
 </ul>
 </li>
 <li id="menu-item-40" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-40"><a href="#">More</a>
 <ul class="submenu">
-	<li class="menu-item"><a href="../our-faq/index.html">FAQ</a></li>
-	<li class="menu-item"><a href="../privacy-policy/index.html">Privacy Policy</a></li>
-	<li class="menu-item"><a href="../terms/index.html">Terms</a></li>
+	<li class="menu-item"><a href="/our-faq/">FAQ</a></li>
+	<li class="menu-item"><a href="/privacy-policy/">Privacy Policy</a></li>
+	<li class="menu-item"><a href="/terms/">Terms</a></li>
 </ul>
 </li>
-<li id="menu-item-47" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47"><a href="../portfolio-page/index.html">Portfolio</a></li>
-<li id="menu-item-49" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-49"><a href="../blog/index.html">Blog</a></li>
-<li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="../contact-us/index.html">Contact Me</a></li>
+<li id="menu-item-47" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47"><a href="/portfolio-page/">Portfolio</a></li>
+<li id="menu-item-49" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-49"><a href="/blog/">Blog</a></li>
+<li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/contact-us/">Contact Me</a></li>
 </ul></nav> </div>
  </div>
  </div>
@@ -322,85 +324,85 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  <div class="container">
  <div class="mega-menu-wrapper">
  <div class="header-main">
- <a href="../index.html" class="header-logo">
+ <a href="/" class="header-logo">
  <img src="../wp-content/assets/img/logo/white-icon.svg?v=zh3" alt="img">
  </a>
  <div class="mean__menu-wrapper">
  <div class="main-menu">
  <nav id="desktop-main-menu">
-<ul id="menu-main-menu" class="defult-header"><li id="menu-item-34" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-34"><a href="../index.html">Home</a>
+<ul id="menu-main-menu" class="defult-header"><li id="menu-item-34" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-34"><a href="/">Home</a>
 <ul class="submenu">
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="../index.html">Full Stack Developer</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="../web-developer/index.html">Web Developer</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="../graphic-designer/index.html">Product Engineer</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="../fashion-model/index.html">Case Studies</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/">Full Stack Developer</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/web-developer/">Web Developer</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/graphic-designer/">Product Engineer</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/fashion-model/">Case Studies</a></li>
 </ul>
 </li>
-<li id="menu-item-39" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39"><a href="../about-me/index.html">About Me</a></li>
-<li class="menu-item menu-item-has-children menu-item-services"><a href="../services/index.html">Services</a>
+<li id="menu-item-39" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39"><a href="/about-me/">About Me</a></li>
+<li class="menu-item menu-item-has-children menu-item-services"><a href="/services/">Services</a>
 <ul class="submenu">
-	<li class="menu-item"><a href="../services/index.html">All Services</a></li>
-	<li class="menu-item"><a href="../services/premium-business-websites/index.html">Premium Business Websites</a></li>
-	<li class="menu-item"><a href="../services/custom-software/index.html">Custom Software</a></li>
-	<li class="menu-item"><a href="../services/ai-integrations/index.html">AI Integrations</a></li>
-	<li class="menu-item"><a href="../services/automation-systems/index.html">Automation Systems</a></li>
-	<li class="menu-item"><a href="../services/seo/index.html">SEO</a></li>
-	<li class="menu-item"><a href="../services/business-platforms/index.html">Business Platforms</a></li>
-	<li class="menu-item"><a href="../services/maintenance/index.html">Maintenance</a></li>
-	<li class="menu-item"><a href="../services/performance-optimization/index.html">Performance Optimization</a></li>
-	<li class="menu-item"><a href="../services/consulting/index.html">Consulting</a></li>
+	<li class="menu-item"><a href="/services/">All Services</a></li>
+	<li class="menu-item"><a href="/services/premium-business-websites/">Premium Business Websites</a></li>
+	<li class="menu-item"><a href="/services/custom-software/">Custom Software</a></li>
+	<li class="menu-item"><a href="/services/ai-integrations/">AI Integrations</a></li>
+	<li class="menu-item"><a href="/services/automation-systems/">Automation Systems</a></li>
+	<li class="menu-item"><a href="/services/seo/">SEO</a></li>
+	<li class="menu-item"><a href="/services/business-platforms/">Business Platforms</a></li>
+	<li class="menu-item"><a href="/services/maintenance/">Maintenance</a></li>
+	<li class="menu-item"><a href="/services/performance-optimization/">Performance Optimization</a></li>
+	<li class="menu-item"><a href="/services/consulting/">Consulting</a></li>
 </ul>
 </li>
 <li id="menu-item-40" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-40"><a href="#">More</a>
 <ul class="submenu">
-	<li class="menu-item"><a href="../our-faq/index.html">FAQ</a></li>
-	<li class="menu-item"><a href="../privacy-policy/index.html">Privacy Policy</a></li>
-	<li class="menu-item"><a href="../terms/index.html">Terms</a></li>
+	<li class="menu-item"><a href="/our-faq/">FAQ</a></li>
+	<li class="menu-item"><a href="/privacy-policy/">Privacy Policy</a></li>
+	<li class="menu-item"><a href="/terms/">Terms</a></li>
 </ul>
 </li>
-<li id="menu-item-47" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47"><a href="../portfolio-page/index.html">Portfolio</a></li>
-<li id="menu-item-49" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-49"><a href="../blog/index.html">Blog</a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="../contact-us/index.html">Contact Me</a></li>
+<li id="menu-item-47" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47"><a href="/portfolio-page/">Portfolio</a></li>
+<li id="menu-item-49" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-49"><a href="/blog/">Blog</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/contact-us/">Contact Me</a></li>
 </ul> </nav>
  <nav id="mean-nav">
- <nav id="mobile-menu" class="menu-main-menu-container"><ul id="menu-main-menu-1" class=""><li id="menu-item-home" class="has-dropdown"><a href="../index.html">Home</a>
+ <nav id="mobile-menu" class="menu-main-menu-container"><ul id="menu-main-menu-1" class=""><li id="menu-item-home" class="has-dropdown"><a href="/">Home</a>
 <ul class="submenu">
-	<li><a href="../index.html">Full Stack Developer</a></li>
-	<li><a href="../web-developer/index.html">Web Developer</a></li>
-	<li><a href="../graphic-designer/index.html">Product Engineer</a></li>
-	<li><a href="../fashion-model/index.html">Case Studies</a></li>
+	<li><a href="/">Full Stack Developer</a></li>
+	<li><a href="/web-developer/">Web Developer</a></li>
+	<li><a href="/graphic-designer/">Product Engineer</a></li>
+	<li><a href="/fashion-model/">Case Studies</a></li>
 </ul>
 </li>
-<li><a href="../about-me/index.html">About Me</a></li>
-<li class="has-dropdown"><a href="../services/index.html">Services</a>
+<li><a href="/about-me/">About Me</a></li>
+<li class="has-dropdown"><a href="/services/">Services</a>
 <ul class="submenu">
-	<li><a href="../services/index.html">All Services</a></li>
-	<li><a href="../services/premium-business-websites/index.html">Premium Business Websites</a></li>
-	<li><a href="../services/custom-software/index.html">Custom Software</a></li>
-	<li><a href="../services/ai-integrations/index.html">AI Integrations</a></li>
-	<li><a href="../services/automation-systems/index.html">Automation Systems</a></li>
-	<li><a href="../services/seo/index.html">SEO</a></li>
-	<li><a href="../services/business-platforms/index.html">Business Platforms</a></li>
-	<li><a href="../services/maintenance/index.html">Maintenance</a></li>
-	<li><a href="../services/performance-optimization/index.html">Performance Optimization</a></li>
-	<li><a href="../services/consulting/index.html">Consulting</a></li>
+	<li><a href="/services/">All Services</a></li>
+	<li><a href="/services/premium-business-websites/">Premium Business Websites</a></li>
+	<li><a href="/services/custom-software/">Custom Software</a></li>
+	<li><a href="/services/ai-integrations/">AI Integrations</a></li>
+	<li><a href="/services/automation-systems/">Automation Systems</a></li>
+	<li><a href="/services/seo/">SEO</a></li>
+	<li><a href="/services/business-platforms/">Business Platforms</a></li>
+	<li><a href="/services/maintenance/">Maintenance</a></li>
+	<li><a href="/services/performance-optimization/">Performance Optimization</a></li>
+	<li><a href="/services/consulting/">Consulting</a></li>
 </ul>
 </li>
 <li class="has-dropdown"><a href="#">More</a>
 <ul class="submenu">
-	<li><a href="../our-faq/index.html">FAQ</a></li>
-	<li><a href="../privacy-policy/index.html">Privacy Policy</a></li>
-	<li><a href="../terms/index.html">Terms</a></li>
+	<li><a href="/our-faq/">FAQ</a></li>
+	<li><a href="/privacy-policy/">Privacy Policy</a></li>
+	<li><a href="/terms/">Terms</a></li>
 </ul>
 </li>
-<li><a href="../portfolio-page/index.html">Portfolio</a></li>
-<li><a href="../blog/index.html">Blog</a></li>
-<li><a href="../contact-us/index.html">Contact Me</a></li>
+<li><a href="/portfolio-page/">Portfolio</a></li>
+<li><a href="/blog/">Blog</a></li>
+<li><a href="/contact-us/">Contact Me</a></li>
 </ul></nav> </nav>
  </div>
  </div>
  <div class="header-right d-flex justify-content-end align-items-center mt-0">
- <a href="../hire-me/index.html" class="theme-btn">Hire Me<i class="fa-solid fa-arrow-up-right"></i>
+ <a href="/hire-me/" class="theme-btn">Hire Me<i class="fa-solid fa-arrow-up-right"></i>
  </a>
  <div class="header__hamburger d-xl-none my-auto">
  <div class="sidebar__toggle">
@@ -425,7 +427,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 
  <span class="sub_title d-block fw-medium">
  <div class="list breadcrumb-menu">
- <a href="../index.html">Home</a> <a href="../index.html">/</a> <a href="../index.html">Blog</a> PNTCOG Ministry Site Notes </div>
+ <a href="/">Home</a> <a href="/">/</a> <a href="/">Blog</a> PNTCOG Ministry Site Notes </div>
  </span>
  </div>
  </div>
@@ -461,15 +463,15 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
        <ol><li class="zh-toc-level-2"><a href="#the-job-of-a-ministry-site-is-practical-first">The job of a ministry site is practical first</a></li><li class="zh-toc-level-2"><a href="#how-the-project-started">How the project started</a></li><li class="zh-toc-level-2"><a href="#working-with-a-congregation-as-a-client">Working with a congregation as a client</a></li><li class="zh-toc-level-2"><a href="#why-truthful-content-handling-matters-so-much">Why truthful content handling matters so much</a></li><li class="zh-toc-level-2"><a href="#the-technical-setup">The technical setup</a></li><li class="zh-toc-level-2"><a href="#accessibility-and-readability-are-not-optional-extras">Accessibility and readability are not optional extras</a></li><li class="zh-toc-level-2"><a href="#making-it-work-for-older-members">Making it work for older members</a></li><li class="zh-toc-level-2"><a href="#content-management-challenges">Content management challenges</a></li><li class="zh-toc-level-2"><a href="#maintenance-reality-should-shape-the-build">Maintenance reality should shape the build</a></li><li class="zh-toc-level-2"><a href="#what-i-value-most-in-this-kind-of-project">What I value most in this kind of project</a></li><li class="zh-toc-level-2"><a href="#the-broader-lesson-from-pntcog-work">The broader lesson from PNTCOG work</a></li></ol>
       </div>
       <div class="entry-content" itemprop="articleBody">
-       <p>Ministry sites have a different responsibility from a lot of commercial websites. They still need to look strong and work well, but clarity and trust carry even more weight. People visit for service information, ministries, messages, giving, events, contact details, and reassurance that the organization behind the site is real and current. That means the structure has to support everyday needs very well. PNTCOG, the Port More New Testament Church of God at portmorentcog.org, is a good example of why that matters.</p><p>This is a project close to home for me, both geographically and personally. Building a website for a church community in Portmore, Jamaica means understanding the people who will use it, the information they need most urgently, and the practical constraints around maintaining it long term. This article is the full story of how the project came together and the lessons I took from it.</p><section class="zh-article-section" id="the-job-of-a-ministry-site-is-practical-first"><h2>The job of a ministry site is practical first</h2><p>A ministry website absolutely benefits from thoughtful design, but the design has to support utility. Visitors should be able to find essential information quickly. If service times, location details, ministries, livestream access, or contact paths are hard to find, the site is not serving people well no matter how polished it looks.</p><p>I keep that in mind when thinking about church or ministry work. The experience should feel warm and credible, but it cannot hide critical information behind unnecessary complexity. When someone in the community needs to check what time Sunday service starts, or whether there is a midweek Bible study, that answer should be visible within seconds of landing on the homepage. That is the fundamental job.</p><p>For PNTCOG, the homepage needed to surface service times, upcoming events, and contact information without requiring any scrolling or navigation on mobile. Those are the three things that bring the most visitors to a church site, and they should never be buried.</p></section><section class="zh-article-section" id="how-the-project-started"><h2>How the project started</h2><p>The church had been operating without a dedicated website, relying on social media pages and word of mouth for announcements. That works up to a point, but it means the church has no permanent, searchable presence on the web. When someone Googles "Port More New Testament Church of God," they should find a real website with real information, not just a Facebook page with inconsistent posting.</p><p>The pastor and a few members of the congregation approached me about building something that would represent the church well online. They wanted something that felt professional without feeling corporate, something that could share service details, ministry information, and event updates, and something that the church could maintain without needing a developer on call for every text change.</p><p>That last requirement shaped a lot of the technical decisions. The site needed to be maintainable by people who are not web developers, and it needed to be reliable on the hosting they could afford.</p></section><section class="zh-article-section" id="working-with-a-congregation-as-a-client"><h2>Working with a congregation as a client</h2><p>Working with a church is different from working with a business. The decision making process is more communal. There is no single product owner with final say on every detail. Instead, there are multiple voices with different perspectives: the pastor has a vision for the message, the youth leader cares about event promotion, the administrator wants easy contact management, and the older members care about readability and simplicity.</p><p>I learned early to gather input broadly but make design decisions that serve the shared priorities. Asking "what are the three most important things a visitor should find on this site?" was more productive than asking "what do you want the site to look like?" The first question leads to clear requirements. The second leads to Pinterest boards and conflicting aesthetic preferences.</p><p>There was also a cultural sensitivity dimension. The site represents a spiritual community, so the tone, imagery, and language all needed to feel respectful and authentic. I avoided stock photography that felt disconnected from Jamaican church culture, and I made sure the language on the site reflected how the congregation actually speaks about itself.</p></section><section class="zh-article-section" id="why-truthful-content-handling-matters-so-much"><h2>Why truthful content handling matters so much</h2><p>One of the easiest ways to damage trust on a ministry site is by publishing details that are vague, outdated, or guessed. That is why I care about truthful content handling. If dates, locations, contacts, or event details are not confirmed, they should not be invented just to make the page feel complete.</p><p>This is not only about accuracy. It is also about respect. Real ministry communities depend on their sites for real world coordination. Placeholder thinking creates real confusion. If the site says Bible study is on Wednesdays at 7pm, that had better be accurate, because people will show up based on that information.</p><p>I made it a rule from the start: every piece of factual content on the site had to be confirmed by someone at the church before it went live. No guessing service times, no inventing ministry descriptions, no fabricating event dates. If I did not have confirmed information, that section stayed empty or used a clear "contact us for details" message until the real content was ready.</p></section><section class="zh-article-section" id="the-technical-setup"><h2>The technical setup</h2><p>PNTCOG is hosted on Bluehost as a static site with a custom content management approach. It is not built on WordPress, despite what people might assume for a church site. The decision to go static was deliberate: static sites are faster, more secure, easier to host cheaply, and less prone to the maintenance burden that comes with WordPress plugins, theme updates, and database management.</p><p>The custom CMS layer I built allows specific content areas to be updated without touching the HTML structure. It handles the parts of the site that change regularly, like event announcements and service schedules, while keeping the overall layout and design stable.</p><p>This approach means the site loads quickly even on slower Jamaican mobile networks, does not require constant software updates to stay secure, and costs very little to host. For a church operating on a modest budget, those practical benefits matter enormously.</p></section><section class="zh-article-section" id="accessibility-and-readability-are-not-optional-extras"><h2>Accessibility and readability are not optional extras</h2><p>Ministry audiences can be broad across age, device, and technical comfort level. That means readable typography, strong contrast, clear navigation, obvious calls to action, and clean mobile behavior matter a lot. Fancy interactions are fine when they do not obstruct the basics. The page should still feel usable for someone moving quickly on a phone after hearing about the church from a friend.</p><p>I also care about content chunking. Long walls of text can make an otherwise helpful page feel harder to use than it needs to be. For PNTCOG, I broke the content into clear sections with descriptive headings, so someone scanning the page could find what they needed without reading everything. Each section answers one question: when are services, what ministries exist, how to contact the church, where to find them.</p><p>Color contrast was another area I paid extra attention to. The church's branding colors needed to work on both white and dark backgrounds, and every text element needed to pass WCAG AA contrast requirements. This was not negotiable, because accessibility is not a feature for some users. It is a baseline for all users.</p></section><section class="zh-article-section" id="making-it-work-for-older-members"><h2>Making it work for older members</h2><p>A significant portion of the PNTCOG congregation includes older members who may not be comfortable navigating complex websites. For them, the site needed to feel obvious. That meant larger tap targets on mobile, font sizes that are readable without zooming, clear button labels that say exactly what they do, and a navigation structure that does not require discovering hidden menus.</p><p>I tested the site with a few older members of the congregation before launching, and their feedback was invaluable. They pointed out things I had not considered, like the fact that "hamburger menu" icons mean nothing to someone who has never seen one before, and that phone numbers should be tappable on mobile so they can call directly.</p><p>Based on their feedback, I made the phone number a large, prominent link on every page, added a "Call Us" button that was visible without scrolling, and kept the navigation visible at all times instead of hiding it behind an icon. Small changes, but they made the difference between a site that feels welcoming and one that feels exclusionary.</p></section><section class="zh-article-section" id="content-management-challenges"><h2>Content management challenges</h2><p>The biggest ongoing challenge with any church site is content freshness. Churches have weekly events, seasonal programs, and frequent announcements, but they rarely have someone dedicated to updating the website. If the site shows last year's Easter program in September, it undermines the credibility of everything else on the page.</p><p>To address this, I designed the content management approach around a few principles:</p><ul><li>Make updates as simple as possible. Changing a service time should not require understanding HTML.</li><li>Build in content expiration. Event announcements should have end dates so they do not linger past their relevance.</li><li>Keep the update surface small. Only the parts of the site that change regularly should be editable. The overall structure, navigation, and design stay fixed.</li><li>Document the update process. I wrote a simple guide with screenshots showing exactly how to update each section.</li></ul><p>Even with these measures, content freshness requires ongoing discipline from the church team. I check in periodically to see if anything has gone stale and remind them to update seasonal content. That relationship, the ongoing connection between the developer and the client, is part of what makes a church site project sustainable.</p></section><section class="zh-article-section" id="maintenance-reality-should-shape-the-build"><h2>Maintenance reality should shape the build</h2><p>A ministry site may not have a full time product team behind it. That changes what sustainable design looks like. The content model should be realistic for the people who will maintain it. If updating one service detail requires digging through five fragile templates, the system is too brittle.</p><p>I always try to think about the handoff. The best build is not just the one that launches cleanly. It is the one that stays manageable for the people responsible afterward. For PNTCOG, that meant choosing technology that the church could afford to host indefinitely, building a content management approach that matched their technical comfort level, and creating documentation that would still make sense six months after I finished the initial build.</p></section><section class="zh-article-section" id="what-i-value-most-in-this-kind-of-project"><h2>What I value most in this kind of project</h2><p>I value clarity, honesty, and calm structure. A strong ministry site should feel welcoming without feeling generic. It should help someone who is exploring, someone who is returning, and someone who simply needs one piece of information quickly. Those are different user needs, and the site has to support all of them gracefully.</p><p>That is why I think information architecture matters just as much as appearance on this kind of work. A beautiful site that makes it hard to find the phone number is failing its users. A simple site that puts the right information in the right places is succeeding.</p><p>Working on PNTCOG also reinforced something I believe about all client work: the best projects happen when the developer respects the client's context. I am not building this site for a tech audience. I am building it for a church community in Portmore that needs a reliable, trustworthy web presence.</p></section><section class="zh-article-section" id="the-broader-lesson-from-pntcog-work"><h2>The broader lesson from PNTCOG work</h2><p>The broader lesson is that good web work begins by respecting the context of the organization, not by forcing the same template logic onto every project. Ministry sites deserve structure built around their actual communication needs, not generic filler.</p><p>Every project I take on, whether it is a church site, an agency platform, or a product build, starts with the same question: who is this for, and what do they need most? The technology is a tool to serve that answer, not the other way around.</p><p>If you want to see more of how I approach purpose driven web work, visit my <a href="../services/premium-business-websites/index.html">website services</a>, browse the <a href="../portfolio-page/index.html">portfolio</a>, or <a href="../contact-us/index.html">contact me</a> if you need a site that feels trustworthy and stays practical to maintain.</p></section>
+       <p>Ministry sites have a different responsibility from a lot of commercial websites. They still need to look strong and work well, but clarity and trust carry even more weight. People visit for service information, ministries, messages, giving, events, contact details, and reassurance that the organization behind the site is real and current. That means the structure has to support everyday needs very well. PNTCOG, the Port More New Testament Church of God at portmorentcog.org, is a good example of why that matters.</p><p>This is a project close to home for me, both geographically and personally. Building a website for a church community in Portmore, Jamaica means understanding the people who will use it, the information they need most urgently, and the practical constraints around maintaining it long term. This article is the full story of how the project came together and the lessons I took from it.</p><section class="zh-article-section" id="the-job-of-a-ministry-site-is-practical-first"><h2>The job of a ministry site is practical first</h2><p>A ministry website absolutely benefits from thoughtful design, but the design has to support utility. Visitors should be able to find essential information quickly. If service times, location details, ministries, livestream access, or contact paths are hard to find, the site is not serving people well no matter how polished it looks.</p><p>I keep that in mind when thinking about church or ministry work. The experience should feel warm and credible, but it cannot hide critical information behind unnecessary complexity. When someone in the community needs to check what time Sunday service starts, or whether there is a midweek Bible study, that answer should be visible within seconds of landing on the homepage. That is the fundamental job.</p><p>For PNTCOG, the homepage needed to surface service times, upcoming events, and contact information without requiring any scrolling or navigation on mobile. Those are the three things that bring the most visitors to a church site, and they should never be buried.</p></section><section class="zh-article-section" id="how-the-project-started"><h2>How the project started</h2><p>The church had been operating without a dedicated website, relying on social media pages and word of mouth for announcements. That works up to a point, but it means the church has no permanent, searchable presence on the web. When someone Googles "Port More New Testament Church of God," they should find a real website with real information, not just a Facebook page with inconsistent posting.</p><p>The pastor and a few members of the congregation approached me about building something that would represent the church well online. They wanted something that felt professional without feeling corporate, something that could share service details, ministry information, and event updates, and something that the church could maintain without needing a developer on call for every text change.</p><p>That last requirement shaped a lot of the technical decisions. The site needed to be maintainable by people who are not web developers, and it needed to be reliable on the hosting they could afford.</p></section><section class="zh-article-section" id="working-with-a-congregation-as-a-client"><h2>Working with a congregation as a client</h2><p>Working with a church is different from working with a business. The decision making process is more communal. There is no single product owner with final say on every detail. Instead, there are multiple voices with different perspectives: the pastor has a vision for the message, the youth leader cares about event promotion, the administrator wants easy contact management, and the older members care about readability and simplicity.</p><p>I learned early to gather input broadly but make design decisions that serve the shared priorities. Asking "what are the three most important things a visitor should find on this site?" was more productive than asking "what do you want the site to look like?" The first question leads to clear requirements. The second leads to Pinterest boards and conflicting aesthetic preferences.</p><p>There was also a cultural sensitivity dimension. The site represents a spiritual community, so the tone, imagery, and language all needed to feel respectful and authentic. I avoided stock photography that felt disconnected from Jamaican church culture, and I made sure the language on the site reflected how the congregation actually speaks about itself.</p></section><section class="zh-article-section" id="why-truthful-content-handling-matters-so-much"><h2>Why truthful content handling matters so much</h2><p>One of the easiest ways to damage trust on a ministry site is by publishing details that are vague, outdated, or guessed. That is why I care about truthful content handling. If dates, locations, contacts, or event details are not confirmed, they should not be invented just to make the page feel complete.</p><p>This is not only about accuracy. It is also about respect. Real ministry communities depend on their sites for real world coordination. Placeholder thinking creates real confusion. If the site says Bible study is on Wednesdays at 7pm, that had better be accurate, because people will show up based on that information.</p><p>I made it a rule from the start: every piece of factual content on the site had to be confirmed by someone at the church before it went live. No guessing service times, no inventing ministry descriptions, no fabricating event dates. If I did not have confirmed information, that section stayed empty or used a clear "contact us for details" message until the real content was ready.</p></section><section class="zh-article-section" id="the-technical-setup"><h2>The technical setup</h2><p>PNTCOG is hosted on Bluehost as a static site with a custom content management approach. It is not built on WordPress, despite what people might assume for a church site. The decision to go static was deliberate: static sites are faster, more secure, easier to host cheaply, and less prone to the maintenance burden that comes with WordPress plugins, theme updates, and database management.</p><p>The custom CMS layer I built allows specific content areas to be updated without touching the HTML structure. It handles the parts of the site that change regularly, like event announcements and service schedules, while keeping the overall layout and design stable.</p><p>This approach means the site loads quickly even on slower Jamaican mobile networks, does not require constant software updates to stay secure, and costs very little to host. For a church operating on a modest budget, those practical benefits matter enormously.</p></section><section class="zh-article-section" id="accessibility-and-readability-are-not-optional-extras"><h2>Accessibility and readability are not optional extras</h2><p>Ministry audiences can be broad across age, device, and technical comfort level. That means readable typography, strong contrast, clear navigation, obvious calls to action, and clean mobile behavior matter a lot. Fancy interactions are fine when they do not obstruct the basics. The page should still feel usable for someone moving quickly on a phone after hearing about the church from a friend.</p><p>I also care about content chunking. Long walls of text can make an otherwise helpful page feel harder to use than it needs to be. For PNTCOG, I broke the content into clear sections with descriptive headings, so someone scanning the page could find what they needed without reading everything. Each section answers one question: when are services, what ministries exist, how to contact the church, where to find them.</p><p>Color contrast was another area I paid extra attention to. The church's branding colors needed to work on both white and dark backgrounds, and every text element needed to pass WCAG AA contrast requirements. This was not negotiable, because accessibility is not a feature for some users. It is a baseline for all users.</p></section><section class="zh-article-section" id="making-it-work-for-older-members"><h2>Making it work for older members</h2><p>A significant portion of the PNTCOG congregation includes older members who may not be comfortable navigating complex websites. For them, the site needed to feel obvious. That meant larger tap targets on mobile, font sizes that are readable without zooming, clear button labels that say exactly what they do, and a navigation structure that does not require discovering hidden menus.</p><p>I tested the site with a few older members of the congregation before launching, and their feedback was invaluable. They pointed out things I had not considered, like the fact that "hamburger menu" icons mean nothing to someone who has never seen one before, and that phone numbers should be tappable on mobile so they can call directly.</p><p>Based on their feedback, I made the phone number a large, prominent link on every page, added a "Call Us" button that was visible without scrolling, and kept the navigation visible at all times instead of hiding it behind an icon. Small changes, but they made the difference between a site that feels welcoming and one that feels exclusionary.</p></section><section class="zh-article-section" id="content-management-challenges"><h2>Content management challenges</h2><p>The biggest ongoing challenge with any church site is content freshness. Churches have weekly events, seasonal programs, and frequent announcements, but they rarely have someone dedicated to updating the website. If the site shows last year's Easter program in September, it undermines the credibility of everything else on the page.</p><p>To address this, I designed the content management approach around a few principles:</p><ul><li>Make updates as simple as possible. Changing a service time should not require understanding HTML.</li><li>Build in content expiration. Event announcements should have end dates so they do not linger past their relevance.</li><li>Keep the update surface small. Only the parts of the site that change regularly should be editable. The overall structure, navigation, and design stay fixed.</li><li>Document the update process. I wrote a simple guide with screenshots showing exactly how to update each section.</li></ul><p>Even with these measures, content freshness requires ongoing discipline from the church team. I check in periodically to see if anything has gone stale and remind them to update seasonal content. That relationship, the ongoing connection between the developer and the client, is part of what makes a church site project sustainable.</p></section><section class="zh-article-section" id="maintenance-reality-should-shape-the-build"><h2>Maintenance reality should shape the build</h2><p>A ministry site may not have a full time product team behind it. That changes what sustainable design looks like. The content model should be realistic for the people who will maintain it. If updating one service detail requires digging through five fragile templates, the system is too brittle.</p><p>I always try to think about the handoff. The best build is not just the one that launches cleanly. It is the one that stays manageable for the people responsible afterward. For PNTCOG, that meant choosing technology that the church could afford to host indefinitely, building a content management approach that matched their technical comfort level, and creating documentation that would still make sense six months after I finished the initial build.</p></section><section class="zh-article-section" id="what-i-value-most-in-this-kind-of-project"><h2>What I value most in this kind of project</h2><p>I value clarity, honesty, and calm structure. A strong ministry site should feel welcoming without feeling generic. It should help someone who is exploring, someone who is returning, and someone who simply needs one piece of information quickly. Those are different user needs, and the site has to support all of them gracefully.</p><p>That is why I think information architecture matters just as much as appearance on this kind of work. A beautiful site that makes it hard to find the phone number is failing its users. A simple site that puts the right information in the right places is succeeding.</p><p>Working on PNTCOG also reinforced something I believe about all client work: the best projects happen when the developer respects the client's context. I am not building this site for a tech audience. I am building it for a church community in Portmore that needs a reliable, trustworthy web presence.</p></section><section class="zh-article-section" id="the-broader-lesson-from-pntcog-work"><h2>The broader lesson from PNTCOG work</h2><p>The broader lesson is that good web work begins by respecting the context of the organization, not by forcing the same template logic onto every project. Ministry sites deserve structure built around their actual communication needs, not generic filler.</p><p>Every project I take on, whether it is a church site, an agency platform, or a product build, starts with the same question: who is this for, and what do they need most? The technology is a tool to serve that answer, not the other way around.</p><p>If you want to see more of how I approach purpose driven web work, visit my <a href="/services/premium-business-websites/">website services</a>, browse the <a href="/portfolio-page/">portfolio</a>, or <a href="/contact-us/">contact me</a> if you need a site that feels trustworthy and stays practical to maintain.</p></section>
       
       </div>
       <div class="zh-blog-cta">
        <h3>Need help building something similar?</h3>
        <p>I design and build premium websites, product experiences, and custom software with a strong focus on clarity, performance, and real business outcomes.</p>
        <div class="zh-blog-cta-actions">
-        <a class="theme-btn" href="../hire-me/index.html">Hire Me <i class="fa-solid fa-arrow-up-right"></i></a>
-        <a class="theme-btn style-border" href="../contact-us/index.html">Contact Me <i class="fa-solid fa-arrow-up-right"></i></a>
+        <a class="theme-btn" href="/hire-me/">Hire Me <i class="fa-solid fa-arrow-up-right"></i></a>
+        <a class="theme-btn style-border" href="/contact-us/">Contact Me <i class="fa-solid fa-arrow-up-right"></i></a>
        </div>
       </div>
     </article>
@@ -491,10 +493,10 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
      <div class="single-sidebar-widget">
       <h3 class="sidebar-widget-title">Related links</h3>
       <ul>
-       <li><a href="../portfolio-page/index.html">Portfolio</a></li>
-       <li><a href="../services/index.html">Services</a></li>
-       <li><a href="../blog/index.html">All blog posts</a></li>
-       <li><a href="../contact-us/index.html">Contact Me</a></li>
+       <li><a href="/portfolio-page/">Portfolio</a></li>
+       <li><a href="/services/">Services</a></li>
+       <li><a href="/blog/">All blog posts</a></li>
+       <li><a href="/contact-us/">Contact Me</a></li>
       </ul>
      </div>
      <div class="single-sidebar-widget">
@@ -543,7 +545,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  </div>
  <div class="footer-wrapper-2">
  <div class="container">
- <a href="../index.html" class="footer-logo">
+ <a href="/" class="footer-logo">
  <img src="../wp-content/uploads/2026/01/white-icon.svg?v=zh3" alt="img">
  </a>
  <div class="content wow fadeInUp" data-wow-delay=".3s">
@@ -560,27 +562,27 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  quick links </h4>
  <ul class="menu-item">
  <li>
- <a href="../index.html">
+ <a href="/">
  home </a>
  </li>
  <li>
- <a href="../about-me/index.html">
+ <a href="/about-me/">
  ABOUT ME </a>
  </li>
  <li>
- <a href="../services/index.html">
+ <a href="/services/">
  SERVICES </a>
  </li>
  <li>
- <a href="../portfolio-page/index.html">
+ <a href="/portfolio-page/">
  PORTFOLIO </a>
  </li>
  <li>
- <a href="../blog/index.html">
+ <a href="/blog/">
  news &amp; blog </a>
  </li>
  <li>
- <a href="../contact-us/index.html">
+ <a href="/contact-us/">
  CONTACT ME </a>
  </li>
  </ul>
@@ -645,11 +647,11 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  </div>
  <ul>
  <li>
- <a href="../terms/index.html">
+ <a href="/terms/">
  Terms &amp; Conditions </a>
  </li>
  <li>
- <a href="../privacy-policy/index.html">
+ <a href="/privacy-policy/">
  Privacy Policy </a>
  </li>
  </ul>
@@ -1108,7 +1110,7 @@ a.header-logo img,
 <script id="zh-header-ux-js">
 (function(){
  var mq=window.matchMedia('(max-width:991px)');
- var DRAWER_NAV='<a class="zh-nav-top" href="../index.html">Home</a><a class="zh-nav-top" href="../about-me/index.html">About Me</a><div class="zh-nav-group"><button type="button" class="zh-nav-accordion" aria-expanded="false">Services<span class="zh-acc-chevron" aria-hidden="true">▼</span></button><div class="zh-nav-sub"><a href="../services/index.html">All Services</a><a href="../services/premium-business-websites/index.html">Premium Business Websites</a><a href="../services/custom-software/index.html">Custom Software</a><a href="../services/ai-integrations/index.html">AI Integrations</a><a href="../services/automation-systems/index.html">Automation Systems</a><a href="../services/seo/index.html">SEO</a><a href="../services/business-platforms/index.html">Business Platforms</a><a href="../services/maintenance/index.html">Maintenance</a><a href="../services/performance-optimization/index.html">Performance Optimization</a><a href="../services/consulting/index.html">Consulting</a></div></div><div class="zh-nav-group"><button type="button" class="zh-nav-accordion" aria-expanded="false">More<span class="zh-acc-chevron" aria-hidden="true">▼</span></button><div class="zh-nav-sub"><a href="../our-faq/index.html">FAQ</a><a href="../privacy-policy/index.html">Privacy Policy</a><a href="../terms/index.html">Terms</a></div></div><a class="zh-nav-top" href="../portfolio-page/index.html">Portfolio</a><a class="zh-nav-top" href="../blog/index.html">Blog</a><a class="zh-nav-top" href="../contact-us/index.html">Contact Me</a>';
+ var DRAWER_NAV='<a class="zh-nav-top" href="/">Home</a><a class="zh-nav-top" href="/about-me/">About Me</a><div class="zh-nav-group"><button type="button" class="zh-nav-accordion" aria-expanded="false">Services<span class="zh-acc-chevron" aria-hidden="true">▼</span></button><div class="zh-nav-sub"><a href="/services/">All Services</a><a href="/services/premium-business-websites/">Premium Business Websites</a><a href="/services/custom-software/">Custom Software</a><a href="/services/ai-integrations/">AI Integrations</a><a href="/services/automation-systems/">Automation Systems</a><a href="/services/seo/">SEO</a><a href="/services/business-platforms/">Business Platforms</a><a href="/services/maintenance/">Maintenance</a><a href="/services/performance-optimization/">Performance Optimization</a><a href="/services/consulting/">Consulting</a></div></div><div class="zh-nav-group"><button type="button" class="zh-nav-accordion" aria-expanded="false">More<span class="zh-acc-chevron" aria-hidden="true">▼</span></button><div class="zh-nav-sub"><a href="/our-faq/">FAQ</a><a href="/privacy-policy/">Privacy Policy</a><a href="/terms/">Terms</a></div></div><a class="zh-nav-top" href="/portfolio-page/">Portfolio</a><a class="zh-nav-top" href="/blog/">Blog</a><a class="zh-nav-top" href="/contact-us/">Contact Me</a>';
  function openDrawer(){
   var d=document.getElementById('zh-mobile-drawer');
   var b=document.getElementById('zh-mobile-drawer-backdrop');
@@ -1180,7 +1182,7 @@ a.header-logo img,
   backBtn.className='zh-back-btn';
   backBtn.setAttribute('aria-label','Go back');
   backBtn.innerHTML='&#8592;';
-  backBtn.addEventListener('click',function(e){e.preventDefault();if(window.history.length>1) window.history.back(); else window.location.href='../index.html';});
+  backBtn.addEventListener('click',function(e){e.preventDefault();if(window.history.length>1) window.history.back(); else window.location.href='/';});
   var menuBtn=document.createElement('button');
   menuBtn.type='button';
   menuBtn.className='zh-hamburger';
@@ -1201,7 +1203,7 @@ a.header-logo img,
   var existing=document.querySelector('.zh-mobile-home-btn');if(existing) return;
   var btn=document.createElement('a');
   btn.className='zh-mobile-home-btn';
-  btn.href='../index.html';
+  btn.href='/';
   btn.setAttribute('aria-label','Go to home page');
   btn.innerHTML='&#8592; HOME';
   document.body.appendChild(btn);
@@ -1219,20 +1221,7 @@ a.header-logo img,
   ensureDrawer();
   var nav=document.getElementById('zh-mobile-nav')||buildNav();
   buildHomeBtn();
-  var lastY=window.scrollY||0;
-  var hero=document.querySelector('.hero-section,.hero-section1,.hero-1,.hero-5,.hero-3,main h1,header');
-  var heroH=hero?(hero.getBoundingClientRect().height+window.scrollY):360;
-  function onScroll(){
-   var y=window.scrollY||window.pageYOffset;
-   if(y<heroH*0.4){nav.classList.remove('zh-nav-hidden');lastY=y;return;}
-   if(y>lastY+6&&y>heroH) nav.classList.add('zh-nav-hidden');
-   else if(y<lastY-6) nav.classList.remove('zh-nav-hidden');
-   lastY=y;
-  }
-  window.removeEventListener('scroll',nav._zhScroll||function(){});
-  nav._zhScroll=onScroll;
-  window.addEventListener('scroll',onScroll,{passive:true});
-  onScroll();
+  nav.classList.remove('zh-nav-hidden');
  }
  initMobileNav();
  if(mq.addEventListener) mq.addEventListener('change',initMobileNav);
@@ -1257,4 +1246,5 @@ a.header-logo img,
 })();
 </script>
 
+<script id="zh-site-fix-js" src="/wp-content/uploads/zach/zh-site-fix.js?v=zhfix1" defer></script>
 </body></html><!-- Page cached by LiteSpeed Cache 7.8.1 on 2026-07-17 19:46:17 -->

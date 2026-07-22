@@ -22,7 +22,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
   left:50%;transform:translateX(-50%);right:auto;
   z-index:10001;transition:opacity .28s ease,transform .28s ease;
  }
- #zh-mobile-nav.zh-nav-hidden{opacity:0;pointer-events:none;transform:translateX(-50%) translateY(72px);}
+ #zh-mobile-nav.zh-nav-hidden{opacity:1!important;pointer-events:auto!important;transform:translateX(-50%)!important;}
  #zh-mobile-nav .zh-back-btn,
  #zh-mobile-nav .zh-hamburger{
   width:52px;height:52px;border-radius:50%;padding:0;
@@ -75,7 +75,8 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
   overflow:hidden;display:flex;flex-direction:column;
   box-shadow:0 16px 48px rgba(0,0,0,.7);
  }
- .zh-mobile-drawer.is-open{transform:translateY(0) scale(1);opacity:1;}
+ .zh-mobile-drawer:not(.is-open){pointer-events:none!important;visibility:hidden!important;}
+ .zh-mobile-drawer.is-open{transform:translateY(0) scale(1);opacity:1;pointer-events:auto!important;visibility:visible!important;}
  .zh-mobile-drawer-header{
   display:flex;justify-content:space-between;align-items:center;
   padding:12px 16px;border-bottom:1px solid rgba(191,247,71,.18);flex-shrink:0;
@@ -235,6 +236,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 <link rel="icon" href="../wp-content/uploads/2025/11/android-chrome-512x512-1-214x214.png" sizes="192x192">
 <link rel="apple-touch-icon" href="../wp-content/uploads/2025/11/android-chrome-512x512-1-214x214.png">
 <meta name="msapplication-TileImage" content="../wp-content/uploads/2025/11/android-chrome-512x512-1-300x300.png">
+ <link rel="stylesheet" id="zh-site-fix-css" href="/wp-content/uploads/zach/zh-site-fix.css?v=zhfix1">
 </head>
 
 <body class="blog wp-theme-revox ehf-header ehf-footer ehf-template-revox ehf-stylesheet-revox hfeed revox-toolkit-activate not-logged-in elementor-default elementor-kit-9">
@@ -252,7 +254,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 	<a class="hfe-skip-link" href="#content">Skip to main content</a><div id="page" class="hfeed site">
 
 		<header id="masthead" itemscope="itemscope" itemtype="https://schema.org/WPHeader">
-			<p class="main-title bhf-hidden" itemprop="headline"><a href="../index.html" title="Zachary Hutton" rel="home">Zachary</a></p>
+			<p class="main-title bhf-hidden" itemprop="headline"><a href="/" title="Zachary Hutton" rel="home">Zachary</a></p>
 			<style>.elementor-322 .elementor-element.elementor-element-6c5547f{--display:flex;--margin-top:0px;--margin-bottom:0px;--margin-left:0px;--margin-right:0px;--padding-top:0px;--padding-bottom:0px;--padding-left:0px;--padding-right:0px;}.elementor-322 .elementor-element.elementor-element-24c4555 .header-2.inner-page-style{border-style:none;}</style>		<div data-elementor-type="wp-post" data-elementor-id="322" class="elementor elementor-322">
 				<div class="elementor-element elementor-element-6c5547f e-con-full e-flex e-con e-parent" data-id="6c5547f" data-element_type="container" data-e-type="container">
 				<div class="elementor-element elementor-element-24c4555 elementor-widget elementor-widget-revox_header_5" data-id="24c4555" data-element_type="widget" data-e-type="widget" data-widget_type="revox_header_5.default">
@@ -264,7 +266,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  <div class="offcanvas__content">
  <div class="offcanvas__top mb-5 d-flex justify-content-between align-items-center">
  <div class="offcanvas__logo">
- <a href="../index.html">
+ <a href="/">
  <img src="../wp-content/assets/img/logo/white-icon.svg?v=zh3" alt="img">
  </a>
  </div>
@@ -277,39 +279,39 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  <p class="text d-none d-xl-block">
  Nullam dignissim, ante scelerisque the is euismod fermentum odio sem semper the is erat, a feugiat leo urna eget eros. Duis Aenean a imperdiet risus. </p>
  <div class="mobile-menu fix mb-3">
- <nav id="mobile-menus" class="menu-main-menu-container"><ul id="menu-main-menu" class="defult-header"><li id="menu-item-34" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-34"><a href="../index.html">Home</a>
+ <nav id="mobile-menus" class="menu-main-menu-container"><ul id="menu-main-menu" class="defult-header"><li id="menu-item-34" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-34"><a href="/">Home</a>
 <ul class="submenu">
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="../index.html">Full Stack Developer</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="../web-developer/index.html">Web Developer</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="../graphic-designer/index.html">Product Engineer</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="../fashion-model/index.html">Case Studies</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/">Full Stack Developer</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/web-developer/">Web Developer</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/graphic-designer/">Product Engineer</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/fashion-model/">Case Studies</a></li>
 </ul>
 </li>
-<li id="menu-item-39" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39"><a href="../about-me/index.html">About Me</a></li>
-<li class="menu-item menu-item-has-children menu-item-services"><a href="../services/index.html">Services</a>
+<li id="menu-item-39" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39"><a href="/about-me/">About Me</a></li>
+<li class="menu-item menu-item-has-children menu-item-services"><a href="/services/">Services</a>
 <ul class="submenu">
-	<li class="menu-item"><a href="../services/index.html">All Services</a></li>
-	<li class="menu-item"><a href="../services/premium-business-websites/index.html">Premium Business Websites</a></li>
-	<li class="menu-item"><a href="../services/custom-software/index.html">Custom Software</a></li>
-	<li class="menu-item"><a href="../services/ai-integrations/index.html">AI Integrations</a></li>
-	<li class="menu-item"><a href="../services/automation-systems/index.html">Automation Systems</a></li>
-	<li class="menu-item"><a href="../services/seo/index.html">SEO</a></li>
-	<li class="menu-item"><a href="../services/business-platforms/index.html">Business Platforms</a></li>
-	<li class="menu-item"><a href="../services/maintenance/index.html">Maintenance</a></li>
-	<li class="menu-item"><a href="../services/performance-optimization/index.html">Performance Optimization</a></li>
-	<li class="menu-item"><a href="../services/consulting/index.html">Consulting</a></li>
+	<li class="menu-item"><a href="/services/">All Services</a></li>
+	<li class="menu-item"><a href="/services/premium-business-websites/">Premium Business Websites</a></li>
+	<li class="menu-item"><a href="/services/custom-software/">Custom Software</a></li>
+	<li class="menu-item"><a href="/services/ai-integrations/">AI Integrations</a></li>
+	<li class="menu-item"><a href="/services/automation-systems/">Automation Systems</a></li>
+	<li class="menu-item"><a href="/services/seo/">SEO</a></li>
+	<li class="menu-item"><a href="/services/business-platforms/">Business Platforms</a></li>
+	<li class="menu-item"><a href="/services/maintenance/">Maintenance</a></li>
+	<li class="menu-item"><a href="/services/performance-optimization/">Performance Optimization</a></li>
+	<li class="menu-item"><a href="/services/consulting/">Consulting</a></li>
 </ul>
 </li>
 <li id="menu-item-40" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-40"><a href="#">More</a>
 <ul class="submenu">
-	<li class="menu-item"><a href="../our-faq/index.html">FAQ</a></li>
-	<li class="menu-item"><a href="../privacy-policy/index.html">Privacy Policy</a></li>
-	<li class="menu-item"><a href="../terms/index.html">Terms</a></li>
+	<li class="menu-item"><a href="/our-faq/">FAQ</a></li>
+	<li class="menu-item"><a href="/privacy-policy/">Privacy Policy</a></li>
+	<li class="menu-item"><a href="/terms/">Terms</a></li>
 </ul>
 </li>
-<li id="menu-item-47" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47"><a href="../portfolio-page/index.html">Portfolio</a></li>
-<li id="menu-item-49" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-49"><a href="../blog/index.html">Blog</a></li>
-<li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="../contact-us/index.html">Contact Me</a></li>
+<li id="menu-item-47" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47"><a href="/portfolio-page/">Portfolio</a></li>
+<li id="menu-item-49" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-49"><a href="/blog/">Blog</a></li>
+<li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/contact-us/">Contact Me</a></li>
 </ul></nav> </div>
  </div>
  </div>
@@ -322,85 +324,85 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  <div class="container">
  <div class="mega-menu-wrapper">
  <div class="header-main">
- <a href="../index.html" class="header-logo">
+ <a href="/" class="header-logo">
  <img src="../wp-content/assets/img/logo/white-icon.svg?v=zh3" alt="img">
  </a>
  <div class="mean__menu-wrapper">
  <div class="main-menu">
  <nav id="desktop-main-menu">
-<ul id="menu-main-menu" class="defult-header"><li id="menu-item-34" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-34"><a href="../index.html">Home</a>
+<ul id="menu-main-menu" class="defult-header"><li id="menu-item-34" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-34"><a href="/">Home</a>
 <ul class="submenu">
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="../index.html">Full Stack Developer</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="../web-developer/index.html">Web Developer</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="../graphic-designer/index.html">Product Engineer</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="../fashion-model/index.html">Case Studies</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/">Full Stack Developer</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/web-developer/">Web Developer</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/graphic-designer/">Product Engineer</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/fashion-model/">Case Studies</a></li>
 </ul>
 </li>
-<li id="menu-item-39" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39"><a href="../about-me/index.html">About Me</a></li>
-<li class="menu-item menu-item-has-children menu-item-services"><a href="../services/index.html">Services</a>
+<li id="menu-item-39" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39"><a href="/about-me/">About Me</a></li>
+<li class="menu-item menu-item-has-children menu-item-services"><a href="/services/">Services</a>
 <ul class="submenu">
-	<li class="menu-item"><a href="../services/index.html">All Services</a></li>
-	<li class="menu-item"><a href="../services/premium-business-websites/index.html">Premium Business Websites</a></li>
-	<li class="menu-item"><a href="../services/custom-software/index.html">Custom Software</a></li>
-	<li class="menu-item"><a href="../services/ai-integrations/index.html">AI Integrations</a></li>
-	<li class="menu-item"><a href="../services/automation-systems/index.html">Automation Systems</a></li>
-	<li class="menu-item"><a href="../services/seo/index.html">SEO</a></li>
-	<li class="menu-item"><a href="../services/business-platforms/index.html">Business Platforms</a></li>
-	<li class="menu-item"><a href="../services/maintenance/index.html">Maintenance</a></li>
-	<li class="menu-item"><a href="../services/performance-optimization/index.html">Performance Optimization</a></li>
-	<li class="menu-item"><a href="../services/consulting/index.html">Consulting</a></li>
+	<li class="menu-item"><a href="/services/">All Services</a></li>
+	<li class="menu-item"><a href="/services/premium-business-websites/">Premium Business Websites</a></li>
+	<li class="menu-item"><a href="/services/custom-software/">Custom Software</a></li>
+	<li class="menu-item"><a href="/services/ai-integrations/">AI Integrations</a></li>
+	<li class="menu-item"><a href="/services/automation-systems/">Automation Systems</a></li>
+	<li class="menu-item"><a href="/services/seo/">SEO</a></li>
+	<li class="menu-item"><a href="/services/business-platforms/">Business Platforms</a></li>
+	<li class="menu-item"><a href="/services/maintenance/">Maintenance</a></li>
+	<li class="menu-item"><a href="/services/performance-optimization/">Performance Optimization</a></li>
+	<li class="menu-item"><a href="/services/consulting/">Consulting</a></li>
 </ul>
 </li>
 <li id="menu-item-40" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-40"><a href="#">More</a>
 <ul class="submenu">
-	<li class="menu-item"><a href="../our-faq/index.html">FAQ</a></li>
-	<li class="menu-item"><a href="../privacy-policy/index.html">Privacy Policy</a></li>
-	<li class="menu-item"><a href="../terms/index.html">Terms</a></li>
+	<li class="menu-item"><a href="/our-faq/">FAQ</a></li>
+	<li class="menu-item"><a href="/privacy-policy/">Privacy Policy</a></li>
+	<li class="menu-item"><a href="/terms/">Terms</a></li>
 </ul>
 </li>
-<li id="menu-item-47" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47"><a href="../portfolio-page/index.html">Portfolio</a></li>
-<li id="menu-item-49" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-49"><a href="../blog/index.html">Blog</a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="../contact-us/index.html">Contact Me</a></li>
+<li id="menu-item-47" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47"><a href="/portfolio-page/">Portfolio</a></li>
+<li id="menu-item-49" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-49"><a href="/blog/">Blog</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/contact-us/">Contact Me</a></li>
 </ul> </nav>
  <nav id="mean-nav">
- <nav id="mobile-menu" class="menu-main-menu-container"><ul id="menu-main-menu-1" class=""><li id="menu-item-home" class="has-dropdown"><a href="../index.html">Home</a>
+ <nav id="mobile-menu" class="menu-main-menu-container"><ul id="menu-main-menu-1" class=""><li id="menu-item-home" class="has-dropdown"><a href="/">Home</a>
 <ul class="submenu">
-	<li><a href="../index.html">Full Stack Developer</a></li>
-	<li><a href="../web-developer/index.html">Web Developer</a></li>
-	<li><a href="../graphic-designer/index.html">Product Engineer</a></li>
-	<li><a href="../fashion-model/index.html">Case Studies</a></li>
+	<li><a href="/">Full Stack Developer</a></li>
+	<li><a href="/web-developer/">Web Developer</a></li>
+	<li><a href="/graphic-designer/">Product Engineer</a></li>
+	<li><a href="/fashion-model/">Case Studies</a></li>
 </ul>
 </li>
-<li><a href="../about-me/index.html">About Me</a></li>
-<li class="has-dropdown"><a href="../services/index.html">Services</a>
+<li><a href="/about-me/">About Me</a></li>
+<li class="has-dropdown"><a href="/services/">Services</a>
 <ul class="submenu">
-	<li><a href="../services/index.html">All Services</a></li>
-	<li><a href="../services/premium-business-websites/index.html">Premium Business Websites</a></li>
-	<li><a href="../services/custom-software/index.html">Custom Software</a></li>
-	<li><a href="../services/ai-integrations/index.html">AI Integrations</a></li>
-	<li><a href="../services/automation-systems/index.html">Automation Systems</a></li>
-	<li><a href="../services/seo/index.html">SEO</a></li>
-	<li><a href="../services/business-platforms/index.html">Business Platforms</a></li>
-	<li><a href="../services/maintenance/index.html">Maintenance</a></li>
-	<li><a href="../services/performance-optimization/index.html">Performance Optimization</a></li>
-	<li><a href="../services/consulting/index.html">Consulting</a></li>
+	<li><a href="/services/">All Services</a></li>
+	<li><a href="/services/premium-business-websites/">Premium Business Websites</a></li>
+	<li><a href="/services/custom-software/">Custom Software</a></li>
+	<li><a href="/services/ai-integrations/">AI Integrations</a></li>
+	<li><a href="/services/automation-systems/">Automation Systems</a></li>
+	<li><a href="/services/seo/">SEO</a></li>
+	<li><a href="/services/business-platforms/">Business Platforms</a></li>
+	<li><a href="/services/maintenance/">Maintenance</a></li>
+	<li><a href="/services/performance-optimization/">Performance Optimization</a></li>
+	<li><a href="/services/consulting/">Consulting</a></li>
 </ul>
 </li>
 <li class="has-dropdown"><a href="#">More</a>
 <ul class="submenu">
-	<li><a href="../our-faq/index.html">FAQ</a></li>
-	<li><a href="../privacy-policy/index.html">Privacy Policy</a></li>
-	<li><a href="../terms/index.html">Terms</a></li>
+	<li><a href="/our-faq/">FAQ</a></li>
+	<li><a href="/privacy-policy/">Privacy Policy</a></li>
+	<li><a href="/terms/">Terms</a></li>
 </ul>
 </li>
-<li><a href="../portfolio-page/index.html">Portfolio</a></li>
-<li><a href="../blog/index.html">Blog</a></li>
-<li><a href="../contact-us/index.html">Contact Me</a></li>
+<li><a href="/portfolio-page/">Portfolio</a></li>
+<li><a href="/blog/">Blog</a></li>
+<li><a href="/contact-us/">Contact Me</a></li>
 </ul></nav> </nav>
  </div>
  </div>
  <div class="header-right d-flex justify-content-end align-items-center mt-0">
- <a href="../hire-me/index.html" class="theme-btn">Hire Me<i class="fa-solid fa-arrow-up-right"></i>
+ <a href="/hire-me/" class="theme-btn">Hire Me<i class="fa-solid fa-arrow-up-right"></i>
  </a>
  <div class="header__hamburger d-xl-none my-auto">
  <div class="sidebar__toggle">
@@ -425,7 +427,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 
  <span class="sub_title d-block fw-medium">
  <div class="list breadcrumb-menu">
- <a href="../index.html">Home</a> <a href="../index.html">/</a> <a href="../index.html">Blog</a> Shipping Remotely from Jamaica </div>
+ <a href="/">Home</a> <a href="/">/</a> <a href="/">Blog</a> Shipping Remotely from Jamaica </div>
  </span>
  </div>
  </div>
@@ -461,15 +463,15 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
        <ol><li class="zh-toc-level-2"><a href="#remote-work-rewards-clarity-more-than-charisma">Remote work rewards clarity more than charisma</a></li><li class="zh-toc-level-2"><a href="#working-from-portmore">Working from Portmore</a></li><li class="zh-toc-level-2"><a href="#caribbean-internet-reliability">Caribbean internet reliability</a></li><li class="zh-toc-level-2"><a href="#time-zone-and-location-are-operational-details-not-excuses">Time zone and location are operational details, not excuses</a></li><li class="zh-toc-level-2"><a href="#async-communication-strategies">Async communication strategies</a></li><li class="zh-toc-level-2"><a href="#ownership-matters-even-more-when-nobody-is-looking-over-your-shoulder">Ownership matters even more when nobody is looking over your shoulder</a></li><li class="zh-toc-level-2"><a href="#building-trust-with-international-clients">Building trust with international clients</a></li><li class="zh-toc-level-2"><a href="#cultural-perspective-as-an-advantage">Cultural perspective as an advantage</a></li><li class="zh-toc-level-2"><a href="#documentation-is-one-of-the-real-superpowers">Documentation is one of the real superpowers</a></li><li class="zh-toc-level-2"><a href="#why-output-still-has-to-carry-the-conversation">Why output still has to carry the conversation</a></li><li class="zh-toc-level-2"><a href="#what-shipping-remotely-from-jamaica-has-taught-me">What shipping remotely from Jamaica has taught me</a></li></ol>
       </div>
       <div class="entry-content" itemprop="articleBody">
-       <p>Shipping remotely from Jamaica has shaped the way I work in useful ways. It has pushed me to communicate clearly, document decisions well, and make my output speak loudly enough that geography does not become the headline. Remote work exposes weak process fast. If the work is vague, ownership is fuzzy, or updates are inconsistent, distance makes that more obvious. But when the process is strong, location can become a strength rather than a constraint.</p><p>I live and work in Portmore, St. Catherine, a suburb of Kingston. Everything I build, every client interaction, every deploy happens from here. This article is about what that actually looks like in practice, and why working from Jamaica is not the limitation some people assume it to be.</p><section class="zh-article-section" id="remote-work-rewards-clarity-more-than-charisma"><h2>Remote work rewards clarity more than charisma</h2><p>In person teams can sometimes cover for weak process with constant conversation. Remote work is less forgiving. If priorities are unclear, handoffs are fuzzy, or decisions live only in somebody's head, progress slows down fast. That is why I value clear written updates, visible reasoning, and disciplined follow through.</p><p>I have found that strong remote contributors make the work legible. They do not just say they are moving. They show what changed, what was verified, and what is blocked. That habit builds trust across distance. When a client in the US or Canada reads my update and knows exactly what shipped, what is next, and what I need from them, geography disappears as a concern.</p></section><section class="zh-article-section" id="working-from-portmore"><h2>Working from Portmore</h2><p>Portmore is not a tech hub in the way people think of Austin or Bangalore. There are no coworking spaces on every block, no startup incubators sponsoring meetups, no developer conferences happening monthly. But those things are not requirements for good work. What I need is a stable internet connection, a quiet workspace, and the discipline to ship consistently. Portmore gives me all of that at a fraction of the cost of living in a major tech city.</p><p>The cost advantage is real and it matters for clients too. I can offer competitive rates without undercutting my own quality of life, which means I am not racing to the bottom on pricing. I charge based on the value of the work, and my overhead is low enough that I can be selective about the projects I take on.</p><p>There is also a focus advantage to working from a place that is not saturated with tech culture. I do not spend my evenings at tech happy hours or my weekends at hackathons. I spend them with my community, at church, with family. That separation between work and the rest of life makes me more focused during working hours, not less.</p></section><section class="zh-article-section" id="caribbean-internet-reliability"><h2>Caribbean internet reliability</h2><p>I am honest about this: Caribbean internet is not always as reliable as what you get in a major US city. There are occasional outages, and speeds can fluctuate depending on the provider and time of day. I have dealt with this by building redundancy into my setup.</p><p>I maintain a primary fiber connection and a mobile data backup that I can switch to within seconds if the main connection drops. I also keep critical tools and repos synced locally so I can continue working offline if needed. Git works offline by design, and my IDE does not need an internet connection to function.</p><p>In practice, connectivity has rarely been a problem that affected delivery timelines. The outages I have experienced have been short, and the backup connection covers the gap. What matters more than perfect uptime is having a plan for when things go wrong, and communicating proactively if an interruption does affect a deadline.</p><p>I have never missed a client deadline because of internet issues. That is not luck. It is preparation.</p></section><section class="zh-article-section" id="time-zone-and-location-are-operational-details-not-excuses"><h2>Time zone and location are operational details, not excuses</h2><p>Jamaica is on Eastern Standard Time year round. We do not observe daylight saving time, which means for half the year I am aligned with EST and for the other half I am one hour behind EDT. This is actually an advantage for working with US East Coast clients, who make up the majority of the North American market.</p><p>I am available during normal US business hours. I can join calls, respond to messages, and ship updates during the same working window as a developer in New York or Miami. For West Coast clients, the time difference is only two to three hours, which is well within the range of comfortable overlap.</p><p>I think remote work becomes stronger when time zone differences are handled proactively instead of treated like permanent friction. Clear async updates, scoped tasks, and honest turnaround expectations matter a lot. When teams document well, a different location does not automatically create chaos.</p></section><section class="zh-article-section" id="async-communication-strategies"><h2>Async communication strategies</h2><p>Async communication is the backbone of effective remote work. Here are the specific practices I follow:</p><ul><li><strong>End of day summaries:</strong> At the end of each working day, I send a brief update covering what I completed, what I am working on next, and any blockers. This keeps the client informed without requiring a meeting.</li><li><strong>Loom videos for complex explanations:</strong> When a text update would take three paragraphs to explain what a two minute screen recording can show, I record a Loom. This is especially useful for demonstrating UI changes, walking through a bug reproduction, or explaining a technical decision.</li><li><strong>Written proposals before building:</strong> For significant features or architectural decisions, I write a short proposal outlining the approach, trade-offs, and timeline before writing code. This gives the client a chance to course correct before I invest hours in the wrong direction.</li><li><strong>Responsive, not reactive:</strong> I respond to messages within a reasonable window, usually within a few hours during working time. But I do not keep Slack open all day with notifications on. Deep work requires focus, and constant interruptions destroy that.</li></ul><p>These habits mean I can work effectively with clients who are three time zones away without anyone feeling like communication is a problem. The key is consistency: if the client knows they will get an update every day, they do not feel the need to check in constantly.</p></section><section class="zh-article-section" id="ownership-matters-even-more-when-nobody-is-looking-over-your-shoulder"><h2>Ownership matters even more when nobody is looking over your shoulder</h2><p>Remote work from Jamaica or anywhere else is not impressive by itself. What matters is whether you can own outcomes. Can you diagnose issues without being handheld. Can you structure your day. Can you communicate early when something is blocked. Can you make the project easier for everyone else to understand.</p><p>That is the standard I try to hold myself to. I want the quality of the work and the reliability of the process to remove doubt. When I take ownership of a feature, I own it end to end: the implementation, the testing, the edge cases, the documentation, and the communication about what is ready and what is not.</p><p>I have worked on projects where the client did not know I was in Jamaica until weeks into the engagement, because the quality and communication were indistinguishable from what they would expect from a local developer. That is the goal: make location irrelevant by making the work undeniable.</p></section><section class="zh-article-section" id="building-trust-with-international-clients"><h2>Building trust with international clients</h2><p>Trust is built through demonstrated reliability, not through promises. Here is how I think about earning trust with clients who have never worked with a Jamaican developer before:</p><ul><li><strong>Start with a small deliverable.</strong> On new engagements, I prefer to start with a defined, scoped piece of work that I can deliver quickly and well. This gives the client a low-risk way to evaluate my work before committing to a larger engagement.</li><li><strong>Show the work, not just the result.</strong> I share progress along the way, not just the final product. Screenshots, staging links, Loom walkthroughs. This builds confidence that the project is moving in the right direction.</li><li><strong>Be transparent about challenges.</strong> If something is harder than expected, I say so early. If a deadline is at risk, the client hears about it before the deadline, not after. Surprises destroy trust faster than delays do.</li><li><strong>Deliver consistently.</strong> Trust compounds. Every week of reliable delivery makes the next week easier. Every promise kept makes the next commitment more believable.</li></ul><p>I have found that once trust is established, the conversation shifts from "can this work remotely?" to "what should we build next?" That is the shift I am always working toward.</p></section><section class="zh-article-section" id="cultural-perspective-as-an-advantage"><h2>Cultural perspective as an advantage</h2><p>Being Jamaican is not a neutral characteristic in my work. It is a lens that shapes how I approach problems, communicate with people, and think about who technology serves.</p><p>Growing up in Jamaica gives me a natural sensitivity to performance constraints, because many Jamaicans access the internet on mobile devices with variable network speeds. I think about page weight, loading time, and offline capability more instinctively than someone who has only ever developed on gigabit fiber. That perspective makes me a better developer for projects that need to work well for real people on real devices.</p><p>I also bring a directness to communication that I think serves remote work well. Jamaican culture values being straightforward. I do not pad my updates with unnecessary optimism, and I do not avoid difficult conversations about scope, timeline, or technical limitations. Clients appreciate that honesty, especially when it saves them from finding out about a problem too late.</p><p>There is also a resilience dimension. Building a career in tech from Jamaica, without the support infrastructure of a major tech hub, requires resourcefulness. I am used to figuring things out independently, which is exactly the skill set that remote work demands.</p></section><section class="zh-article-section" id="documentation-is-one-of-the-real-superpowers"><h2>Documentation is one of the real superpowers</h2><p>Good documentation reduces repeated explanations and gives decisions a memory. I rely on it heavily because it keeps projects from becoming dependent on whoever happens to be awake or available in the moment. That is good remote practice and good engineering practice in general.</p><p>It also helps with handoff, review, and long term maintenance. Clear notes often save more time than another meeting. I document architectural decisions, deployment procedures, environment setup, and the reasoning behind non-obvious code choices. When a new developer joins a project or I revisit code after three months, that documentation is the difference between a smooth onboarding and a week of archaeology.</p></section><section class="zh-article-section" id="why-output-still-has-to-carry-the-conversation"><h2>Why output still has to carry the conversation</h2><p>Remote work can attract a lot of talk about lifestyle, flexibility, and setup. Those things matter, but none of them replace strong output. The work still has to be thoughtful, verifiable, and worth trusting. Clean implementation, honest communication, and follow through are what make remote collaboration sustainable.</p><p>That is especially true when you are building a public portfolio. The proof should live in the work, not only in how you describe yourself. Every project I ship is a demonstration of what remote collaboration from Jamaica can look like when the process is right.</p></section><section class="zh-article-section" id="what-shipping-remotely-from-jamaica-has-taught-me"><h2>What shipping remotely from Jamaica has taught me</h2><p>It has taught me to respect process, make reasoning visible, and keep quality high enough that distance stops being the interesting part. That is a useful discipline to build anywhere, but remote work makes it impossible to ignore.</p><p>Jamaica is not a constraint I am working around. It is where I live, where my community is, and where I do my best work. The tools, the process, and the discipline travel anywhere. The perspective, the resilience, and the grounding come from right here in Portmore.</p><p>If you want to work with me, explore the <a href="../portfolio-page/index.html">portfolio</a>, read more on the <a href="../about-me/index.html">about page</a>, or <a href="../hire-me/index.html">hire me</a> for product and platform work built with strong communication and clean execution.</p></section>
+       <p>Shipping remotely from Jamaica has shaped the way I work in useful ways. It has pushed me to communicate clearly, document decisions well, and make my output speak loudly enough that geography does not become the headline. Remote work exposes weak process fast. If the work is vague, ownership is fuzzy, or updates are inconsistent, distance makes that more obvious. But when the process is strong, location can become a strength rather than a constraint.</p><p>I live and work in Portmore, St. Catherine, a suburb of Kingston. Everything I build, every client interaction, every deploy happens from here. This article is about what that actually looks like in practice, and why working from Jamaica is not the limitation some people assume it to be.</p><section class="zh-article-section" id="remote-work-rewards-clarity-more-than-charisma"><h2>Remote work rewards clarity more than charisma</h2><p>In person teams can sometimes cover for weak process with constant conversation. Remote work is less forgiving. If priorities are unclear, handoffs are fuzzy, or decisions live only in somebody's head, progress slows down fast. That is why I value clear written updates, visible reasoning, and disciplined follow through.</p><p>I have found that strong remote contributors make the work legible. They do not just say they are moving. They show what changed, what was verified, and what is blocked. That habit builds trust across distance. When a client in the US or Canada reads my update and knows exactly what shipped, what is next, and what I need from them, geography disappears as a concern.</p></section><section class="zh-article-section" id="working-from-portmore"><h2>Working from Portmore</h2><p>Portmore is not a tech hub in the way people think of Austin or Bangalore. There are no coworking spaces on every block, no startup incubators sponsoring meetups, no developer conferences happening monthly. But those things are not requirements for good work. What I need is a stable internet connection, a quiet workspace, and the discipline to ship consistently. Portmore gives me all of that at a fraction of the cost of living in a major tech city.</p><p>The cost advantage is real and it matters for clients too. I can offer competitive rates without undercutting my own quality of life, which means I am not racing to the bottom on pricing. I charge based on the value of the work, and my overhead is low enough that I can be selective about the projects I take on.</p><p>There is also a focus advantage to working from a place that is not saturated with tech culture. I do not spend my evenings at tech happy hours or my weekends at hackathons. I spend them with my community, at church, with family. That separation between work and the rest of life makes me more focused during working hours, not less.</p></section><section class="zh-article-section" id="caribbean-internet-reliability"><h2>Caribbean internet reliability</h2><p>I am honest about this: Caribbean internet is not always as reliable as what you get in a major US city. There are occasional outages, and speeds can fluctuate depending on the provider and time of day. I have dealt with this by building redundancy into my setup.</p><p>I maintain a primary fiber connection and a mobile data backup that I can switch to within seconds if the main connection drops. I also keep critical tools and repos synced locally so I can continue working offline if needed. Git works offline by design, and my IDE does not need an internet connection to function.</p><p>In practice, connectivity has rarely been a problem that affected delivery timelines. The outages I have experienced have been short, and the backup connection covers the gap. What matters more than perfect uptime is having a plan for when things go wrong, and communicating proactively if an interruption does affect a deadline.</p><p>I have never missed a client deadline because of internet issues. That is not luck. It is preparation.</p></section><section class="zh-article-section" id="time-zone-and-location-are-operational-details-not-excuses"><h2>Time zone and location are operational details, not excuses</h2><p>Jamaica is on Eastern Standard Time year round. We do not observe daylight saving time, which means for half the year I am aligned with EST and for the other half I am one hour behind EDT. This is actually an advantage for working with US East Coast clients, who make up the majority of the North American market.</p><p>I am available during normal US business hours. I can join calls, respond to messages, and ship updates during the same working window as a developer in New York or Miami. For West Coast clients, the time difference is only two to three hours, which is well within the range of comfortable overlap.</p><p>I think remote work becomes stronger when time zone differences are handled proactively instead of treated like permanent friction. Clear async updates, scoped tasks, and honest turnaround expectations matter a lot. When teams document well, a different location does not automatically create chaos.</p></section><section class="zh-article-section" id="async-communication-strategies"><h2>Async communication strategies</h2><p>Async communication is the backbone of effective remote work. Here are the specific practices I follow:</p><ul><li><strong>End of day summaries:</strong> At the end of each working day, I send a brief update covering what I completed, what I am working on next, and any blockers. This keeps the client informed without requiring a meeting.</li><li><strong>Loom videos for complex explanations:</strong> When a text update would take three paragraphs to explain what a two minute screen recording can show, I record a Loom. This is especially useful for demonstrating UI changes, walking through a bug reproduction, or explaining a technical decision.</li><li><strong>Written proposals before building:</strong> For significant features or architectural decisions, I write a short proposal outlining the approach, trade-offs, and timeline before writing code. This gives the client a chance to course correct before I invest hours in the wrong direction.</li><li><strong>Responsive, not reactive:</strong> I respond to messages within a reasonable window, usually within a few hours during working time. But I do not keep Slack open all day with notifications on. Deep work requires focus, and constant interruptions destroy that.</li></ul><p>These habits mean I can work effectively with clients who are three time zones away without anyone feeling like communication is a problem. The key is consistency: if the client knows they will get an update every day, they do not feel the need to check in constantly.</p></section><section class="zh-article-section" id="ownership-matters-even-more-when-nobody-is-looking-over-your-shoulder"><h2>Ownership matters even more when nobody is looking over your shoulder</h2><p>Remote work from Jamaica or anywhere else is not impressive by itself. What matters is whether you can own outcomes. Can you diagnose issues without being handheld. Can you structure your day. Can you communicate early when something is blocked. Can you make the project easier for everyone else to understand.</p><p>That is the standard I try to hold myself to. I want the quality of the work and the reliability of the process to remove doubt. When I take ownership of a feature, I own it end to end: the implementation, the testing, the edge cases, the documentation, and the communication about what is ready and what is not.</p><p>I have worked on projects where the client did not know I was in Jamaica until weeks into the engagement, because the quality and communication were indistinguishable from what they would expect from a local developer. That is the goal: make location irrelevant by making the work undeniable.</p></section><section class="zh-article-section" id="building-trust-with-international-clients"><h2>Building trust with international clients</h2><p>Trust is built through demonstrated reliability, not through promises. Here is how I think about earning trust with clients who have never worked with a Jamaican developer before:</p><ul><li><strong>Start with a small deliverable.</strong> On new engagements, I prefer to start with a defined, scoped piece of work that I can deliver quickly and well. This gives the client a low-risk way to evaluate my work before committing to a larger engagement.</li><li><strong>Show the work, not just the result.</strong> I share progress along the way, not just the final product. Screenshots, staging links, Loom walkthroughs. This builds confidence that the project is moving in the right direction.</li><li><strong>Be transparent about challenges.</strong> If something is harder than expected, I say so early. If a deadline is at risk, the client hears about it before the deadline, not after. Surprises destroy trust faster than delays do.</li><li><strong>Deliver consistently.</strong> Trust compounds. Every week of reliable delivery makes the next week easier. Every promise kept makes the next commitment more believable.</li></ul><p>I have found that once trust is established, the conversation shifts from "can this work remotely?" to "what should we build next?" That is the shift I am always working toward.</p></section><section class="zh-article-section" id="cultural-perspective-as-an-advantage"><h2>Cultural perspective as an advantage</h2><p>Being Jamaican is not a neutral characteristic in my work. It is a lens that shapes how I approach problems, communicate with people, and think about who technology serves.</p><p>Growing up in Jamaica gives me a natural sensitivity to performance constraints, because many Jamaicans access the internet on mobile devices with variable network speeds. I think about page weight, loading time, and offline capability more instinctively than someone who has only ever developed on gigabit fiber. That perspective makes me a better developer for projects that need to work well for real people on real devices.</p><p>I also bring a directness to communication that I think serves remote work well. Jamaican culture values being straightforward. I do not pad my updates with unnecessary optimism, and I do not avoid difficult conversations about scope, timeline, or technical limitations. Clients appreciate that honesty, especially when it saves them from finding out about a problem too late.</p><p>There is also a resilience dimension. Building a career in tech from Jamaica, without the support infrastructure of a major tech hub, requires resourcefulness. I am used to figuring things out independently, which is exactly the skill set that remote work demands.</p></section><section class="zh-article-section" id="documentation-is-one-of-the-real-superpowers"><h2>Documentation is one of the real superpowers</h2><p>Good documentation reduces repeated explanations and gives decisions a memory. I rely on it heavily because it keeps projects from becoming dependent on whoever happens to be awake or available in the moment. That is good remote practice and good engineering practice in general.</p><p>It also helps with handoff, review, and long term maintenance. Clear notes often save more time than another meeting. I document architectural decisions, deployment procedures, environment setup, and the reasoning behind non-obvious code choices. When a new developer joins a project or I revisit code after three months, that documentation is the difference between a smooth onboarding and a week of archaeology.</p></section><section class="zh-article-section" id="why-output-still-has-to-carry-the-conversation"><h2>Why output still has to carry the conversation</h2><p>Remote work can attract a lot of talk about lifestyle, flexibility, and setup. Those things matter, but none of them replace strong output. The work still has to be thoughtful, verifiable, and worth trusting. Clean implementation, honest communication, and follow through are what make remote collaboration sustainable.</p><p>That is especially true when you are building a public portfolio. The proof should live in the work, not only in how you describe yourself. Every project I ship is a demonstration of what remote collaboration from Jamaica can look like when the process is right.</p></section><section class="zh-article-section" id="what-shipping-remotely-from-jamaica-has-taught-me"><h2>What shipping remotely from Jamaica has taught me</h2><p>It has taught me to respect process, make reasoning visible, and keep quality high enough that distance stops being the interesting part. That is a useful discipline to build anywhere, but remote work makes it impossible to ignore.</p><p>Jamaica is not a constraint I am working around. It is where I live, where my community is, and where I do my best work. The tools, the process, and the discipline travel anywhere. The perspective, the resilience, and the grounding come from right here in Portmore.</p><p>If you want to work with me, explore the <a href="/portfolio-page/">portfolio</a>, read more on the <a href="/about-me/">about page</a>, or <a href="/hire-me/">hire me</a> for product and platform work built with strong communication and clean execution.</p></section>
       
       </div>
       <div class="zh-blog-cta">
        <h3>Need help building something similar?</h3>
        <p>I design and build premium websites, product experiences, and custom software with a strong focus on clarity, performance, and real business outcomes.</p>
        <div class="zh-blog-cta-actions">
-        <a class="theme-btn" href="../hire-me/index.html">Hire Me <i class="fa-solid fa-arrow-up-right"></i></a>
-        <a class="theme-btn style-border" href="../contact-us/index.html">Contact Me <i class="fa-solid fa-arrow-up-right"></i></a>
+        <a class="theme-btn" href="/hire-me/">Hire Me <i class="fa-solid fa-arrow-up-right"></i></a>
+        <a class="theme-btn style-border" href="/contact-us/">Contact Me <i class="fa-solid fa-arrow-up-right"></i></a>
        </div>
       </div>
     </article>
@@ -491,10 +493,10 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
      <div class="single-sidebar-widget">
       <h3 class="sidebar-widget-title">Related links</h3>
       <ul>
-       <li><a href="../portfolio-page/index.html">Portfolio</a></li>
-       <li><a href="../services/index.html">Services</a></li>
-       <li><a href="../blog/index.html">All blog posts</a></li>
-       <li><a href="../contact-us/index.html">Contact Me</a></li>
+       <li><a href="/portfolio-page/">Portfolio</a></li>
+       <li><a href="/services/">Services</a></li>
+       <li><a href="/blog/">All blog posts</a></li>
+       <li><a href="/contact-us/">Contact Me</a></li>
       </ul>
      </div>
      <div class="single-sidebar-widget">
@@ -543,7 +545,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  </div>
  <div class="footer-wrapper-2">
  <div class="container">
- <a href="../index.html" class="footer-logo">
+ <a href="/" class="footer-logo">
  <img src="../wp-content/uploads/2026/01/white-icon.svg?v=zh3" alt="img">
  </a>
  <div class="content wow fadeInUp" data-wow-delay=".3s">
@@ -560,27 +562,27 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  quick links </h4>
  <ul class="menu-item">
  <li>
- <a href="../index.html">
+ <a href="/">
  home </a>
  </li>
  <li>
- <a href="../about-me/index.html">
+ <a href="/about-me/">
  ABOUT ME </a>
  </li>
  <li>
- <a href="../services/index.html">
+ <a href="/services/">
  SERVICES </a>
  </li>
  <li>
- <a href="../portfolio-page/index.html">
+ <a href="/portfolio-page/">
  PORTFOLIO </a>
  </li>
  <li>
- <a href="../blog/index.html">
+ <a href="/blog/">
  news &amp; blog </a>
  </li>
  <li>
- <a href="../contact-us/index.html">
+ <a href="/contact-us/">
  CONTACT ME </a>
  </li>
  </ul>
@@ -645,11 +647,11 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  </div>
  <ul>
  <li>
- <a href="../terms/index.html">
+ <a href="/terms/">
  Terms &amp; Conditions </a>
  </li>
  <li>
- <a href="../privacy-policy/index.html">
+ <a href="/privacy-policy/">
  Privacy Policy </a>
  </li>
  </ul>
@@ -1108,7 +1110,7 @@ a.header-logo img,
 <script id="zh-header-ux-js">
 (function(){
  var mq=window.matchMedia('(max-width:991px)');
- var DRAWER_NAV='<a class="zh-nav-top" href="../index.html">Home</a><a class="zh-nav-top" href="../about-me/index.html">About Me</a><div class="zh-nav-group"><button type="button" class="zh-nav-accordion" aria-expanded="false">Services<span class="zh-acc-chevron" aria-hidden="true">▼</span></button><div class="zh-nav-sub"><a href="../services/index.html">All Services</a><a href="../services/premium-business-websites/index.html">Premium Business Websites</a><a href="../services/custom-software/index.html">Custom Software</a><a href="../services/ai-integrations/index.html">AI Integrations</a><a href="../services/automation-systems/index.html">Automation Systems</a><a href="../services/seo/index.html">SEO</a><a href="../services/business-platforms/index.html">Business Platforms</a><a href="../services/maintenance/index.html">Maintenance</a><a href="../services/performance-optimization/index.html">Performance Optimization</a><a href="../services/consulting/index.html">Consulting</a></div></div><div class="zh-nav-group"><button type="button" class="zh-nav-accordion" aria-expanded="false">More<span class="zh-acc-chevron" aria-hidden="true">▼</span></button><div class="zh-nav-sub"><a href="../our-faq/index.html">FAQ</a><a href="../privacy-policy/index.html">Privacy Policy</a><a href="../terms/index.html">Terms</a></div></div><a class="zh-nav-top" href="../portfolio-page/index.html">Portfolio</a><a class="zh-nav-top" href="../blog/index.html">Blog</a><a class="zh-nav-top" href="../contact-us/index.html">Contact Me</a>';
+ var DRAWER_NAV='<a class="zh-nav-top" href="/">Home</a><a class="zh-nav-top" href="/about-me/">About Me</a><div class="zh-nav-group"><button type="button" class="zh-nav-accordion" aria-expanded="false">Services<span class="zh-acc-chevron" aria-hidden="true">▼</span></button><div class="zh-nav-sub"><a href="/services/">All Services</a><a href="/services/premium-business-websites/">Premium Business Websites</a><a href="/services/custom-software/">Custom Software</a><a href="/services/ai-integrations/">AI Integrations</a><a href="/services/automation-systems/">Automation Systems</a><a href="/services/seo/">SEO</a><a href="/services/business-platforms/">Business Platforms</a><a href="/services/maintenance/">Maintenance</a><a href="/services/performance-optimization/">Performance Optimization</a><a href="/services/consulting/">Consulting</a></div></div><div class="zh-nav-group"><button type="button" class="zh-nav-accordion" aria-expanded="false">More<span class="zh-acc-chevron" aria-hidden="true">▼</span></button><div class="zh-nav-sub"><a href="/our-faq/">FAQ</a><a href="/privacy-policy/">Privacy Policy</a><a href="/terms/">Terms</a></div></div><a class="zh-nav-top" href="/portfolio-page/">Portfolio</a><a class="zh-nav-top" href="/blog/">Blog</a><a class="zh-nav-top" href="/contact-us/">Contact Me</a>';
  function openDrawer(){
   var d=document.getElementById('zh-mobile-drawer');
   var b=document.getElementById('zh-mobile-drawer-backdrop');
@@ -1180,7 +1182,7 @@ a.header-logo img,
   backBtn.className='zh-back-btn';
   backBtn.setAttribute('aria-label','Go back');
   backBtn.innerHTML='&#8592;';
-  backBtn.addEventListener('click',function(e){e.preventDefault();if(window.history.length>1) window.history.back(); else window.location.href='../index.html';});
+  backBtn.addEventListener('click',function(e){e.preventDefault();if(window.history.length>1) window.history.back(); else window.location.href='/';});
   var menuBtn=document.createElement('button');
   menuBtn.type='button';
   menuBtn.className='zh-hamburger';
@@ -1201,7 +1203,7 @@ a.header-logo img,
   var existing=document.querySelector('.zh-mobile-home-btn');if(existing) return;
   var btn=document.createElement('a');
   btn.className='zh-mobile-home-btn';
-  btn.href='../index.html';
+  btn.href='/';
   btn.setAttribute('aria-label','Go to home page');
   btn.innerHTML='&#8592; HOME';
   document.body.appendChild(btn);
@@ -1219,20 +1221,7 @@ a.header-logo img,
   ensureDrawer();
   var nav=document.getElementById('zh-mobile-nav')||buildNav();
   buildHomeBtn();
-  var lastY=window.scrollY||0;
-  var hero=document.querySelector('.hero-section,.hero-section1,.hero-1,.hero-5,.hero-3,main h1,header');
-  var heroH=hero?(hero.getBoundingClientRect().height+window.scrollY):360;
-  function onScroll(){
-   var y=window.scrollY||window.pageYOffset;
-   if(y<heroH*0.4){nav.classList.remove('zh-nav-hidden');lastY=y;return;}
-   if(y>lastY+6&&y>heroH) nav.classList.add('zh-nav-hidden');
-   else if(y<lastY-6) nav.classList.remove('zh-nav-hidden');
-   lastY=y;
-  }
-  window.removeEventListener('scroll',nav._zhScroll||function(){});
-  nav._zhScroll=onScroll;
-  window.addEventListener('scroll',onScroll,{passive:true});
-  onScroll();
+  nav.classList.remove('zh-nav-hidden');
  }
  initMobileNav();
  if(mq.addEventListener) mq.addEventListener('change',initMobileNav);
@@ -1257,4 +1246,5 @@ a.header-logo img,
 })();
 </script>
 
+<script id="zh-site-fix-js" src="/wp-content/uploads/zach/zh-site-fix.js?v=zhfix1" defer></script>
 </body></html><!-- Page cached by LiteSpeed Cache 7.8.1 on 2026-07-17 19:46:17 -->
