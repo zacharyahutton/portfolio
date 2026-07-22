@@ -1,7 +1,7 @@
-/* ZH site fix — preloader, header, mobile nav, mobile motion (v1) */
+/* ZH site fix v2 — preloader, header, mobile chrome, light motion */
 
-/* ── Preloader: full opaque cover, Zachary only ── */
-.preloader {
+/* ── Preloader: full cover, but MUST be hideable ── */
+.preloader:not(.zh-preloader-done):not(.is-hidden) {
   position: fixed !important;
   inset: 0 !important;
   width: 100% !important;
@@ -15,6 +15,9 @@
   justify-content: center !important;
   overflow: hidden !important;
   pointer-events: all !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
 }
 .preloader svg {
   position: absolute !important;
@@ -31,10 +34,14 @@ h5.preloader-text {
   color: #333 !important;
   z-index: 2 !important;
   margin: 0 !important;
+  font-size: 0 !important;
 }
 h5.preloader-text::after {
   content: "Zachary" !important;
   color: #BFF747 !important;
+  font-size: clamp(28px, 6vw, 48px) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
 }
 .preloader.zh-preloader-done,
 .preloader.is-hidden {
@@ -42,6 +49,8 @@ h5.preloader-text::after {
   z-index: -1 !important;
   pointer-events: none !important;
   opacity: 0 !important;
+  visibility: hidden !important;
+  transform: translateY(-120%) !important;
 }
 
 /* ── Desktop header: always visible ── */
@@ -93,33 +102,173 @@ h5.preloader-text::after {
     visibility: visible !important;
   }
 
-  /* Soften / kill heavy motion so content is visible */
+  /* Soften heavy motion only — keep light entrance / wow / sliders */
   .parallaxie,
   [data-speed],
   .circle-progress,
-  .orbit-circle,
-  .feature-work-experience-preview-slider-item,
-  .brand-section .zh-client-brand img {
+  .orbit-circle {
     transform: none !important;
     animation: none !important;
   }
+  .circle-box,
+  .award-section-2 .circle-box,
+  .feature-work-experience-preview {
+    display: none !important;
+  }
+  .feature-work-experience-wrap {
+    height: auto !important;
+    min-height: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  .feature-work-experience-wrap::before {
+    display: none !important;
+  }
+  .feature-work-experience-main-slider {
+    position: relative !important;
+    margin-top: 0 !important;
+  }
+
+  /* Keep wow fades but shorter / safer */
   .wow {
     visibility: visible !important;
-    animation: none !important;
   }
+
+  /* Titles must never stay invisible */
   .split-line,
   .tv_hero_title .split-line,
   .tv_hero_title div,
   .tv_hero_title span {
     opacity: 1 !important;
-    transform: none !important;
     visibility: visible !important;
   }
+
   #smooth-wrapper,
   #smooth-content {
     height: auto !important;
     overflow: visible !important;
     transform: none !important;
+  }
+
+  /* Hero social icons: compact, wrap, don't stretch full width */
+  .hero-1 .social-link,
+  .hero-1 .zh-social-link,
+  .zh-hero-actions .zh-social-link {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 8px !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    margin-top: 16px !important;
+    margin-bottom: 12px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  .hero-1 .social-link a,
+  .hero-1 .zh-social-link a,
+  .zh-hero-actions .zh-social-link a {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    max-width: none !important;
+    font-size: 11px !important;
+    line-height: 1.2 !important;
+    padding: 7px 10px !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    border-radius: 999px !important;
+    white-space: nowrap !important;
+    gap: 0.35em !important;
+  }
+  .hero-1 .zh-social-link a::after {
+    font-size: 0.65em !important;
+  }
+  .zh-icon-gmail {
+    width: 12px !important;
+    height: 12px !important;
+  }
+
+  /* Work experience nav arrows */
+  .zh-work-nav {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    margin: 18px auto 8px;
+    position: relative;
+    z-index: 5;
+  }
+  .zh-work-nav button {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1px solid rgba(191, 247, 71, 0.55);
+    background: rgba(17, 16, 19, 0.85);
+    color: #BFF747;
+    font-size: 18px;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  .zh-work-nav button:hover,
+  .zh-work-nav button:active {
+    background: #BFF747;
+    color: #0a0a0a;
+    border-color: #BFF747;
+  }
+  .zh-work-nav__hint {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+    margin: 0 4px;
+  }
+
+  /* Portrait pop-in after load (highlight) */
+  .hero-1 .animated-image.zh-pop-ready {
+    animation: zhHeroPop 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @keyframes zhHeroPop {
+    from {
+      opacity: 0;
+      transform: translateY(48px) scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .zh-work-nav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    margin: 12px 0 0;
+  }
+  .zh-work-nav button {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(191, 247, 71, 0.45);
+    background: transparent;
+    color: #BFF747;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  .zh-work-nav button:hover {
+    background: #BFF747;
+    color: #0a0a0a;
+  }
+  .zh-work-nav__hint {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
   }
 }
 
@@ -134,7 +283,6 @@ body.zh-ready .tv_hero_title,
 body.zh-ready .tv_hero_title .split-line,
 body.zh-ready .tv_hero_title div,
 body.zh-ready .tv_hero_title span,
-body.zh-ready .animated-image,
 body.zh-ready .hero_title {
   opacity: 1 !important;
   visibility: visible !important;
@@ -143,4 +291,9 @@ body.zh-ready .tv_hero_title .split-line,
 body.zh-ready .tv_hero_title div,
 body.zh-ready .tv_hero_title span {
   transform: none !important;
+}
+/* Portrait: only force visible if pop animation already finished or desktop */
+body.zh-ready .animated-image:not(.zh-pop-pending) {
+  opacity: 1 !important;
+  visibility: visible !important;
 }

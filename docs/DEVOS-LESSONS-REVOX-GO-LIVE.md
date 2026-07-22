@@ -51,3 +51,9 @@
 - [ ] Mobile drawer opens; SERVICES/MORE expand; links work from `/blog/x/` and `/services/x/`
 - [ ] Case Study → `/works/...` 200
 - [ ] Mobile: no ScrollSmoother; titles visible without waiting for GSAP
+
+## Follow-up 2026-07-22: preloader stuck + over-killed mobile motion
+- Root cause PC stuck: `.preloader { display:flex !important }` beat inline `display:none` failsafes without `.zh-preloader-done` class
+- Fix: CSS only applies flex when `:not(.zh-preloader-done)`; JS always adds class + setProperty important; multi timeout failsafes
+- User still wants highlight pop after load and work slider arrows on mobile; do not kill all wow/GSAP on mobile, only ScrollSmoother + pins
+- Social icons need compact wrap on mobile

@@ -282,7 +282,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 <link rel="icon" href="wp-content/uploads/2025/11/android-chrome-512x512-1-214x214.png" sizes="192x192">
 <link rel="apple-touch-icon" href="./wp-content/uploads/2025/11/android-chrome-512x512-1-214x214.png">
 <meta name="msapplication-TileImage" content="./wp-content/uploads/2025/11/android-chrome-512x512-1-300x300.png">
- <link rel="stylesheet" id="zh-site-fix-css" href="/wp-content/uploads/zach/zh-site-fix.css?v=zhfix1">
+ <link rel="stylesheet" id="zh-site-fix-css" href="/wp-content/uploads/zach/zh-site-fix.css?v=zhfix2">
 </head>
 
 <body class="home wp-singular page-template page-template-elementor_header_footer page page-id-11 wp-theme-revox ehf-header ehf-footer ehf-template-revox ehf-stylesheet-revox revox-toolkit-activate not-logged-in elementor-default elementor-template-full-width elementor-kit-9 elementor-page elementor-page-11">
@@ -1196,6 +1196,11 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  </div>
  </div>
  </div>
+ </div>
+ <div class="zh-work-nav" aria-label="Work experience navigation">
+ <button type="button" class="zh-work-prev" aria-label="Previous experience">&#8592;</button>
+ <span class="zh-work-nav__hint">More work</span>
+ <button type="button" class="zh-work-next" aria-label="Next experience">&#8594;</button>
  </div>
  </div>
  </div> 
@@ -2161,6 +2166,18 @@ a.header-logo img,
 .zh-social-link a::after{content:"↗";font-size:.75em;opacity:.7;}
 .zh-icon-gmail{display:inline-block;object-fit:contain;vertical-align:-0.125em;}
 .zh-social-link a[href^="mailto:"]{text-transform:uppercase;letter-spacing:.04em;}
+@media (max-width:991px){
+ .hero-1 .zh-social-link,.zh-hero-actions .zh-social-link{
+  display:flex!important;flex-wrap:wrap!important;justify-content:center!important;
+  gap:8px!important;width:100%!important;max-width:100%!important;
+ }
+ .hero-1 .zh-social-link a{
+  flex:0 0 auto!important;font-size:11px!important;padding:7px 10px!important;
+  border:1px solid rgba(255,255,255,.18)!important;border-radius:999px!important;
+  white-space:nowrap!important;
+ }
+ .zh-icon-gmail{width:12px!important;height:12px!important;}
+}
 .footer-wrapper .icon-items-area .icon-items a[href^="mailto:"]{text-transform:uppercase!important;}
 .footer-wrapper .icon-items-area .icon-items .icon .zh-icon-gmail{vertical-align:middle;}
 
@@ -2536,5 +2553,5 @@ a.header-logo img,
 })();
 </script>
 
-<script id="zh-site-fix-js" src="/wp-content/uploads/zach/zh-site-fix.js?v=zhfix1" defer></script>
+<script id="zh-site-fix-js" src="/wp-content/uploads/zach/zh-site-fix.js?v=zhfix2" defer></script>
 </body></html><!-- Page cached by LiteSpeed Cache 7.8.1 on 2026-07-17 19:15:15 -->

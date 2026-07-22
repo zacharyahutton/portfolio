@@ -1689,7 +1689,7 @@ text_slider.on('slideChangeTransitionStart', function () {
   // Init preloader
   preloader();
   /* ZH_PRELOADER_FAST */
-  setTimeout(function(){ try { var p=document.querySelector('.preloader'); if(p && p.style.display!=='none'){ p.style.display='none'; p.style.zIndex='-1'; } } catch(e){} }, 2500);
+  setTimeout(function(){ try { var p=document.querySelector('.preloader'); if(p){ p.classList.add('zh-preloader-done','is-hidden'); p.style.setProperty('display','none','important'); p.style.setProperty('z-index','-1','important'); p.style.setProperty('opacity','0','important'); p.style.setProperty('pointer-events','none','important'); } } catch(e){} }, 1800);
 
 
    /* ================================
@@ -1715,8 +1715,8 @@ text_slider.on('slideChangeTransitionStart', function () {
         effect: "fade",
         fadeEffect: { crossFade: true },
         navigation: {
-            nextEl: ".array-prev",
-            prevEl: ".array-next",
+            nextEl: ".zh-work-next",
+            prevEl: ".zh-work-prev",
         },
         thumbs: {
             swiper: fw_preview_slider,

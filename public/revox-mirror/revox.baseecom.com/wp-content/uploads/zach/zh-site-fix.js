@@ -1,31 +1,62 @@
 /**
- * ZH site fix — mobile nav (root paths), always-visible chrome,
- * ScrollSmoother mobile kill, fast preloader, sticky header, case study scroll.
+ * ZH site fix v2 — preloader kill, sticky header, mobile chrome,
+ * light mobile motion (keep highlight pop + work slider), work nav arrows.
  */
 (function () {
   "use strict";
 
-  /* ── Fast preloader hide (don't wait forever on window load) ── */
+  /* ── Preloader: must never stick (CSS uses :not(.zh-preloader-done)) ── */
   function hidePreloader() {
     var el = document.querySelector(".preloader");
-    if (!el || el.classList.contains("zh-preloader-done")) return;
-    el.classList.add("zh-preloader-done");
-    el.style.display = "none";
-    el.style.zIndex = "-1";
-    el.style.pointerEvents = "none";
+    if (!el) return;
+    el.classList.add("zh-preloader-done", "is-hidden");
+    try {
+      el.style.setProperty("display", "none", "important");
+      el.style.setProperty("opacity", "0", "important");
+      el.style.setProperty("visibility", "hidden", "important");
+      el.style.setProperty("z-index", "-1", "important");
+      el.style.setProperty("pointer-events", "none", "important");
+    } catch (e) {}
   }
   function armPreloader() {
+    // Aggressive failsafes — desktop was stuck because display:flex !important
+    // beat inline display:none without the done class.
+    setTimeout(hidePreloader, 900);
+    setTimeout(hidePreloader, 1600);
+    setTimeout(hidePreloader, 2400);
+    setTimeout(hidePreloader, 3600);
     if (document.readyState === "complete") {
-      setTimeout(hidePreloader, 280);
+      setTimeout(hidePreloader, 200);
     } else {
       window.addEventListener("load", function () {
-        setTimeout(hidePreloader, 280);
+        setTimeout(hidePreloader, 200);
+        setTimeout(runHeroPop, 260);
       });
-      // Failsafe: never leave users stuck behind the loader
-      setTimeout(hidePreloader, 2200);
     }
   }
   armPreloader();
+
+  /* ── Hero highlight pop AFTER preloader (mobile + desktop) ── */
+  function runHeroPop() {
+    hidePreloader();
+    var img = document.querySelector(".hero-1 .animated-image, .animated-image");
+    if (!img) return;
+    if (img.classList.contains("zh-pop-done")) return;
+    img.classList.add("zh-pop-pending");
+    // Force reflow then play CSS animation
+    void img.offsetWidth;
+    img.classList.remove("zh-pop-pending");
+    img.classList.add("zh-pop-ready", "zh-pop-done");
+    try {
+      if (window.gsap && window.matchMedia("(min-width: 992px)").matches) {
+        window.gsap.fromTo(
+          img,
+          { y: 80, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.9, ease: "power3.out", overwrite: "auto" }
+        );
+      }
+    } catch (e) {}
+  }
 
   /* ── Desktop sticky header outside ScrollSmoother + never hide ── */
   function fixDesktopHeader() {
@@ -41,17 +72,16 @@
         document.querySelector(
           ".hero-section, .hero-section1, .hero-1, .hero-5, .hero-3"
         ) &&
-        document.body.classList.contains("home")
+        (document.body.classList.contains("home") ||
+          !!document.querySelector(".hero-1"))
       ) {
         document.body.classList.add("zh-has-hero");
       }
       var h = Math.ceil(hdr.getBoundingClientRect().height) || 80;
       document.documentElement.style.setProperty("--zh-header-h", h + "px");
-      ["zach-header-hide", "header-hidden", "zh-hide-mobile"].forEach(
-        function (c) {
-          hdr.classList.remove(c);
-        }
-      );
+      ["zach-header-hide", "header-hidden", "zh-hide-mobile"].forEach(function (c) {
+        hdr.classList.remove(c);
+      });
       hdr.style.removeProperty("transform");
       hdr.style.removeProperty("opacity");
       hdr.style.removeProperty("visibility");
@@ -75,17 +105,10 @@
     }
   }
 
-  /* ── Kill ScrollSmoother + pinned triggers on mobile ── */
-  function killMobileMotion() {
+  /* ── Soften mobile motion: kill smoother + pins only, keep light motion ── */
+  function softenMobileMotion() {
     if (!window.matchMedia("(max-width: 991px)").matches) return;
     try {
-      if (window.ScrollTrigger) {
-        window.ScrollTrigger.getAll().forEach(function (t) {
-          try {
-            t.kill(true);
-          } catch (e) {}
-        });
-      }
       if (window.ScrollSmoother) {
         var sm = window.ScrollSmoother.get && window.ScrollSmoother.get();
         if (sm) {
@@ -93,6 +116,18 @@
             sm.kill();
           } catch (e) {}
         }
+      }
+      if (window.ScrollTrigger) {
+        window.ScrollTrigger.getAll().forEach(function (t) {
+          try {
+            var pin = t.vars && t.vars.pin;
+            var scrub = t.vars && t.vars.scrub;
+            // Only kill pins / heavy scrubbers that break layout
+            if (pin || scrub === true || (typeof scrub === "number" && scrub > 0)) {
+              t.kill(true);
+            }
+          } catch (e) {}
+        });
       }
     } catch (e) {}
     var wrap = document.getElementById("smooth-wrapper");
@@ -108,11 +143,60 @@
     }
     document.documentElement.style.overflow = "";
     document.body.style.overflow = "";
-    document.querySelectorAll(".tv_hero_title, .split-line").forEach(function (el) {
-      el.style.opacity = "1";
-      el.style.transform = "none";
-      el.style.visibility = "visible";
-    });
+    // Titles must be readable (SplitText skipped on mobile, but failsafe)
+    document.querySelectorAll(".tv_hero_title, .split-line, .hero_title").forEach(
+      function (el) {
+        if (parseFloat(getComputedStyle(el).opacity) < 0.2) {
+          el.style.opacity = "1";
+          el.style.visibility = "visible";
+        }
+      }
+    );
+  }
+
+  /* ── Work experience nav arrows ── */
+  function ensureWorkNav() {
+    var main = document.querySelector(".fw_main_slider_active");
+    if (!main) return;
+    var wrap =
+      main.closest(".feature-work-experience-wrap") ||
+      main.closest(".work-experience-section-1") ||
+      main.parentElement;
+    if (!wrap) return;
+    var nav = wrap.querySelector(".zh-work-nav");
+    if (!nav) {
+      nav = document.createElement("div");
+      nav.className = "zh-work-nav";
+      nav.setAttribute("aria-label", "Work experience navigation");
+      nav.innerHTML =
+        '<button type="button" class="zh-work-prev" aria-label="Previous experience">&#8592;</button>' +
+        '<span class="zh-work-nav__hint">More work</span>' +
+        '<button type="button" class="zh-work-next" aria-label="Next experience">&#8594;</button>';
+      if (main.nextSibling) {
+        main.parentNode.insertBefore(nav, main.nextSibling);
+      } else {
+        main.parentNode.appendChild(nav);
+      }
+    }
+    if (nav.getAttribute("data-zh-bound") === "1") return;
+    nav.setAttribute("data-zh-bound", "1");
+    function getSwiper() {
+      return main.swiper || null;
+    }
+    var prev = nav.querySelector(".zh-work-prev");
+    var next = nav.querySelector(".zh-work-next");
+    if (prev) {
+      prev.addEventListener("click", function () {
+        var s = getSwiper();
+        if (s) s.slidePrev();
+      });
+    }
+    if (next) {
+      next.addEventListener("click", function () {
+        var s = getSwiper();
+        if (s) s.slideNext();
+      });
+    }
   }
 
   /* ── Mobile drawer with root-absolute paths ── */
@@ -280,7 +364,6 @@
     buildHomeBtn();
   }
 
-  /* ── Lazy-load below-fold images ── */
   function lazyImages() {
     var imgs = document.querySelectorAll("img:not([loading])");
     imgs.forEach(function (img, i) {
@@ -295,7 +378,6 @@
     });
   }
 
-  /* ── Case study hash links: native scroll without ScrollSmoother glitch ── */
   function fixCaseStudyClicks() {
     document.addEventListener(
       "click",
@@ -306,7 +388,7 @@
         var target = document.getElementById(id);
         if (!target) return;
         e.preventDefault();
-        killMobileMotion();
+        softenMobileMotion();
         try {
           var sm =
             window.ScrollSmoother &&
@@ -326,17 +408,19 @@
 
   function revealContentFailsafe() {
     document.body.classList.add("zh-ready");
-    document.querySelectorAll(".animated-image, .tv_hero_title, .hero_title").forEach(function (el) {
+    document.querySelectorAll(".tv_hero_title, .hero_title").forEach(function (el) {
       el.style.opacity = "1";
       el.style.visibility = "visible";
-      el.style.transform = "none";
     });
-    document.querySelectorAll(".tv_hero_title div, .tv_hero_title span, .split-line").forEach(function (el) {
-      el.style.opacity = "1";
-      el.style.visibility = "visible";
-      el.style.transform = "none";
-    });
+    document.querySelectorAll(".tv_hero_title div, .tv_hero_title span, .split-line").forEach(
+      function (el) {
+        el.style.opacity = "1";
+        el.style.visibility = "visible";
+        el.style.transform = "none";
+      }
+    );
     hidePreloader();
+    runHeroPop();
   }
 
   function boot() {
@@ -344,13 +428,13 @@
     initMobileNav();
     lazyImages();
     fixCaseStudyClicks();
-    // Run after theme main.js (GSAP) has likely initialized
-    setTimeout(killMobileMotion, 100);
-    setTimeout(killMobileMotion, 600);
-    setTimeout(killMobileMotion, 1500);
+    ensureWorkNav();
+    setTimeout(softenMobileMotion, 120);
+    setTimeout(softenMobileMotion, 700);
     setTimeout(fixDesktopHeader, 200);
-    // Desktop blank failsafe: if SplitText/ScrollTrigger leave content at opacity 0
-    setTimeout(revealContentFailsafe, 1800);
+    setTimeout(ensureWorkNav, 800);
+    setTimeout(revealContentFailsafe, 1500);
+    setTimeout(runHeroPop, 1700);
   }
 
   if (document.readyState === "loading") {
@@ -359,14 +443,16 @@
     boot();
   }
   window.addEventListener("load", function () {
-    killMobileMotion();
+    softenMobileMotion();
     fixDesktopHeader();
     hidePreloader();
+    ensureWorkNav();
+    setTimeout(runHeroPop, 220);
   });
   window.addEventListener("resize", function () {
     fixDesktopHeader();
     initMobileNav();
-    killMobileMotion();
+    softenMobileMotion();
   });
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") {
