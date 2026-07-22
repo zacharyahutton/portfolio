@@ -564,3 +564,46 @@
   margin-top: 4px !important;
   transform: none !important;
 }
+
+/* Mobile only: lift small/muted copy so it reads cleaner on dark UI */
+@media (max-width: 991px) {
+  .hero-1 .zh-hero-headline > p,
+  .hero-1 .hero-content > p {
+    color: #f3f3f3 !important;
+    opacity: 1 !important;
+  }
+  .hero-1 .zh-hero-aside-col .content p,
+  .hero-1 .zh-hero-aside-col p {
+    color: rgba(255, 255, 255, 0.92) !important;
+    opacity: 1 !important;
+  }
+  .section-title h6,
+  .sub-title,
+  .skill-counter .content p,
+  .about-wrapper .top-text li,
+  .about-wrapper .about-content p,
+  .award-list-items span,
+  .award-list-items p,
+  .feature-work-experience-main-slider .text-cont p,
+  .feature-work-experience-main-slider .info-item p,
+  .work-experience-section-3 .work-experience-list-items li .text-1,
+  .work-experience-section-3 .work-experience-list-items li .text-2,
+  .work-achievements-section ul li .text,
+  .zh-portfolio-more-note__sub,
+  .news-section-2 .news-box-items-2 .content p,
+  .pricing-wrapper p,
+  .footer-section p,
+  .footer-section a {
+    color: rgba(255, 255, 255, 0.86) !important;
+  }
+  /* Keep dark copy on lime case-study cards */
+  .testimonial-section .testimonial-box-items,
+  .testimonial-section .testimonial-box-items p,
+  .testimonial-section .testimonial-box-items span,
+  .testimonial-section .testimonial-box-items h3,
+  .testimonial-section .testimonial-box-items h4,
+  .testimonial-section .testimonial-box-items h5 {
+    color: #111 !important;
+  }
+}
+
