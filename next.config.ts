@@ -90,15 +90,15 @@ const nextConfig: NextConfig = {
         },
         {
           source: "/blog/:slug",
-          destination: `${mirror}/blog/post/index.html`,
+          destination: `${mirror}/blog/:slug/index.html`,
         },
         {
           source: "/blog/:slug/",
-          destination: `${mirror}/blog/post/index.html`,
+          destination: `${mirror}/blog/:slug/index.html`,
         },
         {
           source: "/blog/:slug/index.html",
-          destination: `${mirror}/blog/post/index.html`,
+          destination: `${mirror}/blog/:slug/index.html`,
         },
         ...pageRewrites,
       ],

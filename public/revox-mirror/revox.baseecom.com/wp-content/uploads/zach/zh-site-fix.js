@@ -1,14 +1,24 @@
 /**
- * ZH site fix v2 — preloader kill, sticky header, mobile chrome,
- * light mobile motion (keep highlight pop + work slider), work nav arrows.
+ * ZH site fix v3
+ * - Let Revox preloader wave run; failsafe only if stuck (~5.5s)
+ * - Sticky desktop header (no MutationObserver thrash)
+ * - Mobile drawer / home chrome
+ * - Work nav beside logo preview
+ * - No mobile animation killers, no forced title transform resets
  */
 (function () {
   "use strict";
 
-  /* ── Preloader: must never stick (CSS uses :not(.zh-preloader-done)) ── */
+  var preloaderHidden = false;
+
   function hidePreloader() {
+    if (preloaderHidden) return;
     var el = document.querySelector(".preloader");
-    if (!el) return;
+    if (!el) {
+      preloaderHidden = true;
+      return;
+    }
+    preloaderHidden = true;
     el.classList.add("zh-preloader-done", "is-hidden");
     try {
       el.style.setProperty("display", "none", "important");
@@ -18,188 +28,454 @@
       el.style.setProperty("pointer-events", "none", "important");
     } catch (e) {}
   }
-  function armPreloader() {
-    // Aggressive failsafes — desktop was stuck because display:flex !important
-    // beat inline display:none without the done class.
-    setTimeout(hidePreloader, 900);
-    setTimeout(hidePreloader, 1600);
-    setTimeout(hidePreloader, 2400);
-    setTimeout(hidePreloader, 3600);
-    if (document.readyState === "complete") {
-      setTimeout(hidePreloader, 200);
-    } else {
-      window.addEventListener("load", function () {
-        setTimeout(hidePreloader, 200);
-        setTimeout(runHeroPop, 260);
+
+  function armPreloaderFailsafe() {
+    // Theme timeline is ~2.4s+. Only intervene if still covering the page.
+    setTimeout(function () {
+      var el = document.querySelector(".preloader");
+      if (!el || preloaderHidden) return;
+      if (el.classList.contains("zh-preloader-done")) return;
+      try {
+        var cs = window.getComputedStyle(el);
+        if (cs.display === "none" || cs.visibility === "hidden" || Number(cs.opacity) < 0.05) {
+          el.classList.add("zh-preloader-done", "is-hidden");
+          preloaderHidden = true;
+          return;
+        }
+      } catch (e) {}
+      hidePreloader();
+    }, 5500);
+
+    // If hero portrait stayed at GSAP start state, reveal it (do not fight mid-animation)
+    setTimeout(function () {
+      document.querySelectorAll(".animated-image").forEach(function (img) {
+        try {
+          if (parseFloat(window.getComputedStyle(img).opacity) < 0.15) {
+            img.style.opacity = "1";
+            img.style.visibility = "visible";
+            img.style.transform = "none";
+          }
+        } catch (e) {}
       });
-    }
+      document.querySelectorAll(".tv_hero_title").forEach(function (el) {
+        try {
+          if (parseFloat(window.getComputedStyle(el).opacity) < 0.15) {
+            el.style.opacity = "1";
+            el.style.visibility = "visible";
+          }
+        } catch (e) {}
+      });
+    }, 6500);
   }
-  armPreloader();
+  armPreloaderFailsafe();
 
-  /* ── Hero highlight pop AFTER preloader (mobile + desktop) ── */
-  function runHeroPop() {
-    hidePreloader();
-    var img = document.querySelector(".hero-1 .animated-image, .animated-image");
-    if (!img) return;
-    if (img.classList.contains("zh-pop-done")) return;
-    img.classList.add("zh-pop-pending");
-    // Force reflow then play CSS animation
-    void img.offsetWidth;
-    img.classList.remove("zh-pop-pending");
-    img.classList.add("zh-pop-ready", "zh-pop-done");
-    try {
-      if (window.gsap && window.matchMedia("(min-width: 992px)").matches) {
-        window.gsap.fromTo(
-          img,
-          { y: 80, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.9, ease: "power3.out", overwrite: "auto" }
-        );
-      }
-    } catch (e) {}
+  // When theme GSAP finishes sliding the preloader away, mark done.
+  function watchThemePreloader() {
+    var el = document.querySelector(".preloader");
+    if (!el || typeof MutationObserver === "undefined") return;
+    var obs = new MutationObserver(function () {
+      try {
+        var cs = window.getComputedStyle(el);
+        if (cs.display === "none" || Number(cs.opacity) < 0.05) {
+          el.classList.add("zh-preloader-done", "is-hidden");
+          preloaderHidden = true;
+          obs.disconnect();
+        }
+      } catch (e) {}
+    });
+    obs.observe(el, { attributes: true, attributeFilter: ["style", "class"] });
   }
+  watchThemePreloader();
 
-  /* ── Desktop sticky header outside ScrollSmoother + never hide ── */
+  /* ── Desktop sticky header (outside ScrollSmoother) ── */
   function fixDesktopHeader() {
     var hdr = document.getElementById("header-sticky");
     if (!hdr) return;
     var desktop = window.matchMedia("(min-width: 992px)").matches;
-    if (desktop) {
-      if (hdr.parentElement !== document.body) {
-        document.body.appendChild(hdr);
-      }
-      document.body.classList.add("zh-has-fixed-header");
-      if (
-        document.querySelector(
-          ".hero-section, .hero-section1, .hero-1, .hero-5, .hero-3"
-        ) &&
-        (document.body.classList.contains("home") ||
-          !!document.querySelector(".hero-1"))
-      ) {
-        document.body.classList.add("zh-has-hero");
-      }
-      var h = Math.ceil(hdr.getBoundingClientRect().height) || 80;
-      document.documentElement.style.setProperty("--zh-header-h", h + "px");
+    if (!desktop) return;
+
+    if (hdr.parentElement !== document.body) {
+      document.body.appendChild(hdr);
+    }
+    document.body.classList.add("zh-has-fixed-header");
+    if (
+      document.querySelector(".hero-section, .hero-section1, .hero-1, .hero-5, .hero-3") &&
+      (document.body.classList.contains("home") || !!document.querySelector(".hero-1"))
+    ) {
+      document.body.classList.add("zh-has-hero");
+    }
+    var h = Math.ceil(hdr.getBoundingClientRect().height) || 80;
+    document.documentElement.style.setProperty("--zh-header-h", h + "px");
+
+    function clearHide() {
       ["zach-header-hide", "header-hidden", "zh-hide-mobile"].forEach(function (c) {
         hdr.classList.remove(c);
       });
-      hdr.style.removeProperty("transform");
+      if (hdr.style.transform && hdr.style.transform !== "none") {
+        hdr.style.removeProperty("transform");
+      }
       hdr.style.removeProperty("opacity");
       hdr.style.removeProperty("visibility");
-      if (!hdr._zhObs) {
-        hdr._zhObs = new MutationObserver(function () {
-          if (!window.matchMedia("(min-width: 992px)").matches) return;
-          ["zach-header-hide", "header-hidden", "zh-hide-mobile"].forEach(
-            function (c) {
-              hdr.classList.remove(c);
-            }
-          );
-          if (hdr.style.transform && hdr.style.transform !== "none") {
-            hdr.style.removeProperty("transform");
-          }
-        });
-        hdr._zhObs.observe(hdr, {
-          attributes: true,
-          attributeFilter: ["class", "style"],
-        });
-      }
+    }
+    clearHide();
+
+    // Scroll listener instead of MutationObserver (avoids attribute thrash / freezes)
+    if (!hdr._zhScrollGuard) {
+      hdr._zhScrollGuard = true;
+      var ticking = false;
+      window.addEventListener(
+        "scroll",
+        function () {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(function () {
+            ticking = false;
+            if (!window.matchMedia("(min-width: 992px)").matches) return;
+            clearHide();
+          });
+        },
+        { passive: true }
+      );
     }
   }
 
-  /* ── Soften mobile motion: kill smoother + pins only, keep light motion ── */
-  function softenMobileMotion() {
-    if (!window.matchMedia("(max-width: 991px)").matches) return;
-    try {
-      if (window.ScrollSmoother) {
-        var sm = window.ScrollSmoother.get && window.ScrollSmoother.get();
-        if (sm) {
-          try {
-            sm.kill();
-          } catch (e) {}
-        }
-      }
-      if (window.ScrollTrigger) {
-        window.ScrollTrigger.getAll().forEach(function (t) {
-          try {
-            var pin = t.vars && t.vars.pin;
-            var scrub = t.vars && t.vars.scrub;
-            // Only kill pins / heavy scrubbers that break layout
-            if (pin || scrub === true || (typeof scrub === "number" && scrub > 0)) {
-              t.kill(true);
-            }
-          } catch (e) {}
-        });
-      }
-    } catch (e) {}
-    var wrap = document.getElementById("smooth-wrapper");
-    var content = document.getElementById("smooth-content");
-    if (wrap) {
-      wrap.style.height = "auto";
-      wrap.style.overflow = "visible";
-      wrap.style.transform = "none";
-    }
-    if (content) {
-      content.style.transform = "none";
-      content.style.height = "auto";
-    }
-    document.documentElement.style.overflow = "";
-    document.body.style.overflow = "";
-    // Titles must be readable (SplitText skipped on mobile, but failsafe)
-    document.querySelectorAll(".tv_hero_title, .split-line, .hero_title").forEach(
-      function (el) {
-        if (parseFloat(getComputedStyle(el).opacity) < 0.2) {
-          el.style.opacity = "1";
-          el.style.visibility = "visible";
-        }
-      }
-    );
-  }
-
-  /* ── Work experience nav arrows ── */
+  /* ── Work experience nav: arrows flanking logo preview ── */
   function ensureWorkNav() {
+    var preview = document.querySelector(".feature-work-experience-preview");
     var main = document.querySelector(".fw_main_slider_active");
-    if (!main) return;
-    var wrap =
-      main.closest(".feature-work-experience-wrap") ||
-      main.closest(".work-experience-section-1") ||
-      main.parentElement;
-    if (!wrap) return;
-    var nav = wrap.querySelector(".zh-work-nav");
-    if (!nav) {
-      nav = document.createElement("div");
-      nav.className = "zh-work-nav";
-      nav.setAttribute("aria-label", "Work experience navigation");
-      nav.innerHTML =
-        '<button type="button" class="zh-work-prev" aria-label="Previous experience">&#8592;</button>' +
-        '<span class="zh-work-nav__hint">More work</span>' +
-        '<button type="button" class="zh-work-next" aria-label="Next experience">&#8594;</button>';
-      if (main.nextSibling) {
-        main.parentNode.insertBefore(nav, main.nextSibling);
-      } else {
-        main.parentNode.appendChild(nav);
+    if (!preview && !main) return;
+
+    // Remove nav sitting after text slider
+    document
+      .querySelectorAll(
+        ".fw_main_slider_active + .zh-work-nav, .feature-work-experience-main-slider + .zh-work-nav"
+      )
+      .forEach(function (n) {
+        n.remove();
+      });
+
+    if (preview) {
+      var prev = preview.querySelector(":scope > .zh-work-prev");
+      var next = preview.querySelector(":scope > .zh-work-next");
+      var slider = preview.querySelector(".feature-work-experience-preview-slider");
+      if (!prev) {
+        prev = document.createElement("button");
+        prev.type = "button";
+        prev.className = "zh-work-prev";
+        prev.setAttribute("aria-label", "Previous experience");
+        prev.innerHTML = "&#8592;";
+        preview.insertBefore(prev, preview.firstChild);
+      }
+      if (!next) {
+        next = document.createElement("button");
+        next.type = "button";
+        next.className = "zh-work-next";
+        next.setAttribute("aria-label", "Next experience");
+        next.innerHTML = "&#8594;";
+        if (slider && slider.nextSibling) preview.insertBefore(next, slider.nextSibling);
+        else preview.appendChild(next);
+      } else if (slider && next.previousElementSibling !== slider) {
+        preview.insertBefore(next, slider.nextSibling);
       }
     }
-    if (nav.getAttribute("data-zh-bound") === "1") return;
-    nav.setAttribute("data-zh-bound", "1");
-    function getSwiper() {
-      return main.swiper || null;
+
+    function getMainSwiper() {
+      var el = document.querySelector(".fw_main_slider_active");
+      return el && el.swiper ? el.swiper : null;
     }
-    var prev = nav.querySelector(".zh-work-prev");
-    var next = nav.querySelector(".zh-work-next");
-    if (prev) {
-      prev.addEventListener("click", function () {
-        var s = getSwiper();
-        if (s) s.slidePrev();
-      });
+    function getPreviewSwiper() {
+      var el = document.querySelector(".fw_preview_slider_active");
+      return el && el.swiper ? el.swiper : null;
     }
-    if (next) {
-      next.addEventListener("click", function () {
-        var s = getSwiper();
-        if (s) s.slideNext();
-      });
+    function syncPreviewToMain() {
+      var mainS = getMainSwiper();
+      var prevS = getPreviewSwiper();
+      if (!mainS || !prevS) return;
+      try {
+        prevS.slideTo(mainS.activeIndex, 450);
+      } catch (e) {}
+      try {
+        if (typeof window.__zhSpinWorkCircle === "function") {
+          window.__zhSpinWorkCircle(mainS.activeIndex, true);
+        }
+      } catch (e2) {}
+    }
+    function stepWork(dir) {
+      var mainS = getMainSwiper();
+      var prevS = getPreviewSwiper();
+      var nextIndex = null;
+      if (mainS) {
+        nextIndex =
+          dir < 0
+            ? (mainS.activeIndex - 1 + mainS.slides.length) %
+              mainS.slides.length
+            : (mainS.activeIndex + 1) % mainS.slides.length;
+        if (dir < 0) mainS.slidePrev();
+        else mainS.slideNext();
+      } else if (prevS) {
+        nextIndex =
+          dir < 0
+            ? (prevS.activeIndex - 1 + prevS.slides.length) %
+              prevS.slides.length
+            : (prevS.activeIndex + 1) % prevS.slides.length;
+        if (dir < 0) prevS.slidePrev();
+        else prevS.slideNext();
+      }
+      try {
+        if (
+          nextIndex != null &&
+          typeof window.__zhSpinWorkCircle === "function"
+        ) {
+          window.__zhSpinWorkCircle(nextIndex, true, dir < 0 ? -1 : 1);
+        }
+      } catch (e3) {}
+      setTimeout(syncPreviewToMain, 30);
+      setTimeout(syncPreviewToMain, 320);
+    }
+
+    if (preview && preview.getAttribute("data-zh-work-bound") === "1") {
+      // Still re-bind slideChange if main exists now
+    } else if (preview) {
+      preview.setAttribute("data-zh-work-bound", "1");
+    }
+
+    document.querySelectorAll(".zh-work-prev").forEach(function (btn) {
+      if (btn.getAttribute("data-zh-click") === "1") return;
+      btn.setAttribute("data-zh-click", "1");
+      btn.addEventListener(
+        "click",
+        function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          stepWork(-1);
+        },
+        true
+      );
+    });
+    document.querySelectorAll(".zh-work-next").forEach(function (btn) {
+      if (btn.getAttribute("data-zh-click") === "1") return;
+      btn.setAttribute("data-zh-click", "1");
+      btn.addEventListener(
+        "click",
+        function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          stepWork(1);
+        },
+        true
+      );
+    });
+
+    var mainS = getMainSwiper();
+    if (mainS && !mainS._zhPreviewSync) {
+      mainS._zhPreviewSync = true;
+      mainS.on("slideChange", syncPreviewToMain);
+      syncPreviewToMain();
     }
   }
 
-  /* ── Mobile drawer with root-absolute paths ── */
+  /* ── Desktop circle: smooth 360° snap to selected logo, then stop ── */
+  function initWorkCircleSpin() {
+    if (!window.matchMedia("(min-width: 992px)").matches) return;
+    if (!window.gsap) return;
+    var root = document.querySelector(
+      ".feature-work-experience-preview-slider.fw_preview_slider_active, .feature-work-experience-preview-slider"
+    );
+    if (!root) return;
+    var wrapper = root.querySelector(".swiper-wrapper");
+    if (!wrapper) return;
+    if (wrapper.getAttribute("data-zh-spin") === "1") return;
+
+    var slides = Array.prototype.slice.call(
+      wrapper.querySelectorAll(".swiper-slide")
+    );
+    if (slides.length < 2) return;
+
+    var total = slides.length;
+    var stepDeg = 360 / total;
+    var rot = -90;
+    var currentIndex = 0;
+    var tries = 0;
+    var spinning = false;
+
+    function indexNow() {
+      var main = document.querySelector(".fw_main_slider_active");
+      if (main && main.swiper) {
+        return typeof main.swiper.realIndex === "number"
+          ? main.swiper.realIndex
+          : main.swiper.activeIndex;
+      }
+      var prev = document.querySelector(".fw_preview_slider_active");
+      if (prev && prev.swiper) return prev.swiper.activeIndex;
+      var active = wrapper.querySelector(
+        ".swiper-slide-thumb-active, .swiper-slide-active"
+      );
+      var i = active ? slides.indexOf(active) : 0;
+      return i < 0 ? 0 : i;
+    }
+
+    function keepLogosUpright() {
+      var r = Number(gsap.getProperty(wrapper, "rotation")) || 0;
+      slides.forEach(function (slide) {
+        gsap.set(slide, { rotation: -r });
+      });
+    }
+
+    /**
+     * Move around the full 360° ring by step count (not a random reverse).
+     * dirHint: 1 = next / forward, -1 = prev / backward, 0 = shortest arc.
+     */
+    function spinTo(index, animate, dirHint) {
+      if (index == null || isNaN(index)) index = 0;
+      index = ((index % total) + total) % total;
+
+      rot = Number(gsap.getProperty(wrapper, "rotation"));
+      if (isNaN(rot)) rot = -90 - currentIndex * stepDeg;
+
+      var forward = (index - currentIndex + total) % total;
+      var backward = (currentIndex - index + total) % total;
+      var steps = 0;
+
+      if (dirHint === 1) {
+        steps = forward === 0 ? 0 : forward;
+      } else if (dirHint === -1) {
+        steps = backward === 0 ? 0 : -backward;
+      } else if (forward === 0 && backward === 0) {
+        steps = 0;
+      } else {
+        steps = forward <= backward ? forward : -backward;
+      }
+
+      if (steps === 0) {
+        currentIndex = index;
+        if (!animate) {
+          gsap.killTweensOf(wrapper);
+          rot = -90 - index * stepDeg;
+          gsap.set(wrapper, { rotation: rot });
+          keepLogosUpright();
+        }
+        return;
+      }
+
+      // Increasing index moves clockwise on our ring (more negative rotation)
+      var target = rot - steps * stepDeg;
+      currentIndex = index;
+      rot = target;
+
+      gsap.killTweensOf(wrapper);
+      spinning = !!animate;
+
+      if (!animate) {
+        gsap.set(wrapper, { rotation: rot });
+        keepLogosUpright();
+        spinning = false;
+        return;
+      }
+
+      var dur = Math.min(0.72, 0.34 + Math.abs(steps) * 0.07);
+      gsap.to(wrapper, {
+        rotation: rot,
+        duration: dur,
+        ease: "power3.out",
+        overwrite: true,
+        onUpdate: keepLogosUpright,
+        onComplete: function () {
+          spinning = false;
+          // Hard stop on exact angle for this step (no drift)
+          gsap.set(wrapper, { rotation: rot });
+          keepLogosUpright();
+        },
+      });
+    }
+
+    window.__zhSpinWorkCircle = function (index, animate, dirHint) {
+      spinTo(index, animate !== false, dirHint || 0);
+    };
+
+    function bind() {
+      var positioned = slides.some(function (s) {
+        return (
+          s.style.position === "absolute" ||
+          window.getComputedStyle(s).position === "absolute"
+        );
+      });
+      if (!positioned && tries < 40) {
+        tries += 1;
+        setTimeout(bind, 120);
+        return;
+      }
+
+      wrapper.setAttribute("data-zh-spin", "1");
+      root.classList.add("zh-work-circle-spin");
+      gsap.set(wrapper, { transformOrigin: "50% 50%", force3D: true });
+
+      try {
+        if (window.ScrollTrigger) {
+          ScrollTrigger.getAll().forEach(function (st) {
+            var t = st.vars && st.vars.trigger;
+            var el =
+              typeof t === "string" ? document.querySelector(t) : t;
+            if (
+              el &&
+              el.classList &&
+              el.classList.contains("feature-work-experience-preview-slider")
+            ) {
+              st.kill();
+            }
+          });
+        }
+      } catch (e) {}
+
+      currentIndex = indexNow();
+      rot = -90 - currentIndex * stepDeg;
+      spinTo(currentIndex, false, 0);
+
+      function onChange() {
+        var idx = indexNow();
+        var forward = (idx - currentIndex + total) % total;
+        var backward = (currentIndex - idx + total) % total;
+        var dir = 0;
+        if (forward === 1 || (forward > 0 && forward < backward)) dir = 1;
+        else if (backward === 1 || (backward > 0 && backward < forward))
+          dir = -1;
+        spinTo(idx, true, dir);
+      }
+
+      var main = document.querySelector(".fw_main_slider_active");
+      var prev = document.querySelector(".fw_preview_slider_active");
+      if (main && main.swiper && !main.swiper._zhCircleSpin) {
+        main.swiper._zhCircleSpin = true;
+        main.swiper.on("slideChange", onChange);
+      }
+      if (prev && prev.swiper && !prev.swiper._zhCircleSpin) {
+        prev.swiper._zhCircleSpin = true;
+        prev.swiper.on("slideChange", onChange);
+      }
+      slides.forEach(function (slide, i) {
+        slide.addEventListener(
+          "click",
+          function () {
+            var forward = (i - currentIndex + total) % total;
+            var backward = (currentIndex - i + total) % total;
+            var dir =
+              forward === 0 && backward === 0
+                ? 0
+                : forward <= backward
+                  ? 1
+                  : -1;
+            setTimeout(function () {
+              spinTo(i, true, dir);
+            }, 10);
+          },
+          true
+        );
+      });
+    }
+
+    bind();
+  }
+
+  /* ── Mobile drawer ── */
   var DRAWER_NAV =
     '<a class="zh-nav-top" href="/">Home</a>' +
     '<a class="zh-nav-top" href="/about-me/">About Me</a>' +
@@ -222,6 +498,7 @@
     "</div></div>" +
     '<a class="zh-nav-top" href="/portfolio-page/">Portfolio</a>' +
     '<a class="zh-nav-top" href="/blog/">Blog</a>' +
+    '<a class="zh-nav-top" href="/hire-me/">Hire Me</a>' +
     '<a class="zh-nav-top" href="/contact-us/">Contact Me</a>';
 
   function openDrawer() {
@@ -330,7 +607,6 @@
     nav.appendChild(backBtn);
     nav.appendChild(menuBtn);
     document.body.appendChild(nav);
-    return nav;
   }
   function buildHomeBtn() {
     var existing = document.querySelector(".zh-mobile-home-btn");
@@ -348,12 +624,10 @@
   function initMobileNav() {
     var mq = window.matchMedia("(max-width: 991px)");
     if (!mq.matches) {
-      ["zh-mobile-nav", "zh-mobile-drawer-backdrop", "zh-mobile-drawer"].forEach(
-        function (id) {
-          var el = document.getElementById(id);
-          if (el) el.remove();
-        }
-      );
+      ["zh-mobile-nav", "zh-mobile-drawer-backdrop", "zh-mobile-drawer"].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.remove();
+      });
       var hb = document.querySelector(".zh-mobile-home-btn");
       if (hb) hb.remove();
       document.body.classList.remove("zh-drawer-open");
@@ -388,13 +662,12 @@
         var target = document.getElementById(id);
         if (!target) return;
         e.preventDefault();
-        softenMobileMotion();
         try {
           var sm =
             window.ScrollSmoother &&
             window.ScrollSmoother.get &&
             window.ScrollSmoother.get();
-          if (sm && window.matchMedia("(min-width: 992px)").matches) {
+          if (sm) {
             sm.scrollTo(target, true, "top 100px");
             return;
           }
@@ -406,21 +679,209 @@
     );
   }
 
-  function revealContentFailsafe() {
-    document.body.classList.add("zh-ready");
-    document.querySelectorAll(".tv_hero_title, .hero_title").forEach(function (el) {
-      el.style.opacity = "1";
-      el.style.visibility = "visible";
-    });
-    document.querySelectorAll(".tv_hero_title div, .tv_hero_title span, .split-line").forEach(
-      function (el) {
-        el.style.opacity = "1";
-        el.style.visibility = "visible";
-        el.style.transform = "none";
+  function fixOffcanvasMenuDupes() {
+    document.querySelectorAll(".offcanvas__info .mobile-menus, .offcanvas__info .mobile-menu").forEach(function (wrap) {
+      var source = wrap.querySelector("#mobile-menus, nav.menu-main-menu-container");
+      var meanNav = wrap.querySelector(".mean-nav");
+      if (meanNav && source && source !== meanNav) {
+        source.style.setProperty("display", "none", "important");
       }
-    );
-    hidePreloader();
-    runHeroPop();
+      var means = wrap.querySelectorAll(".mean-nav");
+      for (var i = 1; i < means.length; i++) {
+        means[i].remove();
+      }
+    });
+  }
+
+  /** Collapse offcanvas submenus; parent label toggles instead of navigating */
+  function fixOffcanvasAccordion() {
+    var roots = document.querySelectorAll(".offcanvas__info .mean-nav");
+    if (!roots.length) return;
+
+    function collapseNav(nav) {
+      nav.querySelectorAll(":scope > ul > li").forEach(function (li) {
+        var sub = null;
+        for (var c = 0; c < li.children.length; c++) {
+          if (li.children[c].tagName === "UL") {
+            sub = li.children[c];
+            break;
+          }
+        }
+        var expand = li.querySelector("a.mean-expand");
+        if (sub) {
+          sub.style.display = "none";
+          li.classList.remove("dropdown-opened", "zh-submenu-open");
+        }
+        if (expand) {
+          expand.classList.remove("mean-clicked");
+          var icon = expand.querySelector("i");
+          if (icon) {
+            icon.classList.remove("fa-minus");
+            icon.classList.add("fa-plus");
+          }
+        }
+      });
+    }
+
+    roots.forEach(function (nav) {
+      collapseNav(nav);
+      if (nav.getAttribute("data-zh-acc") === "1") return;
+      nav.setAttribute("data-zh-acc", "1");
+
+      nav.querySelectorAll(":scope > ul > li").forEach(function (li) {
+        var sub = null;
+        var link = null;
+        var expand = null;
+        for (var c = 0; c < li.children.length; c++) {
+          var child = li.children[c];
+          if (child.tagName === "UL") sub = child;
+          if (child.tagName === "A" && child.classList.contains("mean-expand")) expand = child;
+          else if (child.tagName === "A" && !link) link = child;
+        }
+        if (!sub || !link) return;
+
+        link.addEventListener(
+          "click",
+          function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var isOpen = li.classList.contains("dropdown-opened") || li.classList.contains("zh-submenu-open");
+
+            nav.querySelectorAll(":scope > ul > li").forEach(function (sib) {
+              if (sib === li) return;
+              var sibSub = null;
+              for (var i = 0; i < sib.children.length; i++) {
+                if (sib.children[i].tagName === "UL") {
+                  sibSub = sib.children[i];
+                  break;
+                }
+              }
+              var sibExp = sib.querySelector("a.mean-expand");
+              if (sibSub) {
+                sibSub.style.display = "none";
+                sib.classList.remove("dropdown-opened", "zh-submenu-open");
+              }
+              if (sibExp) {
+                sibExp.classList.remove("mean-clicked");
+                var sibIcon = sibExp.querySelector("i");
+                if (sibIcon) {
+                  sibIcon.classList.remove("fa-minus");
+                  sibIcon.classList.add("fa-plus");
+                }
+              }
+            });
+
+            if (isOpen) {
+              sub.style.display = "none";
+              li.classList.remove("dropdown-opened", "zh-submenu-open");
+              if (expand) {
+                expand.classList.remove("mean-clicked");
+                var iconClose = expand.querySelector("i");
+                if (iconClose) {
+                  iconClose.classList.remove("fa-minus");
+                  iconClose.classList.add("fa-plus");
+                }
+              }
+            } else {
+              sub.style.display = "block";
+              li.classList.add("dropdown-opened", "zh-submenu-open");
+              if (expand) {
+                expand.classList.add("mean-clicked");
+                var iconOpen = expand.querySelector("i");
+                if (iconOpen) {
+                  iconOpen.classList.remove("fa-plus");
+                  iconOpen.classList.add("fa-minus");
+                }
+              }
+            }
+          },
+          true
+        );
+      });
+    });
+  }
+
+  /** Centered project-inner carousel with properly fitted covers */
+  function fixProjectInnerSlider() {
+    var el = document.querySelector(".project-section-3 .project-inner-slider");
+    if (!el || typeof window.Swiper === "undefined") return;
+    if (el.swiper && el.getAttribute("data-zh-inner") === "1") return;
+
+    try {
+      if (el.swiper) el.swiper.destroy(true, true);
+    } catch (err) {}
+
+    try {
+      // eslint-disable-next-line no-new
+      new Swiper(el, {
+        spaceBetween: 16,
+        speed: 900,
+        loop: true,
+        centeredSlides: true,
+        slidesPerView: 1.12,
+        watchOverflow: true,
+        autoplay: {
+          delay: 2800,
+          disableOnInteraction: false,
+        },
+        breakpoints: {
+          575: { slidesPerView: 1.2, spaceBetween: 18 },
+          767: { slidesPerView: 1.55, spaceBetween: 22 },
+          991: { slidesPerView: 2.05, spaceBetween: 24 },
+          1200: { slidesPerView: 2.35, spaceBetween: 28 },
+        },
+      });
+      el.setAttribute("data-zh-inner", "1");
+    } catch (e2) {}
+  }
+
+  /** Featured project cards: light L/R slide-in (faster, shorter travel) */
+  function initFeaturedProjectCards() {
+    var section = document.querySelector(".tp-project-5-2-area");
+    if (!section) return;
+    if (!window.gsap || !window.ScrollTrigger) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      section.setAttribute("data-zh-cards", "1");
+      return;
+    }
+    if (section.getAttribute("data-zh-cards") === "1") return;
+    section.setAttribute("data-zh-cards", "1");
+
+    var cards = section.querySelectorAll(".project-box-items");
+    if (!cards.length) return;
+
+    var wide = window.matchMedia("(min-width: 992px)").matches;
+    var dist = wide ? 64 : 40;
+
+    cards.forEach(function (card, i) {
+      var fromLeft = i % 2 === 0;
+      gsap.fromTo(
+        card,
+        {
+          x: fromLeft ? -dist : dist,
+          opacity: 0,
+          rotate: 0,
+          force3D: true,
+        },
+        {
+          x: 0,
+          opacity: 1,
+          rotate: 0,
+          duration: wide ? 0.55 : 0.45,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 92%",
+            toggleActions: "play none none none",
+            once: true,
+          },
+        }
+      );
+    });
+
+    try {
+      ScrollTrigger.refresh();
+    } catch (e2) {}
   }
 
   function boot() {
@@ -429,12 +890,19 @@
     lazyImages();
     fixCaseStudyClicks();
     ensureWorkNav();
-    setTimeout(softenMobileMotion, 120);
-    setTimeout(softenMobileMotion, 700);
     setTimeout(fixDesktopHeader, 200);
-    setTimeout(ensureWorkNav, 800);
-    setTimeout(revealContentFailsafe, 1500);
-    setTimeout(runHeroPop, 1700);
+    setTimeout(ensureWorkNav, 600);
+    setTimeout(ensureWorkNav, 1400);
+    setTimeout(initWorkCircleSpin, 400);
+    setTimeout(initWorkCircleSpin, 1200);
+    setTimeout(initFeaturedProjectCards, 80);
+    setTimeout(initFeaturedProjectCards, 600);
+    setTimeout(fixOffcanvasMenuDupes, 200);
+    setTimeout(fixOffcanvasMenuDupes, 800);
+    setTimeout(fixOffcanvasAccordion, 250);
+    setTimeout(fixOffcanvasAccordion, 900);
+    setTimeout(fixProjectInnerSlider, 500);
+    setTimeout(fixProjectInnerSlider, 1200);
   }
 
   if (document.readyState === "loading") {
@@ -443,16 +911,48 @@
     boot();
   }
   window.addEventListener("load", function () {
-    softenMobileMotion();
     fixDesktopHeader();
-    hidePreloader();
     ensureWorkNav();
-    setTimeout(runHeroPop, 220);
+    initWorkCircleSpin();
+    initFeaturedProjectCards();
+    fixOffcanvasMenuDupes();
+    fixOffcanvasAccordion();
+    fixProjectInnerSlider();
   });
+
+  document.addEventListener(
+    "click",
+    function (e) {
+      var toggle = e.target.closest && e.target.closest(".sidebar__toggle");
+      if (!toggle) return;
+      setTimeout(function () {
+        fixOffcanvasMenuDupes();
+        fixOffcanvasAccordion();
+        document.querySelectorAll(".offcanvas__info .mean-nav ul ul, .offcanvas__info #mobile-menus > ul > li > ul").forEach(function (ul) {
+          ul.style.display = "none";
+        });
+        document.querySelectorAll(".offcanvas__info .mean-nav li, .offcanvas__info #mobile-menus > ul > li").forEach(function (li) {
+          li.classList.remove("dropdown-opened", "zh-submenu-open");
+        });
+        document.querySelectorAll(".offcanvas__info a.mean-expand").forEach(function (a) {
+          a.classList.remove("mean-clicked");
+          var icon = a.querySelector("i");
+          if (icon) {
+            icon.classList.remove("fa-minus");
+            icon.classList.add("fa-plus");
+          }
+        });
+      }, 30);
+    },
+    true
+  );
+  var resizeTimer;
   window.addEventListener("resize", function () {
-    fixDesktopHeader();
-    initMobileNav();
-    softenMobileMotion();
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+      fixDesktopHeader();
+      initMobileNav();
+    }, 150);
   });
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") {

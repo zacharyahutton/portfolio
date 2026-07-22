@@ -9,6 +9,7 @@
 | Symptom | Root cause |
 |---|---|
 | Desktop blank / broken, phone OK | ScrollSmoother + SplitText set hero chars / images to `opacity:0`; if smoother init fails or ScrollTrigger scroller mismatches, content never reveals. Header hide classes + MutationObserver fights added noise. Stale `next dev` can also serve old React `src/app` instead of mirror rewrites. |
+| Desktop infinite loading loop, mobile fine | Inline `zh-header-ux` desktop block: `MutationObserver` on `#header-sticky` `class`/`style` whose `strip()` mutates those same attributes → main-thread freeze. Mobile early-returns before that observer. Fix: scroll/interval strip only (`ZH_HDR_STRIP_SAFE`). Also skip GSAP preloader timeline on desktop (`zhDesktopKillPreloader`). |
 | Preloader shows "Revox" behind Zachary | Most theme CSS builds (`main_ver=*.css` except one) still had `h5.preloader-text::after { content: "Revox" }`. Preloader `background: transparent` let page content show through under the SVG. |
 | Mobile menu broken / wrong redirects | Drawer + desktop nav used relative `./` / `../` hrefs. From `/services/seo/` or `/blog/slug/` those resolve to nested 404s. Closed drawer lacked `pointer-events:none`, and scroll-hide (`zh-nav-hidden`) made chrome disappear. |
 | Case Study buttons glitch | Hash anchors (`#project-*-case`) inside ScrollSmoother scroll oddly; felt like a glitch instead of navigation. |
@@ -16,28 +17,19 @@
 | Mobile Menu / Back / HOME vanish | Intentional hide-on-scroll on `#zh-mobile-nav`. |
 | Desktop header disappears | Theme `zach-header-hide` + ScrollSmoother transform context; fixed header must live outside smoother content. |
 
-## What fixed it
+## Correction (2026-07-22 evening, v3)
 
-1. **Shared assets** (single source of truth):
-   - `/wp-content/uploads/zach/zh-site-fix.css`
-   - `/wp-content/uploads/zach/zh-site-fix.js`
-2. **Theme CSS:** all `main_ver=*.css` → opaque `#111013` preloader + `content: "Zachary"`.
-3. **Theme JS:** skip ScrollSmoother on `max-width:991px`; try/catch create; null-safe `smoother.scrollContainer` / `refresh`; skip SplitText on mobile; preloader failsafe hide at 2.5s.
-4. **Nav:** sitewide root-absolute paths (`/about-me/`, `/services/seo/`, …) in desktop menu + `DRAWER_NAV`.
-5. **Mobile chrome:** never apply `zh-nav-hidden`; closed drawer `pointer-events:none`.
-6. **Case studies:** real pages under `/works/{domus,northern-elite,wehfigo,pntcog,devos}/` (+ existing weroi); portfolio CTAs point there.
-7. **Desktop header:** reparent `#header-sticky` to `body`, MutationObserver strips hide classes, `zh-ready` failsafe forces hero visibility after 1.8s.
-8. **Perf:** lazy-load below-fold images; faster preloader hide; shorter smoother duration on desktop.
+Do **not** gut mobile motion. Over-killing SplitText / forcing `opacity:1 !important` on split lines made text reveal look broken.
 
-**Script:** `scripts/_zh-go-live-fix.js` (+ `_zh-split-safe.js`).
-
-## Rules for future portfolio / template builds
-
-1. **One serve path.** Mirror HTML under `public/…` + Next rewrites. Never mix React portfolio components with the live mirror. After config changes, kill stale `next dev` and clear `.next`.
-2. **Root-absolute nav only** (`/slug/`) for any page that can nest deeper than one level.
-3. **Preloader:** opaque fixed inset cover, brand text only, failsafe hide. Grep every CSS build for leftover template brand (`Revox`).
-4. **ScrollSmoother is desktop-only.** Mobile: kill smoother, pins, SplitText opacity tricks; prefer static/fade or no motion.
-5. **Sticky header:** fixed on `body`, outside smoother; strip hide classes with observer; never rely on transform hide on desktop.
+| Lesson | Detail |
+|---|---|
+| Preloader CSS must not lock `display/opacity/transform !important` while playing | That blocked the Revox SVG wave exit. Only force-hide with `.zh-preloader-done`. |
+| Preloader must not wait only on `window.load` | Stuck CDN fonts (cdnfonts) can delay load forever. Run wave on load **or** ~2.2s timeout. |
+| ScrollTrigger `refresh` → `smoother.refresh()` needs a re-entrancy guard | Unbounded loop freezes the tab (“Page Unresponsive”). |
+| Invalid `\u1fac8` in WP emoji loader | 5-hex `\u` escape → `SyntaxError: Unexpected number` sitewide. Fix to 4-digit escapes. |
+| Mobile: restore SplitText + light ScrollSmoother | Soften with `smooth:0.65`, `effects:false`, `smoothTouch:0.1`. Do not skip SplitText. |
+| Work arrows | Mount beside logo preview (`←` logos `→`), never under the text slider. |
+| Old React portfolio | Runtime is thin Next shell + `public/revox-mirror/` only. `backup/` is offline and not served. |
 6. **Case studies:** real routes under `/works/{slug}/`, not hash-only anchors inside smoother.
 7. **Mobile chrome:** Menu + Back + HOME always visible. No hide-on-scroll.
 8. **Verify live with curl** for `smooth-wrapper`, `zh-site-fix`, abs nav, and zero preloader `Revox` before calling it done.

@@ -121,7 +121,7 @@
 }
 
 </style>
- <link rel="stylesheet" id="zh-site-fix-css" href="/wp-content/uploads/zach/zh-site-fix.css?v=zhfix2">
+ <link rel="stylesheet" id="zh-site-fix-css" href="/wp-content/uploads/zach/zh-site-fix.css?v=zhfix14">
 </head>
 <body>
 <header id="header-sticky" class="zh-legal-header"><a class="logo" href="/"><span>ZH</span> zach</a></header>
@@ -431,7 +431,8 @@ a.header-logo img,
 <script id="zh-header-ux-js">
 (function(){
  var mq=window.matchMedia('(max-width:991px)');
- var DRAWER_NAV='<a class="zh-nav-top" href="/">Home</a><a class="zh-nav-top" href="/about-me/">About Me</a><div class="zh-nav-group"><button type="button" class="zh-nav-accordion" aria-expanded="false">Services<span class="zh-acc-chevron" aria-hidden="true">▼</span></button><div class="zh-nav-sub"><a href="/services/">All Services</a><a href="/services/premium-business-websites/">Premium Business Websites</a><a href="/services/custom-software/">Custom Software</a><a href="/services/ai-integrations/">AI Integrations</a><a href="/services/automation-systems/">Automation Systems</a><a href="/services/seo/">SEO</a><a href="/services/business-platforms/">Business Platforms</a><a href="/services/maintenance/">Maintenance</a><a href="/services/performance-optimization/">Performance Optimization</a><a href="/services/consulting/">Consulting</a></div></div><div class="zh-nav-group"><button type="button" class="zh-nav-accordion" aria-expanded="false">More<span class="zh-acc-chevron" aria-hidden="true">▼</span></button><div class="zh-nav-sub"><a href="/our-faq/">FAQ</a><a href="/privacy-policy/">Privacy Policy</a><a href="/terms/">Terms</a></div></div><a class="zh-nav-top" href="/portfolio-page/">Portfolio</a><a class="zh-nav-top" href="/blog/">Blog</a><a class="zh-nav-top" href="/contact-us/">Contact Me</a>';
+ var DRAWER_NAV='<a class="zh-nav-top" href="/">Home</a><a class="zh-nav-top" href="/about-me/">About Me</a><div class="zh-nav-group"><button type="button" class="zh-nav-accordion" aria-expanded="false">Services<span class="zh-acc-chevron" aria-hidden="true">▼</span></button><div class="zh-nav-sub"><a href="/services/">All Services</a><a href="/services/premium-business-websites/">Premium Business Websites</a><a href="/services/custom-software/">Custom Software</a><a href="/services/ai-integrations/">AI Integrations</a><a href="/services/automation-systems/">Automation Systems</a><a href="/services/seo/">SEO</a><a href="/services/business-platforms/">Business Platforms</a><a href="/services/maintenance/">Maintenance</a><a href="/services/performance-optimization/">Performance Optimization</a><a href="/services/consulting/">Consulting</a></div></div><div class="zh-nav-group"><button type="button" class="zh-nav-accordion" aria-expanded="false">More<span class="zh-acc-chevron" aria-hidden="true">▼</span></button><div class="zh-nav-sub"><a href="/our-faq/">FAQ</a><a href="/privacy-policy/">Privacy Policy</a><a href="/terms/">Terms</a></div></div><a class="zh-nav-top" href="/portfolio-page/">Portfolio</a><a class="zh-nav-top" href="/blog/">Blog</a><a class="zh-nav-top" href="/hire-me/">Hire Me</a><a class="zh-nav-top" href="/hire-me/">Hire Me</a>' +
+    '<a class="zh-nav-top" href="/contact-us/">Contact Me</a>';
  function openDrawer(){
   var d=document.getElementById('zh-mobile-drawer');
   var b=document.getElementById('zh-mobile-drawer-backdrop');
@@ -551,21 +552,23 @@ a.header-logo img,
  document.addEventListener('keydown',function(e){if(e.key==='Escape'){var d=document.getElementById('zh-mobile-drawer');if(d&&d.classList.contains('is-open')) closeDrawer();}});
 })();
 (function(){
+ /* ZH_HDR_STRIP_SAFE: MutationObserver on class/style + strip() = desktop freeze */
  if(!window.matchMedia('(min-width:992px)').matches) return;
  var hdr=document.getElementById('header-sticky');
  if(!hdr) return;
  var HIDE=['zach-header-hide','header-hidden'];
  function strip(){
   if(!window.matchMedia('(min-width:992px)').matches) return;
-  HIDE.forEach(function(c){hdr.classList.remove(c);});
+  HIDE.forEach(function(c){ if(hdr.classList.contains(c)) hdr.classList.remove(c); });
   if(hdr.style.transform&&hdr.style.transform!=='none') hdr.style.removeProperty('transform');
   if(hdr.style.opacity&&hdr.style.opacity!=='1') hdr.style.removeProperty('opacity');
   if(hdr.style.visibility&&hdr.style.visibility!=='visible') hdr.style.removeProperty('visibility');
  }
- new MutationObserver(strip).observe(hdr,{attributes:true,attributeFilter:['class','style']});
  strip();
+ window.addEventListener('scroll', strip, {passive:true});
+ setInterval(strip, 1000);
 })();
 </script>
 
-<script id="zh-site-fix-js" src="/wp-content/uploads/zach/zh-site-fix.js?v=zhfix2" defer></script>
+<script id="zh-site-fix-js" src="/wp-content/uploads/zach/zh-site-fix.js?v=zhfix14" defer></script>
 </body></html>

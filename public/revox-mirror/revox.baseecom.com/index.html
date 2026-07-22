@@ -15,16 +15,9 @@
 img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 /*# sourceURL=wp-img-auto-sizes-contain-inline-css */
 
-/* Mobile-only: orbit/circle fixes + timeline readability */
+/* Mobile-only: layout readability (full animations kept via theme JS) */
 @media (max-width:991px){
- .circle-box,.award-section-2 .circle-box{display:none!important;}
- .circle-box .text-image img,.award-section-2 .circle-box .text-image img{animation:none!important;}
- .feature-work-experience-preview{display:none!important;}
  .feature-work-experience-wrap{height:auto!important;min-height:0!important;padding-bottom:0!important;}
- .feature-work-experience-wrap::before{display:none!important;}
- .feature-work-experience-preview-slider .swiper-wrapper{
-  max-width:100%!important;height:auto!important;
- }
  .feature-work-experience-main-slider{position:relative!important;margin-top:0!important;}
  .work-experience-section-1 .line-shape,.hero-1 .line-shape,.footer-section .like-shape{display:none!important;}
  .page-wrapper-3{margin-top:0!important;padding-bottom:96px!important;}
@@ -238,7 +231,8 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  
 /*# sourceURL=revox-blog-inline-css */
 </style>
-<link rel="stylesheet" id="revox-big-shoulders-display-css" href="https://fonts.cdnfonts.com/css/big-shoulders-display?ver=1.0.0" media="screen">
+<link rel="stylesheet" id="revox-big-shoulders-display-css" href="https://fonts.cdnfonts.com/css/big-shoulders-display?ver=1.0.0" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.cdnfonts.com/css/big-shoulders-display?ver=1.0.0"></noscript>
 <link rel="stylesheet" id="revox-kanit-css" href="../fonts.googleapis.com/css2/family%3DKanit_ital%2Cwght%400%2C100%3B0%2C200%3B0%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700%3B0%2C800%3B0%2C900%3B1%2C100%3B1%2C200%3B1%2C300%3B1%2C400%3B1%2C500%3B1%2C600%3B1%2C700%3B1%2C800%3B1%2C900%26display%3Dswap%26ver%3D1.0.0" media="screen">
 <link rel="stylesheet" id="hfe-elementor-icons-css" href="wp-content/plugins/elementor/assets/lib/eicons/css/elementor-icons.min_ver%3D5.34.0.css" media="all">
 <link rel="stylesheet" id="hfe-icons-list-css" href="wp-content/plugins/elementor/assets/css/widget-icon-list.min_ver%3D3.24.3.css" media="all">
@@ -251,7 +245,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 <script id="jquery-core-js" src="wp-includes/js/jquery/jquery.min_ver%3D3.7.1.js"></script>
 <script id="jquery-migrate-js" src="wp-includes/js/jquery/jquery-migrate.min_ver%3D3.4.1.js"></script>
 <script id="jquery-js-after">
-!function($){"use strict";$(document).ready(function(){$(this).scrollTop()>100&&$(".hfe-scroll-to-top-wrap").removeClass("hfe-scroll-to-top-hide"),$(window).scroll(function(){$(this).scrollTop()100?$(".hfe-scroll-to-top-wrap").fadeOut(300):$(".hfe-scroll-to-top-wrap").fadeIn(300)}),$(".hfe-scroll-to-top-wrap").on("click",function(){$("html, body").animate({scrollTop:0},300);return!1})})}(jQuery);
+!function($){"use strict";$(document).ready(function(){$(this).scrollTop()>100&&$(".hfe-scroll-to-top-wrap").removeClass("hfe-scroll-to-top-hide"),$(window).scroll(function(){$(this).scrollTop()>100?$(".hfe-scroll-to-top-wrap").fadeOut(300):$(".hfe-scroll-to-top-wrap").fadeIn(300)}),$(".hfe-scroll-to-top-wrap").on("click",function(){$("html, body").animate({scrollTop:0},300);return!1})})}(jQuery);
 !function($){'use strict';$(document).ready(function(){var bar=$('.hfe-reading-progress-bar');if(!bar.length)return;$(window).on('scroll',function(){var s=$(window).scrollTop(),d=$(document).height()-$(window).height(),p=d? s/d*100:0;bar.css('width',p+'%')});});}(jQuery);
 //# sourceURL=jquery-js-after
 </script>
@@ -282,7 +276,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 <link rel="icon" href="wp-content/uploads/2025/11/android-chrome-512x512-1-214x214.png" sizes="192x192">
 <link rel="apple-touch-icon" href="./wp-content/uploads/2025/11/android-chrome-512x512-1-214x214.png">
 <meta name="msapplication-TileImage" content="./wp-content/uploads/2025/11/android-chrome-512x512-1-300x300.png">
- <link rel="stylesheet" id="zh-site-fix-css" href="/wp-content/uploads/zach/zh-site-fix.css?v=zhfix2">
+ <link rel="stylesheet" id="zh-site-fix-css" href="/wp-content/uploads/zach/zh-site-fix.css?v=zhfix24">
 </head>
 
 <body class="home wp-singular page-template page-template-elementor_header_footer page page-id-11 wp-theme-revox ehf-header ehf-footer ehf-template-revox ehf-stylesheet-revox revox-toolkit-activate not-logged-in elementor-default elementor-template-full-width elementor-kit-9 elementor-page elementor-page-11">
@@ -292,7 +286,25 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  <path id="svg" d="M0,1005S175,995,500,995s500,5,500,5V0H0Z"></path>
  </svg>
  <h5 class="preloader-text">Zachary</h5>
- </div> 
+ </div>
+ <script id="zh-preloader-early-failsafe">
+ (function(){
+   function hide(){
+     var p=document.querySelector(".preloader");
+     if(!p||p.classList.contains("zh-preloader-done")) return;
+     p.classList.add("zh-preloader-done","is-hidden");
+     try{
+       p.style.setProperty("display","none","important");
+       p.style.setProperty("opacity","0","important");
+       p.style.setProperty("visibility","hidden","important");
+       p.style.setProperty("z-index","-1","important");
+       p.style.setProperty("pointer-events","none","important");
+     }catch(e){}
+   }
+   setTimeout(hide, 3500);
+   window.addEventListener("load", function(){ setTimeout(hide, 2800); });
+ })();
+ </script>
 			<div id="smooth-wrapper"><div id="smooth-content">	<style id="hfe-skip-link-style">
 		.hfe-skip-link{position:absolute;left:-9999px;top:0;z-index:100000;padding:0.75em 1.5em;background:#fff;color:#0073aa;font-size:14px;text-decoration:underline;border-radius:0 0 3px 0;}
 		.hfe-skip-link:focus{left:0;outline:2px solid #0073aa;outline-offset:-2px;}
@@ -385,6 +397,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 </li>
 <li id="menu-item-47" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47"><a href="/portfolio-page/">Portfolio</a></li>
 <li id="menu-item-49" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-49"><a href="/blog/">Blog</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-hire"><a href="/hire-me/">Hire Me</a></li>
 <li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/contact-us/">Contact Me</a></li>
 </ul></nav> </div>
  </div>
@@ -438,6 +451,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 </li>
 <li id="menu-item-47" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47"><a href="/portfolio-page/">Portfolio</a></li>
 <li id="menu-item-49" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-49"><a href="/blog/">Blog</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-hire"><a href="/hire-me/">Hire Me</a></li>
 <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/contact-us/">Contact Me</a></li>
 </ul> </nav>
  </div>
@@ -796,6 +810,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  <div class="feature-work-experience-wrap fix">
  <!-- Preview Slider -->
  <div class="feature-work-experience-preview">
+ <button type="button" class="zh-work-prev" aria-label="Previous experience">&#8592;</button>
  <div class="feature-work-experience-preview-slider fw_preview_slider_active">
  <div class="swiper-wrapper">
  <div class="swiper-slide">
@@ -865,6 +880,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  </div>
  </div>
  </div>
+ <button type="button" class="zh-work-next" aria-label="Next experience">&#8594;</button>
  </div>
  
  <!-- Main Slider -->
@@ -1197,11 +1213,6 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  </div>
  </div>
  </div>
- <div class="zh-work-nav" aria-label="Work experience navigation">
- <button type="button" class="zh-work-prev" aria-label="Previous experience">&#8592;</button>
- <span class="zh-work-nav__hint">More work</span>
- <button type="button" class="zh-work-next" aria-label="Next experience">&#8594;</button>
- </div>
  </div>
  </div> 
  </section>
@@ -1352,17 +1363,17 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  <span>Started shipping full-stack client work</span>
  </div>
  <div class="award-list-items approach-box">
- <p>2023</p>
+ <p>2024</p>
  
  <span>weROI platform live for agency clients</span>
  </div>
  <div class="award-list-items approach-box">
- <p>2023</p>
+ <p>2025</p>
  
  <span>Shipping Domus, Northern Elite &amp; WehFiGo</span>
  </div>
  <div class="award-list-items approach-box">
- <p>2023</p>
+ <p>2026</p>
  
  <span>WehFiGo + PNTCOG in production</span>
  </div>
@@ -1529,9 +1540,6 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  
  <p>Domus is a premium manufacturer site shipped on Next.js, image-led storytelling, fast loads, and conversion-focused IA. Live on Vercel as a portfolio-ready flight test.</p>
  
- <div class="clutech-image">
- <img decoding="async" src="wp-content/uploads/zach/brand-domus.svg" alt="weROI">
- </div>
  </div>
  </div>
  </div>
@@ -1554,9 +1562,6 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  
  <p>weROI is a full-stack agency platform, React, FastAPI, MongoDB, lead funnels, and admin tooling. Live at weroi.net.</p>
  
- <div class="clutech-image">
- <img decoding="async" src="wp-content/uploads/zach/brand-weroi.svg" alt="weROI">
- </div>
  </div>
  </div>
  </div>
@@ -1579,9 +1584,6 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  
  <p>WehFiGo is a Jamaican events platform child theme with custom UX, listing flows, and motion-led storytelling, built for real operators, not demo fluff.</p>
  
- <div class="clutech-image">
- <img decoding="async" src="wp-content/uploads/zach/brand-wehfigo.svg" alt="WehFiGo">
- </div>
  </div>
  </div>
  </div>
@@ -1599,9 +1601,6 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  <img decoding="async" src="wp-content/uploads/2026/01/quote-icon.png" alt="Quote Icon">
  </div>
  <p>Northern Elite Concrete is a premium contractor site, gallery-led services, insights, and Next.js performance.</p>
- <div class="clutech-image">
- <img decoding="async" src="wp-content/uploads/zach/brand-northern.svg" alt="Northern Elite">
- </div>
  </div>
  </div>
  </div>
@@ -2010,7 +2009,7 @@ var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false
 </script>
 <script type="module">
 /*! This file is auto-generated */
-const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(window._wpemojiSettings=a,"wpEmojiSettingsSupports"),s=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const a=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===a[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,a){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!a(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,a){let r;const o=(r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),s=(o.textBaseline="top",o.font="600 32px Arial",{});return e.forEach(e=>{s[e]=t(o,e,n,a)}),s}function r(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}a.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),c.toString(),p.toString()].join(",")+"));",a=new Blob([e],{type:"text/javascript"});const r=new Worker(URL.createObjectURL(a),{name:"wpTestEmojiSupports"});return void(r.onmessage=e=>{i(n=e.data),r.terminate(),t(n)})}catch(e){}i(n=f(s,u,c,p))}t(n)}).then(e=>{for(const n in e)a.supports[n]=e[n],a.supports.everything=a.supports.everything&&a.supports[n],"flag"!==n&&(a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&a.supports[n]);var t;a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&!a.supports.flag,a.supports.everything||((t=a.source||{}).concatemoji?r(t.concatemoji):t.wpemoji&&t.twemoji&&(r(t.twemoji),r(t.wpemoji)))});
+const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(window._wpemojiSettings=a,"wpEmojiSettingsSupports"),s=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const a=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===a[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,a){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!a(e,"\ud83d\ude00")}return!1}function f(e,t,n,a){let r;const o=(r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),s=(o.textBaseline="top",o.font="600 32px Arial",{});return e.forEach(e=>{s[e]=t(o,e,n,a)}),s}function r(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}a.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),c.toString(),p.toString()].join(",")+"));",a=new Blob([e],{type:"text/javascript"});const r=new Worker(URL.createObjectURL(a),{name:"wpTestEmojiSupports"});return void(r.onmessage=e=>{i(n=e.data),r.terminate(),t(n)})}catch(e){}i(n=f(s,u,c,p))}t(n)}).then(e=>{for(const n in e)a.supports[n]=e[n],a.supports.everything=a.supports.everything&&a.supports[n],"flag"!==n&&(a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&a.supports[n]);var t;a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&!a.supports.flag,a.supports.everything||((t=a.source||{}).concatemoji?r(t.concatemoji):t.wpemoji&&t.twemoji&&(r(t.twemoji),r(t.wpemoji)))});
 //# sourceURL=./wp-includes/js/wp-emoji-loader.min.js
 </script>
 
@@ -2417,7 +2416,8 @@ a.header-logo img,
 <script id="zh-header-ux-js">
 (function(){
  var mq=window.matchMedia('(max-width:991px)');
- var DRAWER_NAV='<a class="zh-nav-top" href="/">Home</a><a class="zh-nav-top" href="/about-me/">About Me</a><div class="zh-nav-group"><button type="button" class="zh-nav-accordion" aria-expanded="false">Services<span class="zh-acc-chevron" aria-hidden="true">▼</span></button><div class="zh-nav-sub"><a href="/services/">All Services</a><a href="/services/premium-business-websites/">Premium Business Websites</a><a href="/services/custom-software/">Custom Software</a><a href="/services/ai-integrations/">AI Integrations</a><a href="/services/automation-systems/">Automation Systems</a><a href="/services/seo/">SEO</a><a href="/services/business-platforms/">Business Platforms</a><a href="/services/maintenance/">Maintenance</a><a href="/services/performance-optimization/">Performance Optimization</a><a href="/services/consulting/">Consulting</a></div></div><div class="zh-nav-group"><button type="button" class="zh-nav-accordion" aria-expanded="false">More<span class="zh-acc-chevron" aria-hidden="true">▼</span></button><div class="zh-nav-sub"><a href="/our-faq/">FAQ</a><a href="/privacy-policy/">Privacy Policy</a><a href="/terms/">Terms</a></div></div><a class="zh-nav-top" href="/portfolio-page/">Portfolio</a><a class="zh-nav-top" href="/blog/">Blog</a><a class="zh-nav-top" href="/contact-us/">Contact Me</a>';
+ var DRAWER_NAV='<a class="zh-nav-top" href="/">Home</a><a class="zh-nav-top" href="/about-me/">About Me</a><div class="zh-nav-group"><button type="button" class="zh-nav-accordion" aria-expanded="false">Services<span class="zh-acc-chevron" aria-hidden="true">▼</span></button><div class="zh-nav-sub"><a href="/services/">All Services</a><a href="/services/premium-business-websites/">Premium Business Websites</a><a href="/services/custom-software/">Custom Software</a><a href="/services/ai-integrations/">AI Integrations</a><a href="/services/automation-systems/">Automation Systems</a><a href="/services/seo/">SEO</a><a href="/services/business-platforms/">Business Platforms</a><a href="/services/maintenance/">Maintenance</a><a href="/services/performance-optimization/">Performance Optimization</a><a href="/services/consulting/">Consulting</a></div></div><div class="zh-nav-group"><button type="button" class="zh-nav-accordion" aria-expanded="false">More<span class="zh-acc-chevron" aria-hidden="true">▼</span></button><div class="zh-nav-sub"><a href="/our-faq/">FAQ</a><a href="/privacy-policy/">Privacy Policy</a><a href="/terms/">Terms</a></div></div><a class="zh-nav-top" href="/portfolio-page/">Portfolio</a><a class="zh-nav-top" href="/blog/">Blog</a><a class="zh-nav-top" href="/hire-me/">Hire Me</a><a class="zh-nav-top" href="/hire-me/">Hire Me</a>' +
+    '<a class="zh-nav-top" href="/contact-us/">Contact Me</a>';
  function openDrawer(){
   var d=document.getElementById('zh-mobile-drawer');
   var b=document.getElementById('zh-mobile-drawer-backdrop');
@@ -2537,21 +2537,23 @@ a.header-logo img,
  document.addEventListener('keydown',function(e){if(e.key==='Escape'){var d=document.getElementById('zh-mobile-drawer');if(d&&d.classList.contains('is-open')) closeDrawer();}});
 })();
 (function(){
+ /* ZH_HDR_STRIP_SAFE: MutationObserver on class/style + strip() = desktop freeze */
  if(!window.matchMedia('(min-width:992px)').matches) return;
  var hdr=document.getElementById('header-sticky');
  if(!hdr) return;
  var HIDE=['zach-header-hide','header-hidden'];
  function strip(){
   if(!window.matchMedia('(min-width:992px)').matches) return;
-  HIDE.forEach(function(c){hdr.classList.remove(c);});
+  HIDE.forEach(function(c){ if(hdr.classList.contains(c)) hdr.classList.remove(c); });
   if(hdr.style.transform&&hdr.style.transform!=='none') hdr.style.removeProperty('transform');
   if(hdr.style.opacity&&hdr.style.opacity!=='1') hdr.style.removeProperty('opacity');
   if(hdr.style.visibility&&hdr.style.visibility!=='visible') hdr.style.removeProperty('visibility');
  }
- new MutationObserver(strip).observe(hdr,{attributes:true,attributeFilter:['class','style']});
  strip();
+ window.addEventListener('scroll', strip, {passive:true});
+ setInterval(strip, 1000);
 })();
 </script>
 
-<script id="zh-site-fix-js" src="/wp-content/uploads/zach/zh-site-fix.js?v=zhfix2" defer></script>
+<script id="zh-site-fix-js" src="/wp-content/uploads/zach/zh-site-fix.js?v=zhfix24" defer></script>
 </body></html><!-- Page cached by LiteSpeed Cache 7.8.1 on 2026-07-17 19:15:15 -->

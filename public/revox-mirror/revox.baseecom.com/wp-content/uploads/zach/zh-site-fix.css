@@ -1,48 +1,8 @@
-/* ZH site fix v2 — preloader, header, mobile chrome, light motion */
+/* ZH site fix v3 — preloader hide-only, sticky header, mobile chrome.
+   Do NOT lock preloader transform/opacity (breaks Revox wave reveal).
+   Do NOT force split-line / title transforms (breaks text reveal). */
 
-/* ── Preloader: full cover, but MUST be hideable ── */
-.preloader:not(.zh-preloader-done):not(.is-hidden) {
-  position: fixed !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  min-height: 100vh !important;
-  min-height: 100dvh !important;
-  z-index: 2147483646 !important;
-  background: #111013 !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  overflow: hidden !important;
-  pointer-events: all !important;
-  opacity: 1 !important;
-  visibility: visible !important;
-  transform: none !important;
-}
-.preloader svg {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 110% !important;
-  fill: #111013 !important;
-}
-h5.preloader-text {
-  position: absolute !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
-  color: #333 !important;
-  z-index: 2 !important;
-  margin: 0 !important;
-  font-size: 0 !important;
-}
-h5.preloader-text::after {
-  content: "Zachary" !important;
-  color: #BFF747 !important;
-  font-size: clamp(28px, 6vw, 48px) !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.04em !important;
-}
+/* ── Preloader: only force hide when done. Theme CSS handles centering. ── */
 .preloader.zh-preloader-done,
 .preloader.is-hidden {
   display: none !important;
@@ -50,7 +10,22 @@ h5.preloader-text::after {
   pointer-events: none !important;
   opacity: 0 !important;
   visibility: hidden !important;
-  transform: translateY(-120%) !important;
+}
+
+/* Desktop failsafe: clear stuck preloader without locking hero SplitText opacity */
+@media (min-width: 992px) {
+  .preloader:not(.zh-preloader-done):not(.is-hidden) {
+    animation: zh-pc-preloader-clear 0.35s ease 2.2s forwards;
+  }
+  @keyframes zh-pc-preloader-clear {
+    to {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      z-index: -1;
+      transform: translateY(-120%);
+    }
+  }
 }
 
 /* ── Desktop header: always visible ── */
@@ -79,7 +54,71 @@ h5.preloader-text::after {
   }
 }
 
-/* ── Mobile nav: NEVER hide on scroll ── */
+/* ── Work experience: arrows beside logos (preview), not in text ── */
+.feature-work-experience-preview {
+  position: relative;
+}
+@media (min-width: 992px) {
+  .feature-work-experience-preview-slider.zh-work-circle-spin .swiper-wrapper,
+  .feature-work-experience-preview-slider .swiper-wrapper[data-zh-spin="1"] {
+    transform-origin: 50% 50% !important;
+    will-change: transform;
+  }
+  .feature-work-experience-preview-slider .swiper-slide-thumb-active .feature-work-experience-preview-slider-item,
+  .feature-work-experience-preview-slider .swiper-slide-active .feature-work-experience-preview-slider-item {
+    transform: scale(1.18);
+    border: 2px solid #BFF747;
+    box-shadow: 0 0 0 4px rgba(191, 247, 71, 0.18);
+  }
+  .feature-work-experience-preview-slider .feature-work-experience-preview-slider-item {
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+  }
+}
+.feature-work-experience-preview > .zh-work-prev,
+.feature-work-experience-preview > .zh-work-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 30;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(191, 247, 71, 0.55);
+  background: rgba(17, 16, 19, 0.88);
+  color: #BFF747;
+  font-size: 18px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.feature-work-experience-preview > .zh-work-prev {
+  left: 4%;
+}
+.feature-work-experience-preview > .zh-work-next {
+  right: 4%;
+}
+.feature-work-experience-preview > .zh-work-prev:hover,
+.feature-work-experience-preview > .zh-work-next:hover,
+.feature-work-experience-preview > .zh-work-prev:active,
+.feature-work-experience-preview > .zh-work-next:active {
+  background: #BFF747;
+  color: #0a0a0a;
+  border-color: #BFF747;
+}
+.zh-work-nav__hint {
+  display: none;
+}
+
+/* Hide any leftover nav that sat under the text slider */
+.feature-work-experience-main-slider + .zh-work-nav,
+.fw_main_slider_active + .zh-work-nav {
+  display: none !important;
+}
+
+/* ── Mobile chrome ── */
 @media (max-width: 991px) {
   #zh-mobile-nav,
   #zh-mobile-nav.zh-nav-hidden {
@@ -102,54 +141,118 @@ h5.preloader-text::after {
     visibility: visible !important;
   }
 
-  /* Soften heavy motion only — keep light entrance / wow / sliders */
-  .parallaxie,
-  [data-speed],
-  .circle-progress,
-  .orbit-circle {
-    transform: none !important;
-    animation: none !important;
-  }
-  .circle-box,
-  .award-section-2 .circle-box,
+  /* Restore logos; arrows flank the logo strip */
   .feature-work-experience-preview {
-    display: none !important;
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 112px;
+    margin: 8px 0 20px;
+    padding: 0 8px;
+  }
+  .feature-work-experience-preview > .zh-work-prev,
+  .feature-work-experience-preview > .zh-work-next {
+    position: static !important;
+    transform: none !important;
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+  }
+  .feature-work-experience-preview-slider {
+    flex: 1 1 auto;
+    max-width: min(72vw, 320px);
+    min-height: 96px;
+    overflow: hidden !important;
+  }
+  .feature-work-experience-preview-slider .swiper-wrapper {
+    /* Do NOT force transform:none — Swiper needs translateX to scroll logos */
+    position: relative !important;
+    height: auto !important;
+    display: flex !important;
+    align-items: center;
+    box-sizing: content-box;
+  }
+  .feature-work-experience-preview-slider .swiper-slide {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    width: 72px !important;
+    height: 72px !important;
+    flex-shrink: 0;
+    opacity: 0.45;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .feature-work-experience-preview-slider .swiper-slide-thumb-active,
+  .feature-work-experience-preview-slider .swiper-slide-active {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+  .feature-work-experience-preview-slider-item {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid transparent;
+  }
+  .feature-work-experience-preview-slider .swiper-slide-thumb-active .feature-work-experience-preview-slider-item,
+  .feature-work-experience-preview-slider .swiper-slide-active .feature-work-experience-preview-slider-item {
+    border-color: #BFF747;
   }
   .feature-work-experience-wrap {
     height: auto !important;
     min-height: 0 !important;
-    padding-bottom: 0 !important;
+    overflow: visible !important;
+    padding-bottom: 28px !important;
   }
-  .feature-work-experience-wrap::before {
-    display: none !important;
+
+  /* Main copy must never clip mid-line (theme .fix + fade swiper height) */
+  .feature-work-experience-main-slider,
+  .feature-work-experience-main-slider.wa-fix,
+  .feature-work-experience-main-slider .swiper-wrapper,
+  .feature-work-experience-main-slider .swiper-slide,
+  .feature-work-experience-main-slider .feature-work-experience-main-slider-single,
+  .feature-work-experience-main-slider .info-item,
+  .feature-work-experience-main-slider .text-cont {
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
   }
   .feature-work-experience-main-slider {
     position: relative !important;
-    margin-top: 0 !important;
-  }
-
-  /* Keep wow fades but shorter / safer */
-  .wow {
-    visibility: visible !important;
-  }
-
-  /* Titles must never stay invisible */
-  .split-line,
-  .tv_hero_title .split-line,
-  .tv_hero_title div,
-  .tv_hero_title span {
-    opacity: 1 !important;
-    visibility: visible !important;
-  }
-
-  #smooth-wrapper,
-  #smooth-content {
-    height: auto !important;
-    overflow: visible !important;
+    top: auto !important;
+    left: auto !important;
     transform: none !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    margin-top: 8px !important;
+  }
+  .feature-work-experience-main-slider .info-item {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+  }
+  .feature-work-experience-main-slider .info-item h5 {
+    max-width: none !important;
+    width: auto !important;
+  }
+  .feature-work-experience-main-slider .info-item p,
+  .feature-work-experience-main-slider .text-cont p {
+    max-width: 100% !important;
+    width: 100% !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    line-height: 1.55 !important;
+    height: auto !important;
+    max-height: none !important;
+    text-overflow: clip !important;
+    -webkit-line-clamp: unset !important;
+    display: block !important;
   }
 
-  /* Hero social icons: compact, wrap, don't stretch full width */
+  /* Hero social icons: compact pills */
   .hero-1 .social-link,
   .hero-1 .zh-social-link,
   .zh-hero-actions .zh-social-link {
@@ -186,89 +289,83 @@ h5.preloader-text::after {
     width: 12px !important;
     height: 12px !important;
   }
+}
 
-  /* Work experience nav arrows */
-  .zh-work-nav {
-    display: flex !important;
-    justify-content: center;
-    align-items: center;
-    gap: 14px;
-    margin: 18px auto 8px;
-    position: relative;
-    z-index: 5;
-  }
-  .zh-work-nav button {
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    border: 1px solid rgba(191, 247, 71, 0.55);
-    background: rgba(17, 16, 19, 0.85);
-    color: #BFF747;
-    font-size: 18px;
-    line-height: 1;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-  }
-  .zh-work-nav button:hover,
-  .zh-work-nav button:active {
-    background: #BFF747;
-    color: #0a0a0a;
-    border-color: #BFF747;
-  }
-  .zh-work-nav__hint {
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.45);
-    margin: 0 4px;
-  }
+.feature-work-experience-wrap.fix {
+  overflow: visible !important;
+}
+.feature-work-experience-main-slider.wa-fix {
+  overflow: visible !important;
+}
 
-  /* Portrait pop-in after load (highlight) */
-  .hero-1 .animated-image.zh-pop-ready {
-    animation: zhHeroPop 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
-  @keyframes zhHeroPop {
-    from {
-      opacity: 0;
-      transform: translateY(48px) scale(0.96);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
+/* Role title + body must stay readable (theme caps h5 at 100px, which crushes lines) */
+.feature-work-experience-main-slider .info-item {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: flex-start !important;
+  gap: 12px 24px !important;
+  overflow: visible !important;
+  height: auto !important;
+}
+.feature-work-experience-main-slider .info-item h5 {
+  max-width: none !important;
+  width: auto !important;
+  flex: 1 1 100% !important;
+  line-height: 1.35 !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  white-space: normal !important;
+  word-break: normal !important;
+  letter-spacing: 0.04em !important;
+}
+.feature-work-experience-main-slider .text-cont {
+  flex: 1 1 100% !important;
+  min-width: 0 !important;
+  overflow: visible !important;
+  height: auto !important;
+  max-height: none !important;
+}
+.feature-work-experience-main-slider .info-item p,
+.feature-work-experience-main-slider .text-cont p {
+  max-width: 100% !important;
+  width: 100% !important;
+  overflow: visible !important;
+  white-space: normal !important;
+  line-height: 1.55 !important;
+  height: auto !important;
+  max-height: none !important;
+  margin-bottom: 0.75rem !important;
+  display: block !important;
+}
+.feature-work-experience-main-slider .text-cont p:last-child {
+  margin-bottom: 0 !important;
 }
 
 @media (min-width: 992px) {
-  .zh-work-nav {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 12px;
-    margin: 12px 0 0;
+  .feature-work-experience-wrap {
+    height: auto !important;
+    min-height: 585px;
+    overflow: visible !important;
+    padding-bottom: 48px;
   }
-  .zh-work-nav button {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    border: 1px solid rgba(191, 247, 71, 0.45);
-    background: transparent;
-    color: #BFF747;
-    font-size: 18px;
-    cursor: pointer;
+  .feature-work-experience-main-slider,
+  .feature-work-experience-main-slider .swiper-wrapper,
+  .feature-work-experience-main-slider .swiper-slide {
+    overflow: visible !important;
+    height: auto !important;
   }
-  .zh-work-nav button:hover {
-    background: #BFF747;
-    color: #0a0a0a;
+  .feature-work-experience-main-slider .info-item {
+    flex-wrap: nowrap !important;
+    gap: 28px !important;
   }
-  .zh-work-nav__hint {
-    font-size: 12px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.4);
+  .feature-work-experience-main-slider .info-item h5 {
+    flex: 0 0 168px !important;
+    max-width: 168px !important;
+    line-height: 1.3 !important;
+  }
+  .feature-work-experience-main-slider .text-cont {
+    flex: 1 1 auto !important;
   }
 }
 
@@ -278,22 +375,192 @@ h5.preloader-text::after {
   scroll-margin-top: calc(var(--zh-header-h, 80px) + 24px);
 }
 
-/* Failsafe: never leave hero / titles permanently invisible after load */
-body.zh-ready .tv_hero_title,
-body.zh-ready .tv_hero_title .split-line,
-body.zh-ready .tv_hero_title div,
-body.zh-ready .tv_hero_title span,
-body.zh-ready .hero_title {
-  opacity: 1 !important;
-  visibility: visible !important;
+/* Featured projects: covers fill their card boxes (assets are 3:2) */
+.tp-project-5-2-area.project-section {
+  overflow: visible;
 }
-body.zh-ready .tv_hero_title .split-line,
-body.zh-ready .tv_hero_title div,
-body.zh-ready .tv_hero_title span {
+.tp-project-5-2-area .design-choose-item-wrap,
+.tp-project-5-2-area .row {
+  overflow: visible;
+}
+.tp-project-5-2-area .project-box-items {
+  overflow: visible;
+}
+.tp-project-5-2-area .project-box-items .thumb {
+  aspect-ratio: 3 / 2;
+  height: auto !important;
+  max-height: none !important;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #0a0a0a;
+}
+.tp-project-5-2-area .project-box-items.top_view .thumb {
+  aspect-ratio: 3 / 2;
+}
+.tp-project-5-2-area .project-box-items .thumb img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  display: block;
+  border-radius: 10px;
+}
+@media (max-width: 767px) {
+  .tp-project-5-2-area .project-box-items .thumb {
+    aspect-ratio: 3 / 2;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tp-project-5-2-area .project-box-items {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Case study slider: softer lime + covers sized/centered in card */
+.testimonial-section .swiper-pagination,
+.testimonial-section .testimonial-wrapper > .swiper-pagination,
+.testimonial-content .swiper-pagination {
+  display: none !important;
+}
+.testimonial-section .testimonial-box-items {
+  background-color: #8fc92e !important;
+}
+.testimonial-section .testimonial-box-items .thumb {
+  width: 100%;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+  aspect-ratio: 3 / 2;
+  height: auto !important;
+  max-height: none !important;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #0a0a0a;
+  flex-shrink: 0;
+}
+@media (max-width: 1399px) {
+  .testimonial-section .testimonial-box-items .thumb {
+    max-width: 100%;
+    height: auto !important;
+  }
+}
+.testimonial-section .testimonial-box-items .thumb img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  display: block;
+  border-radius: 10px;
+}
+.testimonial-section .testimonial-box-items .thumb .info-title {
+  text-align: center;
+}
+
+/* Offcanvas: keep one nav list (meanmenu clone only) */
+.offcanvas__info .mobile-menus.mean-container > #mobile-menus,
+.offcanvas__info .mobile-menu.mean-container > #mobile-menus,
+.offcanvas__info .mobile-menus.mean-container > nav.menu-main-menu-container,
+.offcanvas__info .mobile-menu.mean-container > nav.menu-main-menu-container {
+  display: none !important;
+}
+.offcanvas__info .mean-container .mean-nav {
+  display: block !important;
+}
+/* Top-level list only. Nested dropdowns stay collapsed until opened. */
+.offcanvas__info .mean-container .mean-nav > ul {
+  display: block !important;
+}
+.offcanvas__info .mean-container .mean-nav ul ul {
+  display: none;
+}
+.offcanvas__info .mean-container .mean-nav li.dropdown-opened > ul,
+.offcanvas__info .mean-container .mean-nav li.zh-submenu-open > ul {
+  display: block;
+}
+.offcanvas__info .mean-container .mean-nav > ul > li > a:not(.mean-expand) {
+  cursor: pointer;
+}
+.offcanvas__info .mean-container .mean-nav > ul > li.menu-item-has-children > a:not(.mean-expand),
+.offcanvas__info .mean-container .mean-nav > ul > li:has(> ul) > a:not(.mean-expand) {
+  pointer-events: auto;
+}
+
+/* About (and any) project-inner carousel: centered covers that fit */
+.project-section-3.fix {
+  overflow: visible;
+}
+.project-section-3 .project-inner-slider {
+  overflow: visible;
+  padding-left: clamp(12px, 3vw, 28px);
+  padding-right: clamp(12px, 3vw, 28px);
+}
+.project-section-3 .swiper-wrapper {
+  align-items: center;
+}
+.project-section-3 .swiper-slide {
+  height: auto;
+  opacity: 0.45;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.project-section-3 .swiper-slide-active {
+  opacity: 1;
+  z-index: 2;
+}
+.project-section-3 .swiper-slide-next,
+.project-section-3 .swiper-slide-prev {
+  opacity: 0.7;
+}
+.project-section-3 .project-inner-image {
+  aspect-ratio: 3 / 2;
+  height: auto !important;
+  max-height: none !important;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #0a0a0a;
+}
+.project-section-3 .project-inner-image img,
+.project-section-3 .project-inner-image img.wp-post-image {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  display: block;
+  border-radius: 10px;
+  margin: 0 auto;
+}
+
+/* Case study slider: hide leftover brand pill badges */
+.testimonial-section .clutech-image {
+  display: none !important;
+}
+
+/* About news cards: cinematic covers fill thumb cleanly */
+.news-section-2 .news-box-items-2 .thumb {
+  overflow: hidden;
+  border-radius: 10px;
+}
+.news-section-2 .news-box-items-2 .thumb img {
+  width: 100% !important;
+  height: 100% !important;
+  aspect-ratio: 16 / 10;
+  object-fit: cover !important;
+  object-position: center center !important;
+  display: block;
+}
+
+/* Roles dropdown: never flex-grow (was creating empty dark gap under trigger) */
+.zh-roles-dropdown {
+  flex: 0 1 360px !important;
+  height: fit-content !important;
+  min-height: 0 !important;
+  align-self: flex-start !important;
+}
+.zh-roles-panel {
+  top: 100% !important;
+  margin-top: 4px !important;
   transform: none !important;
-}
-/* Portrait: only force visible if pop animation already finished or desktop */
-body.zh-ready .animated-image:not(.zh-pop-pending) {
-  opacity: 1 !important;
-  visibility: visible !important;
 }

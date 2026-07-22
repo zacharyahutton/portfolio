@@ -5,8 +5,9 @@
     const $windowOn = $(window);
   
     $documentOn.ready( function() {
-  
-      /* ================================
+      /* ZH_MOTION_RESTORE: desktop animations on again; hang was header MutationObserver thrash */
+      window.__zhDesktopLite = false;
+/* ================================
        Mobile Menu Js Start
     ================================ */
     
@@ -236,7 +237,7 @@
                     scrollTrigger: {
                         trigger: track,
                         pin: true,
-                        scrub: 3,
+                        scrub: 1.2, /* ZH_MOTION_FAST */
                         start: "center center",
                         end: () => "+=" + (track.scrollWidth - window.innerWidth),
                         onRefresh: (self) => self.getTween().resetTo("totalProgress", 0),
@@ -757,29 +758,37 @@
         nullTargetWarn: false,
     });
 
-    // Initialize ScrollSmoother
-    /* ZH_MOBILE_SMOOTH_SKIP */
-    var zhIsMobile = window.matchMedia('(max-width: 991px)').matches;
+    // Initialize ScrollSmoother (full motion; lighter on mobile)
+    /* ZH_SMOOTHER_V3 */
+        var zhIsMobile = window.matchMedia('(max-width: 991px)').matches;
     let smoother = null;
-    if (!zhIsMobile) {
-      try {
-        smoother = ScrollSmoother.create({
+    try {
+      // ZH_SMOOTHER_V5: desktop hung in sync ScrollSmoother.create (infinite loading).
+      // Mobile creates immediately. Desktop defers one frame so preloader can finish.
+      var zhSmootherOpts = {
         wrapper: "#smooth-wrapper",
         content: "#smooth-content",
-        smooth: 1.2,
-        effects: true,
-        smoothTouch: 0,
+        smooth: 0.35, /* ZH_MOTION_FAST */
+        effects: false,
+        smoothTouch: 0.28, /* ZH_MOTION_FAST mobile */
         normalizeScroll: false,
         ignoreMobileResize: true,
-    });
-      } catch (zhErr) { console.warn('ScrollSmoother skipped', zhErr); }
-    } else {
-      try { $('#smooth-wrapper, #smooth-content').css({height:'auto',overflow:'visible',transform:'none'}); } catch(e){}
-    }
+      };
+      if (zhIsMobile) {
+        smoother = ScrollSmoother.create(zhSmootherOpts);
+      } else {
+        requestAnimationFrame(function () {
+          try {
+            smoother = ScrollSmoother.create(zhSmootherOpts);
+            try { ScrollTrigger.refresh(); } catch (e2) {}
+          } catch (e3) { console.warn('ScrollSmoother deferred skipped', e3); }
+        });
+      }
+    } catch (zhErr) { console.warn('ScrollSmoother skipped', zhErr); }
 
-    // After smoother initialized, run SplitText animations
-    /* ZH_SPLIT_SAFE */
-    if ($(".tv_hero_title").length && !zhIsMobile) {
+    // After smoother initialized, run SplitText animations (desktop + mobile)
+    /* ZH_SPLIT_V3 */
+    if ($(".tv_hero_title").length) {
         $(".tv_hero_title").each(function () {
         let $el = $(this);
         let split = new SplitText($el, {
@@ -790,18 +799,13 @@
         gsap.set($el, { perspective: 400 });
 
         if ($el.hasClass("hero_title_1")) {
-            gsap.set(split.chars, { x: 100, opacity: 0 });
+            gsap.set(split.chars, { x: 40, opacity: 0 }); /* ZH_MOTION_FAST */
         }
         if ($el.hasClass("hero_title_2")) {
-            gsap.set(split.chars, { y: 100, opacity: 0 });
+            gsap.set(split.chars, { y: 36, opacity: 0 }); /* ZH_MOTION_FAST */
         }
         if ($el.hasClass("hero_title_3")) {
-            gsap.set(split.chars, {
-            y: 100,
-            scaleY: 0,
-            opacity: 0,
-            rotationX: 15
-            });
+            gsap.set(split.chars, { y: 28, scaleY: 0.85, opacity: 0, rotationX: 6 }); /* ZH_MOTION_FAST */
         }
 
         // IMPORTANT: Use smoother effects
@@ -817,20 +821,16 @@
             y: 0,
             scaleX: 1,
             scaleY: 1,
-            opacity: 1,
-            duration: 1,
-            stagger: 0.05,
-            rotationX: 15,
-            delay: 0.1,
-            ease: "power3.inOut"
+            opacity: 1, duration: 0.5, stagger: 0.02, rotationX: 0, delay: 0.04, ease: "power2.out" /* ZH_MOTION_FAST */
         });
         });
     }
 
     
 
-    // Update ScrollTrigger when smoother refreshes
-    ScrollTrigger.addEventListener("refresh", () => { if (smoother) smoother.refresh(); });
+        // ZH: never call smoother.refresh() from ScrollTrigger "refresh" —
+    // that re-entrancy freezes desktop when many pins exist. ScrollSmoother syncs itself.
+    /* ZH_ST_REFRESH_GUARD_V4 */
     }
 
     /* ================================
@@ -1135,7 +1135,7 @@
       let tlcta = gsap.timeline({
         scrollTrigger: {
           trigger: el,
-          scrub: 1.5,
+          scrub: 0.8, /* ZH_MOTION_FAST */
           end: "top 40%",
           start: "top 100%",
           toggleActions: "play none none reverse",
@@ -1523,7 +1523,7 @@ text_slider.on('slideChangeTransitionStart', function () {
         stagger: 0.3,
         ease: "power2.out",
         scrollTrigger: {
-            scrub: 2,
+            scrub: 1, /* ZH_MOTION_FAST */
             trigger: ".approach-wrapper-box",
             start: "top 100%",
             end: "bottom 40%",
@@ -1542,7 +1542,7 @@ text_slider.on('slideChangeTransitionStart', function () {
             ease: "power2.out",
             scrollTrigger: {
             trigger: item,
-            scrub: 2,
+            scrub: 1, /* ZH_MOTION_FAST */
             start: "top 90%",
             end: "top 50%",
             }
@@ -1561,7 +1561,7 @@ text_slider.on('slideChangeTransitionStart', function () {
                     ease: "power2.out",
                     scrollTrigger: {
                         trigger: item,
-                        scrub: 2,
+                        scrub: 1, /* ZH_MOTION_FAST */
                         start: "top 90%",
                         end: "top 50%",
                     }
@@ -1603,10 +1603,7 @@ text_slider.on('slideChangeTransitionStart', function () {
         duration: 2
     });
 
-    project_text.to(".gt-project-title4", {
-        scale: 1,
-        duration: 2
-    });
+    project_text.to(".gt-project-title4", { scale: 1, duration: 1.1 }); /* ZH_MOTION_FAST */
 
     project_text.to(".gt-project-title4", {
         scale: 1,
@@ -1631,9 +1628,20 @@ text_slider.on('slideChangeTransitionStart', function () {
     ================================ */
 
      function preloader() {
-        $(window).on("load", function () {
+        function runZhPreloader() {
+        if (window.__zhPreloaderRan) return;
+        window.__zhPreloaderRan = true;
         const svg = document.getElementById("svg");
-        if (!svg) return; // safety check if SVG not found
+        if (!svg) {
+          try {
+            var p = document.querySelector(".preloader");
+            if (p) {
+              p.classList.add("zh-preloader-done", "is-hidden");
+              p.style.setProperty("display", "none", "important");
+            }
+          } catch (e) {}
+          return;
+        }
 
         const tl = gsap.timeline();
 
@@ -1643,21 +1651,21 @@ text_slider.on('slideChangeTransitionStart', function () {
         // Animate preloader text (if exists)
         if ($(".preloader-text").length) {
             tl.to(".preloader-text", {
-            delay: 0.3,
-            y: -100,
+            delay: 0.12,
+            y: -60,
             opacity: 0,
-            duration: 0.5,
+            duration: 0.28,
             ease: "power2.out",
             });
         }
 
         // Animate SVG wave
         tl.to(svg, {
-            duration: 0.3,
+            duration: 0.18,
             attr: { d: curve },
             ease: "power2.in",
         }).to(svg, {
-            duration: 0.5,
+            duration: 0.32,
             attr: { d: flat },
             ease: "power2.out",
         });
@@ -1665,10 +1673,10 @@ text_slider.on('slideChangeTransitionStart', function () {
         // Slide preloader up and hide
         tl.to(".preloader", {
             y: -1500,
-            duration: 0.8,
+            duration: 0.45,
             ease: "power2.inOut",
         })
-            .set(".preloader", { display: "none", zIndex: -1 });
+            .set(".preloader", { display: "none", zIndex: -1 }).add(function(){ try { var p=document.querySelector(".preloader"); if(p){ p.classList.add("zh-preloader-done","is-hidden"); } } catch(e){} }); /* ZH_PRELOADER_ONCOMPLETE_V3 */
 
         // Animate main hero image
         if ($(".animated-image").length) {
@@ -1678,18 +1686,20 @@ text_slider.on('slideChangeTransitionStart', function () {
             {
                 y: 0,
                 opacity: 1,
-                duration: 1,
-                ease: "power3.out",
+                duration: 0.55, ease: "power2.out",
             },
-            "-=0.3"
+            "-=0.2" /* ZH_MOTION_FAST */
             );
         }
-        });
+        }
+        $(window).on("load", runZhPreloader);
+        // Don't wait forever if a font/CDN asset never finishes (blocks window load)
+        setTimeout(runZhPreloader, 2200);
   }
   // Init preloader
   preloader();
-  /* ZH_PRELOADER_FAST */
-  setTimeout(function(){ try { var p=document.querySelector('.preloader'); if(p){ p.classList.add('zh-preloader-done','is-hidden'); p.style.setProperty('display','none','important'); p.style.setProperty('z-index','-1','important'); p.style.setProperty('opacity','0','important'); p.style.setProperty('pointer-events','none','important'); } } catch(e){} }, 1800);
+  /* ZH_PRELOADER_FAILSAFE_V3 — only if stuck after full wave (~5.5s) */
+  setTimeout(function(){ try { var p=document.querySelector('.preloader'); if(!p||p.classList.contains('zh-preloader-done')) return; var cs=window.getComputedStyle(p); if(cs.display==='none'||Number(cs.opacity)<0.05){ p.classList.add('zh-preloader-done','is-hidden'); return; } p.classList.add('zh-preloader-done','is-hidden'); p.style.setProperty('display','none','important'); p.style.setProperty('z-index','-1','important'); p.style.setProperty('opacity','0','important'); p.style.setProperty('pointer-events','none','important'); } catch(e){} }, 5500);
 
 
    /* ================================
@@ -1704,9 +1714,14 @@ text_slider.on('slideChangeTransitionStart', function () {
     if ($(".fw_preview_slider_active").length) {
 
         const fw_preview_slider = new Swiper(".fw_preview_slider_active", {
-        speed: 500,
+        speed: 450,
         slidesPerView: "auto",
-        spaceBetween: 20,
+        spaceBetween: 16,
+        centeredSlides: true,
+        centeredSlidesBounds: true,
+        slideToClickedSlide: true,
+        watchSlidesProgress: true,
+        watchOverflow: true,
         });
 
         const fw_main_slider = new Swiper(".fw_main_slider_active", {
@@ -1714,12 +1729,19 @@ text_slider.on('slideChangeTransitionStart', function () {
         slidesPerView: "auto",
         effect: "fade",
         fadeEffect: { crossFade: true },
-        navigation: {
-            nextEl: ".zh-work-next",
-            prevEl: ".zh-work-prev",
-        },
+        // Navigation handled by zh-site-fix (syncs logo strip + text). Avoid double-bind.
         thumbs: {
             swiper: fw_preview_slider,
+            autoScrollOffset: 1,
+        },
+        on: {
+            slideChange: function () {
+                try {
+                    if (fw_preview_slider && !fw_preview_slider.destroyed) {
+                        fw_preview_slider.slideTo(this.activeIndex, 450);
+                    }
+                } catch (e) {}
+            },
         },
         });
     }
@@ -1727,9 +1749,10 @@ text_slider.on('slideChangeTransitionStart', function () {
     /* ==============================
         Circular Layout for Preview
     ============================== */
-    if ($(".feature-work-experience-preview-slider").length) {
+    if ($(".feature-work-experience-preview-slider").length && window.matchMedia('(min-width: 992px)').matches) {
 
         const $wrapper = document.querySelector(".feature-work-experience-preview-slider .swiper-wrapper");
+        if (!$wrapper) return;
         const $slides = $wrapper.querySelectorAll(".swiper-slide");
 
         const radius = 450; // circle radius
@@ -1751,23 +1774,8 @@ text_slider.on('slideChangeTransitionStart', function () {
         });
         });
 
-        /* ==============================
-            GSAP Scroll Rotation
-        ============================== */
-        gsap.registerPlugin(ScrollTrigger);
-
-        gsap.to(".feature-work-experience-preview-slider .swiper-wrapper", {
-        rotation: -40,
-        ease: "none",
-        scrollTrigger: {
-            trigger: ".feature-work-experience-preview-slider",
-            start: "top center",
-            end: "bottom top",
-            scrub: true,
-            toggleActions: "play none none reverse",
-        },
-        });
-    }
+        /* ZH_CIRCLE_SPIN: click/arrow spin handled in zh-site-fix.js */
+}
     }
 
     /* =========================================================

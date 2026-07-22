@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html><html lang="en-US"><head>
+<!DOCTYPE html><html lang="en-US"><head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="http://gmpg.org/xfn/11">
@@ -251,7 +251,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 <script id="jquery-core-js" src="../wp-includes/js/jquery/jquery.min_ver%3D3.7.1.js"></script>
 <script id="jquery-migrate-js" src="../wp-includes/js/jquery/jquery-migrate.min_ver%3D3.4.1.js"></script>
 <script id="jquery-js-after">
-!function($){"use strict";$(document).ready(function(){$(this).scrollTop()>100&&$(".hfe-scroll-to-top-wrap").removeClass("hfe-scroll-to-top-hide"),$(window).scroll(function(){$(this).scrollTop()100?$(".hfe-scroll-to-top-wrap").fadeOut(300):$(".hfe-scroll-to-top-wrap").fadeIn(300)}),$(".hfe-scroll-to-top-wrap").on("click",function(){$("html, body").animate({scrollTop:0},300);return!1})})}(jQuery);
+!function($){"use strict";$(document).ready(function(){$(this).scrollTop()>100&&$(".hfe-scroll-to-top-wrap").removeClass("hfe-scroll-to-top-hide"),$(window).scroll(function(){$(this).scrollTop()>100?$(".hfe-scroll-to-top-wrap").fadeOut(300):$(".hfe-scroll-to-top-wrap").fadeIn(300)}),$(".hfe-scroll-to-top-wrap").on("click",function(){$("html, body").animate({scrollTop:0},300);return!1})})}(jQuery);
 !function($){'use strict';$(document).ready(function(){var bar=$('.hfe-reading-progress-bar');if(!bar.length)return;$(window).on('scroll',function(){var s=$(window).scrollTop(),d=$(document).height()-$(window).height(),p=d? s/d*100:0;bar.css('width',p+'%')});});}(jQuery);
 //# sourceURL=jquery-js-after
 </script>
@@ -282,7 +282,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 <link rel="icon" href="../wp-content/uploads/2025/11/android-chrome-512x512-1-214x214.png" sizes="192x192">
 <link rel="apple-touch-icon" href="../wp-content/uploads/2025/11/android-chrome-512x512-1-214x214.png">
 <meta name="msapplication-TileImage" content="../wp-content/uploads/2025/11/android-chrome-512x512-1-300x300.png">
- <link rel="stylesheet" id="zh-site-fix-css" href="/wp-content/uploads/zach/zh-site-fix.css?v=zhfix2">
+ <link rel="stylesheet" id="zh-site-fix-css" href="/wp-content/uploads/zach/zh-site-fix.css?v=zhfix18">
 </head>
 
 <body class="wp-singular page-template-default page page-id-19 wp-theme-revox ehf-header ehf-footer ehf-template-revox ehf-stylesheet-revox revox-toolkit-activate not-logged-in elementor-default elementor-kit-9 elementor-page elementor-page-19">
@@ -324,7 +324,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  </div>
  <p class="text d-none d-xl-block">
  Nullam dignissim, ante scelerisque the is euismod fermentum odio sem semper the is erat, a feugiat leo urna eget eros. Duis Aenean a imperdiet risus. </p>
- <div class="mobile-menu fix mb-3">
+ <div class="mobile-menus fix mb-3">
  <nav id="mobile-menus" class="menu-main-menu-container"><ul id="menu-main-menu" class="defult-header"><li id="menu-item-34" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-34"><a href="/">Home</a>
 <ul class="submenu">
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/">Full Stack Developer</a></li>
@@ -357,6 +357,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 </li>
 <li id="menu-item-47" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47"><a href="/portfolio-page/">Portfolio</a></li>
 <li id="menu-item-49" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-49"><a href="/blog/">Blog</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-hire"><a href="/hire-me/">Hire Me</a></li>
 <li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/contact-us/">Contact Me</a></li>
 </ul></nav> </div>
  </div>
@@ -408,6 +409,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 </li>
 <li id="menu-item-47" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47"><a href="/portfolio-page/">Portfolio</a></li>
 <li id="menu-item-49" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-49"><a href="/blog/">Blog</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-hire"><a href="/hire-me/">Hire Me</a></li>
 <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/contact-us/">Contact Me</a></li>
 </ul> </nav>
  <nav id="mean-nav">
@@ -443,6 +445,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 </li>
 <li><a href="/portfolio-page/">Portfolio</a></li>
 <li><a href="/blog/">Blog</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-hire"><a href="/hire-me/">Hire Me</a></li>
 <li><a href="/contact-us/">Contact Me</a></li>
 </ul></nav> </nav>
  </div>
@@ -495,15 +498,33 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 
  <div class="zh-about-roles-services wow fadeInUp" data-wow-delay=".35s">
  <div class="zh-roles-dropdown" id="zh-roles-dropdown">
- <button type="button" class="zh-roles-trigger" id="zh-roles-trigger" aria-expanded="false" aria-controls="zh-roles-panel">
+ <button type="button" class="zh-roles-trigger" id="zh-roles-trigger" aria-expanded="false" aria-controls="zh-roles-panel" aria-haspopup="menu">
  <span class="zh-roles-eyebrow">I wear all three hats</span>
+ <span class="zh-roles-trigger-row">
  <span class="zh-roles-current" id="zh-roles-current">Full Stack Developer</span>
  <i class="fa-solid fa-chevron-down zh-roles-chevron" aria-hidden="true"></i>
+ </span>
+ <span class="zh-roles-hint">Click to explore each role</span>
  </button>
- <ul class="zh-roles-panel" id="zh-roles-panel" role="menu" aria-label="Zachary's roles">
- <li role="none"><a role="menuitem" href="/" data-role="Full Stack Developer">Full Stack Developer</a></li>
- <li role="none"><a role="menuitem" href="/web-developer/" data-role="Web Developer">Web Developer</a></li>
- <li role="none"><a role="menuitem" href="/graphic-designer/" data-role="Product Engineer">Product Engineer</a></li>
+ <ul class="zh-roles-panel" id="zh-roles-panel" role="menu" aria-label="Zachary's roles" hidden>
+ <li role="none">
+ <a role="menuitem" href="/" data-role="Full Stack Developer">
+ <span>Full Stack Developer</span>
+ <i class="fa-solid fa-arrow-up-right" aria-hidden="true"></i>
+ </a>
+ </li>
+ <li role="none">
+ <a role="menuitem" href="/web-developer/" data-role="Web Developer">
+ <span>Web Developer</span>
+ <i class="fa-solid fa-arrow-up-right" aria-hidden="true"></i>
+ </a>
+ </li>
+ <li role="none">
+ <a role="menuitem" href="/graphic-designer/" data-role="Product Engineer">
+ <span>Product Engineer</span>
+ <i class="fa-solid fa-arrow-up-right" aria-hidden="true"></i>
+ </a>
+ </li>
  </ul>
  </div>
 
@@ -1286,15 +1307,15 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  <span>Started shipping full-stack client work</span>
  </div>
  <div class="award-list-items approach-box wow fadeInUp " data-wow-delay=".5s">
- <p>2023</p>
+ <p>2024</p>
  <span>weROI platform live for agency clients</span>
  </div>
  <div class="award-list-items approach-box wow fadeInUp " data-wow-delay=".7s">
- <p>2023</p>
+ <p>2025</p>
  <span>Domus &amp; Northern Elite shipped</span>
  </div>
  <div class="award-list-items approach-box wow fadeInUp bb-bottom" data-wow-delay=".9s">
- <p>2023</p>
+ <p>2026</p>
  <span>WehFiGo + PNTCOG in production</span>
  </div>
  </div>
@@ -1348,9 +1369,6 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  
  <p>Domus is a premium manufacturer site on Next.js, image-led storytelling, fast loads, and conversion-focused IA.</p>
  
- <div class="clutech-image">
- <img decoding="async" src="../wp-content/uploads/zach/brand-weroi.svg" alt="weROI">
- </div>
  </div>
  </div>
  </div>
@@ -1373,9 +1391,6 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  
  <p>Northern Elite Concrete is a premium contractor site, gallery-led services and Next.js performance.</p>
  
- <div class="clutech-image">
- <img decoding="async" src="../wp-content/uploads/zach/brand-weroi.svg" alt="weROI">
- </div>
  </div>
  </div>
  </div>
@@ -1398,9 +1413,6 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  
  <p>WehFiGo is a Jamaican events platform, custom UX, listing flows, and motion-led storytelling.</p>
  
- <div class="clutech-image">
- <img decoding="async" src="../wp-content/uploads/zach/brand-weroi.svg" alt="weROI">
- </div>
  </div>
  </div>
  </div>
@@ -1521,11 +1533,13 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  <div class="col-xl-4 col-lg-6 col-md-6">
  <div class="news-box-items-2">
  <div class="thumb">
- <img decoding="async" src="../wp-content/uploads/2025/11/news-01-3.jpg" alt="Harnessing cloud power to scale agile teams and accelerate delivery">
+ <a href="/blog/css-grid/">
+ <img decoding="async" src="../wp-content/uploads/zach/blog/blog-cinematic-css-grid.png?v=cinematic1" alt="CSS Grid vs Flexbox: When I Reach for Which">
+ </a>
  
  <ul>
  <li>
- <span>web development</span>
+ <span>UI Engineering</span>
  <span class="color-2">Nov 04, 2025</span>
  </li>
  </ul>
@@ -1533,7 +1547,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  
  <div class="content">
  <h3>
- <a href="/blog/">Harnessing cloud power to scale agile teams and accelerate delivery</a>
+ <a href="/blog/css-grid/">CSS Grid vs Flexbox: When I Reach for Which</a>
  </h3>
  
  <div class="client-info-area">
@@ -1547,7 +1561,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  </div>
  </div>
  
- <a href="/blog/" class="circle-icon">
+ <a href="/blog/css-grid/" class="circle-icon">
  <i class="fa-solid fa-arrow-up-right"></i>
  </a>
  </div>
@@ -1557,19 +1571,21 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  <div class="col-xl-4 col-lg-6 col-md-6">
  <div class="news-box-items-2">
  <div class="thumb">
- <img decoding="async" src="../wp-content/uploads/2025/11/news-03-1.jpg" alt="Harnessing AI tools to streamline workflows and elevate creative output">
+ <a href="/blog/weroi/">
+ <img decoding="async" src="../wp-content/uploads/zach/blog/blog-cinematic-weroi.png?v=cinematic1" alt="Building the weROI Agency Platform">
+ </a>
  
  <ul>
  <li>
- <span>web development</span>
- <span class="color-2">Nov 04, 2025</span>
+ <span>Case Study</span>
+ <span class="color-2">Nov 11, 2025</span>
  </li>
  </ul>
  </div>
  
  <div class="content">
  <h3>
- <a href="../harnessing-ai-tools-to-streamline-workflows-and-elevate-creative-output/">Harnessing AI tools to streamline workflows and elevate creative output</a>
+ <a href="/blog/weroi/">Building the weROI Agency Platform</a>
  </h3>
  
  <div class="client-info-area">
@@ -1583,7 +1599,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  </div>
  </div>
  
- <a href="../harnessing-ai-tools-to-streamline-workflows-and-elevate-creative-output/" class="circle-icon">
+ <a href="/blog/weroi/" class="circle-icon">
  <i class="fa-solid fa-arrow-up-right"></i>
  </a>
  </div>
@@ -1593,19 +1609,21 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  <div class="col-xl-4 col-lg-6 col-md-6">
  <div class="news-box-items-2">
  <div class="thumb">
- <img decoding="async" src="../wp-content/uploads/2025/11/news-02-1.jpg" alt="Crafting authentic brand stories that resonate and inspire lasting loyalty">
+ <a href="/blog/typescript/">
+ <img decoding="async" src="../wp-content/uploads/zach/blog/blog-cinematic-typescript.png?v=cinematic1" alt="TypeScript Generics Without the Headache">
+ </a>
  
  <ul>
  <li>
- <span>web development</span>
- <span class="color-2">Nov 04, 2025</span>
+ <span>TypeScript</span>
+ <span class="color-2">Nov 18, 2025</span>
  </li>
  </ul>
  </div>
  
  <div class="content">
  <h3>
- <a href="../crafting-authentic-brand-stories-that-resonate-and-inspire-lasting-loyalty/">Crafting authentic brand stories that resonate and inspire lasting loyalty</a>
+ <a href="/blog/typescript/">TypeScript Generics Without the Headache</a>
  </h3>
  
  <div class="client-info-area">
@@ -1619,7 +1637,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
  </div>
  </div>
  
- <a href="../crafting-authentic-brand-stories-that-resonate-and-inspire-lasting-loyalty/" class="circle-icon">
+ <a href="/blog/typescript/" class="circle-icon">
  <i class="fa-solid fa-arrow-up-right"></i>
  </a>
  </div>
@@ -1849,7 +1867,7 @@ var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false
 </script>
 <script type="module">
 /*! This file is auto-generated */
-const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(window._wpemojiSettings=a,"wpEmojiSettingsSupports"),s=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const a=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===a[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,a){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!a(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,a){let r;const o=(r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),s=(o.textBaseline="top",o.font="600 32px Arial",{});return e.forEach(e=>{s[e]=t(o,e,n,a)}),s}function r(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}a.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),c.toString(),p.toString()].join(",")+"));",a=new Blob([e],{type:"text/javascript"});const r=new Worker(URL.createObjectURL(a),{name:"wpTestEmojiSupports"});return void(r.onmessage=e=>{i(n=e.data),r.terminate(),t(n)})}catch(e){}i(n=f(s,u,c,p))}t(n)}).then(e=>{for(const n in e)a.supports[n]=e[n],a.supports.everything=a.supports.everything&&a.supports[n],"flag"!==n&&(a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&a.supports[n]);var t;a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&!a.supports.flag,a.supports.everything||((t=a.source||{}).concatemoji?r(t.concatemoji):t.wpemoji&&t.twemoji&&(r(t.twemoji),r(t.wpemoji)))});
+const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(window._wpemojiSettings=a,"wpEmojiSettingsSupports"),s=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const a=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===a[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,a){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!a(e,"\ud83d\ude00")}return!1}function f(e,t,n,a){let r;const o=(r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),s=(o.textBaseline="top",o.font="600 32px Arial",{});return e.forEach(e=>{s[e]=t(o,e,n,a)}),s}function r(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}a.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),c.toString(),p.toString()].join(",")+"));",a=new Blob([e],{type:"text/javascript"});const r=new Worker(URL.createObjectURL(a),{name:"wpTestEmojiSupports"});return void(r.onmessage=e=>{i(n=e.data),r.terminate(),t(n)})}catch(e){}i(n=f(s,u,c,p))}t(n)}).then(e=>{for(const n in e)a.supports[n]=e[n],a.supports.everything=a.supports.everything&&a.supports[n],"flag"!==n&&(a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&a.supports[n]);var t;a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&!a.supports.flag,a.supports.everything||((t=a.source||{}).concatemoji?r(t.concatemoji):t.wpemoji&&t.twemoji&&(r(t.twemoji),r(t.wpemoji)))});
 //# sourceURL=../wp-includes/js/wp-emoji-loader.min.js
 </script>
 
@@ -2016,41 +2034,74 @@ a.header-logo img,
  display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:center;gap:clamp(20px,3vw,32px);
  margin:clamp(28px,4vw,44px) auto 0;max-width:980px;padding:0 clamp(12px,2vw,20px);
 }
-.zh-roles-dropdown{position:relative;flex:1 1 280px;max-width:360px;}
-.zh-roles-trigger{
- width:100%;display:flex;flex-direction:column;align-items:flex-start;gap:6px;
- padding:18px 22px;background:#0B0E13;border:0;border-top:3px solid #BFF747;
- box-shadow:0 8px 24px rgba(0,0,0,.9);color:#fff;cursor:pointer;text-align:left;
- font-family:inherit;transition:background .2s ease,transform .2s ease;
+.zh-roles-dropdown{
+ position:relative;flex:0 1 360px;width:100%;max-width:360px;
+ height:fit-content!important;min-height:0!important;max-height:none!important;
+ align-self:flex-start!important;overflow:visible;z-index:30;
 }
-.zh-roles-trigger:hover,.zh-roles-dropdown.is-open .zh-roles-trigger{background:#10141c;}
+.zh-roles-trigger{
+ position:relative;z-index:2;width:100%;display:flex;flex-direction:column;align-items:stretch;gap:8px;
+ padding:16px 18px;background:#0B0E13;border:1px solid rgba(255,255,255,.08);border-top:3px solid #BFF747;
+ border-radius:0;box-shadow:0 8px 24px rgba(0,0,0,.55);color:#fff;cursor:pointer;text-align:left;
+ font-family:inherit;transition:background .2s ease,border-color .2s ease,box-shadow .2s ease;
+ height:auto!important;min-height:0!important;
+}
+.zh-roles-trigger:hover,.zh-roles-dropdown.is-open .zh-roles-trigger{
+ background:#10141c;border-color:rgba(191,247,71,.35);
+}
+.zh-roles-dropdown.is-open .zh-roles-trigger{
+ box-shadow:0 10px 28px rgba(0,0,0,.65);
+}
 .zh-roles-eyebrow{
  font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);
 }
+.zh-roles-trigger-row{
+ display:flex;align-items:center;justify-content:space-between;gap:14px;width:100%;
+}
 .zh-roles-current{
- font-size:clamp(16px,2vw,20px);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff;
+ font-size:clamp(15px,2vw,18px);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff;line-height:1.25;
 }
 .zh-roles-chevron{
- position:absolute;right:18px;top:50%;transform:translateY(-50%);
+ position:static!important;transform:none!important;flex:0 0 auto;
  font-size:12px;color:rgba(255,255,255,.55);transition:transform .25s ease,color .2s ease;
 }
-.zh-roles-dropdown.is-open .zh-roles-chevron{transform:translateY(-50%) rotate(180deg);color:#BFF747;}
+.zh-roles-dropdown.is-open .zh-roles-chevron{transform:rotate(180deg)!important;color:#BFF747;}
+.zh-roles-hint{
+ font-size:11px;font-weight:500;letter-spacing:.06em;color:rgba(191,247,71,.85);
+}
 .zh-roles-panel{
- position:absolute;top:calc(100% + 6px);left:0;right:0;list-style:none;margin:0;padding:8px 0;
- background:#0B0E13;border-top:3px solid #BFF747;box-shadow:0 8px 24px rgba(0,0,0,.9);
- visibility:hidden;opacity:0;transform:translateY(8px);transition:all .25s ease;z-index:20;
+ position:absolute!important;top:100%!important;left:0!important;right:0!important;margin-top:4px!important;
+ list-style:none!important;margin-left:0!important;margin-right:0!important;margin-bottom:0!important;padding:6px 0!important;
+ background:#0B0E13!important;border:1px solid rgba(255,255,255,.1);border-top:3px solid #BFF747;
+ box-shadow:0 16px 40px rgba(0,0,0,.75);z-index:50;
+ display:none!important;visibility:hidden;opacity:0;pointer-events:none;
+ transform:none!important;transition:opacity .18s ease;
+ height:auto!important;min-height:0!important;max-height:none!important;
 }
-.zh-roles-dropdown.is-open .zh-roles-panel,
-.zh-roles-dropdown:hover .zh-roles-panel{visibility:visible;opacity:1;transform:translateY(0);}
-.zh-roles-panel li{display:block;margin:0;}
+.zh-roles-panel[hidden]{display:none!important;}
+.zh-roles-dropdown.is-open .zh-roles-panel{
+ display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto;
+}
+.zh-roles-panel li{display:block;margin:0;padding:0;list-style:none;height:auto!important;}
 .zh-roles-panel a{
- display:block;padding:10px 22px;color:#fff;font-size:14px;font-weight:600;
- letter-spacing:.08em;text-transform:uppercase;text-decoration:none;transition:color .2s ease,background .2s ease;
+ display:flex!important;align-items:center;justify-content:space-between;gap:12px;
+ padding:12px 18px;color:#fff;font-size:13px;font-weight:600;
+ letter-spacing:.08em;text-transform:uppercase;text-decoration:none;
+ transition:color .2s ease,background .2s ease;
 }
-.zh-roles-panel a:hover,.zh-roles-panel a:focus{color:#BFF747;background:rgba(191,247,71,.07);outline:none;}
+.zh-roles-panel a i{
+ font-size:12px;color:#BFF747;opacity:.85;transition:transform .2s ease,opacity .2s ease;
+}
+.zh-roles-panel a:hover,.zh-roles-panel a:focus{
+ color:#BFF747;background:rgba(191,247,71,.08);outline:none;
+}
+.zh-roles-panel a:hover i,.zh-roles-panel a:focus i{
+ opacity:1;transform:translate(2px,-2px);
+}
 .zh-about-services{
- flex:1 1 320px;max-width:520px;padding:18px 22px;background:#0B0E13;
+ flex:0 1 520px;width:100%;max-width:520px;padding:18px 22px;background:#0B0E13;
  border-top:3px solid #BFF747;box-shadow:0 8px 24px rgba(0,0,0,.9);
+ align-self:flex-start!important;height:fit-content!important;
 }
 .zh-about-services-lead{
  margin:0 0 14px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);
@@ -2071,11 +2122,7 @@ a.header-logo img,
 .zh-about-services-all:hover{color:#fff;}
 @media (max-width:767px){
  .zh-about-roles-services{flex-direction:column;align-items:stretch;}
- .zh-roles-dropdown,.zh-about-services{max-width:none;}
-}
-@media (hover:none){
- .zh-roles-dropdown:hover .zh-roles-panel{visibility:hidden;opacity:0;transform:translateY(8px);}
- .zh-roles-dropdown.is-open .zh-roles-panel{visibility:visible;opacity:1;transform:translateY(0);}
+ .zh-roles-dropdown,.zh-about-services{max-width:none;flex:0 0 auto;width:100%;}
 }
 
 
@@ -2236,7 +2283,8 @@ a.header-logo img,
 <script id="zh-header-ux-js">
 (function(){
  var mq=window.matchMedia('(max-width:991px)');
- var DRAWER_NAV='<a class="zh-nav-top" href="/">Home</a><a class="zh-nav-top" href="/about-me/">About Me</a><div class="zh-nav-group"><button type="button" class="zh-nav-accordion" aria-expanded="false">Services<span class="zh-acc-chevron" aria-hidden="true">▼</span></button><div class="zh-nav-sub"><a href="/services/">All Services</a><a href="/services/premium-business-websites/">Premium Business Websites</a><a href="/services/custom-software/">Custom Software</a><a href="/services/ai-integrations/">AI Integrations</a><a href="/services/automation-systems/">Automation Systems</a><a href="/services/seo/">SEO</a><a href="/services/business-platforms/">Business Platforms</a><a href="/services/maintenance/">Maintenance</a><a href="/services/performance-optimization/">Performance Optimization</a><a href="/services/consulting/">Consulting</a></div></div><div class="zh-nav-group"><button type="button" class="zh-nav-accordion" aria-expanded="false">More<span class="zh-acc-chevron" aria-hidden="true">▼</span></button><div class="zh-nav-sub"><a href="/our-faq/">FAQ</a><a href="/privacy-policy/">Privacy Policy</a><a href="/terms/">Terms</a></div></div><a class="zh-nav-top" href="/portfolio-page/">Portfolio</a><a class="zh-nav-top" href="/blog/">Blog</a><a class="zh-nav-top" href="/contact-us/">Contact Me</a>';
+ var DRAWER_NAV='<a class="zh-nav-top" href="/">Home</a><a class="zh-nav-top" href="/about-me/">About Me</a><div class="zh-nav-group"><button type="button" class="zh-nav-accordion" aria-expanded="false">Services<span class="zh-acc-chevron" aria-hidden="true">▼</span></button><div class="zh-nav-sub"><a href="/services/">All Services</a><a href="/services/premium-business-websites/">Premium Business Websites</a><a href="/services/custom-software/">Custom Software</a><a href="/services/ai-integrations/">AI Integrations</a><a href="/services/automation-systems/">Automation Systems</a><a href="/services/seo/">SEO</a><a href="/services/business-platforms/">Business Platforms</a><a href="/services/maintenance/">Maintenance</a><a href="/services/performance-optimization/">Performance Optimization</a><a href="/services/consulting/">Consulting</a></div></div><div class="zh-nav-group"><button type="button" class="zh-nav-accordion" aria-expanded="false">More<span class="zh-acc-chevron" aria-hidden="true">▼</span></button><div class="zh-nav-sub"><a href="/our-faq/">FAQ</a><a href="/privacy-policy/">Privacy Policy</a><a href="/terms/">Terms</a></div></div><a class="zh-nav-top" href="/portfolio-page/">Portfolio</a><a class="zh-nav-top" href="/blog/">Blog</a><a class="zh-nav-top" href="/hire-me/">Hire Me</a><a class="zh-nav-top" href="/hire-me/">Hire Me</a>' +
+    '<a class="zh-nav-top" href="/contact-us/">Contact Me</a>';
  function openDrawer(){
   var d=document.getElementById('zh-mobile-drawer');
   var b=document.getElementById('zh-mobile-drawer-backdrop');
@@ -2360,13 +2408,18 @@ a.header-logo img,
  var dropdown=document.getElementById('zh-roles-dropdown');
  var trigger=document.getElementById('zh-roles-trigger');
  var current=document.getElementById('zh-roles-current');
- if(!dropdown||!trigger) return;
+ var panel=document.getElementById('zh-roles-panel');
+ if(!dropdown||!trigger||!panel) return;
  function setOpen(open){
   dropdown.classList.toggle('is-open',open);
   trigger.setAttribute('aria-expanded',open?'true':'false');
+  if(open) panel.removeAttribute('hidden');
+  else panel.setAttribute('hidden','');
  }
+ setOpen(false);
  trigger.addEventListener('click',function(e){
   e.preventDefault();
+  e.stopPropagation();
   setOpen(!dropdown.classList.contains('is-open'));
  });
  dropdown.querySelectorAll('.zh-roles-panel a').forEach(function(link){
@@ -2383,22 +2436,24 @@ a.header-logo img,
  });
 })();
 (function(){
+ /* ZH_HDR_STRIP_SAFE: MutationObserver on class/style + strip() = desktop freeze */
  if(!window.matchMedia('(min-width:992px)').matches) return;
  var hdr=document.getElementById('header-sticky');
  if(!hdr) return;
  var HIDE=['zach-header-hide','header-hidden'];
  function strip(){
   if(!window.matchMedia('(min-width:992px)').matches) return;
-  HIDE.forEach(function(c){hdr.classList.remove(c);});
+  HIDE.forEach(function(c){ if(hdr.classList.contains(c)) hdr.classList.remove(c); });
   if(hdr.style.transform&&hdr.style.transform!=='none') hdr.style.removeProperty('transform');
   if(hdr.style.opacity&&hdr.style.opacity!=='1') hdr.style.removeProperty('opacity');
   if(hdr.style.visibility&&hdr.style.visibility!=='visible') hdr.style.removeProperty('visibility');
  }
- new MutationObserver(strip).observe(hdr,{attributes:true,attributeFilter:['class','style']});
  strip();
+ window.addEventListener('scroll', strip, {passive:true});
+ setInterval(strip, 1000);
 })();
 </script>
 
 
-<script id="zh-site-fix-js" src="/wp-content/uploads/zach/zh-site-fix.js?v=zhfix2" defer></script>
+<script id="zh-site-fix-js" src="/wp-content/uploads/zach/zh-site-fix.js?v=zhfix18" defer></script>
 </body></html><!-- Page cached by LiteSpeed Cache 7.8.1 on 2026-07-17 19:46:15 -->
